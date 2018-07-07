@@ -40,7 +40,7 @@ class MapToolPage extends Component {
           width: '100%',
           height: '100%',
           top: '0px',
-          left: '10px'
+          left: '0px'
         }}
         center={position}
         zoom={this.state.zoom}
