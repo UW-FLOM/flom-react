@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { map } from 'lodash';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-import FreeDraw from 'leaflet-freedraw';
+import { LatLng } from 'leaflet';
+import FreeDraw, { CREATE, EDIT } from 'leaflet-freedraw';
 import { PlainText } from '../components/Typography';
 
 const TILE_URL = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png';
@@ -18,7 +19,11 @@ class MapToolPage extends Component {
   componentDidMount() {
     const leafletMap = this.leafletMap.leafletElement;
     const freeDraw = new FreeDraw();
+
     leafletMap.addLayer(freeDraw)
+
+    freeDraw.mode(CREATE | EDIT)
+
     leafletMap.on('zoomend', () => {
         window.console.log('Current zoom level -> ', leafletMap.getZoom());
     });
