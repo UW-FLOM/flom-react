@@ -2,6 +2,7 @@
 This is a react version of the FLOM project. There are only a couple prerequisties:
 
 * [yarn](https://yarnpkg.com/en/)
+* [node](https://nodejs.org/en/) 
 
 # Getting started
 To run the project, clone this repo, then from the repo root:
