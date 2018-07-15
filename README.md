@@ -5,9 +5,10 @@ This is a react version of the FLOM project. There are only a couple prerequisti
 * [node](https://nodejs.org/en/) 
 
 # Getting started
-To run the project, clone this repo, then from the repo root:
+To run the project in development mode, clone this repo, then from the repo root:
 
 ```
+cd client
 yarn install
 yarn start
 ```
