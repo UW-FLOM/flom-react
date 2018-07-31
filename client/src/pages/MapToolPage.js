@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { map } from 'lodash';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-import { LatLng } from 'leaflet';
 import FreeDraw, { CREATE, EDIT } from 'leaflet-freedraw';
 import { Button } from 'react-bootstrap';
 

@@ -20,7 +20,7 @@ class HomePage extends Component {
             <Link to="/map_tool">Map Tool Demo</Link>
           </li>
           <li>
-            <Link to="/demo">Demo</Link>
+            <Link to="/api_test">API Test</Link>
           </li>
         </ul>
       </div>

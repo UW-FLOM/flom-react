@@ -4,7 +4,7 @@
         "client": "cd client && yarn install && yarn start",
         "server": "cd server && node server",
         "build": "cd client && yarn install && yarn build",
-        "start": "concurrently \"yarn server\" \"yarn client\""
+        "start": "concurrently –kill-others-on-fail \"yarn server\" \"yarn client\""
     },
     "dependencies": {
         "concurrently": "^3.6.0"

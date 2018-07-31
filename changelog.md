@@ -13,6 +13,9 @@ work on windows. I will keep the README platform agnostic.
 we want to run the dev server proxying to the api server.
 * Add a yarn scipt to start the servers.
 * Add dev server proxying to webpack config in `client/package.json`
+* Create an express server in the `server` directory with a test API endpoint (on 3001 for now)
+* Add a test api page to the app. We'll use it to develope the database.
+* Add client-side routing and static file serving to `server.js`
 
 I used a couple blog posts about how to set up Express and the webpack dev server:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
