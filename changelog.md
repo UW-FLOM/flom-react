@@ -16,10 +16,15 @@ we want to run the dev server proxying to the api server.
 * Create an express server in the `server` directory with a test API endpoint (on 3001 for now)
 * Add a test api page to the app. We'll use it to develope the database.
 * Add client-side routing and static file serving to `server.js`
+* Install postgres locally for development
+* Create dev db in postgres
+* Add script to start postgres with everything else
+* Add pg and sequelize node pacakges to server. We need these to talk to the database.
 
 I used a couple blog posts about how to set up Express and the webpack dev server:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
 * https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/
+* https://www.robinwieruch.de/postgres-express-setup-tutorial/
 
 ### Open Issues
 * Top-level yarn scripts use bash so they won't work on Windows. Eventually these should
