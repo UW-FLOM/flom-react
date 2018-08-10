@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { getServerTest, logPostBody } from '../services/api'
 import { Header, PlainText } from '../components/Typography';
+
+import { FormControl } from 'react-bootstrap';
+
 
 class ApiTestPage extends Component {
   state = {
@@ -7,21 +11,12 @@ class ApiTestPage extends Component {
   };
 
   componentDidMount() {
-    console.log('things');
-    
-    this.callApi()
+    getServerTest()
       .then(res => this.setState({ response: res.express }))
       .catch(err => console.log(err));
+    logPostBody({thing: 'monkey'})
+      .then()
   }
-
-  callApi = async () => {
-    const response = await fetch('/api/hello');
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
-  };
 
   render() {
     return (
@@ -30,6 +25,7 @@ class ApiTestPage extends Component {
         <PlainText>
           {this.state.response}
         </PlainText>
+        <FormControl type="text" placeholder="Send text to server" />
       </div>
     );
   }
