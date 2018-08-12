@@ -1,16 +1,18 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 
 const app = express();
 const port = process.env.PORT || 3001;
+
+app.use(bodyParser());
 
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express' });
 });
 
-app.post('/api/log', (req, res) => {
-  console.log(req.body);
-  // TODO: get this working
-  res.send({ express: 'Hello From Express' });
+app.post('/api/echo', (req, res) => {
+  console.log('Recieved echo request with body:', req.body);
+  res.send({ express: req.body.text });
 });
 
 if (process.env.NODE_ENV === 'production') {

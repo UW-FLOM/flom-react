@@ -11,13 +11,13 @@ export const getServerTest = async () => {
 export const logPostBody = async (args) => {
   const options = {
     method: 'POST',
-    
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      args
+      text: args.text
     }),
-  };
+  };  
   
-  const response = await fetch('/api/log', options);
+  const response = await fetch('/api/echo', options);
   
   return response;
 };

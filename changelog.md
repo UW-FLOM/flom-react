@@ -21,6 +21,9 @@ we want to run the dev server proxying to the api server.
 * Add script to start postgres with everything else
 * Add pg and sequelize node pacakges to server. We need these to talk to the database.
 * Add a services directory and api interface for async calls
+* Add `bodyParser` to express to parse json
+* Add inputs to the test page 
+* Add an echo endpoint to the server
 
 I used a couple blog posts about how to set up Express and the webpack dev server:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

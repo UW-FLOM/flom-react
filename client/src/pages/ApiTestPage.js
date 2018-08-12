@@ -7,14 +7,24 @@ import { FormControl } from 'react-bootstrap';
 
 class ApiTestPage extends Component {
   state = {
-    response: ''
+    response: '',
+    inputValue: ''
   };
 
   componentDidMount() {
     getServerTest()
       .then(res => this.setState({ response: res.express }))
       .catch(err => console.log(err));
-    logPostBody({thing: 'monkey'})
+  }
+
+  handleChangeTextBoxChange = (e) => {
+    this.setState({inputValue: e.target.value})
+  }
+
+  handleEnter = () => {
+    const textToSend = this.state.inputValue;
+    this.setState({inputValue: ''})
+    logPostBody({text: textToSend})
       .then()
   }
 
@@ -25,7 +35,17 @@ class ApiTestPage extends Component {
         <PlainText>
           {this.state.response}
         </PlainText>
-        <FormControl type="text" placeholder="Send text to server" />
+        <FormControl 
+          type="text" 
+          placeholder="Send text to server" 
+          value={this.state.inputValue}
+          onChange={this.handleChangeTextBoxChange}
+          onKeyPress={event => {
+            if (event.key === "Enter") {
+              this.handleEnter();
+            }
+          }}
+        />
       </div>
     );
   }
