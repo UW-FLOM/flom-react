@@ -1,4 +1,14 @@
 ## Sprint 1 - 6/2018
+Get the dev app up and running
+* Start a new app with create react app
+* Add react router and set up basic routes
+* Add eslint for sanity
+* Set up react-bootstrap and write some demo controls
+* Can't get the eslint rules how I like them. I will have to come back to it
+* Write a basic form page to copy what was already implemented. It doesn't write to the server yet
+* Set up leaflet-react
+* Write a basic map tool page with leaflet react
+At this point I have proof of concept pages for the survey and the map tool. The dev server works and can be run locally.
 
 ## Sprint 2 - 7/2018
 This week I am setting up a basic production server so that we can have REST calls for database connectivity.
