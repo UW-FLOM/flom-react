@@ -19,5 +19,19 @@ export const logPostBody = async (args) => {
   
   const response = await fetch('/api/echo', options);
   
-  return response;
+  return response.json();
 };
+
+export const sendSql = async (args) => {
+  const options = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      query: args.query
+    }),
+  };
+
+  const response = await fetch('/api/_unsafe_sqlTest', options);
+
+  return response.json();
+}

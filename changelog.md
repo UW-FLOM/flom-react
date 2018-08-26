@@ -35,6 +35,9 @@ we want to run the dev server proxying to the api server.
 * Add inputs to the test page 
 * Add an echo endpoint to the server
 * Removed `"eject": "react-scripts eject"` from `client/package.json`
+* Add sql input to API test and `sendSql` to `api.js`. This is for dev time. We won't be sending raw SQL at run time.
+* Add `_unsafe_sqlTest` endpoint to server. Again, for dev time. We will remove this altogether when ORM is in place.
+* Set up server to run the unsafe SQL, then return the response
 
 I used a couple blog posts about how to set up Express and the webpack dev server:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
