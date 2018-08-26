@@ -2,7 +2,7 @@
   "name": "flom-prod-server",
   "version": "0.1",
   "scripts": {
-    "client": "cd client && yarn start",
+    "client": "cd ../client && yarn start",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },

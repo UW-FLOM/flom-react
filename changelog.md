@@ -34,6 +34,7 @@ we want to run the dev server proxying to the api server.
 * Add `bodyParser` to express to parse json
 * Add inputs to the test page 
 * Add an echo endpoint to the server
+* Removed `"eject": "react-scripts eject"` from `client/package.json`
 
 I used a couple blog posts about how to set up Express and the webpack dev server:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

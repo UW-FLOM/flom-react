@@ -12,7 +12,7 @@ app.get('/api/hello', (req, res) => {
 
 app.post('/api/echo', (req, res) => {
   console.log('Recieved echo request with body:', req.body);
-  res.send({ express: req.body.text });
+  res.end({ express: req.body.text });
 });
 
 if (process.env.NODE_ENV === 'production') {

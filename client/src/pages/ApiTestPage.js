@@ -25,7 +25,7 @@ class ApiTestPage extends Component {
     const textToSend = this.state.inputValue;
     this.setState({inputValue: ''})
     logPostBody({text: textToSend})
-      .then()
+      .then(res => console.log(res.express))
   }
 
   render() {
@@ -35,8 +35,8 @@ class ApiTestPage extends Component {
         <PlainText>
           {this.state.response}
         </PlainText>
-        <FormControl 
-          type="text" 
+        <FormControl
+          type="text"
           placeholder="Send text to server" 
           value={this.state.inputValue}
           onChange={this.handleChangeTextBoxChange}
