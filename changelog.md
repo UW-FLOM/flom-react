@@ -38,6 +38,11 @@ we want to run the dev server proxying to the api server.
 * Add sql input to API test and `sendSql` to `api.js`. This is for dev time. We won't be sending raw SQL at run time.
 * Add `_unsafe_sqlTest` endpoint to server. Again, for dev time. We will remove this altogether when ORM is in place.
 * Set up server to run the unsafe SQL, then return the response
+At this point we have a production dev server that proxies API requests to a production server, and a postgres database that can be queried.
+There is a test page in the app where we can enter sql to test the database.
+
+## Sprint 3 8/2018
+Next, the plan is to get the app writing to and reading from the database.
 
 I used a couple blog posts about how to set up Express and the webpack dev server:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
