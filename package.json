@@ -2,11 +2,11 @@
     "scripts": {
         "setup": "yarn install && cd client && yarn install && cd ../server && yarn install",
         "client": "cd client && yarn install && yarn start",
-        "server": "cd server && node server",
+        "server": "cd server && yarn install && node server",
         "psql:start": "pg_ctl -D /usr/local/var/postgres start",
         "psql:stop": "pg_ctl -D /usr/local/var/postgres stop",
         "build": "cd client && yarn install && yarn build",
-        "start": "concurrently –kill-others-on-fail \"psql:start\" \"yarn server\" \"yarn client\""
+        "start:all": "yarn psql:start && concurrently –kill-others-on-fail  \"yarn server\" \"yarn client\""
     },
     "dependencies": {
         "concurrently": "^3.6.0"

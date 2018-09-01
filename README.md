@@ -37,6 +37,10 @@ Start postgress:
 ```
 yarn psql:start
 ```
+If you control the environment and you want to start everything at once:
+```
+yarn start:all
+```
 
 It's a good idea to shut down postgres when you are done:
 ```

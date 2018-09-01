@@ -43,6 +43,7 @@ There is a test page in the app where we can enter sql to test the database.
 
 ## Sprint 3 8/2018
 Next, the plan is to get the app writing to and reading from the database.
+* Add a top-level script to start everything.
 
 I used a couple blog posts about how to set up Express and the webpack dev server:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
