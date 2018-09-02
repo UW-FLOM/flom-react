@@ -52,8 +52,10 @@ Next, the plan is to get the app writing to and reading from the database.
 * I put sequelize in the server project instead of at the root because the client doesnt need it
 * Intialize sequelize with `models`, `config`, and `migrations`. I left seeders out for now. We can revisit that if need be.
 * Set up dev environment to use local database `flom_dev` as user `flom` with password `flom`
-* Create models for `session`, `activity`, and `question`. This might cahnge later, but it seems like a good place to start.
-* Create migration files for models and initialize the database by migrating them.
+* Create models for `session`, `activity`, and `question`. This might cahnge later, but it seems like a good place to start
+* Create migration files for models and initialize the database by migrating them
+* Add controllers for session create and list
+* Split out routes to their own server file
 
 I used a couple blog posts about how to set up Express and the webpack dev server:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
