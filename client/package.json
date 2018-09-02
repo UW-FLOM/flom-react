@@ -1,6 +1,7 @@
 {
   "name": "flom-react",
   "version": "0.1.0",
+  "license": "UNLICENSED",
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
