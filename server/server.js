@@ -1,11 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const logger = require('morgan');
 
 var Sequelize = require('sequelize');
 
 const app = express();
 const port = process.env.PORT || 3001;
 
+app.use(logger('dev'));
 app.use(bodyParser());
 
 const sequelize = new Sequelize('flom-dev', 'flom', 'flom', {

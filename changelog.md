@@ -44,11 +44,22 @@ There is a test page in the app where we can enter sql to test the database.
 ## Sprint 3 8/2018
 Next, the plan is to get the app writing to and reading from the database.
 * Add a top-level script to start everything.
+* Branch `orm-setup` to try a complete ORM setup with `sequelize`
+* Add `bin` directory to root for scripts 
+* Add `morgan` for logging
+* Add `.sequelizerc` to configure sequelize
+* Fix license warning with `"license": "UNLICENSED"` in all `package.json` files. We will have to decide later what this should actually be.
+* I put sequelize in the server project instead of at the root because the client doesnt need it
+* Intialize sequelize with `models`, `config`, and `migrations`. I left seeders out for now. We can revisit that if need be.
+* Set up dev environment to use local database `flom_dev` as user `flom` with password `flom`
+* Create models for `session`, `activity`, and `question`. This might cahnge later, but it seems like a good place to start.
+* Create migration files for models and initialize the database by migrating them.
 
 I used a couple blog posts about how to set up Express and the webpack dev server:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
 * https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/
 * https://www.robinwieruch.de/postgres-express-setup-tutorial/
+* https://scotch.io/tutorials/getting-started-with-node-express-and-postgres-using-sequelize
 
 ### Open Issues
 * Top-level yarn scripts use bash so they won't work on Windows. Eventually these should

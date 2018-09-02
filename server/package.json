@@ -1,6 +1,7 @@
 {
   "name": "flom-prod-server",
   "version": "0.1",
+  "license": "UNLICENSED",
   "scripts": {
     "client": "cd ../client && yarn start",
     "server": "nodemon server.js",
@@ -9,7 +10,9 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.2",
+    "morgan": "^1.9.0",
     "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
     "sequelize": "^4.38.0"
   },
   "devDependencies": {
