@@ -1,16 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Activity = sequelize.define('Activity', {
-    activityId: DataTypes.STRING
+  const activity = sequelize.define('activity', {
+    type: DataTypes.ENUM('survey', 'map')
   }, {});
-  Activity.associate = function(models) {
-    Activity.belongsTo(models.Session, {
-      foreignKey: 'activityId',
-    });
-    Activity.hasMany(models.Question, {
-      foreignKey: 'questionId',
-      as: 'questions',
-    })
+  activity.associate = function(models) {
+    activity.belongsTo(models.session)
+    activity.hasMany(models.question)
   };
-  return Activity;
+  return activity;
 };

@@ -1,20 +1,18 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Activities', {
+    return queryInterface.createTable('questions', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      activityId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Sessions',
-          key: 'id',
-          as: 'activityId',
-        },
+      type: {
+        type: Sequelize.ENUM('string', 'number', 'boolean', 'geo', 'time')
+      },
+      response: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -27,6 +25,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Activities');
+    return queryInterface.dropTable('questions');
   }
 };

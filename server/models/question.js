@@ -1,14 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Question = sequelize.define('Question', {
-    questionId: DataTypes.INTEGER,
-    type: DataTypes.STRING,
+  const question = sequelize.define('question', {
+    type: DataTypes.ENUM('string', 'number', 'boolean', 'geo', 'time'),
     response: DataTypes.STRING
   }, {});
-  Question.associate = function(models) {
-    Question.belongsTo(models.Activity, {
-      foreignKey: 'questionId',
-    });
+  question.associate = function(models) {
+    question.belongsTo(models.activity)
   };
-  return Question;
+  return question;
 };

@@ -1,13 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Session = sequelize.define('Session', {
+  const session = sequelize.define('session', {
     // Nothing
   }, {});
-  Session.associate = function(models) {
-    Session.hasMany(models.Activity, {
-      foreignKey: 'activityId',
-      as: 'activities',
-    })
+  session.associate = function(models) {
+    session.hasMany(models.activity)
   };
-  return Session;
+  return session;
 };
