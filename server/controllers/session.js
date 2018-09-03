@@ -1,4 +1,5 @@
 const session = require('../models').session;
+const activity = require('../models').activity;
 
 module.exports = {
   create(req, res) {
@@ -9,8 +10,31 @@ module.exports = {
   },
   list(req, res) {
     return session
-      .all()
+      .findAll({
+        include: [{
+          model: activity,
+          as: 'activities',
+        }],
+      })
       .then(sessions => res.status(200).send(sessions))
+      .catch(error => res.status(400).send(error));
+  },
+  find(req, res) {
+    return session
+      .findById(req.params.sessionId, {
+        include: [{
+          model: activity,
+          as: 'activities',
+        }],
+      })
+      .then(session => {
+        if (!session) {
+          return res.status(404).send({
+            message: 'Session Not Found',
+          });
+        }
+        return res.status(200).send(session);
+      })
       .catch(error => res.status(400).send(error));
   },
 };

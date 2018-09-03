@@ -25,6 +25,7 @@ module.exports = (app) => {
 
   app.post('/api/session', sessionController.create);
   app.get('/api/session', sessionController.list);
+  app.get('/api/session/:sessionId', sessionController.find);
 
   app.post('/api/session/:sessionId/activity', activitiesController.create);
 

@@ -2,7 +2,7 @@
     "scripts": {
         "setup": "yarn install && cd client && yarn install && cd ../server && yarn install",
         "client": "cd client && yarn install && yarn start",
-        "server": "cd server && yarn install && node server",
+        "server": "cd server && yarn install && yarn server",
         "psql:start": "pg_ctl -D /usr/local/var/postgres start",
         "psql:stop": "pg_ctl -D /usr/local/var/postgres stop",
         "build": "cd client && yarn install && yarn build",
