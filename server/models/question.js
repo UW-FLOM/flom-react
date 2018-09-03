@@ -5,7 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     response: DataTypes.STRING
   }, {});
   question.associate = function(models) {
-    question.belongsTo(models.activity)
+    question.belongsTo(models.activity, {
+      foreignKey: 'activityId',
+    })
   };
   return question;
 };

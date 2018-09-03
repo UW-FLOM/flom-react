@@ -4,8 +4,13 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.ENUM('survey', 'map')
   }, {});
   activity.associate = function(models) {
-    activity.belongsTo(models.session)
-    activity.hasMany(models.question)
+    activity.belongsTo(models.session, {
+      foreignKey: 'sessionId',
+      onDelete: 'CASCADE',
+    })
+    activity.hasMany(models.question, {
+      foreignKey: 'activityId',
+    })
   };
   return activity;
 };

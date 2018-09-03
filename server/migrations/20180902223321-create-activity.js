@@ -18,7 +18,16 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      sessionId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'sessions',
+          key: 'id',
+          as: 'sessionId',
+        },
+      },
     });
   },
   down: (queryInterface, Sequelize) => {

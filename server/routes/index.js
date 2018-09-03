@@ -1,5 +1,5 @@
 const sessionController = require('../controllers').session;
-
+const activitiesController = require('../controllers').activities;
 
 module.exports = (app) => {
   app.get('/api/hello', (req, res) => {
@@ -25,5 +25,7 @@ module.exports = (app) => {
 
   app.post('/api/session', sessionController.create);
   app.get('/api/session', sessionController.list);
+
+  app.post('/api/session/:sessionId/activity', activitiesController.create);
 
 };
