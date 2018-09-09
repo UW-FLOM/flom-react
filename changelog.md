@@ -56,10 +56,12 @@ Next, the plan is to get the app writing to and reading from the database.
 * Create migration files for models and initialize the database by migrating them
 * Add controllers for session create and list
 * Split out routes to their own server file
-* I converted all the database objects to lower case. I will use the convention that all db object will be lower case.
+* I converted all the database objects to lower case. I will use the convention that all db objects will be lower case.
 * Add `sessionId` to the activity model
 * Add activity create controller
 * Add a find session endpoint
+* Add question `POST` controller
+* Add activity list controller
 
 I used a couple blog posts about how to set up Express and the webpack dev server:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
@@ -68,6 +70,5 @@ I used a couple blog posts about how to set up Express and the webpack dev serve
 * https://scotch.io/tutorials/getting-started-with-node-express-and-postgres-using-sequelize
 
 ### Open Issues
-* Top-level yarn scripts use bash so they won't work on Windows. Eventually these should
-become node scripts
+* Top-level yarn scripts use bash so they won't work on Windows. Eventually these should become node scripts
 * Scripts don't work when services are already running
