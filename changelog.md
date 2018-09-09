@@ -62,6 +62,7 @@ Next, the plan is to get the app writing to and reading from the database.
 * Add a find session endpoint
 * Add question `POST` controller
 * Add activity list controller
+* Add questins to session detail list
 
 I used a couple blog posts about how to set up Express and the webpack dev server:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
