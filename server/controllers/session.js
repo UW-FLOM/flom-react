@@ -1,5 +1,7 @@
 const session = require('../models').session;
 const activity = require('../models').activity;
+const question = require('../models').question;
+
 
 module.exports = {
   create(req, res) {
@@ -14,6 +16,7 @@ module.exports = {
         include: [{
           model: activity,
           as: 'activities',
+          include: [question]
         }],
       })
       .then(sessions => res.status(200).send(sessions))
