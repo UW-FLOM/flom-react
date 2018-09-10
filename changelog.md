@@ -77,3 +77,4 @@ I used a couple blog posts about how to set up Express and the webpack dev serve
 ### Open Issues
 * Top-level yarn scripts use bash so they won't work on Windows. Eventually these should become node scripts
 * Scripts don't work when services are already running
+* There are deprecation warnings in the server launch
