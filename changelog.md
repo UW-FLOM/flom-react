@@ -69,6 +69,9 @@ At this point I have functional database connectivity, a model for how to struct
 Next, build a demo app on top of the app infrastructure and database that is in place.
 * Begin defining a survey format in JSON
 * Add `api/suveys` endpoint
+* Add `glob` for finding survey files dyanmically
+* Add `lodash` to the server for mapping file paths to something useful. And for everything else.
+* Update survey controller to read any survey in the `surveys` directory
 
 I used a couple blog posts about how to set up Express and the webpack dev server:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

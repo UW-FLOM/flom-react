@@ -1,0 +1,22 @@
+{
+  "title" : "Animals",
+  "activities": [
+    {
+      "title": "Pick an animal",
+      "type": "form",
+      "questions": [
+        {
+          "question": "Which animal would you like?",
+          "type": "select",
+          "options": [
+            "Llama",
+            "Alpaca",
+            "Badger",
+            "Martin",
+            "A snake"
+          ]
+        }
+      ]
+    }
+  ]
+}
