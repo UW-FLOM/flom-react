@@ -22,6 +22,9 @@ class HomePage extends Component {
           <li>
             <Link to="/api_test">API Test</Link>
           </li>
+          <li>
+            <Link to="/surveys">Surveys</Link>
+          </li>
         </ul>
       </div>
     );
