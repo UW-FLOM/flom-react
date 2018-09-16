@@ -2,7 +2,6 @@ const session = require('../models').session;
 const activity = require('../models').activity;
 const question = require('../models').question;
 
-
 module.exports = {
   create(req, res) {
     return session

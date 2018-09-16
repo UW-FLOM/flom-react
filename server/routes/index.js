@@ -1,6 +1,10 @@
+// Database controllers
 const sessionController = require('../controllers').session;
 const activitiesController = require('../controllers').activities;
 const questionsController = require('../controllers').questions;
+
+// Asset controllers
+const surveysController = require('../controllers').surveys;
 
 module.exports = (app) => {
   app.get('/api/hello', (req, res) => {
@@ -23,6 +27,8 @@ module.exports = (app) => {
       })
     })
   });
+
+  app.get('/api/surveys', surveysController.get);
 
   app.post('/api/session', sessionController.create);
   app.get('/api/session', sessionController.list);

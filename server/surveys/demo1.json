@@ -1,0 +1,59 @@
+{
+  "title" : "Demo survey",
+  "activities": [
+    {
+      "title": "About you",
+      "helpText": "Sample demographic form",
+      "type": "form",
+      "questions": [
+        {
+          "question": "What is your gender?",
+          "type": "select",
+          "options": [
+            "Female",
+            "Male",
+            "Intersex",
+            "Androgyne",
+            "The option I would choose is not listed",
+            "I prefer not to state"
+          ]
+        },
+        {
+          "question": "How old are you?",
+          "type": "text"
+        },
+        {
+          "question": "What is the highest level of school you have completed?",
+          "type": "select",
+          "options": [
+            "None",
+            "Elementary school",
+            "High school",
+            "Associate's degree",
+            "Bachelor's degree",
+            "Master's degree or more"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Animals",
+      "helpText": "Tell us about your favorite animals",
+      "type": "form",
+      "questions": [
+        {
+          "question": "What is your favorite animal?",
+          "type": "text"
+        },
+        {
+          "question": "Llamas or alpacs?",
+          "type": "radio",
+          "options": [
+            "Llamas",
+            "Alpacas"
+          ]
+        }
+      ]
+    }
+  ]
+}

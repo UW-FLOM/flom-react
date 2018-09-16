@@ -66,7 +66,9 @@ Next, the plan is to get the app writing to and reading from the database.
 At this point I have functional database connectivity, a model for how to structure the database, and configuration touchpoints for the database. Now it's time to actually build out a demo app.
 
 ## Sprint 4 9/2018
-Next, build a demo app on top of the app infrastructure and database that is in place. 
+Next, build a demo app on top of the app infrastructure and database that is in place.
+* Begin defining a survey format in JSON
+* Add `api/suveys` endpoint
 
 I used a couple blog posts about how to set up Express and the webpack dev server:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
