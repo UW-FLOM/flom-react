@@ -5,6 +5,7 @@ import SampleFormPage from './pages/SampleFormPage';
 import MapToolPage from './pages/MapToolPage';
 import ApiTestPage from './pages/ApiTestPage';
 import SurveyListPage from './pages/SurveyListPage';
+import SurveyPage from './pages/SurveyPage';
 
 import './App.css';
 
@@ -18,6 +19,7 @@ class App extends Component {
           <Route path="/map_tool" component={MapToolPage}/>
           <Route path="/api_test" component={ApiTestPage}/>
           <Route path="/surveys" component={SurveyListPage}/>
+          <Route path="/survey/:surveyId" component={SurveyPage}/>
         </Switch>
       </div>
     );

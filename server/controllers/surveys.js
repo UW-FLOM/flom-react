@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const path = require('path');
 const glob = require('glob');
+const idFromString = require('../util').idFromString;
 
 module.exports = {
   get(req, res) {
@@ -10,6 +11,7 @@ module.exports = {
       }
       const surveys = _.map(files, (filePath) => {
         const survey = require(path.join('..', filePath));
+        survey.id = idFromString(survey.title);
         return survey;
       });
 

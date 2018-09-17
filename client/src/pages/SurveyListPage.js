@@ -24,9 +24,8 @@ class HomePage extends Component {
           {
             map(this.state.surveyDefinitions, (survey) => {
               return (
-                <li key={survey.title}>
-                  {survey.title}
-                  {/* <Link to="/sample_form">Sample Input Form</Link> */}
+                <li key={survey.id}>
+                  <Link to={`/survey/${survey.id}`}>{survey.title}</Link>
                 </li>
               )
             })

@@ -39,9 +39,6 @@ export const sendSql = async (args) => {
 export const getSurveyDefinitions = async (args) => {
   const response = await fetch('/api/surveys');
   const body = await response.json();
-
-  console.log(body);
-  
   if (response.status !== 200) throw Error(body.message);
 
   return body;
