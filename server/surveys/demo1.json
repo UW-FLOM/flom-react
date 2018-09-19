@@ -1,5 +1,6 @@
 {
   "title" : "Demo survey",
+  "intro" : "Do you want to take this survey?",
   "activities": [
     {
       "title": "About you",

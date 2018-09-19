@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { getSurveyDefinitions } from '../services/api';
 import { Header, PlainText } from '../components/Typography';
+import Intro from '../components/Intro';
 
 const HighlightedText = styled(PlainText)`
   color: steelblue;
@@ -25,9 +26,17 @@ class HomePage extends Component {
     return find(this.state.surveyDefinitions, ['id', this.props.match.params.surveyId]);
   }
 
+  getSessionId() {
+    return this.props.match.params.sessionId;
+  }
+
+  handleBeginClick() {
+    console.log('boo')
+  }
+
   render() {
     const surveyDefinition = this.getSurvey();
-    if(!surveyDefinition){
+    if (!surveyDefinition) {
       return (
         <div>
           <Header>No survey found</Header>
@@ -36,6 +45,16 @@ class HomePage extends Component {
       )
     }
     
+    if (!this.getSessionId()) {
+      return (
+        <Intro
+          title={surveyDefinition.title}
+          intro={surveyDefinition.intro}
+          onBeginClick={this.handleBeginClick}
+        />
+      );
+    }
+
     return (
       <div>
         <Header>{surveyDefinition.title}</Header>

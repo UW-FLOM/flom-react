@@ -20,6 +20,7 @@ class App extends Component {
           <Route path="/api_test" component={ApiTestPage}/>
           <Route path="/surveys" component={SurveyListPage}/>
           <Route path="/survey/:surveyId" component={SurveyPage}/>
+          <Route path="/survey/:surveyId/session/:sessionId" component={SurveyPage}/>
         </Switch>
       </div>
     );
