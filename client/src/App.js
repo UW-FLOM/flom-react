@@ -19,8 +19,8 @@ class App extends Component {
           <Route path="/map_tool" component={MapToolPage}/>
           <Route path="/api_test" component={ApiTestPage}/>
           <Route path="/surveys" component={SurveyListPage}/>
-          <Route path="/survey/:surveyId" component={SurveyPage}/>
           <Route path="/survey/:surveyId/session/:sessionId" component={SurveyPage}/>
+          <Route path="/survey/:surveyId" component={SurveyPage}/>
         </Switch>
       </div>
     );

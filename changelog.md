@@ -75,7 +75,8 @@ Next, build a demo app on top of the app infrastructure and database that is in 
 * Add a page to list available surveys.
 * Add a utility to create ids from strings. We'll use titles and questions to create ids.
 * Add a `survey` endpoint that understands survey ids and which survey to pick up.
-* Add an intro page for begining a session
+* Add an intro page for begining a session.
+* Make it so clicking 'ok' on the intro page generates a session and starts a survey.
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

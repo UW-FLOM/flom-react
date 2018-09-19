@@ -43,3 +43,14 @@ export const getSurveyDefinitions = async (args) => {
 
   return body;
 }
+
+export const createSession = async (args) => {
+  const options = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const response = await fetch('/api/session', options);
+
+  return response.json();
+}
