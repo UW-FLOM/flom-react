@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { find } from 'lodash';
-import styled from 'styled-components';
 
 import { getSurveyDefinitions, createSession } from '../services/api';
-import { Header, PlainText } from '../components/Typography';
 import Intro from '../components/Intro';
-
-const HighlightedText = styled(PlainText)`
-  color: steelblue;
-`
+import FormActivity from '../components/FormActivity';
 
 class HomePage extends Component {
   state = {
@@ -57,14 +52,13 @@ class HomePage extends Component {
         />
       );
     }
-
+    console.log('Rendering survey: ', JSON.stringify(surveyDefinition));
+    
     return (
       <div>
-        <Header>{surveyDefinition.title}</Header>
-        <HighlightedText>Survery data:</HighlightedText>
-        <PlainText>
-          {JSON.stringify(surveyDefinition)}
-        </PlainText>
+        <FormActivity
+          activity={surveyDefinition.activities[0]}
+        />
       </div>
     );
   }
