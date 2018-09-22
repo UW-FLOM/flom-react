@@ -82,6 +82,10 @@ Now we can read and write to the database, create new sessions, and render forms
 
 ## Sprint 5 9-10/2018
 Build out activity types and data storage. Especially the Map activity.
+* Added some linter rules for spaces.
+* Add activity index to the route.
+* Add redirecting to the next activity on activity submit.
+
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

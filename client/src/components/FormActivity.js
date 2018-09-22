@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
-import { FormControl, ControlLabel} from 'react-bootstrap';
+import { FormControl, ControlLabel } from 'react-bootstrap';
 
 import { Header, PlainText } from '../components/Typography';
 
@@ -38,15 +38,15 @@ class Intro extends PureComponent {
               return (
                 <div key={idx}>
                   <ControlLabel>{question.question}</ControlLabel>
-                  <StyledFormControl 
-                    componentClass="select" 
-                    type="select" 
+                  <StyledFormControl
+                    componentClass="select"
+                    type="select"
                     placeholder="Select one"
                   >
                     {question.options.map((option, idx) => {
                       return (
-                        <option 
-                          key={idx} 
+                        <option
+                          key={idx}
                           value={option.replace(/[^A-Z0-9]+/ig, "_").toLowerCase()}
                         >
                           {option}
@@ -60,7 +60,7 @@ class Intro extends PureComponent {
             return <p key={idx}>{JSON.stringify(question)}</p>
           })
         }
-        <SubmitButton bsStyle="primary" onClick={this.props.onBeginClick}>
+        <SubmitButton bsStyle="primary" onClick={this.props.onSubmit}>
           Submit
         </SubmitButton>
       </div>

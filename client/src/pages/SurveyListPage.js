@@ -8,7 +8,7 @@ class HomePage extends Component {
   state = {
     surveyDefinitions: []
   }
-  
+
   componentDidMount() {
     getSurveyDefinitions()
       .then(res => this.setState({ surveyDefinitions: res }))
@@ -19,7 +19,7 @@ class HomePage extends Component {
     return (
       <div>
         <Header>Available Surveys</Header>
-        
+
         <ul>
           {
             map(this.state.surveyDefinitions, (survey) => {
