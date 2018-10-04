@@ -26,7 +26,7 @@ class HomePage extends Component {
       return {
         ...state,
         redirect: false
-      }
+      };
     }
     return state;
   }
@@ -68,7 +68,7 @@ class HomePage extends Component {
     } else {
       this.setState({
         redirect: `/survey/${this.getSurveyId()}/session/${this.getSessionId()}/activity/${nextActivityIdx}`
-      })
+      });
     }
   }
 
@@ -80,7 +80,7 @@ class HomePage extends Component {
       return <Redirect to={{
         pathname: this.state.redirect,
         state: { redirect: null }
-      }} push />
+      }} push />;
     }
 
     const surveyDefinition = this.getSurvey();

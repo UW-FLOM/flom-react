@@ -2,6 +2,7 @@
   "extends": "react-app",
   "rules": {
     "no-trailing-spaces": 2,
-    "object-curly-spacing": ["error", "always"]
+    "object-curly-spacing": ["error", "always"],
+    "semi": ["error", "always"]
   }
 }
