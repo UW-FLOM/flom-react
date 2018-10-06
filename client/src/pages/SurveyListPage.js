@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { map } from 'lodash';
-import { getSurveyDefinitions } from '../services/api'
+import { getSurveyDefinitions } from '../services/api';
 import { Header } from '../components/Typography';
 
 class HomePage extends Component {
@@ -27,7 +27,7 @@ class HomePage extends Component {
                 <li key={survey.id}>
                   <Link to={`/survey/${survey.id}`}>{survey.title}</Link>
                 </li>
-              )
+              );
             })
           }
         </ul>

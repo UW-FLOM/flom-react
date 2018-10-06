@@ -51,6 +51,8 @@ class HomePage extends Component {
   handleBeginClick = () => {
     createSession()
       .then((res) => {
+        // Here we replace instead of redirect so that the accept
+        // screen doesn't end up in the browser history
         window.location.replace(
           `/survey/${this.getSurveyId()}/session/${res.id}/activity/0`
         );

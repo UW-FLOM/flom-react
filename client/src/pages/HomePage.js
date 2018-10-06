@@ -9,7 +9,7 @@ class HomePage extends Component {
         <Header>Folk Linguistics Online Mapping</Header>
         <PlainText>
           Demo application for Folk Linguistics Online Mapping.
-          This app shows the various components and how to use them. 
+          This app shows the various components and how to use them.
           There is also a demo.
         </PlainText>
         <ul>

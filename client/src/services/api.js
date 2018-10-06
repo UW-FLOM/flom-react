@@ -15,10 +15,10 @@ export const logPostBody = async (args) => {
     body: JSON.stringify({
       text: args.text
     }),
-  };  
-  
+  };
+
   const response = await fetch('/api/echo', options);
-  
+
   return response.json();
 };
 
@@ -34,7 +34,7 @@ export const sendSql = async (args) => {
   const response = await fetch('/api/_unsafe_sqlTest', options);
 
   return response.json();
-}
+};
 
 export const getSurveyDefinitions = async (args) => {
   const response = await fetch('/api/surveys');
@@ -42,7 +42,7 @@ export const getSurveyDefinitions = async (args) => {
   if (response.status !== 200) throw Error(body.message);
 
   return body;
-}
+};
 
 export const createSession = async (args) => {
   const options = {
@@ -53,4 +53,4 @@ export const createSession = async (args) => {
   const response = await fetch('/api/session', options);
 
   return response.json();
-}
+};

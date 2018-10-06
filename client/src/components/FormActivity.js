@@ -7,15 +7,15 @@ import { Header, PlainText } from '../components/Typography';
 
 const IntroText = styled(PlainText)`
   margin-left: 0px;
-`
+`;
 
 const SubmitButton = styled(Button)`
   margin: auto;
-`
+`;
 
 const StyledFormControl = styled(FormControl)`
   margin-bottom: 15px;
-`
+`;
 
 class Intro extends PureComponent {
   render() {
@@ -33,7 +33,7 @@ class Intro extends PureComponent {
                   <ControlLabel>{question.question}</ControlLabel>
                   <StyledFormControl type="text" />
                 </div>
-              )
+              );
             } else if (question.type === 'select') {
               return (
                 <div key={idx}>
@@ -51,13 +51,13 @@ class Intro extends PureComponent {
                         >
                           {option}
                         </option>
-                      )
+                      );
                     })}
                   </StyledFormControl>
                 </div>
-              )
+              );
             }
-            return <p key={idx}>{JSON.stringify(question)}</p>
+            return <p key={idx}>{JSON.stringify(question)}</p>;
           })
         }
         <SubmitButton bsStyle="primary" onClick={this.props.onSubmit}>

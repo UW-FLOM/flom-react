@@ -6,11 +6,11 @@ import { Header, PlainText } from '../components/Typography';
 
 const IntroText = styled(PlainText)`
   margin-left: 10px;
-`
+`;
 
 const ConsentButton = styled(Button)`
   margin: auto;
-`
+`;
 
 class Intro extends PureComponent {
   render() {

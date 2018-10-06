@@ -21,9 +21,9 @@ class MapToolPage extends Component {
     const leafletMap = this.leafletMap.leafletElement;
     const freeDraw = new FreeDraw();
 
-    leafletMap.addLayer(freeDraw)
+    leafletMap.addLayer(freeDraw);
 
-    freeDraw.mode(CREATE | EDIT)
+    freeDraw.mode(CREATE | EDIT);
 
     leafletMap.on('zoomend', () => {
         window.console.log('Current zoom level -> ', leafletMap.getZoom());
@@ -34,14 +34,14 @@ class MapToolPage extends Component {
     leafletMap.on('click', (e) => {
       console.log('Click event -> ', e);
       this.setState({
-        markers: [...this.state.markers, {lat: e.latlng.lat, lng: e.latlng.lng}]
-      })
-    })
+        markers: [...this.state.markers, { lat: e.latlng.lat, lng: e.latlng.lng }]
+      });
+    });
   }
 
   render() {
 
-    const position = [this.state.lat, this.state.lng]
+    const position = [this.state.lat, this.state.lng];
     return (
       <div>
         <Button style={{
@@ -52,7 +52,7 @@ class MapToolPage extends Component {
           }}>
           Add region
         </Button>
-        <Map 
+        <Map
           style={{
             position: 'absolute',
             width: '100%',
@@ -77,13 +77,13 @@ class MapToolPage extends Component {
                     </PlainText>
                   </Popup>
                 </Marker>
-              )
+              );
             })
           }
         </Map>
 
       </div>
-    )
+    );
   }
 }
 

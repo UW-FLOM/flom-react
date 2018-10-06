@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { getServerTest, logPostBody, sendSql } from '../services/api'
+import { getServerTest, logPostBody, sendSql } from '../services/api';
 import { Header, PlainText, Title } from '../components/Typography';
 
 import { FormControl } from 'react-bootstrap';
 
 const StaticResponse = styled(PlainText)`
   color: steelblue;
-`
+`;
 const EchoResponse = styled(PlainText)`
   color: steelblue;
   margin-top: 5px;
-`
+`;
 class ApiTestPage extends Component {
   state = {
     staticResponse: '',
@@ -30,27 +30,27 @@ class ApiTestPage extends Component {
   }
 
   handleEchoTextBoxChange = (e) => {
-    this.setState({echoInputValue: e.target.value})
+    this.setState({ echoInputValue: e.target.value });
   }
 
   handleSqlTextBoxChange = (e) => {
-    this.setState({sqlInputValue: e.target.value})
+    this.setState({ sqlInputValue: e.target.value });
   }
 
   handleEchoEnter = () => {
     const textToSend = this.state.echoInputValue;
-    this.setState({echoInputValue: ''})
-    logPostBody({text: textToSend})
-      .then(res => this.setState({echoResponse: res.text}))
+    this.setState({ echoInputValue: '' });
+    logPostBody({ text: textToSend })
+      .then(res => this.setState({ echoResponse: res.text }));
   }
 
   handleSqlEnter = () => {
     const query = this.state.sqlInputValue;
-    this.setState({sqlInputValue: ''})
+    this.setState({ sqlInputValue: '' });
     console.log(query);
-    
-    sendSql({query: query})
-      .then(res => this.setState({sqlResponse: res}))
+
+    sendSql({ query: query })
+      .then(res => this.setState({ sqlResponse: res }));
   }
 
   render() {
@@ -65,7 +65,7 @@ class ApiTestPage extends Component {
         <PlainText>Echos request text</PlainText>
         <FormControl
           type="text"
-          placeholder="Send text to server" 
+          placeholder="Send text to server"
           value={this.state.echoInputValue}
           onChange={this.handleEchoTextBoxChange}
           onKeyPress={event => {

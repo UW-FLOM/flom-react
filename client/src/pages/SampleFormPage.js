@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import styled from 'styled-components';
-import { FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
+import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { Header } from '../components/Typography';
 
 const StyledFormControl = styled(FormControl)`
   margin-bottom: 15px;
-`
+`;
 
 class SampleFormPage extends Component {
   render() {
@@ -16,7 +16,7 @@ class SampleFormPage extends Component {
         <form>
           <FormGroup>
             <Header>About You</Header>
-            
+
             <ControlLabel>What is your gender?</ControlLabel>
             <StyledFormControl componentClass="select" placeholder="choose">
               <option value="choose">Choose one</option>
@@ -41,7 +41,7 @@ class SampleFormPage extends Component {
               <option value="more">Master's degree or more</option>
             </StyledFormControl>
             <Button bsStyle="primary"> Submit </Button>
-            
+
         </FormGroup>
         </form>
       </div>

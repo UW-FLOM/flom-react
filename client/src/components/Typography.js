@@ -12,4 +12,4 @@ export const BoldText = styled.p`
 
 export const Title = styled.h4`
   margin-top: 20px;
-`
+`;
