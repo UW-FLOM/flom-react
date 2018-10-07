@@ -1,9 +1,10 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import { FormControl, ControlLabel } from 'react-bootstrap';
 
 import { Header, PlainText } from '../components/Typography';
+import { idFromString } from '../util';
 
 const IntroText = styled(PlainText)`
   margin-left: 0px;
@@ -17,8 +18,27 @@ const StyledFormControl = styled(FormControl)`
   margin-bottom: 15px;
 `;
 
-class Intro extends PureComponent {
+class Intro extends Component {
+
+  state ={
+    answers: {}
+  }
+
+  handleValueUpdate = (questionId, value) => {
+    this.setState((previousState) => {
+      return {
+        ...previousState,
+        answers: {
+          ...previousState.answers,
+          [questionId]: value,
+        },
+      };
+    });
+  }
+
   render() {
+    console.log('INFO: form state on render:', JSON.stringify(this.state));
+
     return (
       <div>
         <Header>{this.props.activity.title}</Header>
@@ -27,11 +47,18 @@ class Intro extends PureComponent {
         </IntroText>
         {
           this.props.activity.questions.map((question, idx) => {
+            const questionId = idFromString(question.question);
             if (question.type === 'text') {
               return (
                 <div key={idx}>
                   <ControlLabel>{question.question}</ControlLabel>
-                  <StyledFormControl type="text" />
+                  <StyledFormControl
+                    type="text"
+                    value={this.state.answers[questionId] || ""}
+                    onChange={
+                      (event) => this.handleValueUpdate(questionId, event.target.value)
+                    }
+                    />
                 </div>
               );
             } else if (question.type === 'select') {
@@ -41,7 +68,10 @@ class Intro extends PureComponent {
                   <StyledFormControl
                     componentClass="select"
                     type="select"
-                    placeholder="Select one"
+                    value={this.state.answers[questionId] || ""}
+                    onChange={
+                      (event) => this.handleValueUpdate(questionId, event.target.value)
+                    }
                   >
                     {question.options.map((option, idx) => {
                       return (

@@ -11,4 +11,4 @@ const idFromString = (string) => string.replace(/[^A-Z0-9]+/ig, "_").toLowerCase
 
 module.exports = {
   idFromString
-}
+};

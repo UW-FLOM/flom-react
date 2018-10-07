@@ -85,6 +85,8 @@ Build out activity types and data storage. Especially the Map activity.
 * Added some linter rules for spaces.
 * Add activity index to the route.
 * Add redirecting to the next activity on activity submit.
+* Create a `shared` directory and move `getIdFromString` utility there. We need it on both client and server.
+* Sigh. Then put the utility back in the server and duplicate it. This is annoying. But Create React App doesn't support imports outside of itself. So we will have to keep two copies. Note symlinks are a bad idea because we are trying to be platform agnostic. 
 
 
 I used a couple blog posts about how to set up Express and postgres:
