@@ -60,8 +60,9 @@ class HomePage extends Component {
       .catch(err => console.log(err));
   }
 
-  handleSubmit = () => {
+  handleSubmit = (answers) => {
     // TODO submit answers
+    console.log('INFO: submitting answers:', JSON.stringify(answers));
 
     const nextActivityIdx = this.getActivityIndex() + 1;
     if ( nextActivityIdx >= this.getSurvey().activities.length){

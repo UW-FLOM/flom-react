@@ -90,7 +90,10 @@ class Intro extends Component {
             return <p key={idx}>{JSON.stringify(question)}</p>;
           })
         }
-        <SubmitButton bsStyle="primary" onClick={this.props.onSubmit}>
+        <SubmitButton
+          bsStyle="primary"
+          onClick={() => this.props.onSubmit(this.state.answers)}
+        >
           Submit
         </SubmitButton>
       </div>
