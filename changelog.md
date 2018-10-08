@@ -86,7 +86,10 @@ Build out activity types and data storage. Especially the Map activity.
 * Add activity index to the route.
 * Add redirecting to the next activity on activity submit.
 * Create a `shared` directory and move `getIdFromString` utility there. We need it on both client and server.
-* Sigh. Then put the utility back in the server and duplicate it. This is annoying. But Create React App doesn't support imports outside of itself. So we will have to keep two copies. Note symlinks are a bad idea because we are trying to be platform agnostic. 
+* Sigh. Then put the utility back in the server and duplicate it. This is annoying. But Create React App doesn't support imports outside of itself. So we will have to keep two copies. Note symlinks are a bad idea because we are trying to be platform agnostic.
+* Add state to form activity. Now it keeps track of the value for each question.
+* Create an endpoint and controllers to submit all answers for an activity. This is in a branch for now.
+* Merge that branch. Seems to work.
 
 
 I used a couple blog posts about how to set up Express and postgres:

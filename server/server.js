@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 app.use(logger('dev'));
-app.use(bodyParser());
+app.use(bodyParser.json());
 
 const sequelize = new Sequelize('flom-dev', 'flom', 'flom', {
   dialect: 'postgres',

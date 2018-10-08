@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const activity = require('../models').activity;
 const question = require('../models').question;
 
@@ -21,4 +22,18 @@ module.exports = {
       .then(activities => res.status(200).send(activities))
       .catch(error => res.status(400).send(error));
   },
+  submit(req, res) {
+    // Add all of the answers to the questions table
+    return Promise
+      .all(
+        _.map(req.body.questions, (q) => {
+          return question.create({
+            activityId: req.body.activityId,
+            response: q.response
+          })
+        })
+      )
+      .then(questions => res.status(200).send(questions))
+      .catch(error => res.status(400).send(error))
+  }
 };
