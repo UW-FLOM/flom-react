@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
+import { map } from 'lodash';
 
 import { Header, PlainText } from '../components/Typography';
 import MapTool from '../components/MapTool';
@@ -14,6 +15,7 @@ const ActivityContainer = styled.div`
 
 const SideBar = styled.div`
   padding: 15px;
+  border-right: 1px solid #ccc;
 `;
 
 const IntroText = styled(PlainText)`
@@ -24,9 +26,6 @@ const SubmitButton = styled(Button)`
   margin: auto;
 `;
 
-const MapSection = styled(MapTool)`
-
-`;
 
 class MapActivity extends Component {
 
@@ -44,14 +43,23 @@ class MapActivity extends Component {
           <IntroText>
             {this.props.activity.helpText}
           </IntroText>
+          {
+            map(this.props.activity.questions, (question, idx) => {
+              return (
+                <PlainText key={idx}>{question.question}</PlainText>
+              );
+            })
+          }
           <SubmitButton
             bsStyle="primary"
-            onClick={() => this.props.onSubmit(this.state.answers)}
+            onClick={() => this.props.onSubmit(this.state)}
           >
             Submit
           </SubmitButton>
         </SideBar>
-        <MapSection />
+        <MapTool
+          center={this.props.activity.center}
+        />
       </ActivityContainer>
     );
   }

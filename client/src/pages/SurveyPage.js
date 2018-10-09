@@ -120,7 +120,10 @@ class HomePage extends Component {
     } else if (currentActivity.type === 'map'){
       return (
         <MapLayout>
-          <MapActivity activity={currentActivity}/>
+          <MapActivity
+            activity={currentActivity}
+            onSubmit={this.handleSubmit}
+          />
         </MapLayout>
       );
     } else {

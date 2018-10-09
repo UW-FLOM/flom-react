@@ -40,19 +40,23 @@
     {
       "title": "Animals",
       "helpText": "Tell us about your favorite animals",
-      "type": "map",
+      "type": "form",
       "questions": [
         {
           "question": "What is your favorite animal?",
           "type": "text"
-        },
+        }
+      ]
+    },
+    {
+      "title": "Animals",
+      "helpText": "Tell us where you think these animals live.",
+      "type": "map",
+      "center": [-13.336639, -72.065167],
+      "questions": [
         {
-          "question": "Llamas or alpacs?",
-          "type": "radio",
-          "options": [
-            "Llamas",
-            "Alpacas"
-          ]
+          "question": "Where does your favorite animal live?",
+          "type": "text"
         }
       ]
     }

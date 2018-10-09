@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { map } from 'lodash';
+import { map, get } from 'lodash';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import FreeDraw, { CREATE, EDIT } from 'leaflet-freedraw';
 import { Button } from 'react-bootstrap';
@@ -20,8 +20,8 @@ const AddRegionButton = styled(Button)`
 
 class MapTool extends Component {
   state = {
-    lat: 47.6202,
-    lng: -122.3472,
+    lat: get(this.props, 'center[0]') || 47.6202,
+    lng: get(this.props, 'center[1]') || -122.3472,
     zoom: 13,
     markers: []
   }
