@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import { Layout } from '../components/Layout';
+
 import { Header } from '../components/Typography';
 
 const StyledFormControl = styled(FormControl)`
@@ -12,7 +14,7 @@ const StyledFormControl = styled(FormControl)`
 class SampleFormPage extends Component {
   render() {
     return (
-      <div>
+      <Layout>
         <form>
           <FormGroup>
             <Header>About You</Header>
@@ -44,7 +46,7 @@ class SampleFormPage extends Component {
 
         </FormGroup>
         </form>
-      </div>
+      </Layout>
     );
   }
 }

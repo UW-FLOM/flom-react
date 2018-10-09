@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import { getServerTest, logPostBody, sendSql } from '../services/api';
+
+import { Layout } from '../components/Layout';
 import { Header, PlainText, Title } from '../components/Typography';
 
 import { FormControl } from 'react-bootstrap';
@@ -55,7 +57,7 @@ class ApiTestPage extends Component {
 
   render() {
     return (
-      <div>
+      <Layout>
         <Header>Api tests</Header>
         <Title>Static server response</Title>
         <StaticResponse>
@@ -96,7 +98,7 @@ class ApiTestPage extends Component {
             PSQL response: {JSON.stringify(this.state.sqlResponse)}
           </EchoResponse>
         }
-      </div>
+      </Layout>
     );
   }
 }

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { map } from 'lodash';
 import { getSurveyDefinitions } from '../services/api';
+
+import { Layout } from '../components/Layout';
+
 import { Header } from '../components/Typography';
 
 class HomePage extends Component {
@@ -17,7 +20,7 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div>
+      <Layout>
         <Header>Available Surveys</Header>
 
         <ul>
@@ -31,7 +34,7 @@ class HomePage extends Component {
             })
           }
         </ul>
-      </div>
+      </Layout>
     );
   }
 }

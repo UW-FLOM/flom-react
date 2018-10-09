@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Layout } from '../components/Layout';
+
 import { Header, PlainText } from '../components/Typography';
 
 class HomePage extends Component {
   render() {
     return (
-      <div>
+      <Layout>
         <Header>Folk Linguistics Online Mapping</Header>
         <PlainText>
           Demo application for Folk Linguistics Online Mapping.
@@ -26,7 +28,7 @@ class HomePage extends Component {
             <Link to="/surveys">Surveys</Link>
           </li>
         </ul>
-      </div>
+      </Layout>
     );
   }
 }

@@ -6,6 +6,13 @@ import { FormControl, ControlLabel } from 'react-bootstrap';
 import { Header, PlainText } from '../components/Typography';
 import { idFromString } from '../util';
 
+const FormLayout = styled.div`
+  margin: auto;
+  width: 900px;
+  padding: 0px 15px;
+  height: 100%;
+`;
+
 const IntroText = styled(PlainText)`
   margin-left: 0px;
 `;
@@ -18,7 +25,7 @@ const StyledFormControl = styled(FormControl)`
   margin-bottom: 15px;
 `;
 
-class Intro extends Component {
+class FormActivity extends Component {
 
   state ={
     answers: {}
@@ -40,7 +47,7 @@ class Intro extends Component {
     console.log('INFO: form state on render:', JSON.stringify(this.state));
 
     return (
-      <div>
+      <FormLayout>
         <Header>{this.props.activity.title}</Header>
         <IntroText>
           {this.props.activity.helpText}
@@ -96,9 +103,9 @@ class Intro extends Component {
         >
           Submit
         </SubmitButton>
-      </div>
+      </FormLayout>
     );
   }
 }
 
-export default Intro;
+export default FormActivity;

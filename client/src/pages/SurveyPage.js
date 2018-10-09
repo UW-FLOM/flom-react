@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { find, has } from 'lodash';
 import { Redirect } from 'react-router-dom';
 
+import { Layout as FormLayout } from '../components/Layout';
 import { Header, PlainText } from '../components/Typography';
 import { getSurveyDefinitions, createSession } from '../services/api';
 import Intro from '../components/Intro';
 import FormActivity from '../components/FormActivity';
+import MapActivity from '../components/MapActivity';
 
 class HomePage extends Component {
   state = {
@@ -94,11 +96,13 @@ class HomePage extends Component {
 
     if (!this.getSessionId()) {
       return (
-        <Intro
-          title={surveyDefinition.title}
-          intro={surveyDefinition.intro}
-          onBeginClick={this.handleBeginClick}
-        />
+        <FormLayout>
+          <Intro
+            title={surveyDefinition.title}
+            intro={surveyDefinition.intro}
+            onBeginClick={this.handleBeginClick}
+          />
+        </FormLayout>
       );
     }
 
@@ -106,13 +110,17 @@ class HomePage extends Component {
 
     if (currentActivity.type === 'form') {
       return (
-        <FormActivity
-          activity={currentActivity}
-          onSubmit={this.handleSubmit}
-        />
+        <FormLayout>
+          <FormActivity
+            activity={currentActivity}
+            onSubmit={this.handleSubmit}
+          />
+        </FormLayout>
       );
     } else if (currentActivity.type === 'map'){
-      return null;
+      return (
+        <MapActivity activity={currentActivity}/>
+      );
     } else {
       return (
         <div>
