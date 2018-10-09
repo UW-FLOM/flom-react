@@ -89,7 +89,8 @@ Build out activity types and data storage. Especially the Map activity.
 * Sigh. Then put the utility back in the server and duplicate it. This is annoying. But Create React App doesn't support imports outside of itself. So we will have to keep two copies. Note symlinks are a bad idea because we are trying to be platform agnostic.
 * Add state to form activity. Now it keeps track of the value for each question.
 * Create an endpoint and controllers to submit all answers for an activity. This is in a branch for now.
-* Merge that branch. Seems to work.
+* Merge that branch. Seems to work. Still need to send them from the client. 
+* Refactor `MapToolPage` into `MapTool` and `MapToolPage`.
 
 
 I used a couple blog posts about how to set up Express and postgres:

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { find, has } from 'lodash';
 import { Redirect } from 'react-router-dom';
 
+import { Header, PlainText } from '../components/Typography';
 import { getSurveyDefinitions, createSession } from '../services/api';
 import Intro from '../components/Intro';
 import FormActivity from '../components/FormActivity';
@@ -101,14 +102,25 @@ class HomePage extends Component {
       );
     }
 
-    return (
-      <div>
+    const currentActivity = surveyDefinition.activities[this.getActivityIndex()];
+
+    if (currentActivity.type === 'form') {
+      return (
         <FormActivity
-          activity={surveyDefinition.activities[this.getActivityIndex()]}
+          activity={currentActivity}
           onSubmit={this.handleSubmit}
         />
-      </div>
-    );
+      );
+    } else if (currentActivity.type === 'map'){
+      return null;
+    } else {
+      return (
+        <div>
+          <Header>Activity type not found</Header>
+          <PlainText>The specified activity type does not exist.</PlainText>
+        </div>
+      );
+    }
   }
 }
 

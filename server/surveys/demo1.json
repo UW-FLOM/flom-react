@@ -40,7 +40,7 @@
     {
       "title": "Animals",
       "helpText": "Tell us about your favorite animals",
-      "type": "form",
+      "type": "map",
       "questions": [
         {
           "question": "What is your favorite animal?",
