@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { find, has } from 'lodash';
 import { Redirect } from 'react-router-dom';
 
-import { Layout as FormLayout } from '../components/Layout';
+import { Layout as FormLayout, MapLayout } from '../components/Layout';
 import { Header, PlainText } from '../components/Typography';
 import { getSurveyDefinitions, createSession } from '../services/api';
 import Intro from '../components/Intro';
@@ -119,7 +119,9 @@ class HomePage extends Component {
       );
     } else if (currentActivity.type === 'map'){
       return (
-        <MapActivity activity={currentActivity}/>
+        <MapLayout>
+          <MapActivity activity={currentActivity}/>
+        </MapLayout>
       );
     } else {
       return (

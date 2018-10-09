@@ -91,7 +91,9 @@ Build out activity types and data storage. Especially the Map activity.
 * Create an endpoint and controllers to submit all answers for an activity. This is in a branch for now.
 * Merge that branch. Seems to work. Still need to send them from the client. 
 * Refactor `MapToolPage` into `MapTool` and `MapToolPage`.
-
+* Create `MapActivity` and add it to `SurveyPage`.
+* Remove top-level css and create layout components so that maps and surveys can have different page layouts.
+* Update map layout to work with a side bar.
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
@@ -103,3 +105,4 @@ I used a couple blog posts about how to set up Express and postgres:
 * Top-level yarn scripts use bash so they won't work on Windows. Eventually these should become node scripts
 * Scripts don't work when services are already running
 * There are deprecation warnings in the server launch
+* This will not work in IE unless someone really really wants it to.

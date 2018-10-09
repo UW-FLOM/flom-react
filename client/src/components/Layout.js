@@ -6,3 +6,8 @@ export const Layout = styled.div`
   padding: 0px 15px;
   height: 100%;
 `;
+
+export const MapLayout = styled.div`
+  width: 100%;
+  height: 100%;
+`;
