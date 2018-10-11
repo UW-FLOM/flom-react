@@ -29,6 +29,7 @@ class MapTool extends Component {
   componentDidMount() {
     const leafletMap = this.leafletMap.leafletElement;
     const freeDraw = new FreeDraw();
+    this.freeDraw = freeDraw;
 
     leafletMap.addLayer(freeDraw);
 
@@ -46,6 +47,10 @@ class MapTool extends Component {
         markers: [...this.state.markers, { lat: e.latlng.lat, lng: e.latlng.lng }]
       });
     });
+  }
+
+  componentWillUnmount() {
+    this.leafletMap.leafletElement.removeLayer(this.freeDraw);
   }
 
   render() {
