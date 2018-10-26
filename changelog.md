@@ -95,6 +95,9 @@ Build out activity types and data storage. Especially the Map activity.
 * Remove top-level css and create layout components so that maps and surveys can have different page layouts.
 * Update map layout to work with a side bar.
 
+## Sprint 6 10/2018
+More data saving and map activity features.
+
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
 * https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/

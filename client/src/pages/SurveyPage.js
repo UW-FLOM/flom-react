@@ -4,7 +4,11 @@ import { Redirect } from 'react-router-dom';
 
 import { Layout as FormLayout, MapLayout } from '../components/Layout';
 import { Header, PlainText } from '../components/Typography';
-import { getSurveyDefinitions, createSession } from '../services/api';
+import {
+  getSurveyDefinitions,
+  createSession,
+  submitAnswers
+} from '../services/api';
 import Intro from '../components/Intro';
 import FormActivity from '../components/FormActivity';
 import MapActivity from '../components/MapActivity';
@@ -64,18 +68,27 @@ class HomePage extends Component {
   }
 
   handleSubmit = (answers) => {
-    // TODO submit answers
     console.log('INFO: submitting answers:', JSON.stringify(answers));
 
-    const nextActivityIdx = this.getActivityIndex() + 1;
-    if ( nextActivityIdx >= this.getSurvey().activities.length){
-      // TODO render the completion screen
-      console.log('Survey complete');
-    } else {
-      this.setState({
-        redirect: `/survey/${this.getSurveyId()}/session/${this.getSessionId()}/activity/${nextActivityIdx}`
-      });
-    }
+    const surveyId = this.getSurveyId();
+    const sessionId = this.getSessionId();
+    const activityIndex = this.getActivityIndex();
+
+    submitAnswers({
+      // TODO: this
+    })
+      .then((res) => {
+        const nextActivityIdx = activityIndex + 1;
+        if ( nextActivityIdx >= this.getSurvey().activities.length){
+          // TODO render the completion screen
+          console.log('Survey complete');
+        } else {
+          this.setState({
+            redirect: `/survey/${surveyId}/session/${sessionId}/activity/${nextActivityIdx}`
+          });
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   render() {

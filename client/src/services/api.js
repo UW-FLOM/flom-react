@@ -54,3 +54,19 @@ export const createSession = async (args) => {
 
   return response.json();
 };
+
+export const submitAnswers = async (args) => {
+  const options = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      activityId: args.activityId,
+      responses: args.responses
+    }),
+  };
+
+  const response = await fetch('/api/activity', options);
+
+  return response.json();
+};
+
