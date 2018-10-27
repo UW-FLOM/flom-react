@@ -60,7 +60,7 @@ export const submitAnswers = async (args) => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      activityId: args.activityId,
+      sessionId: args.sessionId,
       responses: args.responses
     }),
   };

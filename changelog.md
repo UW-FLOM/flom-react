@@ -97,6 +97,10 @@ Build out activity types and data storage. Especially the Map activity.
 
 ## Sprint 6 10/2018
 More data saving and map activity features.
+* Mark activity create async so it can be chained with await
+* Modify the activity submit endpoint to first create an activity, then use the new id to add questions.
+* Submit answers with sessionId isntead of activityId
+* At this point you can submit answers with a session idea and an actitivity is created with those answers.
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

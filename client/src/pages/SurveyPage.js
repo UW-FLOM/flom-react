@@ -75,7 +75,8 @@ class HomePage extends Component {
     const activityIndex = this.getActivityIndex();
 
     submitAnswers({
-      // TODO: this
+      sessionId,
+      responses: answers
     })
       .then((res) => {
         const nextActivityIdx = activityIndex + 1;
