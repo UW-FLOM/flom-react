@@ -101,6 +101,8 @@ More data saving and map activity features.
 * Modify the activity submit endpoint to first create an activity, then use the new id to add questions.
 * Submit answers with sessionId isntead of activityId
 * At this point you can submit answers with a session idea and an actitivity is created with those answers.
+* Add questions to the session by id api
+* Remove activity creation by sessionID endpoint
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

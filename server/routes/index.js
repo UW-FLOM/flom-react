@@ -43,12 +43,12 @@ module.exports = (app) => {
   // Show a session by id
   app.get('/api/session/:sessionId', sessionController.find);
 
-  // Creates an activity in the specified session by session id
-  app.post('/api/session/:sessionId/activity', activitiesController.create);
-
   // Lists all activities
   app.get('/api/activity', activitiesController.list);
 
+  // Show an activity by id
+  app.get('/api/activity/:activityId', activitiesController.find)
+  
   // Submit all answers for an activity. Data format:
   // {
   //   "activityId": <activityId>,

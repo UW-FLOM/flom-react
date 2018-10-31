@@ -27,6 +27,7 @@ module.exports = {
         include: [{
           model: activity,
           as: 'activities',
+          include: [question]
         }],
       })
       .then(session => {

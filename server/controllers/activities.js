@@ -2,18 +2,6 @@ const _ = require('lodash');
 const activity = require('../models').activity;
 const question = require('../models').question;
 
-// TODO: Remove this. They now get created in the submit.
-const create = async (req, res) => {
-  console.log('INFO: activity create');
-  
-  return activity
-    .create({
-      sessionId: req.params.sessionId
-    })
-    .then(activity => res.status(201).send(activity))
-    .catch(error => res.status(400).send(error));
-}
-
 const submit = async (req, res) => {
   console.log('INFO: submitting answers for activity.', req.body);
   
@@ -44,9 +32,29 @@ const submit = async (req, res) => {
     .catch(error => res.status(400).send(error))
 }
 
+const find = (req, res) => {
+  console.log('INFO: finding activity by id: ', req.params.sessionId);
+  return activity
+    .findById(req.params.activityId, {
+      include: [{
+        model: question,
+        as: 'questions',
+      }],
+    })
+    .then(activity => {
+      if (!activity) {
+        return res.status(404).send({
+          message: 'Activity Not Found',
+        });
+      }
+      return res.status(200).send(activity);
+    })
+    .catch(error => res.status(400).send(error));
+}
+
 module.exports = {
-  create,
   submit,
+  find,
   list(req, res) {
     return activity
       .findAll({
