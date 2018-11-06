@@ -24,7 +24,7 @@ const submit = async (req, res) => {
       _.map(req.body.responses, (q) => {
         return question.create({
           activityId: newActivity.id,
-          response: q.response
+          response: q.response,
         })
       })
     )

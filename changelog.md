@@ -104,6 +104,10 @@ More data saving and map activity features.
 * Add questions to the session by id api
 * Remove activity creation by sessionID endpoint
 * Add find activity endpoint
+* Update activity response format
+* Add type and index to responses
+* Properly submit questions
+* At this point submits work and the answers are recorded.
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

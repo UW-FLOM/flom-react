@@ -67,8 +67,8 @@ class HomePage extends Component {
       .catch(err => console.log(err));
   }
 
-  handleSubmit = (answers) => {
-    console.log('INFO: submitting answers:', JSON.stringify(answers));
+  handleSubmit = (questions) => {
+    console.log('INFO: submitting answers:', JSON.stringify(questions));
 
     const surveyId = this.getSurveyId();
     const sessionId = this.getSessionId();
@@ -76,7 +76,7 @@ class HomePage extends Component {
 
     submitAnswers({
       sessionId,
-      responses: answers
+      responses: questions
     })
       .then((res) => {
         const nextActivityIdx = activityIndex + 1;

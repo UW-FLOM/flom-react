@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { get } from 'lodash';
 import { Button } from 'react-bootstrap';
 import { FormControl, ControlLabel } from 'react-bootstrap';
 
@@ -28,16 +29,18 @@ const StyledFormControl = styled(FormControl)`
 class FormActivity extends Component {
 
   state ={
-    answers: {}
+    questions: {}
   }
 
-  handleValueUpdate = (questionId, value) => {
+  handleValueUpdate = (questionId, questionData) => {
     this.setState((previousState) => {
       return {
         ...previousState,
-        answers: {
-          ...previousState.answers,
-          [questionId]: value,
+        questions: {
+          ...previousState.questions,
+          [questionId]: {
+            ...questionData
+          },
         },
       };
     });
@@ -61,9 +64,16 @@ class FormActivity extends Component {
                   <ControlLabel>{question.question}</ControlLabel>
                   <StyledFormControl
                     type="text"
-                    value={this.state.answers[questionId] || ""}
+                    value={get(this.state, `questions[${questionId}].response`) || ""}
                     onChange={
-                      (event) => this.handleValueUpdate(questionId, event.target.value)
+                      (event) => this.handleValueUpdate(
+                        questionId,
+                        {
+                          indexInActivity: idx,
+                          type: "text",
+                          response: event.target.value
+                        }
+                      )
                     }
                     />
                 </div>
@@ -75,9 +85,16 @@ class FormActivity extends Component {
                   <StyledFormControl
                     componentClass="select"
                     type="select"
-                    value={this.state.answers[questionId] || ""}
+                    value={get(this.state, `questions[${questionId}].response`) || ""}
                     onChange={
-                      (event) => this.handleValueUpdate(questionId, event.target.value)
+                      (event) => this.handleValueUpdate(
+                        questionId,
+                        {
+                          indexInActivity: idx,
+                          type: "select",
+                          response: event.target.value
+                        }
+                      )
                     }
                   >
                     {question.options.map((option, idx) => {
@@ -99,7 +116,7 @@ class FormActivity extends Component {
         }
         <SubmitButton
           bsStyle="primary"
-          onClick={() => this.props.onSubmit(this.state.answers)}
+          onClick={() => this.props.onSubmit(this.state.questions)}
         >
           Submit
         </SubmitButton>
