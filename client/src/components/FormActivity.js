@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { get } from 'lodash';
+import { get, reduce } from 'lodash';
 import { Button } from 'react-bootstrap';
 import { FormControl, ControlLabel } from 'react-bootstrap';
 
@@ -28,8 +28,24 @@ const StyledFormControl = styled(FormControl)`
 
 class FormActivity extends Component {
 
-  state ={
-    questions: {}
+  state = {
+    questions: reduce(this.props.activity.questions, (result, value, key) => {
+      const questionData = {
+        type: value.type,
+        indexInActivity: key
+      };
+      const questionId = idFromString(value.question);
+      if (value.type === 'text'){
+        questionData['response'] = '';
+      }
+      if (value.type === 'select'){
+        questionData['response'] = get(value, 'options[0]', '');
+      }
+      return {
+        ...result,
+        [questionId]: questionData
+      };
+    },{})
   }
 
   handleValueUpdate = (questionId, questionData) => {
@@ -85,7 +101,9 @@ class FormActivity extends Component {
                   <StyledFormControl
                     componentClass="select"
                     type="select"
-                    value={get(this.state, `questions[${questionId}].response`) || ""}
+                    value={
+                      get(this.state, `questions[${questionId}].response`, '')
+                    }
                     onChange={
                       (event) => this.handleValueUpdate(
                         questionId,
@@ -101,7 +119,7 @@ class FormActivity extends Component {
                       return (
                         <option
                           key={idx}
-                          value={option.replace(/[^A-Z0-9]+/ig, "_").toLowerCase()}
+                          value={idFromString(option)}
                         >
                           {option}
                         </option>
