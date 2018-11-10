@@ -1,6 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const question = sequelize.define('question', {
+    text: DataTypes.STRING,
+    index: DataTypes.INTEGER,
     type: DataTypes.ENUM('string', 'number', 'boolean', 'geo', 'time'),
     response: DataTypes.STRING
   }, {});

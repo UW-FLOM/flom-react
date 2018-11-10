@@ -8,8 +8,18 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      title: {
+        type: Sequelize.STRING
+      },
+      index: {
+        type: Sequelize.INTEGER
+      },
       type: {
         type: Sequelize.ENUM('survey', 'map')
+      },
+      complete: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

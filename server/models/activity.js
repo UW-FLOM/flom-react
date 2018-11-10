@@ -1,7 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const activity = sequelize.define('activity', {
-    type: DataTypes.ENUM('survey', 'map')
+    title: DataTypes.STRING,
+    index: DataTypes.INTEGER,
+    type: DataTypes.ENUM('survey', 'map'),
+    complete: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {});
   activity.associate = function(models) {
     activity.belongsTo(models.session, {
