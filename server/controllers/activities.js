@@ -25,10 +25,13 @@ const submit = async (req, res) => {
   // Add all of the answers to the questions table
   return Promise
     .all(
-      _.map(req.body.responses, (q) => {
+      _.map(req.body.responses, (q, key) => {
         return question.create({
-          activityId: newActivity.id,
+          text: key,
+          index: q.indexInActivity,
+          type: q.type,
           response: q.response,
+          activityId: newActivity.id,
         })
       })
     )

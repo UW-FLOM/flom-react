@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       type: {
-        type: Sequelize.ENUM('string', 'number', 'boolean', 'geo', 'time')
+        type: Sequelize.STRING,
       },
       response: {
         type: Sequelize.STRING
