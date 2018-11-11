@@ -40,6 +40,9 @@ module.exports = (app) => {
   // Lists all completed sessions
   app.get('/api/session', sessionController.list);
 
+  // Modifies an existing session
+  app.post('/api/session/:sessionId', sessionController.edit)
+
   // Show a session by id
   app.get('/api/session/:sessionId', sessionController.find);
 

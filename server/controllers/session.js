@@ -40,4 +40,20 @@ module.exports = {
       })
       .catch(error => res.status(400).send(error));
   },
+  edit(req, res) {
+    return session
+      .update(
+        { complete: req.body.sessionComplete },
+        { where: { id: req.params.sessionId }}
+      )
+      .then(session => {
+        if (!session) {
+          return res.status(404).send({
+            message: 'Session Not Found',
+          });
+        }
+        return res.status(200).send(session);
+      })
+      .catch(error => res.status(400).send(error));
+  },
 };
