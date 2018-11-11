@@ -15,11 +15,12 @@ import MapActivity from '../components/MapActivity';
 
 import { idFromString } from '../util';
 
-class HomePage extends Component {
+class SurveyPage extends Component {
   state = {
     surveyDefinitions: [],
     activity: null,
     redirect: false,
+    surveyComplete: false
   }
 
   componentDidMount() {
@@ -73,7 +74,7 @@ class HomePage extends Component {
       .catch(err => console.log(err));
   }
 
-  handleSubmit = (questions) => {
+  handleSubmit = async (questions) => {
     console.log('INFO: submitting answers:', JSON.stringify(questions));
 
     const surveyId = this.getSurveyId();
@@ -82,25 +83,28 @@ class HomePage extends Component {
 
     const currentActivity = this.getActivity();
 
-    submitAnswers({
-      sessionId,
-      activityIndex,
-      title: idFromString(currentActivity.title),
-      type: currentActivity.type,
-      responses: questions,
-    })
-      .then((res) => {
-        const nextActivityIdx = activityIndex + 1;
-        if ( nextActivityIdx >= this.getSurvey().activities.length){
-          // TODO render the completion screen
-          console.log('Survey complete');
-        } else {
-          this.setState({
-            redirect: `/survey/${surveyId}/session/${sessionId}/activity/${nextActivityIdx}`
-          });
-        }
-      })
-      .catch(err => console.log(err));
+    try {
+      await submitAnswers({
+        sessionId,
+        activityIndex,
+        title: idFromString(currentActivity.title),
+        type: currentActivity.type,
+        responses: questions,
+      });
+    }
+    catch (error) {
+      console.log('ERROR: ', error);
+    }
+
+    const nextActivityIdx = activityIndex + 1;
+    if ( nextActivityIdx >= this.getSurvey().activities.length){
+      this.setState({ surveyComplete: true });
+      console.log('Survey complete');
+    } else {
+      this.setState({
+        redirect: `/survey/${surveyId}/session/${sessionId}/activity/${nextActivityIdx}`
+      });
+    }
   }
 
   render() {
@@ -127,6 +131,15 @@ class HomePage extends Component {
             intro={surveyDefinition.intro}
             onBeginClick={this.handleBeginClick}
           />
+        </FormLayout>
+      );
+    }
+
+    if (this.state.surveyComplete) {
+      return(
+        <FormLayout>
+          <Header>Survey Complete</Header>
+          <PlainText>Thank you for participating!</PlainText>
         </FormLayout>
       );
     }
@@ -162,4 +175,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default SurveyPage;
