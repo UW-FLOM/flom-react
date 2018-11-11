@@ -115,6 +115,8 @@ More data saving and map activity features.
   * Update questions to have 'text' and 'index'
 * Send new activity data on submit
 * Add a controller to edit sessions
+* Add client api to update sessions
+* Mark sessions complete when they are complete
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

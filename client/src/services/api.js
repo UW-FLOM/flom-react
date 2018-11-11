@@ -55,6 +55,21 @@ export const createSession = async (args) => {
   return response.json();
 };
 
+
+export const updateSession = async (sessionId, args) => {
+  const options = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      ...args
+    }),
+  };
+
+  const response = await fetch(`/api/session/${sessionId}`, options);
+
+  return response.json();
+};
+
 export const submitAnswers = async (args) => {
   const options = {
     method: 'POST',

@@ -7,6 +7,7 @@ import { Header, PlainText } from '../components/Typography';
 import {
   getSurveyDefinitions,
   createSession,
+  updateSession,
   submitAnswers
 } from '../services/api';
 import Intro from '../components/Intro';
@@ -99,7 +100,12 @@ class SurveyPage extends Component {
     const nextActivityIdx = activityIndex + 1;
     if ( nextActivityIdx >= this.getSurvey().activities.length){
       this.setState({ surveyComplete: true });
-      console.log('Survey complete');
+      try {
+        await updateSession(sessionId, { sessionComplete: true });
+      }
+      catch (error) {
+        console.log('ERROR: ', error);
+      }
     } else {
       this.setState({
         redirect: `/survey/${surveyId}/session/${sessionId}/activity/${nextActivityIdx}`
