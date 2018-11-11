@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const activity = sequelize.define('activity', {
     title: DataTypes.STRING,
     index: DataTypes.INTEGER,
-    type: DataTypes.ENUM('survey', 'map'),
+    type: DataTypes.STRING,
     complete: {
       type: DataTypes.BOOLEAN,
       defaultValue: false

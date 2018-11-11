@@ -13,6 +13,8 @@ import Intro from '../components/Intro';
 import FormActivity from '../components/FormActivity';
 import MapActivity from '../components/MapActivity';
 
+import { idFromString } from '../util';
+
 class HomePage extends Component {
   state = {
     surveyDefinitions: [],
@@ -55,6 +57,10 @@ class HomePage extends Component {
     return parseInt(this.props.match.params.activityIdx, 10);
   }
 
+  getActivity() {
+    return this.getSurvey().activities[this.getActivityIndex()];
+  }
+
   handleBeginClick = () => {
     createSession()
       .then((res) => {
@@ -74,9 +80,14 @@ class HomePage extends Component {
     const sessionId = this.getSessionId();
     const activityIndex = this.getActivityIndex();
 
+    const currentActivity = this.getActivity();
+
     submitAnswers({
       sessionId,
-      responses: questions
+      activityIndex,
+      title: idFromString(currentActivity.title),
+      type: currentActivity.type,
+      responses: questions,
     })
       .then((res) => {
         const nextActivityIdx = activityIndex + 1;
@@ -120,7 +131,7 @@ class HomePage extends Component {
       );
     }
 
-    const currentActivity = surveyDefinition.activities[this.getActivityIndex()];
+    const currentActivity = this.getActivity();
 
     if (currentActivity.type === 'form') {
       return (

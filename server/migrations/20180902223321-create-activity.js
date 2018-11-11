@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       type: {
-        type: Sequelize.ENUM('survey', 'map')
+        type: Sequelize.STRING
       },
       complete: {
         allowNull: false,

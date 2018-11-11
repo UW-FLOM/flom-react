@@ -8,7 +8,11 @@ const submit = async (req, res) => {
   let newActivity = undefined;
   try {
     newActivity = await activity.create({
-      sessionId: req.body.sessionId
+      sessionId: req.body.sessionId,
+      index: req.body.activityIndex,
+      title: req.body.title,
+      type: req.body.type,
+      complete: true
     })
   }
   catch(error) {
