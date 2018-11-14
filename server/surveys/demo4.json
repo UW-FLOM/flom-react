@@ -1,0 +1,41 @@
+{
+  "title" : "Six views of New England",
+  "intro" : "Welcome to the Six Views of New England Project! This project is being conducted by Nicole Chartier and Ben Jones from the University of Washington Linguistics Department. The goal of this study is to understand how people perceive the English spoken in New England.",
+  "activities": [
+    {
+      "title": "About you",
+      "helpText": "Sample demographic form",
+      "type": "form",
+      "questions": [
+        {
+          "question": "What is your gender?",
+          "type": "select",
+          "options": [
+            "Female",
+            "Male",
+            "Intersex",
+            "Androgyne",
+            "The option I would choose is not listed",
+            "I prefer not to state"
+          ]
+        },
+        {
+          "question": "How old are you?",
+          "type": "text"
+        },
+        {
+          "question": "What is the highest level of school you have completed?",
+          "type": "select",
+          "options": [
+            "None",
+            "Elementary school",
+            "High school",
+            "Associate's degree",
+            "Bachelor's degree",
+            "Master's degree or more"
+          ]
+        }
+      ]
+    }
+  ]
+}

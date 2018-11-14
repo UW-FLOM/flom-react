@@ -118,6 +118,11 @@ More data saving and map activity features.
 * Add client api to update sessions
 * Mark sessions complete when they are complete
 * Add proposed format for data reuse to demo1
+* At this point the basic infrastructure is there. Next I will try to build some surveys and add fetures as needed. 
+
+## Sprint 7 11/2018
+* Add New England demo to drive features
+
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
