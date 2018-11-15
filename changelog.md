@@ -122,7 +122,7 @@ More data saving and map activity features.
 
 ## Sprint 7 11/2018
 * Add New England demo to drive features
-
+* Add a practice section to the new england survey
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
