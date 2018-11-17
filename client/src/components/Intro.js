@@ -20,7 +20,9 @@ class Intro extends PureComponent {
         <IntroText>
           {this.props.intro}
         </IntroText>
-        <ConsentButton onClick={this.props.onBeginClick}>Yes</ConsentButton>
+        <ConsentButton onClick={this.props.onBeginClick}>
+          {this.props.startButtonText || "Begin"}
+        </ConsentButton>
       </div>
     );
   }

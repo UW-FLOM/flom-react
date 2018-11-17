@@ -1,0 +1,54 @@
+{
+  "title" : "Six views of New England",
+  "intro" : "Welcome to the Six Views of New England Project! This project is being conducted by Nicole Chartier and Ben Jones from the University of Washington Linguistics Department. The goal of this study is to understand how people perceive the English spoken in New England. You are invited to participate in a research study conducted by graduate students in the Linguistics Department of the University of Washington.Before starting the study, we will ask you for some information about yourself. This information will not be used to identify you, and cannot be traced back to you once completed. It is intended to help us understand how different people view New England.    The study involves a brief training activity and completing three (3) tasks. Completing the entire study will take approximately 30 minutes.    In the training activity, we will ask you to draw and label three regions on a map of the United States. After this, we will ask you to draw and label areas on a map of New England. The areas you draw are meant to reflect where you believe people have a particular, identifiable way of speaking. The second task will ask you to rate the regions that you draw in the first task. The final task asks you to provide information about these regions that you feel represent the views of people you know.    Your participation is voluntary. If you decide to participate in this research study, you may quit at any time, and your respones will be deleted.    Your responses will be confidential, and we do not collect identifying information such as your name, email address, or IP address. You must be 18 years of age or older to participate.    If you have any questions about the study, you may contact the research team at Nicole or Ben.",
+  "startText": "Start the study",
+  "activities": [
+    {
+      "title": "About you",
+      "helpText": "Sample demographic form",
+      "type": "form",
+      "questions": [
+        {
+          "question": "What is your gender?",
+          "type": "select",
+          "options": [
+            "Female",
+            "Male",
+            "Intersex",
+            "Androgyne",
+            "The option I would choose is not listed",
+            "I prefer not to state"
+          ]
+        },
+        {
+          "question": "How old are you?",
+          "type": "text"
+        },
+        {
+          "question": "What is the highest level of school you have completed?",
+          "type": "select",
+          "options": [
+            "None",
+            "Elementary school",
+            "High school",
+            "Associate's degree",
+            "Bachelor's degree",
+            "Master's degree or more"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Practice",
+      "helpText": "We will draw some areas on the map.",
+      "type": "map",
+      "center": [38.678052, -96.273380],
+      "questions": [
+        {
+          "question": "Draw New England",
+          "type": "geo"
+        }
+      ]
+    }
+  ]
+}

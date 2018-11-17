@@ -135,6 +135,7 @@ class SurveyPage extends Component {
           <Intro
             title={surveyDefinition.title}
             intro={surveyDefinition.intro}
+            startButtonText={surveyDefinition.startText}
             onBeginClick={this.handleBeginClick}
           />
         </FormLayout>
