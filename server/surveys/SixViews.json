@@ -47,7 +47,11 @@
       "questions": [
         {
           "question": "Draw New England",
-          "type": "geo"
+          "type": "area"
+        },
+        {
+          "question": "Draw the South",
+          "type": "area"
         }
       ]
     }

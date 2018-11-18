@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
-import { map } from 'lodash';
+import { map, reduce, compact } from 'lodash';
 
 import { Header, PlainText } from '../components/Typography';
 import MapTool from '../components/MapTool';
+import MapQuestion from '../components/MapQuestion';
+
+import { idFromString } from '../util';
 
 const ActivityContainer = styled.div`
   display: grid;
@@ -26,38 +29,94 @@ const SubmitButton = styled(Button)`
   margin: auto;
 `;
 
+const SideBarQuestion = styled(PlainText)`
+  background: ${props => props.active ? '#a1d6fc': null}
+  padding: 10px;
+  border-radius: 4px;
+`;
+
+const MapQuestionBox = styled(MapQuestion)`
+  position: absolute;
+  top: 10px;
+  left: 360px;
+  z-index: 10000;
+`;
 
 class MapActivity extends Component {
 
   state ={
-    questions: {},
-    polys: []
+    questions: reduce(this.props.activity.questions, (result, value, key) => {
+      const questionData = {
+        type: value.type,
+        indexInActivity: key
+      };
+      const questionId = idFromString(value.question);
+      return {
+        ...result,
+        [questionId]: questionData
+      };
+    },{}),
+    questionIndex: 0,
+    activityComplete: false
+  }
+
+  getCurrentQuestionData(){
+    const questionPropData = this.props.activity.questions[this.state.questionIndex];
+    return {
+      ...questionPropData,
+      questionId: idFromString(questionPropData.question)
+    };
   }
 
   onRegionDrawn = (latLngs) => {
+    const questionData = this.getCurrentQuestionData();
+    const questionId = questionData.questionId;
+
     this.setState((previousState) => {
+      const nextQuestionIndex = previousState.questionIndex + 1;
+      const activityComplete = nextQuestionIndex >= this.props.activity.questions.length;
+
+      const newQuestionIndex = activityComplete
+        ? previousState.questionIndex
+        : nextQuestionIndex;
+
       return {
         ...previousState,
-        polys: [
-          ...previousState.polys,
-          latLngs
-        ]
+        questions: {
+          ...previousState.questions,
+          [questionId]: {
+            ...previousState.questions[questionId],
+            responseData: latLngs
+          }
+        },
+        questionIndex: newQuestionIndex,
+        activityComplete: activityComplete
       };
     });
   }
 
   render() {
+
+    const {
+      activity
+    } = this.props;
+
+    const existingPolygons = compact(map(this.state.questions, 'responseData'));
+
     return (
+      <React.Fragment>
       <ActivityContainer>
         <SideBar>
-          <Header>{this.props.activity.title}</Header>
+          <Header>{activity.title}</Header>
           <IntroText>
-            {this.props.activity.helpText}
+            {activity.helpText}
           </IntroText>
           {
-            map(this.props.activity.questions, (question, idx) => {
+            map(activity.questions, (question, idx) => {
               return (
-                <PlainText key={idx}>{question.question}</PlainText>
+                <SideBarQuestion key={idx} active={idx === this.state.questionIndex}>
+                  {question.question}
+                </SideBarQuestion>
               );
             })
           }
@@ -69,12 +128,14 @@ class MapActivity extends Component {
           </SubmitButton>
         </SideBar>
         <MapTool
-          center={this.props.activity.center}
-          zoomLevel={this.props.activity.zoomLevel}
+          center={activity.center}
+          zoomLevel={activity.zoomLevel}
           onRegionDrawn={this.onRegionDrawn}
-          polygons={this.state.polys}
+          polygons={existingPolygons}
         />
       </ActivityContainer>
+      <MapQuestionBox text={this.getCurrentQuestionData().question}></MapQuestionBox>
+      </React.Fragment>
     );
   }
 }
