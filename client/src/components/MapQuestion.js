@@ -17,8 +17,6 @@ const QuestionText = styled(PlainText)`
 
 class MapQuestion extends PureComponent {
   render(props) {
-    console.log(this.props);
-
     return (
       <QuestionBox className={this.props.className}>
         <QuestionText>
