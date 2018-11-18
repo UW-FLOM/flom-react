@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import { map, get } from 'lodash';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-import FreeDraw, { CREATE, EDIT } from 'leaflet-freedraw';
+import { Map, TileLayer, Marker, Popup, Polygon } from 'react-leaflet';
+import FreeDraw, { CREATE } from 'leaflet-freedraw';
 import { Button } from 'react-bootstrap';
 
 import { PlainText } from '../components/Typography';
@@ -20,47 +20,38 @@ const AddRegionButton = styled(Button)`
 
 class MapTool extends Component {
   state = {
-    lat: get(this.props, 'center[0]') || 47.6202,
-    lng: get(this.props, 'center[1]') || -122.3472,
-    zoom: 13,
+    lat: get(this.props, 'center[0]', 47.6202),
+    lng: get(this.props, 'center[1]', -122.3472),
+    zoom: get(this.props, 'zoomLevel', 13),
     markers: []
   }
 
   componentDidMount() {
-    const leafletMap = this.leafletMap.leafletElement;
+    this.map = this.leafletMap.leafletElement;
+
     const freeDraw = new FreeDraw();
     this.freeDraw = freeDraw;
+    this.map.addLayer(freeDraw);
 
-    leafletMap.addLayer(freeDraw);
-
-    freeDraw.mode(CREATE | EDIT);
-
-    leafletMap.on('zoomend', () => {
-        window.console.log('Current zoom level -> ', leafletMap.getZoom());
-    });
-    leafletMap.on('moveend', () => {
-      window.console.log('Current map bounds -> ', leafletMap.getCenter());
-    });
-    leafletMap.on('click', (e) => {
-      console.log('Click event -> ', e);
-      this.setState({
-        markers: [...this.state.markers, { lat: e.latlng.lat, lng: e.latlng.lng }]
-      });
-    });
+    freeDraw.mode(CREATE);
+    freeDraw.on('markers', (event) => this.handleRegionDrawn(event));
   }
 
   componentWillUnmount() {
-    this.leafletMap.leafletElement.removeLayer(this.freeDraw);
+    this.map.removeLayer(this.freeDraw);
+  }
+
+  handleRegionDrawn(event){
+    if (event.eventType !== 'clear'){
+      this.props.onRegionDrawn(event.latLngs);
+      this.freeDraw.clear();
+    }
   }
 
   render() {
-    const {
-      ...rest
-    } = this.props;
-
     const position = [this.state.lat, this.state.lng];
     return (
-      <div {...rest}>
+      <div>
         <AddRegionButton>
           Add region
         </AddRegionButton>
@@ -76,6 +67,18 @@ class MapTool extends Component {
             attribution={TILE_ATTRIBUTION}
             url={TILE_URL}
           />
+          {
+            map(this.props.polygons, (polygon, idx) =>{
+              return(
+                <Polygon
+                  key={'poly' + idx}
+                  color="#b1ef8d"
+                  positions={polygon}
+                />
+              );
+            })
+          }
+
           {
             map(this.state.markers, (marker, idx) => {
               return (

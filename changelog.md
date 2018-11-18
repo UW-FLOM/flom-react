@@ -123,6 +123,12 @@ More data saving and map activity features.
 ## Sprint 7 11/2018
 * Add New England demo to drive features
 * Add a practice section to the new england survey
+* Add customizable start button
+* Add zoom level to map activity definitions
+* Move map state out of map to map activity. The map contract is now:
+  * Parente element provides state (points and polygons)
+  * Map calls a callback when interaction happens
+  * Parent element calculates state and passes it back to map
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

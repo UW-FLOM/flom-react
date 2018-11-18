@@ -43,6 +43,7 @@
       "helpText": "We will draw some areas on the map.",
       "type": "map",
       "center": [38.678052, -96.273380],
+      "zoomLevel": 4,
       "questions": [
         {
           "question": "Draw New England",

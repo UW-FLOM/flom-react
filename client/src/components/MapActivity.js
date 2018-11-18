@@ -30,12 +30,23 @@ const SubmitButton = styled(Button)`
 class MapActivity extends Component {
 
   state ={
-    answers: {}
+    questions: {},
+    polys: []
+  }
+
+  onRegionDrawn = (latLngs) => {
+    this.setState((previousState) => {
+      return {
+        ...previousState,
+        polys: [
+          ...previousState.polys,
+          latLngs
+        ]
+      };
+    });
   }
 
   render() {
-    console.log('INFO: map state on render:', JSON.stringify(this.state));
-
     return (
       <ActivityContainer>
         <SideBar>
@@ -59,6 +70,9 @@ class MapActivity extends Component {
         </SideBar>
         <MapTool
           center={this.props.activity.center}
+          zoomLevel={this.props.activity.zoomLevel}
+          onRegionDrawn={this.onRegionDrawn}
+          polygons={this.state.polys}
         />
       </ActivityContainer>
     );
