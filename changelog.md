@@ -133,6 +133,7 @@ More data saving and map activity features.
 * Add info about data formats to README
 * Make map activity submit answers as lat lon pairs
 * Convert all responses to string before database storage
+* Change response datatype to TEXT in the database
 
 
 I used a couple blog posts about how to set up Express and postgres:

@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     text: DataTypes.STRING,
     index: DataTypes.INTEGER,
     type: DataTypes.STRING,
-    response: DataTypes.STRING
+    response: DataTypes.TEXT
   }, {});
   question.associate = function(models) {
     question.belongsTo(models.activity, {
