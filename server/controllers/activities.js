@@ -26,11 +26,19 @@ const submit = async (req, res) => {
   return Promise
     .all(
       _.map(req.body.responses, (q, key) => {
+        
+        // TODO: All responses are strored as strings, so we convert them here.
+        // The database could be more restrictive and get some perf and correctness
+        // improvements by storing other types.
+        const stringResponse = _.isString(q.response)
+          ? q.response 
+          : JSON.stringify(q.response);
+
         return question.create({
           text: key,
           index: q.indexInActivity,
           type: q.type,
-          response: q.response,
+          response: stringResponse,
           activityId: newActivity.id,
         })
       })

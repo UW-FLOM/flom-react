@@ -86,7 +86,7 @@ class MapActivity extends Component {
           ...previousState.questions,
           [questionId]: {
             ...previousState.questions[questionId],
-            responseData: latLngs
+            response: latLngs
           }
         },
         questionIndex: newQuestionIndex,
@@ -101,7 +101,7 @@ class MapActivity extends Component {
       activity
     } = this.props;
 
-    const existingPolygons = compact(map(this.state.questions, 'responseData'));
+    const existingPolygons = compact(map(this.state.questions, 'response'));
 
     return (
       <React.Fragment>
@@ -122,7 +122,7 @@ class MapActivity extends Component {
           }
           <SubmitButton
             bsStyle="primary"
-            onClick={() => this.props.onSubmit(this.state)}
+            onClick={() => this.props.onSubmit(this.state.questions)}
           >
             Submit
           </SubmitButton>

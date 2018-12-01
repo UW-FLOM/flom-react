@@ -46,3 +46,45 @@ It's a good idea to shut down postgres when you are done:
 ```
 yarn psql:stop
 ```
+
+## Data Formats
+Completed questions passed to `SurveyPage.handleSubmit`.
+
+Form questions:
+
+```
+{
+  "what_is_your_gender_": {
+    "type": "select",
+    "indexInActivity": 0,
+    "response": "Female"
+  },
+  "how_old_are_you_": {
+    "indexInActivity": 1,
+    "type": "text",
+    "response": "55"
+  },
+  "what_is_the_highest_level_of_school_you_have_completed_": {
+    "type": "select",
+    "indexInActivity": 2,
+    "response": "high_school"
+  }
+}
+```
+
+Map questions:
+
+```
+{
+    "draw_new_england": {
+      "type": "area",
+      "indexInActivity": 0,
+      "response": <geoJson>
+    },
+    "draw_the_south": {
+      "type": "area",
+      "indexInActivity": 1,
+      "response": <geoJson>
+    }
+}
+```

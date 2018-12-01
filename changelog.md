@@ -130,6 +130,10 @@ More data saving and map activity features.
   * Map calls a callback when interaction happens
   * Parent element calculates state and passes it back to map
 * Make the map activity move through questions as they are completed
+* Add info about data formats to README
+* Make map activity submit answers as lat lon pairs
+* Convert all responses to string before database storage
+
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
