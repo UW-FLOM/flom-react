@@ -134,6 +134,10 @@ More data saving and map activity features.
 * Make map activity submit answers as lat lon pairs
 * Convert all responses to string before database storage
 * Change response datatype to TEXT in the database
+* Add `geojson` from npm to parse data
+* Update MapTool data contract to use a better format for `geojson`
+
+
 
 
 I used a couple blog posts about how to set up Express and postgres:

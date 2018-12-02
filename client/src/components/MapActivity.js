@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
-import { map, reduce, compact } from 'lodash';
+import { map, reduce, compact, flatten } from 'lodash';
+import  geojson from 'geojson';
 
 import { Header, PlainText } from '../components/Typography';
 import MapTool from '../components/MapTool';
@@ -42,6 +43,15 @@ const MapQuestionBox = styled(MapQuestion)`
   z-index: 10000;
 `;
 
+export const featureFromGeometry = (geometry) => {
+  if (geometry.type === 'polygon'){
+    return {
+      polygon: geometry.geometry
+    };
+  }
+  return {};
+};
+
 class MapActivity extends Component {
 
   state ={
@@ -68,7 +78,7 @@ class MapActivity extends Component {
     };
   }
 
-  onRegionDrawn = (latLngs) => {
+  onFeatureDrawn = (featureGeometry) => {
     const questionData = this.getCurrentQuestionData();
     const questionId = questionData.questionId;
 
@@ -86,7 +96,7 @@ class MapActivity extends Component {
           ...previousState.questions,
           [questionId]: {
             ...previousState.questions[questionId],
-            response: latLngs
+            response: [featureFromGeometry(featureGeometry)]
           }
         },
         questionIndex: newQuestionIndex,
@@ -95,13 +105,29 @@ class MapActivity extends Component {
     });
   }
 
+  submitResponses = () => {
+    this.props.onSubmit(
+      map(this.state.questions, (value, key) => {
+        console.log(value);
+        return {
+          ...value,
+          // TODO: this is light on error handling
+          response: value.response
+            ? geojson.parse(value.response, { 'Polygon': 'polygon' })
+            : null
+        };
+      })
+    );
+  }
+
   render() {
 
     const {
       activity
     } = this.props;
 
-    const existingPolygons = compact(map(this.state.questions, 'response'));
+    // Polygons to pass down to the map tool
+    const existingPolygons = flatten(compact(map(this.state.questions, 'response')));
 
     return (
       <React.Fragment>
@@ -122,7 +148,7 @@ class MapActivity extends Component {
           }
           <SubmitButton
             bsStyle="primary"
-            onClick={() => this.props.onSubmit(this.state.questions)}
+            onClick={this.submitResponses}
           >
             Submit
           </SubmitButton>
@@ -130,7 +156,7 @@ class MapActivity extends Component {
         <MapTool
           center={activity.center}
           zoomLevel={activity.zoomLevel}
-          onRegionDrawn={this.onRegionDrawn}
+          onFeatureDrawn={this.onFeatureDrawn}
           polygons={existingPolygons}
         />
       </ActivityContainer>

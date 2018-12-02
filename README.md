@@ -48,7 +48,8 @@ yarn psql:stop
 ```
 
 ## Data Formats
-Completed questions passed to `SurveyPage.handleSubmit`.
+
+### SurveyPage: `SurveyPage.handleSubmit`.
 
 Form questions:
 
@@ -87,4 +88,45 @@ Map questions:
       "response": <geoJson>
     }
 }
+```
+
+### MapTool
+The map tool holds no geo data state (it does have state for position and zoom).
+It get's passed geometry and returns raw goemetry through its `onFeatureDrawn` callback. It returns and array of objects containing a `type` field denoting type and a `geometry` field containing the raw data.
+
+#### Supported map tool return types:
+* `polygon`
+```
+{ 
+  type: "polygon",
+  geometry: [
+    [44.5, 77.7],
+    [66.7, 45.6],
+    [120, 56]
+  ]
+}
+```
+
+*Note that multi-shape polygons are not supported*
+
+### MapActivity 
+For geo-based questions, the map activity stores a `response` in state as an array 
+of very simple geo objects.
+
+#### Supported MapActivity types
+* `polygon`
+```
+[
+  {
+    polygon: [
+      [ 
+        [x, y],
+        [z, a],
+        [b, c]
+      ]
+    ]
+    otherAttr: "some other attribute",
+    ...
+  }
+]
 ```

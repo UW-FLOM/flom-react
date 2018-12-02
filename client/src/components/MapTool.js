@@ -18,6 +18,17 @@ const AddRegionButton = styled(Button)`
   right: 15px;
 `;
 
+export const polygonFromLatLngs = (latLngs) => {
+  return {
+    type: 'polygon',
+    geometry: map(latLngs, (shape) => {
+      return map(shape, (point) => {
+        return[point.lat, point.lng];
+      });
+    })
+  };
+};
+
 class MapTool extends Component {
   state = {
     lat: get(this.props, 'center[0]', 47.6202),
@@ -34,22 +45,23 @@ class MapTool extends Component {
     this.map.addLayer(freeDraw);
 
     freeDraw.mode(CREATE);
-    freeDraw.on('markers', (event) => this.handleRegionDrawn(event));
+    freeDraw.on('markers', (event) => this.handleFeatureDrawn(event));
   }
 
   componentWillUnmount() {
     this.map.removeLayer(this.freeDraw);
   }
 
-  handleRegionDrawn(event){
+  handleFeatureDrawn(event){
     if (event.eventType !== 'clear'){
-      this.props.onRegionDrawn(event.latLngs);
+      this.props.onFeatureDrawn(polygonFromLatLngs(event.latLngs));
       this.freeDraw.clear();
     }
   }
 
   render() {
     const position = [this.state.lat, this.state.lng];
+
     return (
       <div>
         <AddRegionButton>
@@ -73,14 +85,14 @@ class MapTool extends Component {
                 <Polygon
                   key={'poly' + idx}
                   color="#b1ef8d"
-                  positions={polygon}
+                  positions={polygon.polygon}
                 />
               );
             })
           }
 
           {
-            map(this.state.markers, (marker, idx) => {
+            map(this.props.markers, (marker, idx) => {
               return (
                 <Marker key={idx} position={[marker.lat, marker.lng]}>
                   <Popup>
