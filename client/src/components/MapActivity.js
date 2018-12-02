@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
-import { map, reduce, compact, flatten } from 'lodash';
+import { map, reduce, compact, flatten, each } from 'lodash';
 import  geojson from 'geojson';
 
 import { Header, PlainText } from '../components/Typography';
@@ -106,18 +106,18 @@ class MapActivity extends Component {
   }
 
   submitResponses = () => {
-    this.props.onSubmit(
-      map(this.state.questions, (value, key) => {
-        console.log(value);
-        return {
-          ...value,
-          // TODO: this is light on error handling
-          response: value.response
-            ? geojson.parse(value.response, { 'Polygon': 'polygon' })
-            : null
-        };
-      })
-    );
+    const questionsToSubmit = {
+      ...this.state.questions
+    };
+
+    // Convert response to GeoJson
+    each(questionsToSubmit, (question) => {
+      question.response = question.response
+      ? geojson.parse(question.response, { 'Polygon': 'polygon' })
+      : null;
+    });
+
+    this.props.onSubmit(questionsToSubmit);
   }
 
   render() {

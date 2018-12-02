@@ -136,6 +136,7 @@ More data saving and map activity features.
 * Change response datatype to TEXT in the database
 * Add `geojson` from npm to parse data
 * Update MapTool data contract to use a better format for `geojson`
+* Use `geojson` to parse responses before sending to the server
 
 
 
