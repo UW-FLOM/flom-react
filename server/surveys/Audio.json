@@ -1,0 +1,32 @@
+{
+  "title" : "Audio Demo",
+  "intro": "This is an audio survey demo",
+  "startText": "I want to do an audio survey",
+  "activities": [
+    {
+      "title": "Listen to the animal",
+      "helpText": "Listen to the below audio clip and answer some questions about it",
+      "type": "randoAudio",
+      "replays": "3",
+      "audioFiles": [
+        "llama.wav",
+        "alpaca.wav",
+        "camel.wav"
+      ],
+      "questions": [
+        {
+          "question": "Did this animal sound awesome?",
+          "type": "select",
+          "options": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "question": "How would you describe this Animal?",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

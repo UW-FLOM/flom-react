@@ -138,7 +138,9 @@ More data saving and map activity features.
 * Update MapTool data contract to use a better format for `geojson`
 * Use `geojson` to parse responses before sending to the server
 
-
+## Sprint 8 12/2018
+* Create demo survey with desired audio configuration
+* Add skeleton for RandomAudioActivity
 
 
 I used a couple blog posts about how to set up Express and postgres:
