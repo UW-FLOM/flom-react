@@ -141,6 +141,10 @@ More data saving and map activity features.
 ## Sprint 8 12/2018
 * Create demo survey with desired audio configuration
 * Add skeleton for RandomAudioActivity
+* Update readme with data on survey descriptions
+* Add a readme in surveys directory to catalog survey format
+* Describe supported survey properties and activity types
+* Add some comments to map activity
 
 
 I used a couple blog posts about how to set up Express and postgres:

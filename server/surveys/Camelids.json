@@ -1,11 +1,12 @@
 {
-  "title": "Llamas and Alpacas",
-  "intro": "Are you sure?",
+  "title": "Camelids of South America",
+  "intro": "This is survey about your knowledge or south american camelids. Would you like to tell us what you know?",
+  "startText": "Yes!",
   "activities":[
     {
-      "title": "About Llamas",
-      "helpText": "Tell us about your llama experience",
-      "type": "form",
+      "title": "Animal ranges",
+      "helpText": "Tell us about your llama cemelid experience",
+      "type": "map",
       "questions": [
         {
           "question": "Do you like llamas?",

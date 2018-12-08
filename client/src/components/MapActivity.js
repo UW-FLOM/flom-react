@@ -55,6 +55,9 @@ export const featureFromGeometry = (geometry) => {
 class MapActivity extends Component {
 
   state ={
+    // TODO: Abstract this out of activities
+    // Use the list of input questions to set state up
+    // As a dictionary of qiestionId: question data
     questions: reduce(this.props.activity.questions, (result, value, key) => {
       const questionData = {
         type: value.type,
@@ -66,10 +69,12 @@ class MapActivity extends Component {
         [questionId]: questionData
       };
     },{}),
+    // Activity start on the first question, incomplete
     questionIndex: 0,
     activityComplete: false
   }
 
+  // Gets the raw data for the current question, along with its id
   getCurrentQuestionData(){
     const questionPropData = this.props.activity.questions[this.state.questionIndex];
     return {
@@ -131,36 +136,36 @@ class MapActivity extends Component {
 
     return (
       <React.Fragment>
-      <ActivityContainer>
-        <SideBar>
-          <Header>{activity.title}</Header>
-          <IntroText>
-            {activity.helpText}
-          </IntroText>
-          {
-            map(activity.questions, (question, idx) => {
-              return (
-                <SideBarQuestion key={idx} active={idx === this.state.questionIndex}>
-                  {question.question}
-                </SideBarQuestion>
-              );
-            })
-          }
-          <SubmitButton
-            bsStyle="primary"
-            onClick={this.submitResponses}
-          >
-            Submit
-          </SubmitButton>
-        </SideBar>
-        <MapTool
-          center={activity.center}
-          zoomLevel={activity.zoomLevel}
-          onFeatureDrawn={this.onFeatureDrawn}
-          polygons={existingPolygons}
-        />
-      </ActivityContainer>
-      <MapQuestionBox text={this.getCurrentQuestionData().question}></MapQuestionBox>
+        <ActivityContainer>
+          <SideBar>
+            <Header>{activity.title}</Header>
+            <IntroText>
+              {activity.helpText}
+            </IntroText>
+            {
+              map(activity.questions, (question, idx) => {
+                return (
+                  <SideBarQuestion key={idx} active={idx === this.state.questionIndex}>
+                    {question.question}
+                  </SideBarQuestion>
+                );
+              })
+            }
+            <SubmitButton
+              bsStyle="primary"
+              onClick={this.submitResponses}
+            >
+              Submit
+            </SubmitButton>
+          </SideBar>
+          <MapTool
+            center={activity.center}
+            zoomLevel={activity.zoomLevel}
+            onFeatureDrawn={this.onFeatureDrawn}
+            polygons={existingPolygons}
+          />
+        </ActivityContainer>
+        <MapQuestionBox text={this.getCurrentQuestionData().question}></MapQuestionBox>
       </React.Fragment>
     );
   }
