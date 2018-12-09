@@ -23,6 +23,15 @@ For example:
 * **`activities`**: The main list of activities to be completed in the survey. Some of these may be form activities, some may be map activities, and some may be audio activities. There can be as many activities as desired and the types can be mixed and matched. By default they will be given to the user in the order defined in this list.
 
 ### Suported activities
-Activities are the basic sections of a survey. They represent groups of questions persented in various ways. Each activity has a `type` that defines its basic setup. Available types are:
+Activities are the basic sections of a survey. They represent groups of questions persented in various ways. Each activity must have a `type` that defines its basic setup. Available types are:
 * **`form`**: A standard input form. This will be a set of questions with inputs for answering them such as text-boxes, dropdowns, radio buttons, etc.
 * **`map`**: A map activity presents a number of questions and asks the user to draw regions or points on the map to answer the questions.
+
+#### Map activities
+Map activities show a map, a sidebar, and a list of questions in the sidebar. One question is active at a time, while the user answers it. The active question appears in a banner at the top of the page. 
+Supported properties for map activities:
+* **`type`**: Must be `map` for a map activity.
+* **`title`**: Title of the activity. This will appear as a heading at the top of the side bar.
+* **`center`**: The center of the map expressed as a tuple of latitude and longitude in degrees. Example: `[-17.814756, -65.847956]`.
+* **`zoomLevel`**: How far the map is zoomed out. This is sort of an abstract number, but a `zoomLevel` of `4` roughly fits the United States on most monitors and a zoom level of `12` is about the size of a major city.
+* **`questions`**: A list of questions that will be presented to the user on the map page.

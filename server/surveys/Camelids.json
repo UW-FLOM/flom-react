@@ -1,25 +1,23 @@
 {
   "title": "Camelids of South America",
-  "intro": "This is survey about your knowledge or south american camelids. Would you like to tell us what you know?",
+  "intro": "This is survey about your knowledge or South American camelids. Would you like to tell us what you know?",
   "startText": "Yes!",
   "activities":[
     {
       "title": "Animal ranges",
-      "helpText": "Tell us about your llama cemelid experience",
+      "helpText": "Tell us about your about where South American camelids live. There are no right answers; the goal of this activity is to learn about peoples' perceptions of these animals.",
       "type": "map",
+      "center": [-19.14756, -65.847956],
+      "zoomLevel": 4,
       "questions": [
         {
-          "question": "Do you like llamas?",
-          "type": "select",
-          "options": [
-            "Yes",
-            "No",
-            "I don't know"
-          ]
+          "question": "Where do you think llamas mostly live?"
         },
         {
-          "question": "What color?",
-          "type": "text"
+          "question": "Where do you think alpacas mostly live?"
+        },
+        {
+          "question": "Where do you think vicuñas mostly live?"
         }
       ]
     }
