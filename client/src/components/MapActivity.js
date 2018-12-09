@@ -41,6 +41,7 @@ const MapQuestionBox = styled(MapQuestion)`
   position: absolute;
   top: 10px;
   left: 360px;
+  right: 20px;
   z-index: 10000;
 `;
 
