@@ -31,7 +31,8 @@ const SubmitButton = styled(Button)`
 `;
 
 const SideBarQuestion = styled(PlainText)`
-  background: ${props => props.active ? '#a1d6fc': null}
+  background-color: ${props => props.active ? '#a1d6fc': null};
+  cursor: ${props => props.active ? null: 'pointer'};
   padding: 10px;
   border-radius: 4px;
 `;
@@ -54,7 +55,7 @@ export const featureFromGeometry = (geometry) => {
 
 class MapActivity extends Component {
 
-  state ={
+  state = {
     // TODO: Abstract this out of activities
     // Use the list of input questions to set state up
     // As a dictionary of qiestionId: question data
@@ -83,31 +84,46 @@ class MapActivity extends Component {
     };
   }
 
+  setActiveQuestion(index) {
+    this.setState({
+      questionIndex: index
+    });
+  }
+
+  nextQuestion() {
+    const nextQuestionIndex = this.state.questionIndex +1;
+    const activityComplete = nextQuestionIndex >= this.props.activity.questions.length;
+
+    if (activityComplete) {
+      this.setState({
+        activityComplete: true
+      });
+    } else {
+      this.setState({
+        questionIndex: nextQuestionIndex
+      });
+    }
+  }
+
   onFeatureDrawn = (featureGeometry) => {
     const questionData = this.getCurrentQuestionData();
     const questionId = questionData.questionId;
 
-    this.setState((previousState) => {
-      const nextQuestionIndex = previousState.questionIndex + 1;
-      const activityComplete = nextQuestionIndex >= this.props.activity.questions.length;
-
-      const newQuestionIndex = activityComplete
-        ? previousState.questionIndex
-        : nextQuestionIndex;
-
+    // Add the response to the current question to the state
+    this.setState((state) => {
       return {
-        ...previousState,
         questions: {
-          ...previousState.questions,
+          ...state.questions,
           [questionId]: {
-            ...previousState.questions[questionId],
+            ...state.questions[questionId],
             response: [featureFromGeometry(featureGeometry)]
           }
         },
-        questionIndex: newQuestionIndex,
-        activityComplete: activityComplete
       };
     });
+
+    // Move to the next question
+    this.nextQuestion();
   }
 
   submitResponses = () => {
@@ -123,6 +139,10 @@ class MapActivity extends Component {
     });
 
     this.props.onSubmit(questionsToSubmit);
+  }
+
+  handleQuestionClick(idx) {
+    this.setActiveQuestion(idx);
   }
 
   render() {
@@ -145,7 +165,11 @@ class MapActivity extends Component {
             {
               map(activity.questions, (question, idx) => {
                 return (
-                  <SideBarQuestion key={idx} active={idx === this.state.questionIndex}>
+                  <SideBarQuestion
+                    key={idx}
+                    active={idx === this.state.questionIndex}
+                    onClick={() => this.handleQuestionClick(idx)}
+                  >
                     {question.question}
                   </SideBarQuestion>
                 );

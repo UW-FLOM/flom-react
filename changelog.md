@@ -146,6 +146,7 @@ More data saving and map activity features.
 * Describe supported survey properties and activity types
 * Add some comments to map activity
 * Map properties added to the readme
+* Make it possible to move between questions on the map
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
