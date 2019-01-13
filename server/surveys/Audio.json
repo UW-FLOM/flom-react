@@ -6,7 +6,7 @@
     {
       "title": "Listen to the animal",
       "helpText": "Listen to the below audio clip and answer some questions about it",
-      "type": "randoAudio",
+      "type": "randomAudio",
       "replays": "3",
       "audioFiles": [
         "llama.wav",

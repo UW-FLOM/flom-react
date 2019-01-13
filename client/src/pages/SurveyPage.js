@@ -60,10 +60,13 @@ class SurveyPage extends Component {
     return parseInt(this.props.match.params.activityIdx, 10);
   }
 
+  // Returns the current activity based on the index in the URL
   getActivity() {
     return this.getSurvey().activities[this.getActivityIndex()];
   }
 
+  // Called to begin a survey. This calls out to the database to create a session,
+  // then re-directs to the session URL
   handleBeginClick = () => {
     createSession()
       .then((res) => {
@@ -125,11 +128,15 @@ class SurveyPage extends Component {
       }} push />;
     }
 
+    // If no survey is defined, we render nothing. This shouldn't happen.
+    // It's possible it should render an error message instead
     const surveyDefinition = this.getSurvey();
     if (!surveyDefinition) {
       return null;
     }
 
+    // If there is no sessionId, this is the users first visit to the survey,
+    // We show the intro, passing a handler to begin the survey
     if (!this.getSessionId()) {
       return (
         <FormLayout>
@@ -143,6 +150,7 @@ class SurveyPage extends Component {
       );
     }
 
+    // If the survey is complete, we show the end screen.
     if (this.state.surveyComplete) {
       return(
         <FormLayout>
@@ -172,7 +180,7 @@ class SurveyPage extends Component {
           />
         </MapLayout>
       );
-    } else if (currentActivity.type === 'randoAudio') {
+    } else if (currentActivity.type === 'randomAudio') {
       return (
         <FormLayout>
           <RandomAudioActivity
