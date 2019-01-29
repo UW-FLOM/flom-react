@@ -152,6 +152,8 @@ More data saving and map activity features.
 * Add a client `contributing` doc.
 * Document `index.js`
 * Document `App.js`
+* Add question state to `RandomAudioActivity`
+* Render form questions in random audio
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
