@@ -11,9 +11,9 @@ import {
   submitAnswers
 } from '../services/api';
 import Intro from '../components/Intro';
-import FormActivity from '../components/FormActivity';
-import MapActivity from '../components/MapActivity';
-import RandomAudioActivity from '../components/RandomAudioActvity';
+import FormActivity from '../activities/FormActivity';
+import MapActivity from '../activities/MapActivity';
+import RandomAudioActivity from '../activities/RandomAudioActvity';
 
 import { idFromString } from '../util';
 
