@@ -155,6 +155,8 @@ More data saving and map activity features.
 * Add question state to `RandomAudioActivity`
 * Render form questions in random audio
 * Move activities to their own directory
+* Add `FormInputRenderer`
+* Refactor to render forms witn `FormInputRenderer`
 
 
 I used a couple blog posts about how to set up Express and postgres:
