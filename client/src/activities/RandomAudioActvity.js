@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { get, each } from 'lodash';
+import { each, shuffle } from 'lodash';
 import { Button } from 'react-bootstrap';
-import { FormControl, ControlLabel } from 'react-bootstrap';
 import Sound from 'react-sound';
 
 import FormInputRenderer from '../components/FormInputRenderer';
+import { PlainText } from '../components/Typography';
 import { idFromString } from '../util';
 
-const StyledFormControl = styled(FormControl)`
-  margin-bottom: 15px;
+const NextButton = styled(Button)`
+  float: right;
 `;
 
 const setUpQuestions = (audioFiles, questions) => {
@@ -35,24 +35,35 @@ class RandomAudioActivity extends Component {
       this.props.activity.audioFiles,
       this.props.activity.questions
     ),
-    // Activities start on the first question, incomplete
-    questionIndex: 0,
+    // Shuffle the audio files. We will index into this in order
+    // to produce random order.
+    audioFiles: shuffle([...this.props.activity.audioFiles]),
+    audioIndex: 0,
     activityComplete: false
   }
 
-  // handleValueUpdate = (questionId, questionData) => {
-  //   this.setState((previousState) => {
-  //     return {
-  //       ...previousState,
-  //       questions: {
-  //         ...previousState.questions,
-  //         [questionId]: {
-  //           ...questionData
-  //         },
-  //       },
-  //     };
-  //   });
-  // }
+  handleValueUpdate = (questionId, questionData) => {
+    //TODO: anything
+  }
+
+  getCurrentAudioFileName(){
+    return this.state.audioFiles[this.state.audioIndex];
+  }
+
+  onNext(){
+    const nextAudioIndex = this.state.audioIndex + 1;
+    const activityComplete = nextAudioIndex >= this.props.activity.audioFiles.length;
+
+    if (activityComplete) {
+      this.setState({
+        activityComplete: true
+      });
+    } else {
+      this.setState({
+        audioIndex: nextAudioIndex
+      });
+    }
+  }
 
   playAudio = () => {
     this.setState({
@@ -65,10 +76,13 @@ class RandomAudioActivity extends Component {
 
     return <div>
       <h1>Llama</h1>
+      <PlainText>
+        {this.getCurrentAudioFileName().split('.')[0]}
+      </PlainText>
       <Button
        onClick={this.playAudio}
       >
-        Make a horrible Llama sound
+        Play
       </Button>
       <Sound
         url="http://urlserveurs.free.fr/sound/misc/ooorgle.wav"
@@ -79,6 +93,12 @@ class RandomAudioActivity extends Component {
         onValueChange={this.handleValueUpdate}
         values={this.state.questions}
       />
+      <NextButton
+          bsStyle="primary"
+          onClick={() => this.onNext()}
+        >
+          Next
+      </NextButton>
     </div>;
   }
 }

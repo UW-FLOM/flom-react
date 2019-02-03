@@ -157,7 +157,8 @@ More data saving and map activity features.
 * Move activities to their own directory
 * Add `FormInputRenderer`
 * Refactor to render forms witn `FormInputRenderer`
-
+* Add next button to `RandomAudioActivity` to move through audio files
+* Clean up random audio activity
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
