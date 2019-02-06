@@ -7,6 +7,7 @@ import Sound from 'react-sound';
 import FormInputRenderer from '../components/FormInputRenderer';
 import { PlainText } from '../components/Typography';
 import { idFromString } from '../util';
+import soundfile from '../assets/alpaca.mp3';
 
 const NextButton = styled(Button)`
   float: right;
@@ -71,6 +72,12 @@ class RandomAudioActivity extends Component {
     });
   }
 
+  handleAudioFinishedPlaying = () => {
+    this.setState({
+      audioState: Sound.status.PAUSED
+    });
+  }
+
   render() {
     console.log('INFO: form state on render:', JSON.stringify(this.state));
 
@@ -85,8 +92,9 @@ class RandomAudioActivity extends Component {
         Play
       </Button>
       <Sound
-        url="http://urlserveurs.free.fr/sound/misc/ooorgle.wav"
+        url={soundfile}
         playStatus={this.state.audioState}
+        onFinishedPlaying={this.handleAudioFinishedPlaying}
       />
       <FormInputRenderer
         questions={this.props.activity.questions}
