@@ -161,6 +161,11 @@ More data saving and map activity features.
 * Clean up random audio activity
 * Reset audio after playing
 * Serve audio from static directory
+* Add more demo audio
+* Cycle between audio files
+* Add help tittle and help text to audio activity
+* Add Icons
+* Style play button
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

@@ -9,7 +9,8 @@
         "start:all": "yarn psql:start && concurrently –kill-others-on-fail  \"yarn server\" \"yarn client\""
     },
     "dependencies": {
-        "concurrently": "^3.6.0"
+        "concurrently": "^3.6.0",
+        "react-icons": "^3.3.0"
     },
     "license": "UNLICENSED"
 }

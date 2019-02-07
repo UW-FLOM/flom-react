@@ -5,12 +5,27 @@ import { Button } from 'react-bootstrap';
 import Sound from 'react-sound';
 
 import FormInputRenderer from '../components/FormInputRenderer';
+import { FaPlayCircle } from 'react-icons/fa';
 import { PlainText } from '../components/Typography';
 import { idFromString } from '../util';
-import soundfile from '../assets/alpaca.mp3';
+
+// TODO: Clearly these are hard-coded. They should be loaded from the server
+import alpaca from '../assets/alpaca.mp3';
+import camel from '../assets/camel.mp3';
+import llama from '../assets/llama.wav';
 
 const NextButton = styled(Button)`
   float: right;
+`;
+
+// TODO: Make this a component. Grid is questionable.
+const PlayButton = styled(Button)`
+  display: grid;
+  margin-bottom: 10px;
+`;
+
+const PlayIcon = styled(FaPlayCircle)`
+  font-size: 30px;
 `;
 
 const setUpQuestions = (audioFiles, questions) => {
@@ -26,6 +41,12 @@ const setUpQuestions = (audioFiles, questions) => {
     });
   });
   return toReturn;
+};
+
+const audioMap = {
+  'alpaca.mp3': alpaca,
+  'camel.mp3': camel,
+  'llama.wav': llama
 };
 
 class RandomAudioActivity extends Component {
@@ -82,17 +103,19 @@ class RandomAudioActivity extends Component {
     console.log('INFO: form state on render:', JSON.stringify(this.state));
 
     return <div>
-      <h1>Llama</h1>
+      <h1>{this.props.activity.title}</h1>
       <PlainText>
-        {this.getCurrentAudioFileName().split('.')[0]}
+        {this.props.activity.helpText}
       </PlainText>
-      <Button
-       onClick={this.playAudio}
+      <PlayButton
+        bsStyle="primary"
+        title="Play audio"
+        onClick={this.playAudio}
       >
-        Play
-      </Button>
+        <PlayIcon/>
+      </PlayButton>
       <Sound
-        url={soundfile}
+        url={audioMap[this.getCurrentAudioFileName()]}
         playStatus={this.state.audioState}
         onFinishedPlaying={this.handleAudioFinishedPlaying}
       />

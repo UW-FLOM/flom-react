@@ -10,8 +10,8 @@
       "replays": "3",
       "audioFiles": [
         "llama.wav",
-        "alpaca.wav",
-        "camel.wav"
+        "alpaca.mp3",
+        "camel.mp3"
       ],
       "questions": [
         {
