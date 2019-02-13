@@ -167,6 +167,10 @@ More data saving and map activity features.
 * Add Icons
 * Style play button
 
+## Sprint 10 2/2019
+* Update Random Audio activity to store answers by audio
+* Comments for documentation
+
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
 * https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/

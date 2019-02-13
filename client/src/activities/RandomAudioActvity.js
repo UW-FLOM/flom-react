@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { each, shuffle } from 'lodash';
+import { shuffle } from 'lodash';
 import { Button } from 'react-bootstrap';
 import Sound from 'react-sound';
 
@@ -28,19 +28,8 @@ const PlayIcon = styled(FaPlayCircle)`
   font-size: 30px;
 `;
 
-const setUpQuestions = (audioFiles, questions) => {
-  const toReturn = {};
-  each(questions, (question) => {
-    each(audioFiles, (file) => {
-      const questionId = `${file.split('.')[0]}.${idFromString(question.question)}`;
-      const questionData = {
-        type: question.type,
-        audioFile: file
-      };
-      toReturn[questionId] = questionData;
-    });
-  });
-  return toReturn;
+const idFromFileNameAndQuestionId = (fileName, questionId) => {
+  return `${fileName.split('.')[0]}.${questionId}`;
 };
 
 const audioMap = {
@@ -53,10 +42,7 @@ class RandomAudioActivity extends Component {
 
   state = {
     audioState: Sound.status.PAUSED,
-    questions: setUpQuestions(
-      this.props.activity.audioFiles,
-      this.props.activity.questions
-    ),
+    questionsByAudio: {},
     // Shuffle the audio files. We will index into this in order
     // to produce random order.
     audioFiles: shuffle([...this.props.activity.audioFiles]),
@@ -65,7 +51,39 @@ class RandomAudioActivity extends Component {
   }
 
   handleValueUpdate = (questionId, questionData) => {
-    //TODO: anything
+    // Question data is stored per audio file while this form is active with
+    // the format:
+    // "questionsByAudio": {
+    //   "alpaca.mp3": {
+    //     "some_question_id": {
+    //       "indexInActivity": 0,
+    //       "type": "select",
+    //       "response": "no",
+    //       "audioFile": "audio.mp3"
+    //     },
+    //     "another_question": {
+    //       "indexInActivity": 1,
+    //       "type": "text",
+    //       "response": "thing",
+    //       "audioFile": "alpaca.mp3"
+    //     }
+    //   }
+    // }
+    //
+    // On handle submit, the list gets flattened to include files in the ids
+    const audioFileName = this.getCurrentAudioFileName();
+    this.setState({
+      questionsByAudio: {
+        ...this.state.questionsByAudio,
+        [audioFileName]: {
+          ...this.state.questionsByAudio[audioFileName],
+          [questionId]: {
+            ...questionData,
+            audioFile: audioFileName
+          },
+        }
+      }
+    });
   }
 
   getCurrentAudioFileName(){
@@ -100,7 +118,7 @@ class RandomAudioActivity extends Component {
   }
 
   render() {
-    console.log('INFO: form state on render:', JSON.stringify(this.state));
+    console.log('INFO: form state on render:', JSON.stringify(this.state, null , 2));
 
     return <div>
       <h1>{this.props.activity.title}</h1>
@@ -122,7 +140,9 @@ class RandomAudioActivity extends Component {
       <FormInputRenderer
         questions={this.props.activity.questions}
         onValueChange={this.handleValueUpdate}
-        values={this.state.questions}
+        // Questions are stored by file name, so we send down the
+        // answers under the current file name
+        values={this.state.questionsByAudio[this.getCurrentAudioFileName()]}
       />
       <NextButton
           bsStyle="primary"
