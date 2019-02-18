@@ -130,7 +130,9 @@ class RandomAudioActivity extends Component {
       each(question, (value, key) => {
         const questionKey = idFromFileNameAndQuestionId(fileName, key);
         const questionData = {
-          ...value
+          ...value,
+          // Store audio file in notes
+          notes: `{audioFile:${value.audioFile}}`
         };
         questionsToSubmit[questionKey] = questionData;
       });
