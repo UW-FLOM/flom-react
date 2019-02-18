@@ -169,7 +169,8 @@ More data saving and map activity features.
 
 ## Sprint 10 2/2019
 * Update Random Audio activity to store answers by audio
-* Comments for documentation
+* Comments for documentation in form renderer
+* Add documentation for Random audio activity
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

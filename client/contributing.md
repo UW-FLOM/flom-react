@@ -82,6 +82,8 @@ It get's passed geometry and returns raw goemetry through its `onFeatureDrawn` c
 
 *Note that multi-shape polygons are not supported*
 
+## Activities
+
 ### MapActivity 
 For geo-based questions, the map activity stores a `response` in state as an array
 of very simple geo objects. 
@@ -104,3 +106,11 @@ When submitted to the server, these get converted to standard geo-json.
   }
 ]
 ```
+
+### RandomAudioActivity
+`RandomAudioActivity` presents the user with a set of audio files in random order and a number of questions to answer about each of the audio clips. 
+It supports form-based questions using the `FormInputRenderer`.
+The basic inputs are a list of audio files, and a list of questions.
+On setup, the `RandomAudioActivity` shuffles the audio files, then indexes into the suffled array as it goes through questions to achieve rough-randomness.
+For each activity the same form is displayed for each clip, so the user answers the same questions for each audio clip.
+The responses are stored in the database under ids made up from the audio file name and the question id: `'<audio file name>.<questionId>'`.
