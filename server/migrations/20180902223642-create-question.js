@@ -20,6 +20,9 @@ module.exports = {
       response: {
         type: Sequelize.TEXT
       },
+      notes: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
