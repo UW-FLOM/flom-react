@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const logger = require('morgan');
 
 var Sequelize = require('sequelize');
@@ -18,12 +19,18 @@ const sequelize = new Sequelize('flom-dev', 'flom', 'flom', {
 require('./routes')(app);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  console.log('--------------', __dirname);
+  
+  app.use(express.static(path.join(__dirname, '../client/build')));
 
   // Client-side routing
   app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
   });
+}
+else {
+  console.log('monkey', process.env.NODE_ENV);
+  
 }
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
