@@ -182,9 +182,3 @@ I used a couple blog posts about how to set up Express and postgres:
 * https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/
 * https://www.robinwieruch.de/postgres-express-setup-tutorial/
 * https://scotch.io/tutorials/getting-started-with-node-express-and-postgres-using-sequelize
-
-### Open Issues
-* Top-level yarn scripts use bash so they won't work on Windows. Eventually these should become node scripts
-* Scripts don't work when services are already running
-* There are deprecation warnings in the server launch
-* This will not work in IE unless someone really really wants it to.
