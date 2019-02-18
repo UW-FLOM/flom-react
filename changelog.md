@@ -177,6 +177,7 @@ More data saving and map activity features.
 * Submit audio file info as notes on random audio activity
 * Store question notes field in db
 * Upgrade `bootstrap` to address a security concern
+* Upgrade `react-bootstrap` to 1.0
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

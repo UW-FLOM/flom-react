@@ -73,7 +73,7 @@ class FormActivity extends Component {
           values={this.state.questions}
         />
         <SubmitButton
-          bsStyle="primary"
+          variant="primary"
           onClick={() => this.props.onSubmit(this.state.questions)}
         >
           Submit

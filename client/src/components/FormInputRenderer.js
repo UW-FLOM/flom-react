@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { get } from 'lodash';
-import { FormControl, ControlLabel } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 import { idFromString } from '../util';
 
-const StyledFormControl = styled(FormControl)`
+const StyledFormControl = styled(Form.Control)`
   margin-bottom: 15px;
 `;
 
@@ -26,7 +26,7 @@ const FormInputRenderer = (props) => {
       if (question.type === 'text') {
         return (
           <div key={idx}>
-            <ControlLabel>{question.question}</ControlLabel>
+            <Form.Label>{question.question}</Form.Label>
             <StyledFormControl
               type="text"
               value={get(values, `${questionId}.response`) || ""}
@@ -46,10 +46,9 @@ const FormInputRenderer = (props) => {
       } else if (question.type === 'select') {
         return (
           <div key={idx}>
-            <ControlLabel>{question.question}</ControlLabel>
+            <Form.Label>{question.question}</Form.Label>
             <StyledFormControl
-              componentClass="select"
-              type="select"
+              as="select"
               value={
                 get(values, `${questionId}.response`, '')
               }

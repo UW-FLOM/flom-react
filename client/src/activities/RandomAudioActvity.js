@@ -155,7 +155,7 @@ class RandomAudioActivity extends Component {
           {this.props.activity.helpText}
         </PlainText>
         <PlayButton
-          bsStyle="primary"
+          variant="primary"
           title="Play audio"
           onClick={this.playAudio}
         >
@@ -174,7 +174,7 @@ class RandomAudioActivity extends Component {
           values={this.state.questionsByAudio[this.getCurrentAudioFileName()]}
         />
         <NextButton
-            bsStyle="primary"
+            variant="primary"
             onClick={() => this.onNext()}
           >
             Next
@@ -190,7 +190,7 @@ class RandomAudioActivity extends Component {
             You've answered all of the questions in this activity. Click 'Continue' to save your answers and move on to the next activity
           </Modal.Body>
           <Modal.Footer>
-            <Button bsStyle="primary" onClick={this.submitResponses}>
+            <Button variant="primary" onClick={this.submitResponses}>
               Continue
             </Button>
           </Modal.Footer>

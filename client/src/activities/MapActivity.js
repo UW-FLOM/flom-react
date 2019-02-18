@@ -177,7 +177,7 @@ class MapActivity extends Component {
               })
             }
             <SubmitButton
-              bsStyle="primary"
+              variant="primary"
               onClick={this.submitResponses}
             >
               Submit
