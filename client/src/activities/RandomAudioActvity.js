@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { shuffle, reduce, each, values } from 'lodash';
+import { shuffle, each, values } from 'lodash';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 import Sound from 'react-sound';
