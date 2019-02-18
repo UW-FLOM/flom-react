@@ -39,6 +39,7 @@ const submit = async (req, res) => {
           index: q.indexInActivity,
           type: q.type,
           response: stringResponse,
+          notes: q.notes,
           activityId: newActivity.id,
         })
       })

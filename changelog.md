@@ -175,6 +175,7 @@ More data saving and map activity features.
 * Make `RandomAudioActivity` submit answers
 * Add notes field to DB to store extra info about questions
 * Submit audio file info as notes on random audio activity
+* Store question notes field in db
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
