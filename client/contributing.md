@@ -63,6 +63,23 @@ Map questions:
 }
 ```
 
+Random Audio activity questions:
+```
+{
+  "file_id.questionId": {
+    "type": "select",
+    "indexInActivity": 0,
+    "response": "Female",
+    "audioFile": "<url>"
+  },
+  "llama_mp3.are_llamas_great": {
+    "indexInActivity": 1,
+    "type": "text",
+    "response": "55",
+    "audioFile": "<url>"
+  }
+}
+
 ### MapTool
 The map tool holds no geo data state (it does have state for position and zoom).
 It get's passed geometry and returns raw goemetry through its `onFeatureDrawn` callback. It returns and array of objects containing a `type` field denoting type and a `geometry` field containing the raw data.
@@ -114,3 +131,5 @@ The basic inputs are a list of audio files, and a list of questions.
 On setup, the `RandomAudioActivity` shuffles the audio files, then indexes into the suffled array as it goes through questions to achieve rough-randomness.
 For each activity the same form is displayed for each clip, so the user answers the same questions for each audio clip.
 The responses are stored in the database under ids made up from the audio file name and the question id: `'<audio file name>.<questionId>'`.
+
+**NOTE:** `RandomAudioActivity` relies heavily on the [`react-sound` library](https://www.npmjs.com/package/react-sound)

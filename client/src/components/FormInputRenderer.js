@@ -19,7 +19,6 @@ const StyledFormControl = styled(FormControl)`
 //      { <questionId>: {response: <some value>, ... }, ...}
 const FormInputRenderer = (props) => {
   const { questions, onValueChange, values } = props;
-  console.log('>>>', questions, values);
 
   return (
     questions.map((question, idx) => {

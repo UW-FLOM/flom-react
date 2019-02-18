@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { shuffle } from 'lodash';
+import { shuffle, reduce, each, values } from 'lodash';
 import { Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import Sound from 'react-sound';
 
 import FormInputRenderer from '../components/FormInputRenderer';
@@ -29,7 +30,7 @@ const PlayIcon = styled(FaPlayCircle)`
 `;
 
 const idFromFileNameAndQuestionId = (fileName, questionId) => {
-  return `${fileName.split('.')[0]}.${questionId}`;
+  return `${idFromString(fileName)}.${questionId}`;
 };
 
 const audioMap = {
@@ -117,40 +118,83 @@ class RandomAudioActivity extends Component {
     });
   }
 
+  submitResponses = () => {
+    const questionsByAudio = {
+      ...this.state.questionsByAudio
+    };
+
+    const questionsToSubmit = {};
+    // Loop through each audio file
+    each(questionsByAudio, (question, fileName) => {
+      // Loop through the answers per file
+      each(question, (value, key) => {
+        const questionKey = idFromFileNameAndQuestionId(fileName, key);
+        const questionData = {
+          ...value
+        };
+        questionsToSubmit[questionKey] = questionData;
+      });
+    });
+
+    this.props.onSubmit(questionsToSubmit);
+  }
+
   render() {
     console.log('INFO: form state on render:', JSON.stringify(this.state, null , 2));
+    console.log('=====>', values(this.state.questionsByAudio));
 
-    return <div>
-      <h1>{this.props.activity.title}</h1>
-      <PlainText>
-        {this.props.activity.helpText}
-      </PlainText>
-      <PlayButton
-        bsStyle="primary"
-        title="Play audio"
-        onClick={this.playAudio}
-      >
-        <PlayIcon/>
-      </PlayButton>
-      <Sound
-        url={audioMap[this.getCurrentAudioFileName()]}
-        playStatus={this.state.audioState}
-        onFinishedPlaying={this.handleAudioFinishedPlaying}
-      />
-      <FormInputRenderer
-        questions={this.props.activity.questions}
-        onValueChange={this.handleValueUpdate}
-        // Questions are stored by file name, so we send down the
-        // answers under the current file name
-        values={this.state.questionsByAudio[this.getCurrentAudioFileName()]}
-      />
-      <NextButton
+
+    return (
+      <div>
+        <h1>
+          {this.props.activity.title}
+        </h1>
+        <PlainText>
+          {this.props.activity.helpText}
+        </PlainText>
+        <PlayButton
           bsStyle="primary"
-          onClick={() => this.onNext()}
+          title="Play audio"
+          onClick={this.playAudio}
         >
-          Next
-      </NextButton>
-    </div>;
+          <PlayIcon/>
+        </PlayButton>
+        <Sound
+          url={audioMap[this.getCurrentAudioFileName()]}
+          playStatus={this.state.audioState}
+          onFinishedPlaying={this.handleAudioFinishedPlaying}
+        />
+        <FormInputRenderer
+          questions={this.props.activity.questions}
+          onValueChange={this.handleValueUpdate}
+          // Questions are stored by file name, so we send down the
+          // answers under the current file name
+          values={this.state.questionsByAudio[this.getCurrentAudioFileName()]}
+        />
+        <NextButton
+            bsStyle="primary"
+            onClick={() => this.onNext()}
+          >
+            Next
+        </NextButton>
+
+        {/* When the activity is complete, we show a modal with a continue button.
+          * Continue submits the answers to the database. */}
+        <Modal show={this.state.activityComplete}>
+          <Modal.Header>
+            <Modal.Title>Activity complete</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            You've answered all of the questions in this activity. Click 'Continue' to save your answers and move on to the next activity
+          </Modal.Body>
+          <Modal.Footer>
+            <Button bsStyle="primary" onClick={this.submitResponses}>
+              Continue
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
   }
 }
 
