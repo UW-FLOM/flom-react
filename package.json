@@ -3,10 +3,11 @@
     "setup": "yarn install && cd client && yarn install && cd ../server && yarn install",
     "client": "cd client && yarn install && yarn start",
     "server": "cd server && yarn install && yarn server",
+    "start:dev": "yarn psql:start && concurrently –kill-others-on-fail  \"yarn server\" \"yarn client\"",
     "psql:start": "pg_ctl -D /usr/local/var/postgres start",
     "psql:stop": "pg_ctl -D /usr/local/var/postgres stop",
     "build": "cd client && yarn install && yarn build",
-    "start:all": "yarn psql:start && concurrently –kill-others-on-fail  \"yarn server\" \"yarn client\""
+    "stop": "yarn psql:stop"
   },
   "dependencies": {
     "concurrently": "^3.6.0"

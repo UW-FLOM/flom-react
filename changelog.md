@@ -1,4 +1,4 @@
-## Sprint 1 - 6/2018
+## Sprint 1: 6/2018
 Get the dev app up and running
 * Start a new app with create react app
 * Add react router and set up basic routes
@@ -10,7 +10,7 @@ Get the dev app up and running
 * Write a basic map tool page with leaflet react
 At this point I have proof of concept pages for the survey and the map tool. The dev server works and can be run locally.
 
-## Sprint 2 - 7/2018
+## Sprint 2: 7/2018
 This week I am setting up a basic production server so that we can have REST calls for database connectivity.
 The plan is to use Express as an app server and to proxy calls to the database. Step by step:
 * Split the root of the project into a client and a server directory
@@ -41,7 +41,7 @@ we want to run the dev server proxying to the api server.
 At this point we have a production dev server that proxies API requests to a production server, and a postgres database that can be queried.
 There is a test page in the app where we can enter sql to test the database.
 
-## Sprint 3 8/2018
+## Sprint 3: 8/2018
 Next, the plan is to get the app writing to and reading from the database.
 * Add a top-level script to start everything.
 * Branch `orm-setup` to try a complete ORM setup with `sequelize`
@@ -65,7 +65,7 @@ Next, the plan is to get the app writing to and reading from the database.
 * Add questins to session detail list
 At this point I have functional database connectivity, a model for how to structure the database, and configuration touchpoints for the database. Now it's time to actually build out a demo app.
 
-## Sprint 4 9/2018
+## Sprint 4: 9/2018
 Next, build a demo app on top of the app infrastructure and database that is in place.
 * Begin defining a survey format in JSON.
 * Add `api/suveys` endpoint.
@@ -80,7 +80,7 @@ Next, build a demo app on top of the app infrastructure and database that is in 
 * Add a form activity renderer
 Now we can read and write to the database, create new sessions, and render forms. Next, more activities, and actual answers written to the DB
 
-## Sprint 5 9-10/2018
+## Sprint 5: 9-10/2018
 Build out activity types and data storage. Especially the Map activity.
 * Added some linter rules for spaces.
 * Add activity index to the route.
@@ -95,7 +95,7 @@ Build out activity types and data storage. Especially the Map activity.
 * Remove top-level css and create layout components so that maps and surveys can have different page layouts.
 * Update map layout to work with a side bar.
 
-## Sprint 6 10/2018
+## Sprint 6: 10/2018
 More data saving and map activity features.
 * Mark activity create async so it can be chained with await
 * Modify the activity submit endpoint to first create an activity, then use the new id to add questions.
@@ -120,7 +120,7 @@ More data saving and map activity features.
 * Add proposed format for data reuse to demo1
 * At this point the basic infrastructure is there. Next I will try to build some surveys and add fetures as needed. 
 
-## Sprint 7 11/2018
+## Sprint 7: 11/2018
 * Add New England demo to drive features
 * Add a practice section to the new england survey
 * Add customizable start button
@@ -138,7 +138,7 @@ More data saving and map activity features.
 * Update MapTool data contract to use a better format for `geojson`
 * Use `geojson` to parse responses before sending to the server
 
-## Sprint 8 12/2018
+## Sprint 8: 12/2018
 * Create demo survey with desired audio configuration
 * Add skeleton for RandomAudioActivity
 * Update readme with data on survey descriptions
@@ -148,7 +148,7 @@ More data saving and map activity features.
 * Map properties added to the readme
 * Make it possible to move between questions on the map
 
-## Sprint 9 1/2019
+## Sprint 9: 1/2019
 * Add a client `contributing` doc.
 * Document `index.js`
 * Document `App.js`
@@ -167,7 +167,7 @@ More data saving and map activity features.
 * Add Icons
 * Style play button
 
-## Sprint 10 2/2019
+## Sprint 10: 2/2019
 * Update Random Audio activity to store answers by audio
 * Comments for documentation in form renderer
 * Add documentation for Random audio activity
@@ -182,6 +182,10 @@ More data saving and map activity features.
 * Remove build from git
 * Add setup docs
 * Fix dependencies from `yarn setup`
+* Add `yarn start:dev` to start everything from the root
+* Add `yarn:stop` for completeness
+* Document running the dev app
+* Document stopping the dev app
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

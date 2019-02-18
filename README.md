@@ -23,42 +23,21 @@ Once the pre-requisites are installed, we need to install the development depend
 
 Once this is done, `node_modules` folders will be created in the relevant places, containing the project's dependencies.
 
-## Dev server
+## Running the app
+To run the app in dev mode we will run the dev server, the prod server, and Postgres. 
+Each of these can be started individually, or they can all be started together. 
+To start all of the processes together, from the root run:
 ```
-cd client
-yarn start
+yarn start:dev
 ```
-This will run the development server on your local machine. By default you
-can see the app by going to *localhost:3000*
+This will start Postgres, and start the dev and prodcution servers. By default you
+can see the app by going to ***localhost:3000***
 
-# Running the app
-In development, run the dev server, the prod server, and psql.
-The dev server is set up to proxy REST calls to the production server, which talks to postgress.
+> *NOTE*: the servers will be started as child processes of the window where they were started. 
+>In order to easily kill them later, it is best to keep the terminal open.
 
-To run the dev server:
-```
-cd client
-yarn start
-```
-
-To run the production server:
-
-```
-cd server
-yarn install
-yarn server
-```
-
-Start postgress:
-```
-yarn psql:start
-```
-If you control the environment and you want to start everything at once:
-```
-yarn start:all
-```
-
-It's a good idea to shut down postgres when you are done:
-```
-yarn psql:stop
+### Stopping the app
+It's a good idea to shut down the servers and Postgres when you are done. To kill the servers hit `ctrl-c` in the terminal where you started them. To shut down Postgres, run:
+``` 
+yarn stop
 ```
