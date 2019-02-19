@@ -196,6 +196,9 @@ More data saving and map activity features.
 * Add server `start:prod`
 * Expose port 3000
 * At this point we have a docker container serving the app
+* Add `.dockerignore` to speed up docker build by not copying node_modules
+* Add postgres to Dockerfile
+* Add postgres init scripts
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

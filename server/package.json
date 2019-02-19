@@ -4,7 +4,11 @@
   "license": "UNLICENSED",
   "scripts": {
     "start:dev": "nodemon server.js",
-    "start:prod": "NODE_ENV=production node ./server.js"
+    "start:prod": "NODE_ENV=production node ./server.js",
+
+    "db:migrate": "./node_modules/.bin/sequelize db:migrate",
+    "db:create": "./node_modules/.bin/sequelize db:create flom_dev",
+    "db:setup": "yarn db:create && yarn db:migrate"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -14,7 +18,8 @@
     "morgan": "^1.9.0",
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.38.0"
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^5.4.0"
   },
   "devDependencies": {
     "concurrently": "^3.5.0"
