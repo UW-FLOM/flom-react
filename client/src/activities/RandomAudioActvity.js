@@ -145,7 +145,6 @@ class RandomAudioActivity extends Component {
     console.log('INFO: form state on render:', JSON.stringify(this.state, null , 2));
     console.log('=====>', values(this.state.questionsByAudio));
 
-
     return (
       <div>
         <h1>

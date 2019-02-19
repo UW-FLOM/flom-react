@@ -8,7 +8,7 @@ Most of the time, when run locally, it will be in developement mode.
 In dev mode, the project requires 3 processes to run:
 * The **productions server**, which exposes the required REST endpoints
 * The **dev server**, which serves the client app, provides debuggability, and proxies all API calls to the production server
-* **Postgres** running a database to save data to
+* **Postgres** a database for storage
 
 ## Pre-requisites
 There are a few programs that must be installed to run these processes:
@@ -36,8 +36,23 @@ can see the app by going to ***localhost:3000***
 > *NOTE*: the servers will be started as child processes of the window where they were started. 
 >In order to easily kill them later, it is best to keep the terminal open.
 
-### Stopping the app
+## Stopping the app
 It's a good idea to shut down the servers and Postgres when you are done. To kill the servers hit `ctrl-c` in the terminal where you started them. To shut down Postgres, run:
 ``` 
 yarn stop
 ```
+
+### App commands
+This is a full list of the commands available from the app root. Some have been mentioned already, others are for more fine-grained control.
+
+Common commands:
+* `yarn setup`: installs all node dependencies in the root, client, and server directories. The may take a few minutes.
+* `yarn start:dev`: starts all of the app services in dev mode: dev server, api server, and Postgres. This is the typical way to run the app.
+* `yarn stop`: stops database services. Servers must be shut down separately.
+
+Advanced commands:
+* `yarn client`: starts the dev client server in the current terminal. Once complete, the app can be reached at ***localhost:3000***. The app will be unresponsive without also starting the server.
+* `yarn server`: starts the app server in the current terminal.
+* `yarn psql:start`: starts the Postgres database.
+* `yarn psql:stop`: stops the Postgres database.
+* `yarn build`: creates a production client build.
