@@ -4,6 +4,7 @@
     "client": "cd client && yarn install && yarn start",
     "server": "cd server && yarn install && yarn server",
     "start:dev": "yarn psql:start && concurrently –kill-others-on-fail  \"yarn server\" \"yarn client\"",
+    "start:prod": "cd server && node server.js",
     "psql:start": "pg_ctl -D /usr/local/var/postgres start",
     "psql:stop": "pg_ctl -D /usr/local/var/postgres stop",
     "build": "cd client && yarn install && yarn build",
