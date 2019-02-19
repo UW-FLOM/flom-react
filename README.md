@@ -42,7 +42,7 @@ It's a good idea to shut down the servers and Postgres when you are done. To kil
 yarn stop
 ```
 
-### App commands
+## App commands
 This is a full list of the commands available from the app root. Some have been mentioned already, others are for more fine-grained control.
 
 Common commands:

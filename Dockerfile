@@ -16,4 +16,6 @@ COPY ./package.json /app
 
 RUN yarn setup
 
+EXPOSE 3000
+
 CMD ["yarn", "start:prod"]

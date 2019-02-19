@@ -193,6 +193,9 @@ More data saving and map activity features.
   * Copy app to docker
   * Add `yarn start:prod`
   * Add CMD to docker
+* Add server `start:prod`
+* Expose port 3000
+* At this point we have a docker container serving the app
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

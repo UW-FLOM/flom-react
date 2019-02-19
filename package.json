@@ -2,12 +2,13 @@
   "scripts": {
     "setup": "yarn install && cd client && yarn install && cd ../server && yarn install",
     "client": "cd client && yarn install && yarn start",
-    "server": "cd server && yarn install && yarn server",
+    "server": "cd server && yarn install && yarn start:dev",
     "start:dev": "yarn psql:start && concurrently –kill-others-on-fail  \"yarn server\" \"yarn client\"",
-    "start:prod": "cd server && node server.js",
+
+    "start:prod": "cd server && yarn start:prod",
     "psql:start": "pg_ctl -D /usr/local/var/postgres start",
     "psql:stop": "pg_ctl -D /usr/local/var/postgres stop",
-    "build": "cd client && yarn install && yarn build",
+    "build:client": "cd client && yarn install && yarn build",
     "stop": "yarn psql:stop"
   },
   "dependencies": {

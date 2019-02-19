@@ -6,7 +6,7 @@ const logger = require('morgan');
 var Sequelize = require('sequelize');
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -19,6 +19,8 @@ const sequelize = new Sequelize('flom-dev', 'flom', 'flom', {
 require('./routes')(app);
 
 if (process.env.NODE_ENV === 'production') {
+  console.log('Starting production server');
+  
   app.use(express.static(path.join(__dirname, '../client/build')));
 
   // Client-side routing

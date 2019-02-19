@@ -3,9 +3,7 @@
   "version": "0.1",
   "license": "UNLICENSED",
   "scripts": {
-    "client": "cd ../client && yarn start",
-    "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "start:dev": "nodemon server.js",
     "start:prod": "NODE_ENV=production node ./server.js"
   },
   "dependencies": {
