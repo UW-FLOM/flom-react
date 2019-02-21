@@ -3,17 +3,11 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const logger = require('morgan');
 
-var Sequelize = require('sequelize');
-
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-
-const sequelize = new Sequelize('flom-dev', 'flom', 'flom', {
-  dialect: 'postgres',
-});
 
 // Add route controllers
 require('./routes')(app);

@@ -1,22 +1,15 @@
 {
   "development": {
     "username": "flom",
-    "password": "flom",
-    "database": "flom_dev",
+    "password": null,
+    "database": "flom",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
   "production": {
     "username": "flom",
-    "password": "flom",
-    "database": "flom_dev_prod",
+    "password": null,
+    "database": "flom",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
