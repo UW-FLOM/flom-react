@@ -1,6 +1,17 @@
 FROM ubuntu
+
+# Install main dependencies:
+# Postgres, npm and node. We need npm to install yarn in this setup (see below).
+# DEBIAN_FRONTEND=noninteractive is require for the build.
+# to run non-interactively so that it doesn't ask the user questions.
 RUN apt-get update \
-&& apt-get install -y postgresql-10 yarn nodejs
+&& DEBIAN_FRONTEND=noninteractive apt-get install -y postgresql-10 npm nodejs
+
+# Install yarn with npm do to an ubuntu issue.
+# More here: https://stackoverflow.com/questions/46013544/yarn-install-command-error-no-such-file-or-directory-install
+RUN apt remove cmdtest
+RUN apt remove yarn
+RUN npm install -g yarn
 
 WORKDIR /app
 

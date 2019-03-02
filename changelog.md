@@ -200,9 +200,15 @@ More data saving and map activity features.
 * Add postgres to Dockerfile
 * Add postgres init scripts
 * Use Ubuntu for docker base
+* Make ubuntu install non-interactive
+* Change to install yarn with NPM. There is an issue on ubuntu:
+  * https://stackoverflow.com/questions/46013544/yarn-install-command-error-no-such-file-or-directory-install
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
 * https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/
 * https://www.robinwieruch.de/postgres-express-setup-tutorial/
 * https://scotch.io/tutorials/getting-started-with-node-express-and-postgres-using-sequelize
+
+Some relevant stack overflow docs:
+* https://stackoverflow.com/questions/46013544/yarn-install-command-error-no-such-file-or-directory-install
