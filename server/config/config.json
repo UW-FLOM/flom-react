@@ -1,13 +1,13 @@
 {
   "development": {
-    "username": "flom",
+    "username": "postgres",
     "password": null,
     "database": "flom",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "username": "flom",
+    "username": "postgres",
     "password": null,
     "database": "flom",
     "host": "127.0.0.1",

@@ -1,7 +1,7 @@
 {
   "scripts": {
     "setup": "yarn install && cd client && yarn install && cd ../server && yarn install",
-    "db:setup": "cd server && yarn db:setup",
+    "db:setup": "cd server && yarn db:setup && cd ..",
     
     "client": "cd client && yarn install && yarn start",
     "server": "cd server && yarn install && yarn start:dev",
