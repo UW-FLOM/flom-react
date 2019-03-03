@@ -203,6 +203,10 @@ More data saving and map activity features.
 * Make ubuntu install non-interactive
 * Change to install yarn with NPM. There is an issue on ubuntu:
   * https://stackoverflow.com/questions/46013544/yarn-install-command-error-no-such-file-or-directory-install
+* Change user to `postgres` in sequelize config to match docker container user setup
+* Move database init to container start so the db can be initiated when postgress is up
+* Docker container running the app and postgres works!!
+* Add docker docs
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

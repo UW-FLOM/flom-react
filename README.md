@@ -3,8 +3,34 @@ This is a version of FLOM written in React.
 This project can be run on a local machine in development mode, or deployed as a production build.
 
 # Getting started
-This project can either be run in either developement mode or production mode.
-Most of the time, when run locally, it will be in developement mode.
+This project can either be run in either developement mode or production mode and can be run either on a local machine, or in a docker container. 
+The typical setup is:
+* At development time, when writing new features or workig with the app, it is run on the **local machine** in **development mode**.
+* In production, when the app is being used, it will useually been in a **docker container** in **production mode**.
+
+# Quick start: running the Docker container
+The fastest and easiest way to run the app and use it is to run a it in Docker on your local machine. 
+The only dependency is Docker, and once you have it installed, the Flom app runs in a container that includes the database and app server.
+
+>NOTE: the servers require linux, so the docker container can not be run on windows. 
+>MacOS works great.
+
+To run the container:
+1. Install docker: https://www.docker.com/get-started
+2. From the root of the flom directory, build the Flom docker container. 
+This will take a few minutes as it fetches everything it needs from the internet:
+```
+docker build --tag=flom .
+```
+3. Run the docker container:
+```
+docker run -p 3000:3000 flom:latest
+```
+4. You should be able to use the app at `localhost:3000`
+
+# Local machine setup
+
+Most of the time, when run locally, this app will be in developement mode.
 In dev mode, the project requires 3 processes to run:
 * The **productions server**, which exposes the required REST endpoints
 * The **dev server**, which serves the client app, provides debuggability, and proxies all API calls to the production server
