@@ -1,12 +1,15 @@
 # Flom in React
 This is a version of FLOM written in React. 
-This project can be run on a local machine in development mode, or deployed as a production build.
+This project can be run on a local machine in development mode, or deployed as a production build. 
+This document describes how to get started using the app. 
+For more info on how to build surveys, and contribute to the app this repo includes some other resources:
+* [Helpful links](resources.md) to included libraries and places to learn about the primary technologies used in this app
 
 # Getting started
-This project can either be run in either developement mode or production mode and can be run either on a local machine, or in a docker container. 
+This project can either be run in either development mode or production mode and can be run either on a local machine, or in a docker container. 
 The typical setup is:
-* At development time, when writing new features or workig with the app, it is run on the **local machine** in **development mode**.
-* In production, when the app is being used, it will useually been in a **docker container** in **production mode**.
+* At development time, when writing new features or working with the app, it is run on the **local machine** in **development mode**.
+* In production, when the app is being used, it will usually be in a **docker container** in **production mode**.
 
 # Quick start: running the Docker container
 The fastest and easiest way to run the app and use it is to run a it in Docker on your local machine. 
@@ -30,7 +33,7 @@ docker run -p 3000:3000 flom:latest
 
 # Local machine setup
 
-Most of the time, when run locally, this app will be in developement mode.
+Most of the time, when run locally, this app will be in development mode.
 In dev mode, the project requires 3 processes to run:
 * The **productions server**, which exposes the required REST endpoints
 * The **dev server**, which serves the client app, provides debuggability, and proxies all API calls to the production server
@@ -56,7 +59,7 @@ To start all of the processes together, from the root run:
 ```
 yarn start:dev
 ```
-This will start Postgres, and start the dev and prodcution servers. By default you
+This will start Postgres, and start the dev and production servers. By default you
 can see the app by going to ***localhost:3000***
 
 > *NOTE*: the servers will be started as child processes of the window where they were started. 
