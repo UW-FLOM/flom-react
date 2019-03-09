@@ -79,6 +79,7 @@ Random Audio activity questions:
     "audioFile": "<url>"
   }
 }
+```
 
 ### MapTool
 The map tool holds no geo data state (it does have state for position and zoom).
@@ -86,6 +87,7 @@ It get's passed geometry and returns raw goemetry through its `onFeatureDrawn` c
 
 #### Supported map tool return types:
 * `polygon`
+
 ```
 { 
   type: "polygon",
