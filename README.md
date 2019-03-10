@@ -3,6 +3,7 @@ This is a version of FLOM written in React.
 This project can be run on a local machine in development mode, or deployed as a production build. 
 This document describes how to get started using the app. 
 For more info on how to build surveys, and contribute to the app this repo includes some other resources:
+* [Architecture overview](architecture.md) an overview of the app architecture.
 * [Helpful links](resources.md) to included libraries and places to learn about the primary technologies used in this app
 
 # Getting started
