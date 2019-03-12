@@ -1,4 +1,4 @@
-# FLOM documentation
+# Architecture
 
 The FLOM app is made up of three parts:
 * **The client** application is a javascript/react application that runs in the browser on users' machines. 

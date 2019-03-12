@@ -7,28 +7,10 @@ const questionsController = require('../controllers').questions;
 const surveysController = require('../controllers').surveys;
 
 module.exports = (app) => {
-  // Returns a message from the server. This is for debugging.
-  app.get('/api/hello', (req, res) => {
-    res.send({ express: 'Message from Express server' });
-  });
-
   // Responds from the server. This is for debugging.
   app.post('/api/echo', (req, res) => {
     console.log('Recieved echo request with body:', req.body);
     res.json(req.body);
-  });
-
-  // TODO: REMOVE! This is dangerous, it is used for test at dev time. 
-  app.post('/api/_unsafe_sqlTest', (req, res) => {
-    console.log('Recieved sql test request with body:', req.body);
-    sequelize.query(req.body.query).spread((results, metadata) => {
-      console.log('results', results);
-      console.log('metadata', metadata);
-      res.json({
-        results: results,
-        metadata: metadata
-      })
-    })
   });
 
   // Sends available survey definitions
