@@ -208,6 +208,8 @@ More data saving and map activity features.
 * Docker container running the app and postgres works!!
 * Add docker docs
 * Add docs about resources
+* Move docs to docs directory
+* Add architecture docs
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0

@@ -4,10 +4,10 @@ This project can be run on a local machine in development mode, or deployed as a
 This document describes how to get started using the app. 
 For more info on how to build surveys, and contribute to the app this repo includes some other resources:
 * [Architecture overview](docs/index.md) an overview of the app architecture.
-* [Helpful links](resources.md) to included libraries and places to learn about the primary technologies used in this app
+* [Helpful links](docs/resources.md) to included libraries and places to learn about the primary technologies used in this app
 
 # Getting started
-This project can either be run in either development mode or production mode and can be run either on a local machine, or in a docker container. 
+This project can either be run in development mode or production mode and can be run either on a local machine, or in a docker container. 
 The typical setup is:
 * At development time, when writing new features or working with the app, it is run on the **local machine** in **development mode**.
 * In production, when the app is being used, it will usually be in a **docker container** in **production mode**.
