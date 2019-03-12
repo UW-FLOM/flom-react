@@ -1,5 +1,5 @@
 # Contributing
-The document is intended for anyone wanting to contribute to the client code in the FLOM project.
+This document is intended for anyone wanting to contribute to the client code in the FLOM project.
 It describes the basic architecture of the app and how the various components fit together.
 
 ## App architecture and components
