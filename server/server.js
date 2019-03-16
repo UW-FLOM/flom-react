@@ -4,7 +4,7 @@ const path = require('path');
 const logger = require('morgan');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

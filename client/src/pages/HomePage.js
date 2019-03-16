@@ -1,28 +1,43 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Layout } from '../components/Layout';
-
-import { Header, PlainText } from '../components/Typography';
+import { Redirect } from 'react-router-dom';
+import {
+  getSurveyDefinitions,
+} from '../services/api';
 
 class HomePage extends Component {
+  state = {
+    redirect: false,
+    noSurveys: false
+  }
+
+  // When this page mounts, it fetches the survey definitions
+  // so that it can redirect to the first survey found.
+  componentDidMount() {
+    getSurveyDefinitions()
+      .then((surveys) => {
+        if (!surveys || surveys.length < 1) {
+          this.setState({ noSurveys: true });
+          return;
+        }
+
+        // If there is a survey, we redirect to it
+        this.setState({
+          redirect: `/survey/${surveys[0].id}`
+        });
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
-    return (
-      <Layout>
-        <Header>Folk Linguistics Online Mapping</Header>
-        <PlainText>
-          Demo application for Folk Linguistics Online Mapping.
-          There is a sample survey and a list of other available surveys.
-        </PlainText>
-        <ul>
-          <li>
-            <Link to="/survey/six_views_of_new_england">Trial survey</Link>
-          </li>
-          <li>
-            <Link to="/surveys">Other demo surveys</Link>
-          </li>
-        </ul>
-      </Layout>
-    );
+    console.log('-', this.state);
+
+    // The landing page re-directs to surveys
+    // This is where you would put a real home page if
+    // you wanted to see that before a survey
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
+    return null;
   }
 }
 
