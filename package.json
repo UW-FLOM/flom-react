@@ -11,7 +11,9 @@
     "psql:start": "pg_ctl -D /usr/local/var/postgres start",
     "psql:stop": "pg_ctl -D /usr/local/var/postgres stop",
     "build:client": "cd client && yarn install && yarn build",
-    "stop": "yarn psql:stop"
+    "stop": "yarn psql:stop",
+
+    "build": "cd client && yarn install && yarn build && cd .. && docker build --tag=flom ."
   },
   "dependencies": {
     "concurrently": "^3.6.0"

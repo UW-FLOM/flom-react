@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import SampleFormPage from './pages/SampleFormPage';
-import MapToolPage from './pages/MapToolPage';
-import ApiTestPage from './pages/ApiTestPage';
 import SurveyListPage from './pages/SurveyListPage';
 import SurveyPage from './pages/SurveyPage';
 

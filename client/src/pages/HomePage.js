@@ -11,21 +11,14 @@ class HomePage extends Component {
         <Header>Folk Linguistics Online Mapping</Header>
         <PlainText>
           Demo application for Folk Linguistics Online Mapping.
-          This app shows the various components and how to use them.
-          There is also a demo.
+          There is a sample survey and a list of other available surveys.
         </PlainText>
         <ul>
           <li>
-            <Link to="/sample_form">Sample Input Form</Link>
+            <Link to="/survey/six_views_of_new_england">Trial survey</Link>
           </li>
           <li>
-            <Link to="/map_tool">Map Tool Demo</Link>
-          </li>
-          <li>
-            <Link to="/api_test">API Test</Link>
-          </li>
-          <li>
-            <Link to="/surveys">Surveys</Link>
+            <Link to="/surveys">Other demo surveys</Link>
           </li>
         </ul>
       </Layout>
