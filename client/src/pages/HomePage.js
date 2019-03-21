@@ -29,8 +29,6 @@ class HomePage extends Component {
   }
 
   render() {
-    console.log('-', this.state);
-
     // The landing page re-directs to surveys
     // This is where you would put a real home page if
     // you wanted to see that before a survey
