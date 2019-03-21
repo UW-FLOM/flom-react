@@ -18,7 +18,7 @@ module.exports = {
           
           return fullName === process.env.SURVEY || name === process.env.SURVEY;
         });
-      }      
+      }
 
       let surveys = _.map(files, (filePath) => {
         const survey = require(path.join('..', filePath));

@@ -15,15 +15,22 @@ class HomePage extends Component {
   componentDidMount() {
     getSurveyDefinitions()
       .then((surveys) => {
+
         if (!surveys || surveys.length < 1) {
           this.setState({ noSurveys: true });
-          return;
-        }
 
-        // If there is a survey, we redirect to it
-        this.setState({
-          redirect: `/survey/${surveys[0].id}`
-        });
+        } else if (surveys.length === 1) {
+          // If there is one survey, we redirect to it
+          this.setState({
+            redirect: `/survey/${surveys[0].id}`
+          });
+
+        } else {
+          // If there are many surveys we redirect to the surveys page
+          this.setState({
+            redirect: `/surveys`
+          });
+        }
       })
       .catch(err => console.log(err));
   }

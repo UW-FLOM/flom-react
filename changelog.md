@@ -213,6 +213,7 @@ More data saving and map activity features.
 * Make home redirect to the first survey
 * Add a survey name variable to docker build
 * Make `/surveys` endpoint only return the specified survey when specified
+* Redirect to single survey if set, survey list page if not
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
