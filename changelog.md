@@ -211,6 +211,7 @@ More data saving and map activity features.
 * Move docs to docs directory
 * Add architecture docs
 * Make home redirect to the first survey
+* Add a survey name variable to docker build
 
 I used a couple blog posts about how to set up Express and postgres:
 * https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0
