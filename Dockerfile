@@ -40,7 +40,7 @@ RUN /usr/lib/postgresql/10/bin/initdb -D /postgres/
 ENV PGDATA "/postgres"
 
 # Pick up the survey name from the command line of the build
-ARG survey_name=index
+ARG survey_name
 ENV SURVEY=$survey_name
 
 # App will run on port 3000
