@@ -1,19 +1,22 @@
 {
   "scripts": {
     "setup": "yarn install && cd client && yarn install && cd ../server && yarn install",
-    "db:setup": "cd server && yarn db:setup && cd ..",
     
-    "client": "cd client && yarn install && yarn start",
-    "server": "cd server && yarn install && yarn start:dev",
-    "start:dev": "yarn psql:start && concurrently –kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "db:setup": "cd server && yarn db:setup && cd ..",
+    "db:start": "pg_ctl -D /usr/local/var/postgres start",
+    "db:stop": "pg_ctl -D /usr/local/var/postgres stop",
+    
+    "dev:start:client": "cd client && yarn install && yarn start",
+    "dev:start:server": "cd server && yarn install && yarn start:dev",
+    "dev:start": "yarn db:start && concurrently –kill-others-on-fail \"yarn dev:start:server\" \"yarn dev:start:client\"",
+    
+    "prod:build": "cd client && yarn install && yarn build && cd ..",
+    "prod:start": "cd server && yarn start:prod",
 
-    "start:prod": "cd server && yarn start:prod",
-    "psql:start": "pg_ctl -D /usr/local/var/postgres start",
-    "psql:stop": "pg_ctl -D /usr/local/var/postgres stop",
-    "build:client": "cd client && yarn install && yarn build",
-    "stop": "yarn psql:stop",
-
-    "build": "cd client && yarn install && yarn build && cd .. && docker build --tag=flom ."
+    "docker:build:survey": "docker build --tag=flom .",
+    "docker:build:all": "yarn prod:build && yarn docker:build:survey",
+    "docker:start": "./bin/docker_start.sh",
+    "docker:kill:all": "docker kill $(docker ps -q)"
   },
   "dependencies": {
     "concurrently": "^3.6.0"

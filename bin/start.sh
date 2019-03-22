@@ -7,4 +7,4 @@
 yarn db:setup
 
 # Start the servers
-yarn start:prod
+yarn prod:start
