@@ -13,7 +13,7 @@
     "prod:build": "cd client && yarn install && yarn build && cd ..",
     "prod:start": "cd server && yarn start:prod",
 
-    "docker:build:survey": "docker build --tag=flom .",
+    "docker:build:survey": "./bin/docker_build.sh",
     "docker:build:all": "yarn prod:build && yarn docker:build:survey",
     "docker:start": "./bin/docker_start.sh",
     "docker:kill:all": "docker kill $(docker ps -q)"

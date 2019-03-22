@@ -1,5 +1,6 @@
 #!/bin/sh
 echo Starting flom on port $1
+TAG=$2
 
 if [[ -z "$1" ]]; then
     echo "-----"
@@ -8,4 +9,9 @@ if [[ -z "$1" ]]; then
     exit 1
 fi
 
-docker run -p $1:3001 flom:latest
+if [[ -z "$TAG" ]]; then
+    echo "No tag specified. Using 'latest'"
+    TAG="latest"
+fi
+
+docker run -p $1:3001 flom:$TAG
