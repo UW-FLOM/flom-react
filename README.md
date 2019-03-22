@@ -32,7 +32,7 @@ docker run -p 3000:3000 flom:latest
 ```
 4. You should be able to use the app at `localhost:3000`
 
-For more on building different versions of the container, see [$LINK].
+For more on building different versions of the container, see [Docker setup](docs/docker.md).
 
 # Local machine setup
 
