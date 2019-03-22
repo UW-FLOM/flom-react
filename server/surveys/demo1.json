@@ -8,18 +8,6 @@
       "type": "form",
       "questions": [
         {
-          "question": "What is your gender?",
-          "type": "select",
-          "options": [
-            "Female",
-            "Male",
-            "Intersex",
-            "Androgyne",
-            "The option I would choose is not listed",
-            "I prefer not to state"
-          ]
-        },
-        {
           "question": "How old are you?",
           "type": "text"
         },

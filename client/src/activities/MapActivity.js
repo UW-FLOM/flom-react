@@ -40,8 +40,8 @@ const SideBarQuestion = styled(PlainText)`
 const MapQuestionBox = styled(MapQuestion)`
   position: absolute;
   top: 10px;
-  left: 360px;
-  right: 20px;
+  left: 500px;
+  right: 200px;
   z-index: 10000;
 `;
 
