@@ -2,10 +2,20 @@
 This document is intended for anyone wanting to contribute to the client code in the FLOM project.
 It describes the basic architecture of the app and how the various components fit together.
 
-## App architecture and components
+## App architecture
 The FLOM survey app consists of a couple classes to boostrap execution and set up routing, a main `SurveyPage` class which handles fetching survey definitions from the server, progressing them, and submitting answers, and activity classes that define what happens in each activity.
 
+Routing happens client-side. 
+The `App` class interprets the URL and instantiates the right page (usually the `SurveyPage`) with the arguments from the URL passed to it.
 
+Api calls are all made through `/services/api.js`.
+Each endpoint the app can talk to on the server is wrapped in a function call there that returns a promise.
+
+Components are styled using `styled-components`, a library that isolates styles to each component. Global css should be avoided. 
+
+See the component breakdown below for details on each component's responsibilities and implementation. 
+
+## Components
 
 ### index.js
 This is the entry point to the app. It doesn't do much but provide a router and instantiate the `App` class.
@@ -22,9 +32,10 @@ Each of these instantiates a `SurveyPage` component and passes any relevant URL 
 * **`/survey/:surveyId/session/:sessionId`**: once a user has begun a survey, a `sessionId` is created and passed to the `SurveyPage` along with the survey id. `SurveyPage` uses `sessionId` to track what has been complete in the session, and send answers to th database as part of the session.
 * **`/survey/:surveyId/session/:sessionId/activity/:activityIdx`**: as a user moves through activities in a survey, the `activityIdx` in the URL is incremented and passed to the `SurveyPage` by this route. `SurveyPage` uses `activityIdx` to determine which activity in the survey the user is on. 
 
-## Data Formats
+### SurveyPage 
+`SurveyPage.js` is the heart of the app. 
 
-### SurveyPage: `SurveyPage.handleSubmit`.
+#### `SurveyPage.handleSubmit` data formats
 
 Form questions:
 
