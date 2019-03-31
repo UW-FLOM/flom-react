@@ -5,6 +5,8 @@ It describes the basic architecture of the app and how the various components fi
 ## App architecture and components
 The FLOM survey app consists of a couple classes to boostrap execution and set up routing, a main `SurveyPage` class which handles fetching survey definitions from the server, progressing them, and submitting answers, and activity classes that define what happens in each activity.
 
+
+
 ### index.js
 This is the entry point to the app. It doesn't do much but provide a router and instantiate the `App` class.
 
