@@ -13,9 +13,20 @@ Each endpoint the app can talk to on the server is wrapped in a function call th
 
 Components are styled using `styled-components`, a library that isolates styles to each component. Global css should be avoided. 
 
-See the component breakdown below for details on each component's responsibilities and implementation. 
+> Note that there are a couple of css files used in the top-level components: `index.css`, and `bootstrap/dist/css/bootstrap.css`. 
+These are exceptions to the global style rule. 
+`index.css` sets up the most basic global styles and `bootstrap/dist/css/bootstrap.css` is necessary for the bootstrap components which do not use `styled-components`
 
-## Components
+The following sections go in to detail about the important parts of the client app, broken up by a few different types:
+* **[Top-level components](#top-level-components)** get the app started and instantiate the other components.
+* **Pages** are the main view containers of the app. 
+They are responsible for most of the logic, calling services, and instantiating other components.
+* **components** are re-usable view components.
+* **services** are the API layer.
+These represent API calls that can be made to the app server.
+* **activities** represent the various survey activities available to build surveys with.
+
+## Top-level components
 
 ### index.js
 This is the entry point to the app. It doesn't do much but provide a router and instantiate the `App` class.
@@ -44,7 +55,26 @@ Each of these instantiates a `SurveyPage` component and passes any relevant URL 
 * **`/survey`**: the `/survey` route with no arguments renders the `HomePage` which, as described above, redirects to a survey or list of surveys.
 
 >**What to do with App.js**: App.js is where to add new routes. 
-If the flom app needs to render s new top-level page that is not the survey page, or new sub-components of the `survey` route, passing different arguments, `App.js` is where to declare these new routes. 
+If the flom app needs to render s new top-level page that is not the survey page, or new sub-components of the `survey` route, passing different arguments, `App.js` is where to declare these new routes.
+
+### util.js
+`util.js` is a place to put common utility functions. 
+It contains one important function in particular `idFromString` which is used to creates an id out of an english string by removing spaces and special characters and converting to lower case. 
+These ids are used to identify surveys, activities, and questions on both the server and the client.
+Unfortunately, in the current architecture, this function is duplicated on the server and client and should not be changed in either place.
+
+### Other files at the root
+* **`App.css`** is a small css file that adds 100% width and height to the app. Global styles should be avoided and it is best not to add anything to this file.
+* **`App.test.js`** shows an example of how to start setting up tests for this app's components. 
+In the first version, no tests have been added.
+* **`index.css`** has a little more global css. It should not be added to.
+* **`registerServiceWorker.js`** is a caching helper provided by create react app. It shouldn't be necessary to change it.
+
+## Pages
+Pages represent the main view components.
+In general, each looks at the URL arguments passed to it through react router (sometimes none), fetches the necessary data from the server by calling the right services, and renders it's sub components with the data fetched.
+
+Pages are also responsible for most of the logic as well as calling the necessary services to send data back to the server.
 
 ### SurveyPage 
 `SurveyPage.js` is the heart of the app. 

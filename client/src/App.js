@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import SurveyListPage from './pages/SurveyListPage';
 import SurveyPage from './pages/SurveyPage';
 
+// Only sets width and height of the app to 100%
 import './App.css';
 
 // This component handles routing. Rendering the page specified
