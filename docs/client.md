@@ -19,12 +19,12 @@ These are exceptions to the global style rule.
 
 The following sections go in to detail about the important parts of the client app, broken up by a few different types:
 * **[Top-level components](#top-level-components)** get the app started and instantiate the other components.
-* **Pages** are the main view containers of the app. 
+* **[Pages](#pages)** are the main view containers of the app. 
 They are responsible for most of the logic, calling services, and instantiating other components.
-* **components** are re-usable view components.
-* **services** are the API layer.
+* **[Components](#components)** are re-usable view components.
+* **[Services](#services)** are the API layer.
 These represent API calls that can be made to the app server.
-* **activities** represent the various survey activities available to build surveys with.
+* **[Activities](#activities)** represent the various survey activities available to build surveys with.
 
 ## Top-level components
 
@@ -64,7 +64,6 @@ These ids are used to identify surveys, activities, and questions on both the se
 Unfortunately, in the current architecture, this function is duplicated on the server and client and should not be changed in either place.
 
 ### Other files at the root
-* **`App.css`** is a small css file that adds 100% width and height to the app. Global styles should be avoided and it is best not to add anything to this file.
 * **`App.test.js`** shows an example of how to start setting up tests for this app's components. 
 In the first version, no tests have been added.
 * **`index.css`** has a little more global css. It should not be added to.
@@ -76,8 +75,25 @@ In general, each looks at the URL arguments passed to it through react router (s
 
 Pages are also responsible for most of the logic as well as calling the necessary services to send data back to the server.
 
+### HomePage
+`HomePage.js` is a re-directing page that handles the root routes of the app. 
+It is responsible for redirecting to the `SurveyPage` with the correct survey populated or the `SurveyList` page if there are many surveys available.
+
+`HomePage` calls the service `getSurveyDefinitions`, which returns the surveys from the server. If there is one survey, it redirects to `SurveyPage` with that survey.
+
+>**What to do with HomePage.js**: Change this page to change the behavior of the app when a user goes to the root URL **`/`**. 
+
+### SurveyListPage
+`SurveyListPage.js` lists the surveys available on the system as links. It ins generally most useful at development time for survey authors who want to work on multiple surveys at once. Once the app is deployed, generally there will only be one survey and this page will not be shown.
+
+`SurveyListPage` calls the service `getSurveyDefinitions`, which returns the surveys from the server. It renders a link to each. 
+
+>**What to do with SurveyListPage.js**: This page is probably mostly only used by app authors or flom developers.
+If there was a reason to show multiple surveys to a user, this is the page to do it.
+It probably needs more explanation in that case. 
+
 ### SurveyPage 
-`SurveyPage.js` is the heart of the app. 
+`SurveyPage.js` is the heart of the app. It gets URL arguments specifying what survey to render, what session to record the survey in, and what the current activity in the survey is. 
 
 #### `SurveyPage.handleSubmit` data formats
 

@@ -7,11 +7,12 @@ import { Layout } from '../components/Layout';
 
 import { Header } from '../components/Typography';
 
-class HomePage extends Component {
+class SurveyListPage extends Component {
   state = {
     surveyDefinitions: []
   }
 
+  // Get the survey definitions
   componentDidMount() {
     getSurveyDefinitions()
       .then(res => this.setState({ surveyDefinitions: res }))
@@ -25,6 +26,7 @@ class HomePage extends Component {
 
         <ul>
           {
+            // Render a list of links
             map(this.state.surveyDefinitions, (survey) => {
               return (
                 <li key={survey.id}>
@@ -39,4 +41,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default SurveyListPage;

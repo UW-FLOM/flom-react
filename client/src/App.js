@@ -4,15 +4,12 @@ import HomePage from './pages/HomePage';
 import SurveyListPage from './pages/SurveyListPage';
 import SurveyPage from './pages/SurveyPage';
 
-// Only sets width and height of the app to 100%
-import './App.css';
-
 // This component handles routing. Rendering the page specified
 // for each URL listed in the Switch below.
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App" style={{ width: '100%', height: '100%' }}>
         <Switch>
           <Route exact path="/" component={HomePage}/>
           <Route path="/surveys" component={SurveyListPage}/>
