@@ -21,10 +21,10 @@ The following sections go in to detail about the important parts of the client a
 * **[Top-level components](#top-level-components)** get the app started and instantiate the other components.
 * **[Pages](#pages)** are the main view containers of the app. 
 They are responsible for most of the logic, calling services, and instantiating other components.
-* **[Components](#components)** are re-usable view components.
+* **[Activities](#activities)** represent the various survey activities available to build surveys with.
 * **[Services](#services)** are the API layer.
 These represent API calls that can be made to the app server.
-* **[Activities](#activities)** represent the various survey activities available to build surveys with.
+* **[Components](#components)** are re-usable view components.
 
 ## Top-level components
 
@@ -93,11 +93,37 @@ If there was a reason to show multiple surveys to a user, this is the page to do
 It probably needs more explanation in that case. 
 
 ### SurveyPage 
-`SurveyPage.js` is the heart of the app. It gets URL arguments specifying what survey to render, what session to record the survey in, and what the current activity in the survey is. 
+The `SurveyPage` is the most complex component in the flom app. It is responsible for not only rendering surveys, but creating sessions, progressing through each survey, and submitting data to the server. 
+Each survey consists of a list of activities. Users complete one activity at a time, then the `SurveyPage` submits the data, and moves to the next activity by updating the URL and redirecting (more on flow of control below).
+
+`SurveyPage` gets URL arguments specifying what survey to render, what session to record the survey in, and what the current activity in the survey is. 
+These arguments are:
+* **surveyId**: specifies the current survey by it's id. This must correspond to a survey definition.
+* **sessionId**: denotes the current session. Each run through the a survey corresponds to a single session. 
+**If no sessionId is specified, a session has not begun, and the `SurveyPage` will render a consent form to begin a survey.**
+See information on flow of control below for more.
+* **activityIdx**: specifies the current activity within a survey to render.
+When 0, the first activity is rendered, when 1, the second, and so on. 
+`SurveyPage` is responsible for incrementing this number and moving to the next activity once an activity is complete.
+
+#### Flow of control
+The flow of control in the survey page follows this general pattern:
+1. A user navigates to a survey URL, for example, a survey called "Some great survey": `/survey/some_great_survey`.
+2. On visiting this url, there is no `sessionId` defined (it is not in the URL). A `sessionId` denotes the user session, a specific run through a survey. Since there is no `sessionId`, the `SurveyPage` must create a session before beginning the survey. It sees there is no `sessionId` and starts by rendering an `Intro` component, which shows the intro and consent information provided by the survey author, as well as a button to accept and begin the survey.
+3. When a user consents to begin a survey, `SurveyPage` calls the `createSession` service, adding a session to the database and getting the `sessionId`.
+4. Once `createSession` returns a `sessionId`, `SurveyPage` redirects to the same survey with the new `sessionId`, starting at activity 0. 
+For example, the 30th session in the database: `/survey/some_great_survey/session/30/activity/0`.
+5. The `SurveyPage` handles this new route as well, but now there is a `sessionId` as well as an `activityIdx`, 0, the first activity. 
+6. `SurveyPage` now renders the first activity, instantiating the appropriate activity type, `FormActivity` for example.
+7. The user completes the activity, then submits the answers, causing the activity class to call `handleSubmit` on the survey page (data formats for data passed to handleSubmit described below).
+8. `handleSubmit` submits the answers to the server, then redirects to the next activity. 
+9. If there Are no more activities, it marks the survey as complete and calls the `updateSession` service to mark the session as complete.
+9. Once the session is marked complete, the `SurveyPage` shows the complete screen.
 
 #### `SurveyPage.handleSubmit` data formats
+These are the data formats `SurveyPage` expects from different activity types.
 
-Form questions:
+`FormActivity`:
 
 ```
 {
@@ -119,7 +145,7 @@ Form questions:
 }
 ```
 
-Map questions:
+`MapActivity`:
 
 ```
 {
@@ -136,7 +162,7 @@ Map questions:
 }
 ```
 
-Random Audio activity questions:
+`RandomAudioActivity`:
 ```
 {
   "file_id.questionId": {
@@ -154,25 +180,7 @@ Random Audio activity questions:
 }
 ```
 
-### MapTool
-The map tool holds no geo data state (it does have state for position and zoom).
-It get's passed geometry and returns raw goemetry through its `onFeatureDrawn` callback. It returns and array of objects containing a `type` field denoting type and a `geometry` field containing the raw data.
-
-#### Supported map tool return types:
-* `polygon`
-
-```
-{ 
-  type: "polygon",
-  geometry: [
-    [44.5, 77.7],
-    [66.7, 45.6],
-    [120, 56]
-  ]
-}
-```
-
-*Note that multi-shape polygons are not supported*
+>**What to do with SurveyPage.js**: `SurveyPage` contains the meat of the app. If flow of control needs to be changed, it will need to change here. **The most obvious reason to modify SurveyPage is to add a new activity type, which should only require changing its render function to understand the new type.**
 
 ## Activities
 
@@ -208,3 +216,27 @@ For each activity the same form is displayed for each clip, so the user answers 
 The responses are stored in the database under ids made up from the audio file name and the question id: `'<audio file name>.<questionId>'`.
 
 **NOTE:** `RandomAudioActivity` relies heavily on the [`react-sound` library](https://www.npmjs.com/package/react-sound)
+
+## Components
+The components directory contains re-usable components that are relied upon by activities and other app elements.
+
+### MapTool
+The MapTool shows a map that the user can draw on. It holds no geo data state (it does have state for position and zoom).
+The parent should maintain geo state and pass the current stat to it.
+It gets passed geometry and returns raw geometry through its `onFeatureDrawn` callback. It returns and array of objects containing a `type` field denoting type and a `geometry` field containing the raw data.
+
+#### Supported map tool return types:
+* `polygon`
+
+```
+{ 
+  type: "polygon",
+  geometry: [
+    [44.5, 77.7],
+    [66.7, 45.6],
+    [120, 56]
+  ]
+}
+```
+
+*Note that multi-shape polygons are not supported*

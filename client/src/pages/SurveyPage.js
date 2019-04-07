@@ -34,6 +34,8 @@ class SurveyPage extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
+    // If the current location equals the location store in state.redirect,
+    // set redirect to false. We are now on the page we need and no redirect is required
     if (has(props, 'location.pathname') && props.location.pathname === state.redirect) {
       return {
         ...state,
@@ -79,6 +81,10 @@ class SurveyPage extends Component {
       .catch(err => console.log(err));
   }
 
+  // handleSubmit is passed to the activities and they call it when the user submits
+  // answers. It submits the answers tothe server, then redirects to the next activity.
+  // If there are no more activities, it marks the survey as complete and calls
+  // updateSession to mark the session as complete.
   handleSubmit = async (questions) => {
     console.log('INFO: submitting answers:', JSON.stringify(questions));
 
@@ -102,6 +108,8 @@ class SurveyPage extends Component {
     }
 
     const nextActivityIdx = activityIndex + 1;
+
+    // If there are no more activities, mark the session complete
     if ( nextActivityIdx >= this.getSurvey().activities.length){
       this.setState({ surveyComplete: true });
       try {
@@ -110,6 +118,7 @@ class SurveyPage extends Component {
       catch (error) {
         console.log('ERROR: ', error);
       }
+    // else, there are more activities, redirect to the next one
     } else {
       this.setState({
         redirect: `/survey/${surveyId}/session/${sessionId}/activity/${nextActivityIdx}`
