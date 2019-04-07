@@ -3,7 +3,7 @@ This document is intended for anyone wanting to contribute to the client code in
 It describes the basic architecture of the app and how the various components fit together.
 
 ## App architecture
-The FLOM survey app consists of a couple classes to boostrap execution and set up routing, a main `SurveyPage` class which handles fetching survey definitions from the server, progressing them, and submitting answers, and activity classes that define what happens in each activity.
+The FLOM survey app consists of a couple classes to bootstrap execution and set up routing, a main `SurveyPage` class which handles fetching survey definitions from the server, progressing them, and submitting answers, and activity classes that define what happens in each activity.
 
 Routing happens client-side. 
 The `App` class interprets the URL and instantiates the right page (usually the `SurveyPage`) with the arguments from the URL passed to it.
@@ -26,11 +26,25 @@ It handles client-side routing, parsing the URL and passing relevant args to the
 This component makes heavy use of `react-router`, doc's for which can be found here:
 [react-router](https://reacttraining.com/react-router/).
 
-The most important routes in the app at this point are the `/survey` routes.
+Given that this component mostly serves to instantiate page components based on the URL, it is pretty simple. 
+It Creates a `react-router` `Switch` component, declaring possible routes and enumerating which page component to show for which URL.
+
+Most routes in the app are `/survey` routes which instantiate a `SurveyPage` with the correct arguments. There are 2 exceptions:
+* **`/`**: the root route when no URL is specified points to the `HomePage`. 
+`HomePage` is just a redirect page which shows no content, but decides what other page to send the user to. 
+The result of `/` rendering the `HomePage` is that users who hit the base URL of the app are usually re-directed to the survey found in the deployed app. 
+If more than one survey is deployed on the app instance, `HomePage` will instead redirect to the `/surveys` page, which shows a list of them.
+* **`/surveys`**: shows a list of links to the surveys available on the current app instance.
+
+The most important routes in the app are the `/survey` routes.
 Each of these instantiates a `SurveyPage` component and passes any relevant URL information to it--for example, which survey to run based on the URL. Available `/survey` routes are:
 * **`/survey/:surveyId`**: routes the the landing page for the specified survey. Note that `:surveyId` denotes a URL variable, it will make the variable `surveyId` available to the `SurveyPage` instantiated by this route. For example, if a user navigates to `/survey/someGreatSurvey`, a `SurveyPage` will be instantiated and passed `someGreatSurvey` as the `surveyId` in its URL properties.
 * **`/survey/:surveyId/session/:sessionId`**: once a user has begun a survey, a `sessionId` is created and passed to the `SurveyPage` along with the survey id. `SurveyPage` uses `sessionId` to track what has been complete in the session, and send answers to th database as part of the session.
-* **`/survey/:surveyId/session/:sessionId/activity/:activityIdx`**: as a user moves through activities in a survey, the `activityIdx` in the URL is incremented and passed to the `SurveyPage` by this route. `SurveyPage` uses `activityIdx` to determine which activity in the survey the user is on. 
+* **`/survey/:surveyId/session/:sessionId/activity/:activityIdx`**: as a user moves through activities in a survey, the `activityIdx` in the URL is incremented and passed to the `SurveyPage` by this route. `SurveyPage` uses `activityIdx` to determine which activity in the survey the user is on.
+* **`/survey`**: the `/survey` route with no arguments renders the `HomePage` which, as described above, redirects to a survey or list of surveys.
+
+>**What to do with App.js**: App.js is where to add new routes. 
+If the flom app needs to render s new top-level page that is not the survey page, or new sub-components of the `survey` route, passing different arguments, `App.js` is where to declare these new routes. 
 
 ### SurveyPage 
 `SurveyPage.js` is the heart of the app. 

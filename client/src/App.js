@@ -6,6 +6,8 @@ import SurveyPage from './pages/SurveyPage';
 
 import './App.css';
 
+// This component handles routing. Rendering the page specified
+// for each URL listed in the Switch below.
 class App extends Component {
   render() {
     return (
