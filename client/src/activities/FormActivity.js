@@ -24,6 +24,9 @@ const SubmitButton = styled(Button)`
 
 class FormActivity extends Component {
 
+  // Sets up the state ahead of time based on the questions.
+  // State will store each questions answer and index in
+  // the activity
   state = {
     questions: reduce(this.props.activity.questions, (result, value, key) => {
       const questionData = {

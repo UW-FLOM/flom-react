@@ -22,9 +22,9 @@ The following sections go in to detail about the important parts of the client a
 * **[Pages](#pages)** are the main view containers of the app. 
 They are responsible for most of the logic, calling services, and instantiating other components.
 * **[Activities](#activities)** represent the various survey activities available to build surveys with.
-* **[Services](#services)** are the API layer.
 These represent API calls that can be made to the app server.
 * **[Components](#components)** are re-usable view components.
+* **[Services](#services)** are the API layer.
 
 ## Top-level components
 
@@ -183,6 +183,15 @@ These are the data formats `SurveyPage` expects from different activity types.
 >**What to do with SurveyPage.js**: `SurveyPage` contains the meat of the app. If flow of control needs to be changed, it will need to change here. **The most obvious reason to modify SurveyPage is to add a new activity type, which should only require changing its render function to understand the new type.**
 
 ## Activities
+Activities represent the actual activities a user will do during a survey. 
+For example, filling out a form, or drawing on a map, or answering questions about an audio clip.
+Every survey is made up of a list of activities of various types that can be mixed in any way according to the survey author. 
+
+>**What to do with Activities**: Activities are intended to be the main extension point for this app. Creating new activity types should be pretty straightforward, requiring only writing the activity class, and adding it to the known types in `SurveyPage` render.
+
+### FormActivity
+The `FormActivity` represents a form that the user fills out. 
+It uses the `FormInputRenderer` component to render a form and submits the answers to `SurveyPage` when complete.
 
 ### MapActivity 
 For geo-based questions, the map activity stores a `response` in state as an array
@@ -220,6 +229,41 @@ The responses are stored in the database under ids made up from the audio file n
 ## Components
 The components directory contains re-usable components that are relied upon by activities and other app elements.
 
+### FormInputRenderer
+This component renders a list of form inputs and calls a provided callback when an input changes.
+It takes:
+* **questions**: a list of question objects like:
+```
+[
+  {
+    question: "This is question text?", 
+    type: "select", 
+    options: <array>
+  }, 
+  ...
+]
+```
+* **onValueChange**: a callback for when the value of an input changes, signature:
+```
+onValueChange(questionId, questionData)
+```
+* **values**: a map of values for the controlled form inputs like:
+```
+{ 
+  <questionId>: {
+    response: <some value>, 
+    ...
+  }, 
+  ...
+}
+```
+`FormInputRenderer` supports text inputs and selects.
+>**What to do with FormInputRenderer**: if more input types are required, this `FormInputRenderer` is where to add them.
+
+### Intro
+Renders a survey intro based on the survey author's survey definition. 
+The intro is shown before a survey is begun.
+
 ### MapTool
 The MapTool shows a map that the user can draw on. It holds no geo data state (it does have state for position and zoom).
 The parent should maintain geo state and pass the current stat to it.
@@ -240,3 +284,49 @@ It gets passed geometry and returns raw geometry through its `onFeatureDrawn` ca
 ```
 
 *Note that multi-shape polygons are not supported*
+
+### Typography
+Typography should be used to render text to be consistent with the app style. 
+
+## Services
+Services represent API calls that can be made to the server. 
+Any API call should be done through a function defined in the services directory.
+All of the services that communicate with the flom server are defined in `api.js`.
+#### **getSurveyDefinitions**
+Called with no arguments. Returns a list of complete survey definitions contained on the server.
+#### **createSession**
+Call with no arguments. Creates a session in the database with a new unique id. 
+Returns the new id.
+#### **updateSession**
+Called with **sessionId** to be updated and a dictionary of `field:value` pairs to be updated in the session entry. Example payload:
+```
+{ sessionComplete: true }
+```
+#### **submitAnswers**
+Submits answers for an activity. Arguments:
+* **sessionId**: the current session
+* **activityIndex**: the index of the activity in the session to be stored for researchers.
+* **title**: id made from the title of the activity to be stored for researchers.
+* **type**: the type of activity to be stored for researchers.
+* **responses**: the responses to the questions in the activity. 
+These will be stored in the questions table. Example payload:
+```
+{
+  "sessionId": "30",
+  "activityIndex": 3,
+  "title": "animals",
+  "type": "map",
+  "responses": {
+    "where_does_your_favorite_animal_live_": {
+      "type": "text",
+      "indexInActivity": 0,
+      "response": "Peru"
+    },
+    "where_is_peru": {
+      "type": "text",
+      "indexInActivity": 0,
+      "response": "south america"
+    }
+  }
+}
+```
