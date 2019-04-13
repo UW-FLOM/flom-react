@@ -114,3 +114,22 @@ Unlike the other controllers, `surveys.js` does not communicate with the databas
 Instead, it reads the `/surveys` directory on the server and returns the survey definitions. 
 It defines one method, `get`, which is called by the client app to get the JSON necessary to render surveys.
 
+## Models and Migrations
+Models and migrations define the database schema and how to interact with it.
+
+**Models** tell Sequelize what the database schema is, and it uses them to create the appropriate SQL to send to the database at run time. 
+They are essentially the run time gate keepers of the database.
+Sequelize uses them to know the form of the database and how to read from and write to it.
+
+**Migrations** set the database up with the right schema and tables, making it match what the models are expecting.
+
+Any time a model is changed, the migration must be changed to correspond to the new schema. Any time a migration is changed, the model must also be changed to match.
+
+For specifics on how Flom's models and migrations are defined, see [Database setup](database.md).
+
+# Surveys
+The `/surveys` directory contains survey definitions available on the system. In most production setups, there should be one survey here. 
+The client application will run that one survey in that case.
+If more than one survey is included, the client application will show a list.
+
+For more on writing surveys see [Surveys](surveys.md).
