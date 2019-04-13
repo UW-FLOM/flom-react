@@ -25,4 +25,19 @@ The server contains definitions of the various models in the database (which map
 
 See below for details on configuring Sequelize and it's role in the app. For more on the setup of the database, see [Database setup](database.md).
 
-### Configuration 
+### Configuration
+Sequelize picks up it's connection configuration from `/server/config/config.json`. 
+This file contains information on where the database is and how to connect to it.
+ This file contains two configurations, one for production and one for development. 
+The connection configuration includes the following fields:
+* **username**: the username of the database user. This will depend on your database configuration, but in most normal setups this should be left as `postgres`.
+* **password**: the database password for your database user. The checked-in value for this field is `null`, a configuration that tells postgres to use trust authentication, only accepting requests from the local machine. This is a safe configuration when the database is running in the Docker container. **Do not check this file in containing a real password**.
+* **database**: the name of the specific database in your postgres instance. This should generally be 'flom' unless you have configured your database differently.
+* **host**: the location of the host machine to talk to. This is set to **localhost** by default as in the docker container we will be talking to a database on the local machine. 
+Change this to talk to a database elsewhere.
+* **dialect**: should always be 'postgres'
+
+>NOTE that in the Docker container this file is built in and therefor unreadable. 
+The app should **never** be deployed in such a way that this file is accessible to outside access.
+
+The database configuration (tables and schemas) is contained in the `/server/models` directory. `/server/models/index.js` is where Sequelize is initialized.
