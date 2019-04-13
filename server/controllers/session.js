@@ -3,12 +3,14 @@ const activity = require('../models').activity;
 const question = require('../models').question;
 
 module.exports = {
+  // Creates a session, returning it's sessionId
   create(req, res) {
     return session
       .create()
       .then(session => res.status(201).send(session))
       .catch(error => res.status(400).send(error));
   },
+  // Lists all sessions
   list(req, res) {
     return session
       .findAll({
@@ -21,6 +23,7 @@ module.exports = {
       .then(sessions => res.status(200).send(sessions))
       .catch(error => res.status(400).send(error));
   },
+  // Gets a specific sessino by id
   find(req, res) {
     return session
       .findById(req.params.sessionId, {
@@ -40,6 +43,7 @@ module.exports = {
       })
       .catch(error => res.status(400).send(error));
   },
+  // Edits a sepcific session. 
   edit(req, res) {
     return session
       .update(

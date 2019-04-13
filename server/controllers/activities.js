@@ -5,6 +5,7 @@ const question = require('../models').question;
 const submit = async (req, res) => {
   console.log('INFO: submitting answers for activity.', req.body);
   
+  // Create the activity on the activities table
   let newActivity = undefined;
   try {
     newActivity = await activity.create({
@@ -27,7 +28,7 @@ const submit = async (req, res) => {
     .all(
       _.map(req.body.responses, (q, key) => {
         
-        // TODO: All responses are strored as strings, so we convert them here.
+        // TODO: All responses are stored as strings, so we convert them here.
         // The database could be more restrictive and get some perf and correctness
         // improvements by storing other types.
         const stringResponse = _.isString(q.response)
@@ -48,8 +49,9 @@ const submit = async (req, res) => {
     .catch(error => res.status(400).send(error))
 }
 
+// Finds an activity by id
 const find = (req, res) => {
-  console.log('INFO: finding activity by id: ', req.params.sessionId);
+  console.log('INFO: finding activity by id: ', req.params.activityId);
   return activity
     .findById(req.params.activityId, {
       include: [{
