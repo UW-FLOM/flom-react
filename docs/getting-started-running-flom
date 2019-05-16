@@ -1,0 +1,32 @@
+
+How to start the Docker 
+
+createdb flom
+
+To run on another port:
+
+docker run -p 8000:3001  magnew/flom
+* map port 3001 internally to port 8000 externally
+
+Currently container has its own postgres DB that is transient
+
+
+settings for FLOM - 
+
+Marshall is available to help get the system up and running
+
+Need some kind of user auth
+	- Maybe a computable token that can be verified
+	- CSV auth file of tokens
+	- Pass in a URL
+	- Hiroku could be used for auth
+	- generate one-time auth tokens - do something simple
+	- 
+
+
+Stuff todo still:
+
+- Set up postgres db in FLOM server outside of docker (running on docker host is ok)
+- wire up docker containers to use the top level postgres install
+- naming convention for container to database connector
+- 
