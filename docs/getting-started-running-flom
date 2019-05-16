@@ -23,6 +23,26 @@ Need some kind of user auth
 	- generate one-time auth tokens - do something simple
 	- 
 
+	- obfuscate URL for the FLOM API interface   or allow only from certain IP address range
+	
+    - may only need one single top level Postgres database	
+
+    - feature add: survey id in the survey api - so can search by that
+	
+	- when you do a "docker build" (at build time is when you change database credentials
+		 -credentials get built in to a binary that isnt easily 
+		 starting from scratch will need a docker build with postgres crentials specified on the command line
+		 
+		 
+		 Yarn is used as a task running - reads package.json - eventaully calls docker_start.sh -= may be where creds should live (?)
+		 
+		 need an optioon to start with embedded postgres vs "prodcution" outside of container postrgres
+		 
+		 - prod:start doent test for crash and restart itself
+		 
+		 Docker orchestration can get complicated in production, but this should be simpler than most cases
+		 
+		 
 
 Stuff todo still:
 
@@ -30,3 +50,15 @@ Stuff todo still:
 - wire up docker containers to use the top level postgres install
 - naming convention for container to database connector
 - 
+If doing a 50-state separate survey, could set things up to run a single docker instance and encode the survey id, state, etc in each URL request from 
+users   (may need code changes)
+
+
+
+
+pass in session auth token, Country, State, all on the URL line - from something encoded for sending to users in participation email
+
+URL can be hacked to jump into another person's session as long as it isnt marked "complete"  
+may want to obfuscate session id in URL string
+
+Can query an API via flom...:8000/api/session/ to see all session 
