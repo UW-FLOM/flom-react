@@ -17,6 +17,7 @@ WORKDIR /app
 
 # Move the app to the container
 RUN mkdir client
+RUN mkdir client/build
 RUN mkdir server
 COPY ./package.json .
 COPY /client/build/ client/build
