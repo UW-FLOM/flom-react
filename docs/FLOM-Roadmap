@@ -1,0 +1,28 @@
+
+From:   https://docs.google.com/document/d/16XVoYqzn4pqBYdO_smeT60fD5m39bZMjNOWG57rMR4A/edit?usp=sharing
+
+Roadmap
+1) what would be needed to take the framework from where it is now, to an implemented and live pilot site
+
+Survey author tasks
+Author a survey. A pilot survey needs to be built. There will be work between survey authors and app developer to get the necessary features added.
+
+App developer tasks
+Necessary features need to be added to the React app. It's a bit of an open question what is necessary. I put together a board to track what is missing compared to the existing app here: https://trello.com/b/sUDDxCda/flom.
+
+Framework-level tasks
+Endpoint authentication. Some sort of auth should be put in front of the app and endpoints. Hopefully this can be done in a general way at UW. Importance: XL, Difficulty: M-L, Size: M
+Database location specification. At the moment the database runs in a docker container. This is nice and easy for demos, but it's dangerous because if the container crashes, all data will be lost. The framework is set up to take a URL, username and password for a different postgres database to connect to, but these must be plumbed through. A reasonable workaround is to change them at build time. Importance: M (the workaround helps), Difficulty: M, Size: S.
+Geo format verification. It's probably a good idea to make sure the stored data formats will work for the consuming tools. It's probably not hard to convert after the fact if not, but it'd be great if it 'just worked'. Importance: S, Difficulty: M, Size: M.
+Figure out deployment. Where does it get deployed? Docker has to be there (or someone has to set up node), a postgres database needs to be set up, the right images have to be pulled, and it should all be tested. Importance: Critical, Difficulty: M-L, Size: M
+
+
+2) The type of individual(s) needed to do that pilot development, and longer term feature development
+ The framework should largely be in place. Most of the most difficult work is done. There are a couple framework tasks that could be done, but for the most part developers should be able to work in the application layer and not too much in the framework. Application layer code is easier to learn and write and most of the remaining work is there. 
+
+These roles are necessary, but don't have to be individuals; multiple jobs could be done by one person:
+Survey authors shouldn't be a problem. Some technical aptitude would help with initial surveys, but these could just be people interested in writing surveys.
+App developer. As mentioned, most of the remaining code-work is in the application layer. This code is not immensely complicated, but will require someone comfortable with javascript. A good CS student, a normal-level contractor or any other developer will do fine here. With a little work other interested people could be helpful with this.
+Framework-level developer. A framework dev will be needed if changes have to be made in the server/docker layers. This person will likely have to be a little more skilled. There are CS students who would have no problem with this. Other more technical people shouldn't have much trouble ramping up here.
+Deployment manager. Someone used to deploying apps in servers and setting up a database. 
+Advisor. I can help people ramp up and figure out how to do things, I just can't do them all. 
