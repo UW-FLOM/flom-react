@@ -12,25 +12,26 @@ The typical setup is:
 * At development time, when writing new features or working with the app, it is run on the **local machine** in **development mode**.
 * In production, when the app is being used, it will usually be in a **docker container** in **production mode**.
 
-# Quick start: running the Docker container
-The fastest and easiest way to run the app and use it is to run a it in Docker on your local machine. 
-The only dependency is Docker, and once you have it installed, the Flom app runs in a container that includes the database and app server.
+# Quick start: building this repo and running the Docker container
+The fastest and easiest way to run the app and use it is to build this repo and run a it in Docker on your local machine. 
+The only dependencies are Docker and yarn, and once you have them installed, the Flom app runs in a container that includes the database and app server.
 
 >NOTE: the servers require linux, so the docker container can not be run on windows.
 >MacOS works great.
 
-To run the container:
+To build and run the container:
 1. Install docker: https://www.docker.com/get-started
-2. From the root of the flom directory, build the Flom docker container. 
+2. Install yarn: https://yarnpkg.com/lang/en/docs/install/
+3. From the root of the flom directory, run the yarn command to build the app and container.
 This will take a few minutes as it fetches everything it needs from the internet:
 ```
-docker build --tag=flom .
+yarn docker:build:all
 ```
-3. Run the docker container:
+4. Run the docker container, specifying the port:
 ```
-docker run -p 3000:3000 flom:latest
+yarn docker:start 3000
 ```
-4. You should be able to use the app at `localhost:3000`
+5. You should be able to see the demo the app with a number of surveys at `localhost:3000`
 
 For more on building different versions of the container, see [Docker setup](docs/docker.md).
 
