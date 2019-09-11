@@ -13,6 +13,8 @@ import {
 import Intro from '../components/Intro';
 import FormActivity from '../activities/FormActivity';
 import MapActivity from '../activities/MapActivity';
+import MapAudioActivity from '../activities/MapAudioActivity';
+
 import RandomAudioActivity from '../activities/RandomAudioActvity';
 
 import { idFromString } from '../util';
@@ -197,6 +199,15 @@ class SurveyPage extends Component {
             onSubmit={this.handleSubmit}
           />
         </FormLayout>
+      );
+    } else if (currentActivity.type === 'mapAudio') {
+      return (
+        <MapLayout>
+          <MapAudioActivity
+            activity={currentActivity}
+            onSubmit={this.handleSubmit}
+          />
+        </MapLayout>
       );
     } else {
       return (

@@ -1,0 +1,22 @@
+{
+  "title" : "Map audio survey",
+  "intro" : "Lets put audio on a map",
+  "activities": [
+    {
+      "title": "Tell me your name",
+      "helpText": "Just 'cause",
+      "type": "form",
+      "questions": [
+        {
+          "question": "Whats your name?",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "title": "Map time",
+      "helpText": "Nothing",
+      "type": "mapAudio"
+    }
+  ]
+}
