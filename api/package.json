@@ -1,11 +1,11 @@
 {
-  "name": "flom-prod-server",
+  "name": "flom-api",
   "version": "0.1",
   "license": "UNLICENSED",
   "scripts": {
-    "start:dev": "nodemon server.js",
+    "start:dev": "yarn db:migrate && nodemon server.js",
     "start:prod": "NODE_ENV=production node ./server.js",
-
+    "start": "NODE_ENV=production node ./server.js",
     "db:migrate": "./node_modules/.bin/sequelize db:migrate",
     "db:create": "./node_modules/.bin/sequelize db:create flom",
     "db:setup": "yarn install && yarn db:create && yarn db:migrate"
@@ -22,6 +22,7 @@
     "sequelize-cli": "^5.4.0"
   },
   "devDependencies": {
-    "concurrently": "^3.5.0"
+    "concurrently": "^3.5.0",
+    "nodemon": "^2.0.5"
   }
 }

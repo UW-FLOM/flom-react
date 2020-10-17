@@ -1,8 +1,0 @@
-{
-  "extends": "react-app",
-  "rules": {
-    "no-trailing-spaces": ["error"],
-    "object-curly-spacing": ["error", "always"],
-    "semi": ["error", "always"]
-  }
-}

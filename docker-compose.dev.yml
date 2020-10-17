@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  db:
+    image: library/postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: flom
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./api:/app
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - api

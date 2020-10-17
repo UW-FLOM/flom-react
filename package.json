@@ -1,25 +1,27 @@
 {
   "scripts": {
-    "setup": "yarn install && cd client && yarn install && cd ../server && yarn install",
-    
-    "db:setup": "cd server && yarn db:setup && cd ..",
+    "setup": "yarn install && cd client && yarn install && cd ../api && yarn install",
+    "db:setup": "cd api && yarn db:setup && cd ..",
     "db:start": "pg_ctl -D /usr/local/var/postgres start",
     "db:stop": "pg_ctl -D /usr/local/var/postgres stop",
-    
-    "dev:start:client": "cd client && yarn install && yarn start",
-    "dev:start:server": "cd server && yarn install && yarn start:dev",
-    "dev:start": "yarn db:start && concurrently –kill-others-on-fail \"yarn dev:start:server\" \"yarn dev:start:client\"",
-    
     "prod:build": "cd client && yarn install && yarn build && cd ..",
-    "prod:start": "cd server && yarn start:prod",
-
-    "docker:build:survey": "./bin/docker_build.sh",
-    "docker:build:all": "yarn prod:build && yarn docker:build:survey",
-    "docker:start": "./bin/docker_start.sh",
-    "docker:kill:all": "docker kill $(docker ps -q)"
+    "prod:start": "cd api && yarn start:prod",
+    "dev:setup": "yarn && cd client && yarn && cd ../api && yarn && docker-compose up -d",
+    "dev:start" : "docker-compose -f docker-compose.dev.yml build && docker-compose -f docker-compose.dev.yml up -d",
+    "dev:resume": "docker-compose -f docker-compose.dev.yml up -d",
+    "dev:stop": "docker-compose stop",
+    "dev:destroy": "docker-compose down -v"
   },
   "dependencies": {
     "concurrently": "^3.6.0"
   },
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.21.4",
+    "eslint-plugin-react-hooks": "^4.1.2"
+  }
 }

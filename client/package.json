@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "UNLICENSED",
   "private": true,
-  "proxy": "http://localhost:3001/",
+  "proxy": "http://api:3001/",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "bootstrap": "4.3.1",
@@ -12,18 +12,26 @@
     "leaflet-freedraw": "^2.9.0",
     "lodash": "^4.17.10",
     "ramda": "^0.25.0",
-    "react": "^16.4.1",
+    "react": "16.14.0",
     "react-bootstrap": "1.0.0-beta.5",
     "react-dom": "^16.4.1",
+    "react-icons": "^3.3.0",
     "react-leaflet": "^1.9.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-sound": "^1.2.0",
-    "styled-components": "^3.3.3",
-    "react-icons": "^3.3.0"
+    "styled-components": "^3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "babel-jest": "^26.5.2",
+    "jest": "^26.5.3",
+    "react-test-renderer": "^16.14.0"
   }
 }

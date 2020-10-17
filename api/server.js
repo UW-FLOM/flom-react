@@ -14,10 +14,10 @@ app.use(bodyParser.json());
 // Add route controllers. Most of the server logic is puleed in here
 require('./routes')(app);
 
-// If in production, serve 
+// If in production, serve
 if (process.env.NODE_ENV === 'production') {
   console.log('Starting production server');
-  
+
   app.use(express.static(path.join(__dirname, '../client/build')));
 
   // Client-side routing
