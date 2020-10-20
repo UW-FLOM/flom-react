@@ -1,20 +1,18 @@
 {
   "scripts": {
-    "setup": "yarn install && cd client && yarn install && cd ../api && yarn install",
-    "db:setup": "cd api && yarn db:setup && cd ..",
+    "setup": "yarn install && cd client && yarn install && cd ../server && yarn install",
+    "db:setup": "cd server && yarn db:setup && cd ..",
     "db:start": "pg_ctl -D /usr/local/var/postgres start",
     "db:stop": "pg_ctl -D /usr/local/var/postgres stop",
     "prod:build": "cd client && yarn install && yarn build && cd ..",
-    "prod:start": "cd api && yarn start:prod",
-    "dev:setup": "yarn && cd client && yarn && cd ../api && yarn && docker-compose up -d",
-    "dev:start" : "docker-compose -f docker-compose.dev.yml build && docker-compose -f docker-compose.dev.yml up -d",
+    "prod:start": "cd server && yarn start:prod",
+    "dev:setup": "yarn && cd client && yarn && cd ../server && yarn && docker-compose up -d",
+    "dev:start": "docker-compose -f docker-compose.dev.yml build && docker-compose -f docker-compose.dev.yml up -d",
     "dev:resume": "docker-compose -f docker-compose.dev.yml up -d",
-    "dev:stop": "docker-compose stop",
-    "dev:destroy": "docker-compose down -v"
+    "dev:stop": "docker-compose -f docker-compose.dev.yml stop",
+    "dev:destroy": "docker-compose -f docker-compose.dev.yml down -v"
   },
-  "dependencies": {
-    "concurrently": "^3.6.0"
-  },
+  "dependencies": {},
   "license": "UNLICENSED",
   "devDependencies": {
     "eslint": "^7.11.0",
