@@ -6,7 +6,7 @@
     "db:stop": "pg_ctl -D /usr/local/var/postgres stop",
     "prod:build": "cd client && yarn install && yarn build && cd ..",
     "prod:start": "cd server && yarn start:prod",
-    "dev:setup": "yarn && cd client && yarn && cd ../server && yarn && docker-compose up -d",
+    "dev:setup": "yarn && cd client && yarn && cd ../server && yarn && docker-compose -f docker-compose.dev.yml up -d",
     "dev:start": "docker-compose -f docker-compose.dev.yml build && docker-compose -f docker-compose.dev.yml up -d",
     "dev:resume": "docker-compose -f docker-compose.dev.yml up -d",
     "dev:stop": "docker-compose -f docker-compose.dev.yml stop",
