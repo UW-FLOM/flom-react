@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "mypassword",
     "database": "flom",
-    "host": "db",
+    "host": "db_dev",
     "port": "5432",
     "logging": true,
     "dialect": "postgres",
