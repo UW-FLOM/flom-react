@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { map, get } from 'lodash';
 import { Map, TileLayer, Marker, Popup, Polygon } from 'react-leaflet';
 import FreeDraw, { CREATE } from 'leaflet-freedraw';
+import { Typography } from 'antd';
 
-import { PlainText } from '../components/Typography';
-
+const { Text } = Typography;
 const TILE_URL = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png';
 const TILE_ATTRIBUTION = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
 
@@ -84,9 +84,11 @@ class MapTool extends Component {
               return (
                 <Marker key={idx} position={[marker.lat, marker.lng]}>
                   <Popup>
-                    <PlainText>
-                      {marker.lat}, {marker.lng}
-                    </PlainText>
+                    <Typography>
+                      <Text>
+                        {marker.lat}, {marker.lng}
+                      </Text>
+                    </Typography>
                   </Popup>
                 </Marker>
               );

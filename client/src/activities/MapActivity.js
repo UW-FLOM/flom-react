@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
+import { Button, Typography } from 'antd';
 import { map, reduce, compact, flatten, each } from 'lodash';
 import  geojson from 'geojson';
 
-import { Header, PlainText } from '../components/Typography';
 import MapTool from '../components/MapTool';
 import MapQuestion from '../components/MapQuestion';
 
 import { idFromString } from '../util';
+
+const { Title, Paragraph } = Typography;
 
 const ActivityContainer = styled.div`
   display: grid;
@@ -22,15 +23,7 @@ const SideBar = styled.div`
   border-right: 1px solid #ccc;
 `;
 
-const IntroText = styled(PlainText)`
-  margin-left: 0px;
-`;
-
-const SubmitButton = styled(Button)`
-  margin: auto;
-`;
-
-const SideBarQuestion = styled(PlainText)`
+const SideBarQuestion = styled(Paragraph)`
   background-color: ${props => props.active ? '#a1d6fc': null};
   cursor: ${props => props.active ? null: 'pointer'};
   padding: 10px;
@@ -159,10 +152,12 @@ class MapActivity extends Component {
       <React.Fragment>
         <ActivityContainer>
           <SideBar>
-            <Header>{activity.title}</Header>
-            <IntroText>
-              {activity.helpText}
-            </IntroText>
+            <Typography>
+              <Title>{activity.title}</Title>
+              <Paragraph>
+                {activity.helpText}
+              </Paragraph>
+            </Typography>
             {
               map(activity.questions, (question, idx) => {
                 return (
@@ -176,12 +171,12 @@ class MapActivity extends Component {
                 );
               })
             }
-            <SubmitButton
-              variant="primary"
+            <Button
+              type="primary"
               onClick={this.submitResponses}
             >
               Submit
-            </SubmitButton>
+            </Button>
           </SideBar>
           <MapTool
             center={activity.center}

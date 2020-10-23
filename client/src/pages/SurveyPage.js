@@ -1,45 +1,50 @@
-import React, { Component } from 'react';
-import { find, has } from 'lodash';
-import { Redirect } from 'react-router-dom';
+import React, { Component } from "react";
+import { find, has } from "lodash";
+import { Redirect } from "react-router-dom";
+import { Result } from "antd";
 
-import { Layout as FormLayout, MapLayout } from '../components/Layout';
-import { Header, PlainText } from '../components/Typography';
+import { Layout as FormLayout, MapLayout } from "../components/Layout";
 import {
   getSurveyDefinitions,
   createSession,
   updateSession,
-  submitAnswers
-} from '../services/api';
-import Intro from '../components/Intro';
-import FormActivity from '../activities/FormActivity';
-import MapActivity from '../activities/MapActivity';
-import RandomAudioActivity from '../activities/RandomAudioActvity';
+  submitAnswers,
+} from "../services/api";
+import Intro from "../components/Intro";
+import FormActivity from "../activities/FormActivity";
+import MapActivity from "../activities/MapActivity";
+import RandomAudioActivity from "../activities/RandomAudioActvity";
 
-import { idFromString } from '../util';
+import { idFromString } from "../util";
 
 class SurveyPage extends Component {
   state = {
     surveyDefinitions: [],
     activity: null,
     redirect: false,
-    surveyComplete: false
-  }
+    surveyComplete: false,
+  };
 
   componentDidMount() {
     getSurveyDefinitions()
-      .then(res => this.setState({
-        surveyDefinitions: res
-      }))
-      .catch(err => console.log(err));
+      .then((res) =>
+        this.setState({
+          surveyDefinitions: res,
+        })
+      )
+      .catch((err) => console.log(err));
   }
 
   static getDerivedStateFromProps(props, state) {
     // If the current location equals the location store in state.redirect,
     // set redirect to false. We are now on the page we need and no redirect is required
-    if (has(props, 'location.pathname') && props.location.pathname === state.redirect) {
+    if (
+      has(props, "location.pathname") &&
+      props.location.pathname === state.redirect
+    ) {
       return {
         ...state,
-        redirect: false
+        redirect: false,
       };
     }
     return state;
@@ -47,7 +52,10 @@ class SurveyPage extends Component {
 
   // Get the current survey based on URL params
   getSurvey() {
-    return find(this.state.surveyDefinitions, ['id', this.props.match.params.surveyId]);
+    return find(this.state.surveyDefinitions, [
+      "id",
+      this.props.match.params.surveyId,
+    ]);
   }
 
   getSurveyId() {
@@ -78,15 +86,15 @@ class SurveyPage extends Component {
           `/survey/${this.getSurveyId()}/session/${res.id}/activity/0`
         );
       })
-      .catch(err => console.log(err));
-  }
+      .catch((err) => console.log(err));
+  };
 
   // handleSubmit is passed to the activities and they call it when the user submits
   // answers. It submits the answers tothe server, then redirects to the next activity.
   // If there are no more activities, it marks the survey as complete and calls
   // updateSession to mark the session as complete.
   handleSubmit = async (questions) => {
-    console.log('INFO: submitting answers:', JSON.stringify(questions));
+    console.log("INFO: submitting answers:", JSON.stringify(questions));
 
     const surveyId = this.getSurveyId();
     const sessionId = this.getSessionId();
@@ -102,39 +110,42 @@ class SurveyPage extends Component {
         type: currentActivity.type,
         responses: questions,
       });
-    }
-    catch (error) {
-      console.log('ERROR: ', error);
+    } catch (error) {
+      console.log("ERROR: ", error);
     }
 
     const nextActivityIdx = activityIndex + 1;
 
     // If there are no more activities, mark the session complete
-    if ( nextActivityIdx >= this.getSurvey().activities.length){
+    if (nextActivityIdx >= this.getSurvey().activities.length) {
       this.setState({ surveyComplete: true });
       try {
         await updateSession(sessionId, { sessionComplete: true });
+      } catch (error) {
+        console.log("ERROR: ", error);
       }
-      catch (error) {
-        console.log('ERROR: ', error);
-      }
-    // else, there are more activities, redirect to the next one
+      // else, there are more activities, redirect to the next one
     } else {
       this.setState({
-        redirect: `/survey/${surveyId}/session/${sessionId}/activity/${nextActivityIdx}`
+        redirect: `/survey/${surveyId}/session/${sessionId}/activity/${nextActivityIdx}`,
       });
     }
-  }
+  };
 
   render() {
     // We put redirect paths in the state when its time to move to the next page.
     // If there is a redirect path in state, we render a rediect.
     // This is a bit of an oddness of react router.
     if (this.state.redirect) {
-      return <Redirect to={{
-        pathname: this.state.redirect,
-        state: { redirect: null }
-      }} push />;
+      return (
+        <Redirect
+          to={{
+            pathname: this.state.redirect,
+            state: { redirect: null },
+          }}
+          push
+        />
+      );
     }
 
     // If no survey is defined, we render nothing. This shouldn't happen.
@@ -161,17 +172,18 @@ class SurveyPage extends Component {
 
     // If the survey is complete, we show the end screen.
     if (this.state.surveyComplete) {
-      return(
-        <FormLayout>
-          <Header>Survey Complete</Header>
-          <PlainText>Thank you for participating!</PlainText>
-        </FormLayout>
+      return (
+        <Result
+          status="success"
+          title="Survey Complete"
+          subTitle="Thank you for participating!"
+        />
       );
     }
 
     const currentActivity = this.getActivity();
 
-    if (currentActivity.type === 'form') {
+    if (currentActivity.type === "form") {
       return (
         <FormLayout>
           <FormActivity
@@ -180,7 +192,7 @@ class SurveyPage extends Component {
           />
         </FormLayout>
       );
-    } else if (currentActivity.type === 'map') {
+    } else if (currentActivity.type === "map") {
       return (
         <MapLayout>
           <MapActivity
@@ -189,7 +201,7 @@ class SurveyPage extends Component {
           />
         </MapLayout>
       );
-    } else if (currentActivity.type === 'randomAudio') {
+    } else if (currentActivity.type === "randomAudio") {
       return (
         <FormLayout>
           <RandomAudioActivity
@@ -200,10 +212,11 @@ class SurveyPage extends Component {
       );
     } else {
       return (
-        <div>
-          <Header>Activity type not found</Header>
-          <PlainText>The specified activity type does not exist.</PlainText>
-        </div>
+        <Result
+          status="warning"
+          title="Activity type not found"
+          subTitle="The specified activity type does not exist."
+        />
       );
     }
   }

@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
+import { Typography } from 'antd';
 
-import { PlainText } from '../components/Typography';
+const { Text } = Typography;
 
 const QuestionBox = styled.div`
   display: grid;
@@ -12,17 +13,15 @@ const QuestionBox = styled.div`
   padding: 15px 25px;
 `;
 
-const QuestionText = styled(PlainText)`
-  margin: auto;
-`;
-
 class MapQuestion extends PureComponent {
   render(props) {
     return (
       <QuestionBox className={this.props.className}>
-        <QuestionText>
-          {this.props.text}
-        </QuestionText>
+        <Typography>
+          <Text>
+            {this.props.text}
+          </Text>
+        </Typography>
       </QuestionBox>
     );
   }

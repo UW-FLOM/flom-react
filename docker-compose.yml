@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  db:
+    container_name: flom-react_prod_db
+    image: library/postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: flom
+  server:
+    container_name: flom-react_prod_server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+  client:
+    container_name: flom-react_prod_client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+      - server

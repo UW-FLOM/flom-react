@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { get, reduce } from 'lodash';
-import { Button } from 'react-bootstrap';
+import { Button, Typography } from 'antd';
 
-import { Header, PlainText } from '../components/Typography';
 import FormInputRenderer from '../components/FormInputRenderer';
 import { idFromString } from '../util';
+
+const { Title, Paragraph } = Typography;
 
 const FormLayout = styled.div`
   margin: auto;
   width: 900px;
   padding: 0px 15px;
   height: 100%;
-`;
-
-const IntroText = styled(PlainText)`
-  margin-left: 0px;
-`;
-
-const SubmitButton = styled(Button)`
-  margin: auto;
 `;
 
 class FormActivity extends Component {
@@ -66,21 +59,21 @@ class FormActivity extends Component {
 
     return (
       <FormLayout>
-        <Header>{this.props.activity.title}</Header>
-        <IntroText>
+        <Title>{this.props.activity.title}</Title>
+        <Paragraph>
           {this.props.activity.helpText}
-        </IntroText>
+        </Paragraph>
         <FormInputRenderer
           questions={this.props.activity.questions}
           onValueChange={this.handleValueUpdate}
           values={this.state.questions}
         />
-        <SubmitButton
-          variant="primary"
+        <Button
+          type="primary"
           onClick={() => this.props.onSubmit(this.state.questions)}
         >
           Submit
-        </SubmitButton>
+        </Button>
       </FormLayout>
     );
   }

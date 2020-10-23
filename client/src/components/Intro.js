@@ -1,12 +1,9 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
+import { Button, Typography } from 'antd';
+import '../App.css';
 
-import { Header, PlainText } from '../components/Typography';
-
-const IntroText = styled(PlainText)`
-  margin-left: 10px;
-`;
+const { Title, Paragraph } = Typography;
 
 const ConsentButton = styled(Button)`
   margin: auto;
@@ -15,15 +12,15 @@ const ConsentButton = styled(Button)`
 class Intro extends PureComponent {
   render() {
     return (
-      <div>
-        <Header>{this.props.title}</Header>
-        <IntroText>
+      <Typography>
+        <Title>{this.props.title}</Title>
+        <Paragraph>
           {this.props.intro}
-        </IntroText>
-        <ConsentButton onClick={this.props.onBeginClick} variant="primary">
+        </Paragraph>
+        <ConsentButton onClick={this.props.onBeginClick} type="primary">
           {this.props.startButtonText || "Begin"}
         </ConsentButton>
-      </div>
+      </Typography>
     );
   }
 }

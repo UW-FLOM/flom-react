@@ -1,0 +1,15 @@
+FROM node:12-alpine as build
+
+EXPOSE 3001
+
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+
+RUN yarn config set ignore-engines true
+
+RUN yarn install
+
+COPY . ./
+
+CMD ["yarn", "start:dev"]
