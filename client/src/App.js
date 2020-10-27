@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import SurveyListPage from './pages/SurveyListPage';
 import SurveyPage from './pages/SurveyPage';
+import Survey from './components/Survey';
 
 // This component handles routing. Rendering the page specified
 // for each URL listed in the Switch below.
@@ -17,6 +18,7 @@ class App extends Component {
           <Route path="/survey/:surveyId/session/:sessionId" component={SurveyPage}/>
           <Route path="/survey/:surveyId" component={SurveyPage}/>
           <Route path="/survey" component={HomePage}/>
+          <Route path="/survey-beta/:surveyId" component={Survey}/>
         </Switch>
       </div>
     );

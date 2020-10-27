@@ -2,24 +2,23 @@
   "scripts": {
     "setup": "yarn && cd client && yarn && cd ../server && yarn",
     "prod:setup": "yarn setup && yarn prod:start",
-    "prod:start": "docker-compose build && docker-compose up -d",
+    "prod:start": "docker-compose build && yarn prod:resume",
     "prod:resume": "docker-compose up -d",
     "prod:stop": "docker-compose stop",
     "prod:destroy": "docker-compose down -v",
     "dev:setup": "yarn setup && yarn dev:start",
-    "dev:start": "docker-compose -f docker-compose.dev.yml build && docker-compose -f docker-compose.dev.yml up -d",
-    "dev:resume": "docker-compose -f docker-compose.dev.yml up -d",
-    "dev:stop": "docker-compose -f docker-compose.dev.yml stop",
-    "dev:destroy": "docker-compose -f docker-compose.dev.yml down -v"
+    "dev:start": "docker-compose -f docker-compose.dev.yml build && yarn dev:resume",
+    "dev:resume": "docker-compose -f docker-compose.dev.yml -p flom-react_dev up -d",
+    "dev:stop": "docker-compose -f docker-compose.dev.yml -p flom-react_dev stop",
+    "dev:destroy": "docker-compose -f docker-compose.dev.yml -p flom-react_dev down -v"
   },
-  "dependencies": {},
   "license": "UNLICENSED",
   "devDependencies": {
-    "eslint": "^7.11.0",
+    "eslint": "^7.12.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.21.4",
-    "eslint-plugin-react-hooks": "^4.1.2"
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0"
   }
 }

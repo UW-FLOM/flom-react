@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "UNLICENSED",
   "private": true,
-  "proxy": "http://server_dev:3001/",
+  "proxy": "http://server:3001/",
   "dependencies": {
     "antd": "^4.7.2",
     "babel-polyfill": "^6.26.0",
