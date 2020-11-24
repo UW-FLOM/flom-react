@@ -7,7 +7,7 @@ class StepsRender extends PureComponent {
     return (
         <Steps current={this.props.current}>
         {this.props.steps.map(item => (
-          <Step title={item.title} />
+          <Step key={item.title} title={item.title} />
         ))}
       </Steps>
     );

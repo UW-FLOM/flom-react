@@ -8,6 +8,7 @@ import Sound from 'react-sound';
 import FormInputRenderer from '../components/FormInputRenderer';
 import { FaPlayCircle } from 'react-icons/fa';
 import { PlainText } from '../components/Typography';
+import AudioButton from '../components/AudioButton';
 import { idFromString } from '../util';
 
 // TODO: Clearly these are hard-coded. They should be loaded from the server
@@ -160,6 +161,7 @@ class RandomAudioActivity extends Component {
         >
           <PlayIcon/>
         </PlayButton>
+        <AudioButton src={audioMap[this.getCurrentAudioFileName()]}/>
         <Sound
           url={audioMap[this.getCurrentAudioFileName()]}
           playStatus={this.state.audioState}

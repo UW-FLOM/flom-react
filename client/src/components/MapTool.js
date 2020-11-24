@@ -14,7 +14,7 @@ export const polygonFromLatLngs = (latLngs) => {
     type: 'polygon',
     geometry: map(latLngs, (shape) => {
       return map(shape, (point) => {
-        return[point.lat, point.lng];
+        return [point.lat, point.lng];
       });
     })
   };
@@ -43,8 +43,8 @@ class MapTool extends Component {
     this.map.removeLayer(this.freeDraw);
   }
 
-  handleFeatureDrawn(event){
-    if (event.eventType !== 'clear'){
+  handleFeatureDrawn(event) {
+    if (event.eventType !== 'clear') {
       this.props.onFeatureDrawn(polygonFromLatLngs(event.latLngs));
       this.freeDraw.clear();
     }
@@ -54,49 +54,46 @@ class MapTool extends Component {
     const position = [this.state.lat, this.state.lng];
 
     return (
-      <div>
-        <Map
-          style={{
-            height: '100%',
-            width: '100%'
-          }}
-          center={position}
-          zoom={this.state.zoom}
-          ref={(m) => { this.leafletMap = m; }}>
-          <TileLayer
-            attribution={TILE_ATTRIBUTION}
-            url={TILE_URL}
-          />
-          {
-            map(this.props.polygons, (polygon, idx) =>{
-              return(
-                <Polygon
-                  key={'poly' + idx}
-                  color="#b1ef8d"
-                  positions={polygon.polygon}
-                />
-              );
-            })
-          }
+      <Map
+        style={{
+          height: '100%',
+          width: '100%'
+        }}
+        center={position}
+        zoom={this.state.zoom}
+        ref={(m) => { this.leafletMap = m; }}>
+        <TileLayer
+          attribution={TILE_ATTRIBUTION}
+          url={TILE_URL}
+        />
+        {
+          map(this.props.polygons, (polygon, idx) => {
+            return (
+              <Polygon
+                key={'poly' + idx}
+                color="#b1ef8d"
+                positions={polygon.geometry}
+              />
+            );
+          })
+        }
 
-          {
-            map(this.props.markers, (marker, idx) => {
-              return (
-                <Marker key={idx} position={[marker.lat, marker.lng]}>
-                  <Popup>
-                    <Typography>
-                      <Text>
-                        {marker.lat}, {marker.lng}
-                      </Text>
-                    </Typography>
-                  </Popup>
-                </Marker>
-              );
-            })
-          }
-        </Map>
-
-      </div>
+        {
+          map(this.props.markers, (marker, idx) => {
+            return (
+              <Marker key={idx} position={[marker.lat, marker.lng]}>
+                <Popup>
+                  <Typography>
+                    <Text>
+                      {marker.lat}, {marker.lng}
+                    </Text>
+                  </Typography>
+                </Popup>
+              </Marker>
+            );
+          })
+        }
+      </Map>
     );
   }
 }

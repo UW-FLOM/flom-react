@@ -30,6 +30,14 @@ export const getSurveyDefinitions = async (args) => {
   return body;
 };
 
+export const getSurveyDefinition = async (args) => {
+  const response = await fetch('/api/surveys');
+  const body = await response.json();
+  if (response.status !== 200) throw Error(body.message);
+
+  return body;
+};
+
 export const createSession = async (args) => {
   const options = {
     method: 'POST',

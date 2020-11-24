@@ -9,37 +9,64 @@
       "type": "form",
       "questions": [
         {
-          "question": "How old are you?",
-          "type": "text"
+          "title": "How old are you?",
+          "type": "text",
+          "required": "true",
+          "id":"age"
         },
         {
-          "question": "What is the highest level of school you have completed?",
+          "title": "What is the highest level of school you have completed?",
+          "id": "education_degree",
           "type": "select",
           "options": [
-            "None",
-            "Elementary school",
-            "High school",
-            "Associate's degree",
-            "Bachelor's degree",
-            "Master's degree or more"
+            {
+              "id": "elementary",
+              "text": "Elementary school"
+            }, {
+              "id": "high",
+              "text": "High school"
+            }, {
+              "id": "associate",
+              "text": "Associate's degree"
+            }, {
+              "id": "bachelor",
+              "text": "Bachelor's degree"
+            }, {
+              "id": "master",
+              "text": "Master's degree or more"
+            }
           ]
+        },
+        {
+          "title": "Rating question example",
+          "type": "rate",
+          "id": "rating",
+          "desc": [
+            "terrible", 
+            "bad", 
+            "normal", 
+            "good", 
+            "wonderful"]
         }
       ]
     },
     {
       "title": "Practice",
       "helpText": "We will draw some areas on the map.",
+      "id": "practice",
       "type": "map",
       "center": [38.678052, -96.273380],
       "zoomLevel": 4,
       "questions": [
         {
-          "question": "Draw New England",
-          "type": "area"
+          "title": "Draw New England",
+          "type": "area",
+          "id": "new_england"
         },
         {
-          "question": "Draw the South",
-          "type": "area"
+          "title": "Draw the South",
+          "type": "area",
+          "id": "south"
         }
       ]
     }

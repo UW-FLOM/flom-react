@@ -1,39 +1,21 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Button, Typography } from 'antd';
+import { Button, Typography, Layout } from 'antd';
 import { map, reduce, compact, flatten, each } from 'lodash';
 import  geojson from 'geojson';
 
 import MapTool from '../components/MapTool';
 import MapQuestion from '../components/MapQuestion';
 
+const { Sider, Content } = Layout;
+
 const { Title, Paragraph } = Typography;
-
-const ActivityContainer = styled.div`
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  width: 100vw;
-  height: 100vh;
-`;
-
-const SideBar = styled.div`
-  padding: 15px;
-  border-right: 1px solid #ccc;
-`;
 
 const SideBarQuestion = styled(Paragraph)`
   background-color: ${props => props.active ? '#a1d6fc': null};
   cursor: ${props => props.active ? null: 'pointer'};
   padding: 10px;
   border-radius: 4px;
-`;
-
-const MapQuestionBox = styled(MapQuestion)`
-  position: absolute;
-  top: 10px;
-  left: 500px;
-  right: 200px;
-  z-index: 10000;
 `;
 
 export const featureFromGeometry = (geometry) => {
@@ -45,35 +27,21 @@ export const featureFromGeometry = (geometry) => {
   return {};
 };
 
-class MapActivity extends Component {
+class MapPage extends Component {
 
-  state = {
-    // TODO: Abstract this out of activities
-    // Use the list of input questions to set state up
-    // As a dictionary of qiestionId: question data
-    questions: reduce(this.props.activity.questions, (result, value, key) => {
-      const questionData = {
-        type: value.type,
-        indexInActivity: key
-      };
-      const questionId = value.question.id;
-      return {
-        ...result,
-        [questionId]: questionData
-      };
-    },{}),
-    // Activity start on the first question, incomplete
-    questionIndex: 0,
-    activityComplete: false
+  constructor(prop) {
+    super(prop);
+    console.log(this.props.activity.questions);
+    this.state = {
+      questionIndex: 0,
+      activityComplete: false,
+      gisDisplay: {}
+    }
   }
 
   // Gets the raw data for the current question, along with its id
   getCurrentQuestionData(){
-    const questionPropData = this.props.activity.questions[this.state.questionIndex];
-    return {
-      ...questionPropData,
-      questionId: questionPropData.question.id
-    };
+    return this.props.activity.questions[this.state.questionIndex];
   }
 
   setActiveQuestion(index) {
@@ -99,20 +67,12 @@ class MapActivity extends Component {
 
   onFeatureDrawn = (featureGeometry) => {
     const questionData = this.getCurrentQuestionData();
-    const questionId = questionData.questionId;
 
-    // Add the response to the current question to the state
-    this.setState((state) => {
-      return {
-        questions: {
-          ...state.questions,
-          [questionId]: {
-            ...state.questions[questionId],
-            response: [featureFromGeometry(featureGeometry)]
-          }
-        },
-      };
-    });
+    this.props.onUpdate(questionData.id, featureFromGeometry(featureGeometry));
+    
+    this.state.gisDisplay[questionData.id] = featureGeometry;
+
+    console.log(this.state.gisDisplay);
 
     // Move to the next question
     this.nextQuestion();
@@ -143,15 +103,21 @@ class MapActivity extends Component {
       activity
     } = this.props;
 
-    // Polygons to pass down to the map tool
-    const existingPolygons = flatten(compact(map(this.state.questions, 'response')));
-
-    console.log(existingPolygons);
 
     return (
-      <React.Fragment>
-        <ActivityContainer>
-          <SideBar>
+        <Layout
+          style={{
+            height: '100%',
+            background: 'none',
+          }}
+        >
+          <Sider
+            style={{
+              background: 'none',
+              padding: '0 20px',
+            }}
+            width='400'
+          >
             <Typography>
               <Title>{activity.title}</Title>
               <Paragraph>
@@ -166,7 +132,7 @@ class MapActivity extends Component {
                     active={idx === this.state.questionIndex}
                     onClick={() => this.handleQuestionClick(idx)}
                   >
-                    {question.question}
+                    {question.title}
                   </SideBarQuestion>
                 );
               })
@@ -177,18 +143,23 @@ class MapActivity extends Component {
             >
               Submit
             </Button>
-          </SideBar>
-          <MapTool
-            center={activity.center}
-            zoomLevel={activity.zoomLevel}
-            onFeatureDrawn={this.onFeatureDrawn}
-            polygons={existingPolygons}
-          />
-        </ActivityContainer>
-        <MapQuestionBox text={this.getCurrentQuestionData().question}></MapQuestionBox>
-      </React.Fragment>
+          </Sider>
+          <Content
+            style={{
+              background: 'none',
+              height: '100%',
+            }}
+          >
+            <MapTool
+              center={activity.center}
+              zoomLevel={activity.zoomLevel}
+              onFeatureDrawn={this.onFeatureDrawn}
+              polygons={this.state.gisDisplay}
+            />
+          </Content>
+        </Layout>
     );
   }
 }
 
-export default MapActivity;
+export default MapPage;
