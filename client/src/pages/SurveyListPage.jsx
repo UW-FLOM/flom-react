@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { map } from 'lodash';
 import { getSurveyDefinitions } from '../services/api';
-
-import { Layout } from '../components/Layout';
-
-import { Header } from '../components/Typography';
+import PageRender from '../components/PageRender';
 
 class SurveyListPage extends Component {
   state = {
@@ -21,9 +18,11 @@ class SurveyListPage extends Component {
 
   render() {
     return (
-      <Layout>
-        <Header>Available Surveys</Header>
-
+      <PageRender
+        steps={false}
+        title={"Available Surveys"}
+        intro={"Below are all available survey for development testing."}
+      >
         <ul>
           {
             // Render a list of links
@@ -36,7 +35,7 @@ class SurveyListPage extends Component {
             })
           }
         </ul>
-      </Layout>
+      </PageRender>
     );
   }
 }

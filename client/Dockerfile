@@ -14,7 +14,7 @@ RUN cp -R node_modules node_modules_production
 
 RUN yarn config set ignore-engines true
 
-RUN yarn install
+RUN yarn install --network-timeout 1000000
 
 COPY . /app
 
