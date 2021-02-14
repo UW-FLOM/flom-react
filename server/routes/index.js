@@ -1,10 +1,8 @@
 // Database controllers
-const sessionController = require('../controllers').session;
-const activitiesController = require('../controllers').activities;
-const questionsController = require('../controllers').questions;
+const submissionController = require('../controllers').submission;
+const surveyController = require('../controllers').survey;
 
 // Asset controllers
-const surveysController = require('../controllers').surveys;
 
 module.exports = (app) => {
   // Responds from the server. This is for debugging.
@@ -13,6 +11,12 @@ module.exports = (app) => {
     res.json(req.body);
   });
 
-  // Sends available survey definitions
-  app.get('/api/surveys', surveysController.get);
+  // Sends list of available survey
+  app.get('/api/survey', surveyController.list);
+
+  // Sends the content of a specific survey
+  app.get('/api/survey/:surveyID', surveyController.retrieve);
+
+  // Store user response
+  app.post('/api/submission/:surveyID', submissionController.create);
 };

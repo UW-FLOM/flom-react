@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Typography, Layout } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Typography, Layout } from 'antd';
 
 import MapTool from '../components/MapTool';
 import MapQuestion from '../components/MapQuestion';
@@ -24,96 +23,64 @@ class MapPage extends Component {
   constructor(prop) {
     super(prop);
 
-    var storedGisDisplay = [];
-    var counter = 0;
-    var freehand = [{"title": "Untitled", "id": counter}];
+    const storedGisDisplay = [];
 
     this.state = {
-      questionIndex: 0,
-      activityComplete: true,
+      questionID: this.props.activity.id,
       gisDisplay: storedGisDisplay,
       mode: "NONE",
-      freehand: freehand,
-      freehandCounter: counter,
     };
 
     this.fireDraw = this.fireDraw.bind(this);
-    this.addMapQuestion = this.addMapQuestion.bind(this);
-    this.handleQuestionClick = this.handleQuestionClick.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.updateQuestionID = this.updateQuestionID.bind(this);
+    this.changeGIS = this.changeGIS.bind(this);
   }
 
 
   componentDidUpdate(prevProps) {
     if (prevProps.activity !== this.props.activity) {
-      const counter = 0;
-      var freehand = [{"title": "Untitled", "id": counter}];
-      if (this.props.activity === 'freedraw') {
+      this.setState({
+        questionID: 0,
+        mode: "NONE",
+      });
+      if (this.props.activity.function !== 'additional') {
         this.setState({
-          freehand: freehand,
-          freehandCounter: counter,
           gisDisplay: [],
-          questionIndex: 0,
         });
       }
-      this.setState({
-        gisDisplay: [],
-        questionIndex: 0,
-      });
     }
   }
 
-  // Gets the raw data for the current question, along with its id
-  getCurrentQuestionData() {
-    const questions = this.questionGenerator();
-    return questions[this.state.questionIndex];
-  }
-
-  setActiveQuestion(index) {
+  updateQuestionID(id) {
     this.setState({
-      questionIndex: index
+      questionID: id,
     });
   }
 
-  nextQuestion() {
-    const nextQuestionIndex = this.state.questionIndex + 1;
-    const activityComplete = nextQuestionIndex >= this.props.activity.questions.length;
-
-    if (activityComplete) {
-      this.setState({
-        activityComplete: true
-      });
-    } else {
-      this.setState({
-        questionIndex: nextQuestionIndex
-      });
-    }
+  changeGIS(gis) {
+    console.log(gis);
+    let gisDisplay = [];
+    gisDisplay[0] = gis;
+    console.log(gisDisplay);
+    this.setState({
+      gisDisplay: gisDisplay,
+    });
   }
 
   onFeatureDrawn = (featureGeometry) => {
-    const questionData = this.getCurrentQuestionData();
+    const id = this.state.questionID;
 
-    this.onChange(questionData.id, featureFromGeometry(featureGeometry));
+    this.props.onChange(id, featureFromGeometry(featureGeometry));
 
-    var gis = this.state.gisDisplay;
-    gis[questionData.id] = featureFromGeometry(featureGeometry);
+    let gis = this.state.gisDisplay;
+    gis[id] = featureFromGeometry(featureGeometry);
 
     this.setState({
       gisDisplay: gis,
       mode: "NONE",
     });
-  }
 
-  handleQuestionClick = activeKey => {
-    this.setState({
-      questionIndex: activeKey
-    });
-  }
-
-  onChange(questionID, response) {
-    let currentResponse = this.props.values[this.props.activity.id];
-    currentResponse[questionID] = response;
-    this.props.onChange(this.props.activity.id, currentResponse);
+    console.log(gis);
   }
 
   fireDraw() {
@@ -122,28 +89,13 @@ class MapPage extends Component {
     });
   }
 
-  addMapQuestion() {
-    var newCounter = this.state.freehandCounter + 1;
-
-    this.setState(state => ({
-      freehandCounter: newCounter,
-      freehand: [...state.freehand, {"title": "Untitled", "id": newCounter}]
-    }));
-  }
-
-  questionGenerator() {
-    if(this.props.activity.function === 'predefined') {
-      return this.props.activity.questions;
-    }
-    if(this.props.activity.function === 'freedraw') {
-      return this.state.freehand;
-    }
-  }
   render() {
 
     const {
       activity,
-      values
+      values,
+      mode,
+      onChange
     } = this.props;
 
     return (
@@ -168,37 +120,15 @@ class MapPage extends Component {
           </Typography>
           <MapQuestion
             key={activity.id}
-            questions={this.questionGenerator()}
+            activity={activity}
             fireDraw={this.fireDraw}
-            values={values[activity.id]}
-            onChange={this.onChange}
-            onClick={this.handleQuestionClick}
+            values={values}
+            mode={this.state.mode}
+            onChange={onChange}
+            updateQuestionID={this.updateQuestionID}
+            changeGIS={this.changeGIS}
+            onFinish={this.props.onFinish}
           />
-          {activity.function === 'freedraw' &&
-            <Button
-              block
-              type="dashed"
-              icon={<PlusOutlined />}
-              disabled={this.state.mode === "CREATE"}
-              style={{
-                marginTop: '10px'
-              }}
-              onClick={this.addMapQuestion}
-            >
-              Add Area
-            </Button>}
-
-          {this.state.activityComplete &&
-            <Button
-              type="primary"
-              onClick={this.props.onFinish}
-              style={{
-                marginTop: '10px'
-              }}
-            >
-              Submit
-            </Button>
-          }
         </Sider>
         <Content
           style={{

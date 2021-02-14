@@ -8,7 +8,13 @@ COPY package.json yarn.lock ./
 
 RUN yarn config set ignore-engines true
 
-RUN yarn install
+RUN yarn install --production
+
+RUN cp -R node_modules node_modules_production
+
+RUN yarn config set ignore-engines true
+
+RUN yarn install --network-timeout 1000000
 
 COPY . /app
 
@@ -20,7 +26,7 @@ COPY --from=builder /app/build /usr/share/nginx/html
 
 RUN rm /etc/nginx/conf.d/default.conf
 
-COPY nginx.conf /etc/nginx/conf.d
+COPY ../client/nginx.conf /etc/nginx/conf.d
 
 EXPOSE 80
 

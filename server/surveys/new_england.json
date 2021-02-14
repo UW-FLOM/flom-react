@@ -13,8 +13,7 @@
                     "title": "How old are you?",
                     "type": "num",
                     "required": "false",
-                    "id": "age",
-                    "min": "21"
+                    "id": "age"
                 },
                 {
                     "title": "What is the highest level of school you have completed?",
@@ -376,6 +375,12 @@
                             "required": "false",
                             "least": "terrible",
                             "best": "wonderful"
+                        },
+                        {
+                            "title": "One-line text question example",
+                            "type": "text",
+                            "id": "text",
+                            "required": "false"
                         }
                     ]
                 },
@@ -396,7 +401,40 @@
                 38.678052,
                 -96.273380
             ],
-            "zoomLevel": 4
+            "zoomLevel": 4,
+            "questions": [
+                {
+                    "title": "Rating question example",
+                    "type": "rate",
+                    "id": "rating",
+                    "required": "false",
+                    "least": "terrible",
+                    "best": "wonderful"
+                }
+            ]
+        },
+        {
+            "title": "Additional Questions",
+            "helpText": "Ask additional questions based on user previous drawn area",
+            "id": "additional",
+            "type": "map",
+            "function": "additional",
+            "center": [
+                38.678052,
+                -96.273380
+            ],
+            "zoomLevel": 4,
+            "basedOn": "freehand",
+            "questions": [
+                {
+                    "title": "Rating question example",
+                    "type": "rate",
+                    "id": "rating",
+                    "required": "false",
+                    "least": "terrible",
+                    "best": "wonderful"
+                }
+            ]
         }
     ]
 }

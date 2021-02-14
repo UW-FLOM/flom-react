@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { find } from 'lodash';
 import { Result } from 'antd';
 
-import { getSurveyDefinitions } from '../services/api';
+import { submitAnswer, getSurvey } from '../services/api';
 import MapPage from './MapPage';
 import PageRender from '../components/PageRender';
 import FormRender from '../components/FormRender';
@@ -34,9 +34,10 @@ class Survey extends Component {
     */
 
     this.state = {
-      surveyDefinitions: storedSurveyDefinitions,
+      surveyDefinition: storedSurveyDefinitions,
       currentPage: storedCurrentPage,
       response: storedResponse,
+      isFetching: true,
     };
 
     this.updateResponse = this.updateResponse.bind(this);
@@ -46,22 +47,18 @@ class Survey extends Component {
 
   componentDidMount() {
     const self = this;
-    getSurveyDefinitions()
+    getSurvey(this.props.match.params.surveyId)
       .then((res) => {
         self.setState({
-          surveyDefinitions: res,
+          surveyDefinition: res.content,
+          isFetching: false,
         });
-        localStorage.setItem('surveyDefinitions', JSON.stringify(res));
       })
       .catch((err) => console.log(err));
   }
 
-  // Get the current survey based on URL params
   getSurvey() {
-    return find(this.state.surveyDefinitions, [
-      'id',
-      this.props.match.params.surveyId,
-    ]);
+    return this.state.surveyDefinition;
   }
 
   getSurveyId() {
@@ -80,8 +77,9 @@ class Survey extends Component {
   }
 
   updateResponse(questionID, response) {
+    const activityID = this.getActivity().id;
     const currentResponse = this.state.response;
-    currentResponse[questionID] = response;
+    currentResponse[activityID][questionID] = response;
     this.setState({ response: currentResponse });
     console.log(this.state.response);
   }
@@ -89,53 +87,29 @@ class Survey extends Component {
   getResponse(questionID) {
     const { response } = this.state;
     if (!response[questionID]) {
-      this.updateResponse(questionID, {});
+      const currentResponse = this.state.response;
+      currentResponse[questionID] = {};
+      this.setState({ response: currentResponse });
     }
     return response;
   }
 
   render() {
-    const surveyDefinition = this.getSurvey();
-    const { currentPage, response } = this.state;
-    if (!surveyDefinition) {
+    const { currentPage, response, isFetching } = this.state;
+    if (isFetching) {
       return null;
     }
     if (currentPage === this.getSurvey().activities.length) {
       localStorage.clear();
+      submitAnswer(this.getSurveyId(), this.state.response);
       return (
         <Result
           status="success"
           title="Survey Complete"
           subTitle="Thank you for participating!"
-        >
-          {JSON.stringify(response)}
-        </Result>
+        />
       );
     }
-
-    /*
-    if (!this.state.surveyStart) {
-      return (
-        <Layout
-          style={{
-            margin: 'auto',
-            width: '900px',
-            height: '100%',
-            background: 'none',
-          }}
-        >
-          <Content>
-            <Intro
-              title={surveyDefinition.title}
-              intro={surveyDefinition.intro}
-              startButtonText={surveyDefinition.startText}
-              onBeginClick={() => this.start()}
-            />
-          </Content>
-        </Layout>
-      );
-    }
-    */
 
     const currentActivity = this.getActivity();
     const currentResponse = this.getResponse(currentActivity.id);
