@@ -7,8 +7,6 @@ import  geojson from 'geojson';
 import MapTool from '../components/MapTool';
 import MapQuestion from '../components/MapQuestion';
 
-import { idFromString } from '../util';
-
 const { Title, Paragraph } = Typography;
 
 const ActivityContainer = styled.div`
@@ -58,7 +56,7 @@ class MapActivity extends Component {
         type: value.type,
         indexInActivity: key
       };
-      const questionId = idFromString(value.question);
+      const questionId = value.question.id;
       return {
         ...result,
         [questionId]: questionData
@@ -74,7 +72,7 @@ class MapActivity extends Component {
     const questionPropData = this.props.activity.questions[this.state.questionIndex];
     return {
       ...questionPropData,
-      questionId: idFromString(questionPropData.question)
+      questionId: questionPropData.question.id
     };
   }
 
@@ -147,6 +145,8 @@ class MapActivity extends Component {
 
     // Polygons to pass down to the map tool
     const existingPolygons = flatten(compact(map(this.state.questions, 'response')));
+
+    console.log(existingPolygons);
 
     return (
       <React.Fragment>

@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "license": "UNLICENSED",
   "scripts": {
-    "start:dev": "yarn db:migrate && nodemon server.js",
+    "start:dev": "yarn db:migrate && yarn db:seed & nodemon server.js",
     "start:prod": "NODE_ENV=production node ./server.js",
     "start": "NODE_ENV=production node ./server.js",
     "db:migrate": "./node_modules/.bin/sequelize db:migrate",
+    "db:seed": "./node_modules/.bin/sequelize db:seed:all",
     "db:create": "./node_modules/.bin/sequelize db:create flom",
     "db:setup": "yarn install && yarn db:create && yarn db:migrate"
   },

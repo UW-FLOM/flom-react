@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  db_dev:
+  db:
     container_name: flom-react_dev_db
     image: library/postgres
     ports:
@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: flom
-  server_dev:
+  server:
     container_name: flom-react_dev_server
     build:
       context: ./server
@@ -19,8 +19,8 @@ services:
     ports:
       - "3001:3001"
     depends_on:
-      - db_dev
-  client_dev:
+      - db
+  client:
     container_name: flom-react_dev_client
     stdin_open: true
     build:
@@ -32,5 +32,5 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db_dev
-      - server_dev
+      - db
+      - server

@@ -11,6 +11,8 @@ const port = process.env.PORT || 3001;
 app.use(logger('dev'));
 app.use(bodyParser.json());
 
+app.use('/static', express.static('public'));
+
 // Add route controllers. Most of the server logic is puleed in here
 require('./routes')(app);
 

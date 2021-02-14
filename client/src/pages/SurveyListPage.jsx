@@ -1,42 +1,41 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { map } from 'lodash';
-import { getSurveyDefinitions } from '../services/api';
-
-import { Layout } from '../components/Layout';
-
-import { Header } from '../components/Typography';
+import { getSurveyList } from '../services/api';
+import PageRender from '../components/PageRender';
 
 class SurveyListPage extends Component {
   state = {
-    surveyDefinitions: []
+    survey: []
   }
 
   // Get the survey definitions
   componentDidMount() {
-    getSurveyDefinitions()
-      .then(res => this.setState({ surveyDefinitions: res }))
+    getSurveyList()
+      .then(res => this.setState({ survey: res }))
       .catch(err => console.log(err));
   }
 
   render() {
     return (
-      <Layout>
-        <Header>Available Surveys</Header>
-
+      <PageRender
+        steps={false}
+        title={"Available Surveys"}
+        intro={"Below are all available survey for development testing."}
+      >
         <ul>
           {
             // Render a list of links
-            map(this.state.surveyDefinitions, (survey) => {
+            map(this.state.survey, (survey) => {
               return (
                 <li key={survey.id}>
-                  <Link to={`/survey/${survey.id}`}>{survey.title}</Link>
+                  <Link to={`/survey/${survey.id}`}>{survey.name}</Link>
                 </li>
               );
             })
           }
         </ul>
-      </Layout>
+      </PageRender>
     );
   }
 }

@@ -84,11 +84,11 @@ It is responsible for redirecting to the `SurveyPage` with the correct survey po
 >**What to do with HomePage.js**: Change this page to change the behavior of the app when a user goes to the root URL **`/`**. 
 
 ### SurveyListPage
-`SurveyListPage.js` lists the surveys available on the system as links. It ins generally most useful at development time for survey authors who want to work on multiple surveys at once. Once the app is deployed, generally there will only be one survey and this page will not be shown.
+`SurveyListPage.jsx` lists the surveys available on the system as links. It ins generally most useful at development time for survey authors who want to work on multiple surveys at once. Once the app is deployed, generally there will only be one survey and this page will not be shown.
 
 `SurveyListPage` calls the service `getSurveyDefinitions`, which returns the surveys from the server. It renders a link to each. 
 
->**What to do with SurveyListPage.js**: This page is probably mostly only used by app authors or flom developers.
+>**What to do with SurveyListPage.jsx**: This page is probably mostly only used by app authors or flom developers.
 If there was a reason to show multiple surveys to a user, this is the page to do it.
 It probably needs more explanation in that case. 
 

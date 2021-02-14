@@ -1,47 +1,440 @@
 {
-  "title" : "Six views of New England",
-  "intro" : "Welcome to the Six Views of New England Project! This project is being conducted by Nicole Chartier and Ben Jones from the University of Washington Linguistics Department. The goal of this study is to understand how people perceive the English spoken in New England. You are invited to participate in a research study conducted by graduate students in the Linguistics Department of the University of Washington.Before starting the study, we will ask you for some information about yourself. This information will not be used to identify you, and cannot be traced back to you once completed. It is intended to help us understand how different people view New England.    The study involves a brief training activity and completing three (3) tasks. Completing the entire study will take approximately 30 minutes.    In the training activity, we will ask you to draw and label three regions on a map of the United States. After this, we will ask you to draw and label areas on a map of New England. The areas you draw are meant to reflect where you believe people have a particular, identifiable way of speaking. The second task will ask you to rate the regions that you draw in the first task. The final task asks you to provide information about these regions that you feel represent the views of people you know.    Your participation is voluntary. If you decide to participate in this research study, you may quit at any time, and your respones will be deleted.    Your responses will be confidential, and we do not collect identifying information such as your name, email address, or IP address. You must be 18 years of age or older to participate.    If you have any questions about the study, you may contact the research team at Nicole or Ben.",
-  "startText": "Start the study",
-  "activities": [
-    {
-      "title": "About you",
-      "helpText": "Sample demographic form",
-      "type": "form",
-      "questions": [
+    "title": "Full Demo of Current Survey Format",
+    "intro": "This is the full demo of current survey format",
+    "startText": "Start Demo",
+    "activities": [
         {
-          "question": "How old are you?",
-          "type": "text"
+            "title": "About you",
+            "helpText": "Sample demographic form",
+            "type": "form",
+            "id": "about",
+            "questions": [
+                {
+                    "title": "How old are you?",
+                    "type": "num",
+                    "required": "false",
+                    "id": "age"
+                },
+                {
+                    "title": "What is the highest level of school you have completed?",
+                    "id": "education_degree",
+                    "type": "select",
+                    "required": "false",
+                    "options": [
+                        {
+                            "id": "elementary",
+                            "text": "Elementary school"
+                        },
+                        {
+                            "id": "high",
+                            "text": "High school"
+                        },
+                        {
+                            "id": "associate",
+                            "text": "Associate's degree"
+                        },
+                        {
+                            "id": "bachelor",
+                            "text": "Bachelor's degree"
+                        },
+                        {
+                            "id": "master",
+                            "text": "Master's degree or more"
+                        }
+                    ]
+                },
+                {
+                    "title": "Rating question example",
+                    "type": "rate",
+                    "id": "rating",
+                    "required": "false",
+                    "least": "terrible",
+                    "best": "wonderful"
+                },
+                {
+                    "title": "One-line text question example",
+                    "type": "text",
+                    "id": "text",
+                    "required": "false",
+                    "audio": "/static/audio/happy.mp3"
+                },
+                {
+                    "title": "Text Area question example",
+                    "type": "textarea",
+                    "required": "false",
+                    "id": "textarea"
+                },
+                {
+                    "title": "Sample select question example",
+                    "type": "select",
+                    "required": "false",
+                    "id": "state",
+                    "searchable": "true",
+                    "options": [
+                        {
+                            "text": "Alabama",
+                            "id": "AL"
+                        },
+                        {
+                            "text": "Alaska",
+                            "id": "AK"
+                        },
+                        {
+                            "text": "American Samoa",
+                            "id": "AS"
+                        },
+                        {
+                            "text": "Arizona",
+                            "id": "AZ"
+                        },
+                        {
+                            "text": "Arkansas",
+                            "id": "AR"
+                        },
+                        {
+                            "text": "California",
+                            "id": "CA"
+                        },
+                        {
+                            "text": "Colorado",
+                            "id": "CO"
+                        },
+                        {
+                            "text": "Connecticut",
+                            "id": "CT"
+                        },
+                        {
+                            "text": "Delaware",
+                            "id": "DE"
+                        },
+                        {
+                            "text": "District Of Columbia",
+                            "id": "DC"
+                        },
+                        {
+                            "text": "Federated States Of Micronesia",
+                            "id": "FM"
+                        },
+                        {
+                            "text": "Florida",
+                            "id": "FL"
+                        },
+                        {
+                            "text": "Georgia",
+                            "id": "GA"
+                        },
+                        {
+                            "text": "Guam",
+                            "id": "GU"
+                        },
+                        {
+                            "text": "Hawaii",
+                            "id": "HI"
+                        },
+                        {
+                            "text": "Idaho",
+                            "id": "ID"
+                        },
+                        {
+                            "text": "Illinois",
+                            "id": "IL"
+                        },
+                        {
+                            "text": "Indiana",
+                            "id": "IN"
+                        },
+                        {
+                            "text": "Iowa",
+                            "id": "IA"
+                        },
+                        {
+                            "text": "Kansas",
+                            "id": "KS"
+                        },
+                        {
+                            "text": "Kentucky",
+                            "id": "KY"
+                        },
+                        {
+                            "text": "Louisiana",
+                            "id": "LA"
+                        },
+                        {
+                            "text": "Maine",
+                            "id": "ME"
+                        },
+                        {
+                            "text": "Marshall Islands",
+                            "id": "MH"
+                        },
+                        {
+                            "text": "Maryland",
+                            "id": "MD"
+                        },
+                        {
+                            "text": "Massachusetts",
+                            "id": "MA"
+                        },
+                        {
+                            "text": "Michigan",
+                            "id": "MI"
+                        },
+                        {
+                            "text": "Minnesota",
+                            "id": "MN"
+                        },
+                        {
+                            "text": "Mississippi",
+                            "id": "MS"
+                        },
+                        {
+                            "text": "Missouri",
+                            "id": "MO"
+                        },
+                        {
+                            "text": "Montana",
+                            "id": "MT"
+                        },
+                        {
+                            "text": "Nebraska",
+                            "id": "NE"
+                        },
+                        {
+                            "text": "Nevada",
+                            "id": "NV"
+                        },
+                        {
+                            "text": "New Hampshire",
+                            "id": "NH"
+                        },
+                        {
+                            "text": "New Jersey",
+                            "id": "NJ"
+                        },
+                        {
+                            "text": "New Mexico",
+                            "id": "NM"
+                        },
+                        {
+                            "text": "New York",
+                            "id": "NY"
+                        },
+                        {
+                            "text": "North Carolina",
+                            "id": "NC"
+                        },
+                        {
+                            "text": "North Dakota",
+                            "id": "ND"
+                        },
+                        {
+                            "text": "Northern Mariana Islands",
+                            "id": "MP"
+                        },
+                        {
+                            "text": "Ohio",
+                            "id": "OH"
+                        },
+                        {
+                            "text": "Oklahoma",
+                            "id": "OK"
+                        },
+                        {
+                            "text": "Oregon",
+                            "id": "OR"
+                        },
+                        {
+                            "text": "Palau",
+                            "id": "PW"
+                        },
+                        {
+                            "text": "Pennsylvania",
+                            "id": "PA"
+                        },
+                        {
+                            "text": "Puerto Rico",
+                            "id": "PR"
+                        },
+                        {
+                            "text": "Rhode Island",
+                            "id": "RI"
+                        },
+                        {
+                            "text": "South Carolina",
+                            "id": "SC"
+                        },
+                        {
+                            "text": "South Dakota",
+                            "id": "SD"
+                        },
+                        {
+                            "text": "Tennessee",
+                            "id": "TN"
+                        },
+                        {
+                            "text": "Texas",
+                            "id": "TX"
+                        },
+                        {
+                            "text": "Utah",
+                            "id": "UT"
+                        },
+                        {
+                            "text": "Vermont",
+                            "id": "VT"
+                        },
+                        {
+                            "text": "Virgin Islands",
+                            "id": "VI"
+                        },
+                        {
+                            "text": "Virginia",
+                            "id": "VA"
+                        },
+                        {
+                            "text": "Washington",
+                            "id": "WA"
+                        },
+                        {
+                            "text": "West Virginia",
+                            "id": "WV"
+                        },
+                        {
+                            "text": "Wisconsin",
+                            "id": "WI"
+                        },
+                        {
+                            "text": "Wyoming",
+                            "id": "WY"
+                        }
+                    ]
+                },
+                {
+                    "title": "Sample radio question",
+                    "id": "radio",
+                    "required": "false",
+                    "type": "radio",
+                    "options": [
+                        {
+                            "id": "apple",
+                            "text": "apple"
+                        },
+                        {
+                            "id": "pear",
+                            "text": "pear"
+                        },
+                        {
+                            "id": "orange",
+                            "text": "orange"
+                        }
+                    ]
+                },
+                {
+                    "title": "Sample checkbox question",
+                    "id": "checkbox",
+                    "required": "false",
+                    "type": "checkbox",
+                    "options": [
+                        {
+                            "value": "apple",
+                            "label": "apple"
+                        },
+                        {
+                            "value": "pear",
+                            "label": "pear"
+                        },
+                        {
+                            "value": "orange",
+                            "label": "orange"
+                        }
+                    ]
+                }
+            ]
         },
         {
-          "question": "What is the highest level of school you have completed?",
-          "type": "select",
-          "options": [
-            "None",
-            "Elementary school",
-            "High school",
-            "Associate's degree",
-            "Bachelor's degree",
-            "Master's degree or more"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Practice",
-      "helpText": "We will draw some areas on the map.",
-      "type": "map",
-      "center": [38.678052, -96.273380],
-      "zoomLevel": 4,
-      "questions": [
-        {
-          "question": "Draw New England",
-          "type": "area"
+            "title": "Defined Draw",
+            "helpText": "We will draw some areas on the map.",
+            "id": "defined",
+            "type": "map",
+            "function": "predefined",
+            "center": [
+                38.678052,
+                -96.273380
+            ],
+            "zoomLevel": 4,
+            "questions": [
+                {
+                    "title": "Draw New England",
+                    "type": "area",
+                    "id": "new_england",
+                    "questions": [
+                        {
+                            "title": "Rating question example",
+                            "type": "rate",
+                            "id": "rating",
+                            "required": "false",
+                            "least": "terrible",
+                            "best": "wonderful"
+                        },
+                        {
+                            "title": "One-line text question example",
+                            "type": "text",
+                            "id": "text",
+                            "required": "false"
+                        }
+                    ]
+                },
+                {
+                    "title": "Draw the South",
+                    "type": "area",
+                    "id": "south"
+                }
+            ]
         },
         {
-          "question": "Draw the South",
-          "type": "area"
+            "title": "Freehand Draw",
+            "helpText": "User can draw freely",
+            "id": "freehand",
+            "type": "map",
+            "function": "freedraw",
+            "center": [
+                38.678052,
+                -96.273380
+            ],
+            "zoomLevel": 4,
+            "questions": [
+                {
+                    "title": "Rating question example",
+                    "type": "rate",
+                    "id": "rating",
+                    "required": "false",
+                    "least": "terrible",
+                    "best": "wonderful"
+                }
+            ]
+        },
+        {
+            "title": "Additional Questions",
+            "helpText": "Ask additional questions based on user previous drawn area",
+            "id": "additional",
+            "type": "map",
+            "function": "additional",
+            "center": [
+                38.678052,
+                -96.273380
+            ],
+            "zoomLevel": 4,
+            "basedOn": "freehand",
+            "questions": [
+                {
+                    "title": "Rating question example",
+                    "type": "rate",
+                    "id": "rating",
+                    "required": "false",
+                    "least": "terrible",
+                    "best": "wonderful"
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
