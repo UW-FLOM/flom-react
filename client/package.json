@@ -5,22 +5,17 @@
   "private": true,
   "proxy": "http://server:3001/",
   "dependencies": {
-    "antd": "4.8.5",
-    "body-scroll-lock": "^3.1.5",
-    "geojson": "^0.5.0",
-    "leaflet": "^1.3.1",
-    "leaflet-freedraw": "^2.9.0",
-    "lodash": "^4.17.10",
-    "ramda": "^0.27.1",
-    "react": "16.14.0",
-    "react-dom": "^16.4.1",
-    "react-icons": "^3.3.0",
-    "react-leaflet": "^2.7.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.0",
-    "react-sound": "^1.2.0",
-    "styled-components": "^5",
-    "typescript": "^4.0.3"
+    "antd": "4.12.3",
+    "geojson": "0.5.0",
+    "leaflet": "1.7.1",
+    "leaflet-freedraw": "2.13.3",
+    "lodash": "4.17.20",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-leaflet": "2.8.0",
+    "react-router-dom": "5.2.0",
+    "react-scripts": "4.0.2",
+    "typescript": "4.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,9 +27,9 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "defaults",
+      "not IE 11",
+      "maintained node versions"
     ],
     "development": [
       "last 1 chrome version",
