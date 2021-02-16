@@ -7,13 +7,16 @@
     "port": "5432",
     "logging": true,
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": 0
   },
   "production": {
     "username": "postgres",
     "password": "mypassword",
     "database": "flom",
     "host": "db",
-    "dialect": "postgres"
+    "port": "5432",
+    "logging": true,
+    "dialect": "postgres",
+    "operatorsAliases": 0
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { map, get } from 'lodash';
 import {
-  Map, TileLayer, Marker, Popup, Polygon,
+  TileLayer, Marker, Popup, Polygon, Map,
 } from 'react-leaflet';
 import FreeDraw, { CREATE, NONE } from 'leaflet-freedraw';
 import { Typography } from 'antd';
