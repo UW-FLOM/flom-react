@@ -26,6 +26,4 @@ COPY . ./
 
 USER node
 
-RUN yarn db:migrate
-
 CMD ["yarn", "start:prod"]
