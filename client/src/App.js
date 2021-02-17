@@ -10,7 +10,7 @@ import './App.css';
 export default function App() {
   const { height, width } = useWindowDimensions();
   return (
-    <div className="App" style={{ width, height }}>
+    <div className="App" style={{ width }}>
       <Switch>
         <Route exact path="/" component={SurveyListPage} />
         <Route path="/survey/:surveyId" component={Survey} />

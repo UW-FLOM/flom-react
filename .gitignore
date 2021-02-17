@@ -6,11 +6,17 @@
 # IntelliJ
 .idea/
 
+# VSCode
+.vscode/
+
 # testing
 /coverage
 
 # production
 build/
+
+# Database data
+data/
 
 # misc
 .DS_Store

@@ -8,6 +8,9 @@ services:
     environment:
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: flom
+    restart: always
+    volumes:
+      - ./data:/var/lib/postgresql/data
   server:
     container_name: flom-react_prod_server
     build:
@@ -17,6 +20,7 @@ services:
       - /app/node_modules
     ports:
       - "3001:3001"
+    restart: always
     depends_on:
       - db
   client:
@@ -26,6 +30,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - /app/node_modules
+    restart: always
     ports:
       - "8080:80"
     depends_on:

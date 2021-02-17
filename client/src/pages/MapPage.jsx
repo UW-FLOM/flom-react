@@ -109,6 +109,7 @@ class MapPage extends Component {
           style={{
             background: 'none',
             padding: '0 20px',
+            overflow: 'auto',
           }}
           width='400'
         >
