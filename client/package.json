@@ -1,6 +1,6 @@
 {
   "name": "flom-react",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "license": "UNLICENSED",
   "private": true,
   "proxy": "http://server:3001/",
@@ -10,6 +10,7 @@
     "leaflet": "1.7.1",
     "leaflet-freedraw": "2.13.3",
     "lodash": "4.17.20",
+    "prop-types": "^15.7.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-leaflet": "2.8.0",

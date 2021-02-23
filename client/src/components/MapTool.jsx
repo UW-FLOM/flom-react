@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import { map, get } from 'lodash';
-import {
-  Map, TileLayer, Marker, Popup, Polygon,
-} from 'react-leaflet';
-import FreeDraw, { CREATE, NONE } from 'leaflet-freedraw';
-import { Typography } from 'antd';
+import {get, map} from 'lodash';
+import {Map, Marker, Polygon, Popup, TileLayer,} from 'react-leaflet';
+import FreeDraw, {CREATE, NONE} from 'leaflet-freedraw';
+import {Typography} from 'antd';
+import PropTypes from 'prop-types';
 
 const { Text } = Typography;
-const TILE_URL = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png';
-const TILE_ATTRIBUTION = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
 
 const freeDraw = new FreeDraw();
 
@@ -50,12 +47,13 @@ class MapTool extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.objects !== this.props.objects) {
-      this.setState({ objects: this.props.objects });
+    const { mode, objects } = this.props;
+    if (prevProps.objects !== objects) {
+      this.setState({ objects: objects });
     }
-    if (prevProps.mode !== this.props.mode) {
-      this.setState({ mode: this.props.mode });
-      this.changeMode(this.props.mode);
+    if (prevProps.mode !== mode) {
+      this.setState({ mode: mode });
+      this.changeMode(mode);
     }
   }
 
@@ -66,7 +64,8 @@ class MapTool extends Component {
   handleFeatureDrawn(event) {
     if (event.eventType !== 'clear') {
       if (event.latLngs !== undefined || event.latLngs.length !== 0) {
-        this.props.onFeatureDrawn(polygonFromLatLngs(event.latLngs));
+        const { onFeatureDrawn } = this.props;
+        onFeatureDrawn(polygonFromLatLngs(event.latLngs));
         freeDraw.clear();
       }
     }
@@ -82,25 +81,29 @@ class MapTool extends Component {
   }
 
   render() {
-    const position = [this.state.lat, this.state.lng];
+    const {
+      mode, lat, lng, zoom, width, height, objects,
+    } = this.state;
+    const position = [lat, lng];
+    const {tileURL, markers, tileAttribution} = this.props;
     return (
       <Map
         style={{
-          width: this.state.width,
-          height: this.state.height,
+          width,
+          height,
           touchAction: 'none',
         }}
         center={position}
-        zoom={this.state.zoom}
-        draggable={this.state.mode === 'NONE'}
+        zoom={zoom}
+        draggable={mode === 'NONE'}
         ref={(m) => { this.leafletMap = m; }}
       >
         <TileLayer
-          attribution={TILE_ATTRIBUTION}
-          url={TILE_URL}
+          attribution={tileAttribution}
+          url={tileURL}
         />
         {
-          map(this.state.objects, (object, idx) => (
+          map(objects, (object, idx) => (
             <Polygon
               key={idx}
               color="#b1ef8d"
@@ -110,7 +113,7 @@ class MapTool extends Component {
         }
 
         {
-          map(this.props.markers, (marker, idx) => (
+          map(markers, (marker, idx) => (
             <Marker key={idx} position={[marker.lat, marker.lng]}>
               <Popup>
                 <Typography>
@@ -128,5 +131,16 @@ class MapTool extends Component {
     );
   }
 }
+
+MapTool.propTypes = {
+  tileURL: PropTypes.string,
+  tileAttribution: PropTypes.string,
+  onFeatureDrawn: PropTypes.func.isRequired,
+};
+
+MapTool.defaultProps = {
+  tileURL: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}{r}.png',
+  tileAttribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+};
 
 export default MapTool;
