@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { find } from 'lodash';
-import { Result } from 'antd';
+import React, {Component} from 'react';
+import {Result} from 'antd';
 
-import { submitAnswer, getSurvey } from '../services/api';
+import {getSurvey, submitAnswer} from '../services/api';
 import MapPage from './MapPage';
 import PageRender from '../components/PageRender';
 import FormRender from '../components/FormRender';
+import IntroRender from '../components/IntroRender';
 
 class Survey extends Component {
   constructor(props) {
@@ -13,9 +13,7 @@ class Survey extends Component {
 
     const storedSurveyDefinitions = {};
     const storedCurrentPage = 0;
-    const storedSurveyStart = false;
     const storedResponse = {};
-    const storedSurveyID = this.props.match.params.surveyId;
 
     /*
     if(localStorage.getItem("surveyID") === storedSurveyID) {
@@ -38,11 +36,15 @@ class Survey extends Component {
       currentPage: storedCurrentPage,
       response: storedResponse,
       isFetching: true,
+      isComplete: false,
+      isStart: false,
+      surveyLength: 0,
     };
 
     this.updateResponse = this.updateResponse.bind(this);
     this.next = this.next.bind(this);
     this.getResponse = this.getResponse.bind(this);
+    this.start = this.start.bind(this);
   }
 
   componentDidMount() {
@@ -52,6 +54,7 @@ class Survey extends Component {
         self.setState({
           surveyDefinition: res.content,
           isFetching: false,
+          surveyLength: res.content.activities.length,
         });
       })
       .catch((err) => console.log(err));
@@ -68,12 +71,6 @@ class Survey extends Component {
   // Returns the current activity based on the index
   getActivity() {
     return this.getSurvey().activities[this.state.currentPage];
-  }
-
-  next() {
-    const currentPage = this.state.currentPage + 1;
-    this.setState({ currentPage });
-    localStorage.setItem('currentPage', currentPage);
   }
 
   updateResponse(questionID, response) {
@@ -94,14 +91,31 @@ class Survey extends Component {
     return response;
   }
 
+  next() {
+    const { currentPage: currentPage1 } = this.state;
+    const currentPage = currentPage1 + 1;
+    this.setState({ currentPage });
+    localStorage.setItem('currentPage', currentPage);
+  }
+
+  start() {
+    this.setState({ isStart: true });
+  }
+
   render() {
-    const { currentPage, response, isFetching } = this.state;
+    const { currentPage, isFetching, surveyLength, isStart, surveyDefinition } = this.state;
     if (isFetching) {
       return null;
     }
     if (currentPage === this.getSurvey().activities.length) {
       localStorage.clear();
-      submitAnswer(this.getSurveyId(), this.state.response);
+      submitAnswer(this.getSurveyId(), this.state.response)
+        .then(() => {
+          this.setState({
+            isComplete: true,
+          });
+        })
+        .catch((err) => console.log(err));
       return (
         <Result
           status="success"
@@ -111,26 +125,27 @@ class Survey extends Component {
       );
     }
 
-    const currentActivity = this.getActivity();
-    const currentResponse = this.getResponse(currentActivity.id);
-
-    if (currentActivity.type === 'intro') {
+    if (!isStart) {
       return (
-        <PageRender
-          title={currentActivity.title}
-          intro={currentActivity.intro}
-        >
-          <h1>Hello</h1>
-        </PageRender>
+        <IntroRender
+          title={surveyDefinition.title}
+          intro={surveyDefinition.intro}
+          onFinish={this.start}
+        />
       );
     }
+
+    const currentActivity = this.getActivity();
+    const currentResponse = this.getResponse(currentActivity.id);
 
     if (currentActivity.type === 'form') {
       return (
         <PageRender
-          currentPage={this.state.currentPage}
-          activities={this.getSurvey().activities}
-          steps
+          current={currentPage + 1}
+          length={surveyLength}
+          title={currentActivity.title}
+          intro={currentActivity.intro}
+          progress
         >
           <FormRender
             questions={currentActivity.questions}
@@ -143,20 +158,16 @@ class Survey extends Component {
     }
     if (currentActivity.type === 'map') {
       return (
-        <PageRender
-          currentPage={this.state.currentPage}
-          activities={this.getSurvey().activities}
-          steps
-          type="map"
-        >
-          <MapPage
+        <MapPage
             key="MapPage"
             activity={currentActivity}
             onChange={this.updateResponse}
             onFinish={this.next}
             values={currentResponse}
+            current={currentPage + 1}
+            length={surveyLength}
+            progress
           />
-        </PageRender>
       );
     }
     return (

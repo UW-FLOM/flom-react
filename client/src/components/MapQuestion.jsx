@@ -1,24 +1,9 @@
 import React, { Component } from 'react';
-import {
-  Row, Button, Card,
-} from 'antd';
+import { Button, Card, Row } from 'antd';
 import { EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { map } from 'lodash';
 
 import FormRender from './FormRender';
-
-function FormContent(props) {
-  return (
-    <>
-      <FormRender
-        questions={props.questions}
-        onChange={props.onChange}
-        values={props.values}
-        onFinish={props.onFinish}
-      />
-    </>
-  );
-}
 
 class QuestionPanel extends Component {
   constructor(prop) {
@@ -51,9 +36,12 @@ class QuestionPanel extends Component {
   }
 
   render() {
+    const {
+      noDraw, onFinish, values, question,
+    } = this.props;
     return (
       <>
-        {(!this.props.values[this.props.question.id] && !this.props.noDraw)
+        {(!values[question.id] && !noDraw)
         && (
           <Row justify="center">
             <Button type="primary" icon={<EditOutlined />} onClick={this.fireDraw}>
@@ -61,20 +49,20 @@ class QuestionPanel extends Component {
             </Button>
           </Row>
         )}
-        {((this.props.values[this.props.question.id] && this.props.question.questions)
-          || this.props.noDraw)
+        {((values[question.id] && question.questions)
+          || noDraw)
         && (
-          <FormContent
-            questions={this.props.question.questions}
-            values={this.props.values[this.props.question.id]}
+          <FormRender
+            questions={question.questions}
             onChange={this.onFormItemChange}
-            onFinish={this.props.onFinish}
+            values={values[question.id]}
+            onFinish={onFinish}
           />
         )}
-        {(this.props.values[this.props.question.id] && !this.props.question.questions)
+        {(values[question.id] && !question.questions)
         && (
           <Row justify="center">
-            <Button type="primary" onClick={this.props.onFinish}>
+            <Button type="primary" onClick={onFinish}>
               Next
             </Button>
           </Row>
@@ -153,16 +141,18 @@ class MapQuestion extends Component {
   }
 
   nextQuestion() {
-    const nextQuestionIndex = this.state.index + 1;
-    const activityComplete = nextQuestionIndex >= this.state.questions.length;
+    const { questions, index } = this.state;
+    const nextQuestionIndex = index + 1;
+    const activityComplete = nextQuestionIndex >= questions.length;
 
     if (activityComplete) {
-      if (this.props.activity.function === 'freedraw') {
+      const { activity, onFinish } = this.props;
+      if (activity.function === 'freedraw') {
         this.setState({
           activityComplete: true,
         });
       } else {
-        this.props.onFinish();
+        onFinish();
       }
     } else {
       this.setState({

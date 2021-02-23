@@ -13,7 +13,7 @@ export default function App() {
     <div className="App">
       <Switch>
         <Route exact path="/" component={SurveyListPage} />
-        <Route path="/survey/:surveyId" component={Survey} />
+        <Route exact path="/survey/:surveyId" component={Survey} />
       </Switch>
     </div>
   );

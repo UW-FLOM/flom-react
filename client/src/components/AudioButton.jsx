@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from 'antd';
 import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
 
-class AudioButton extends Component {
+export default class AudioButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,12 +13,6 @@ class AudioButton extends Component {
   }
 
   componentDidMount() {}
-
-  formatSecond(time) {
-    const second = Math.floor(time % 60);
-    let miniute = Math.floor(time / 60);
-    return `${miniute}:${second >= 10 ? second : `0${second}`}`;
-  }
 
   onCanPlay = () => {
     const { id } = this.props;
@@ -89,5 +83,3 @@ class AudioButton extends Component {
     );
   }
 }
-
-export default AudioButton;
