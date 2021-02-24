@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from 'antd';
 import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
 
-export default class AudioButton extends Component {
+class AudioButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,3 +83,5 @@ export default class AudioButton extends Component {
     );
   }
 }
+
+export default AudioButton;

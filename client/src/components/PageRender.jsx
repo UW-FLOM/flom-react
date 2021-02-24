@@ -5,7 +5,7 @@ import TitleRender from './TitleRender';
 
 const { Content } = Layout;
 
-export default function PageRender({
+function PageRender({
   length, children, current, intro, title,
 }) {
   PageRender.propTypes = {
@@ -40,3 +40,5 @@ export default function PageRender({
     </Layout>
   );
 }
+
+export default PageRender;

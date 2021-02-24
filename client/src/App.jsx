@@ -2,13 +2,11 @@ import React, { useState, useEffect, Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import SurveyListPage from './pages/SurveyListPage';
 import Survey from './pages/Survey';
-import useWindowDimensions from './useWindowDimensions';
 import './App.css';
 
 // This component handles routing. Rendering the page specified
 // for each URL listed in the Switch below.
-export default function App() {
-  const { height, width } = useWindowDimensions();
+function App() {
   return (
     <div className="App">
       <Switch>
@@ -18,3 +16,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;

@@ -56,6 +56,7 @@ class Survey extends Component {
           isFetching: false,
           surveyLength: res.content.activities.length,
         });
+        document.title = res.content.title;
       })
       .catch((err) => console.log(err));
   }

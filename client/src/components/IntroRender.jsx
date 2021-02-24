@@ -4,7 +4,7 @@ import { Button, Typography, Layout } from 'antd';
 const { Title, Paragraph } = Typography;
 const { Header, Content, Footer } = Layout;
 
-export default function IntroRender({ title, intro, onFinish }) {
+function IntroRender({ title, intro, onFinish }) {
   return (
     <Layout className="pageContainer" style={{ overflow: 'hidden' }}>
       <Header style={{
@@ -39,3 +39,5 @@ export default function IntroRender({ title, intro, onFinish }) {
     </Layout>
   );
 }
+
+export default IntroRender;
