@@ -1,10 +1,11 @@
 {
   "name": "flom-react",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "UNLICENSED",
   "private": true,
   "proxy": "http://server:3001/",
   "dependencies": {
+    "@ant-design/icons": "4.5.0",
     "antd": "4.12.3",
     "geojson": "0.5.0",
     "leaflet": "1.7.1",
@@ -33,9 +34,7 @@
       "maintained node versions"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "last 2 versions"
     ]
   }
 }

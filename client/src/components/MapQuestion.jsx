@@ -1,76 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Card, Row } from 'antd';
-import { EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import { map } from 'lodash';
 
-import FormRender from './FormRender';
-
-class QuestionPanel extends Component {
-  constructor(prop) {
-    super(prop);
-    const displaySurvey = this.props.noDraw;
-    this.state = {
-      displaySurvey,
-    };
-    this.onFormItemChange = this.onFormItemChange.bind(this);
-    this.fireDraw = this.fireDraw.bind(this);
-    if (this.props.noDraw) {
-      this.props.onChange(this.props.question.id, {});
-      const area = { GISObject: this.props.question.area };
-      this.props.changeGIS(area);
-    }
-  }
-
-  onFormItemChange(questionID, response) {
-    let currentResponse;
-    if (this.props.values[this.props.question.id]) {
-      currentResponse = this.props.values[this.props.question.id];
-    }
-    currentResponse[questionID] = response;
-    this.props.onChange(this.props.question.id, currentResponse);
-  }
-
-  fireDraw() {
-    this.props.updateQuestionID(this.props.question.id);
-    this.props.fireDraw();
-  }
-
-  render() {
-    const {
-      noDraw, onFinish, values, question,
-    } = this.props;
-    return (
-      <>
-        {(!values[question.id] && !noDraw)
-        && (
-          <Row justify="center">
-            <Button type="primary" icon={<EditOutlined />} onClick={this.fireDraw}>
-              Draw
-            </Button>
-          </Row>
-        )}
-        {((values[question.id] && question.questions)
-          || noDraw)
-        && (
-          <FormRender
-            questions={question.questions}
-            onChange={this.onFormItemChange}
-            values={values[question.id]}
-            onFinish={onFinish}
-          />
-        )}
-        {(values[question.id] && !question.questions)
-        && (
-          <Row justify="center">
-            <Button type="primary" onClick={onFinish}>
-              Next
-            </Button>
-          </Row>
-        )}
-      </>
-    );
-  }
-}
+import QuestionPanel from './QuestionPanel';
 
 class MapQuestion extends Component {
   constructor(prop) {
@@ -144,7 +77,8 @@ class MapQuestion extends Component {
     const { questions, index } = this.state;
     const nextQuestionIndex = index + 1;
     const activityComplete = nextQuestionIndex >= questions.length;
-
+    document.getElementById('side').scroll({ top: 0 });
+    document.getElementById('mapContainer').scroll({ top: 0 });
     if (activityComplete) {
       const { activity, onFinish } = this.props;
       if (activity.function === 'freedraw') {
@@ -218,6 +152,7 @@ class MapQuestion extends Component {
                 updateQuestionID={updateQuestionID}
                 changeGIS={changeGIS}
                 onFinish={this.nextQuestion}
+                mode={mode}
               />
             </Card>
           )}

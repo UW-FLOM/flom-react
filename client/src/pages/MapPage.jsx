@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import {Layout} from 'antd';
 
 import MapTool from '../components/MapTool';
 import MapQuestion from '../components/MapQuestion';
 import TitleRender from '../components/TitleRender';
-
-const {Sider, Content} = Layout;
 
 export const featureFromGeometry = (geometry) => {
   if (geometry.type === 'polygon') {
@@ -90,15 +87,15 @@ class MapPage extends Component {
     const {
       activity,
       values,
-      mode,
       onChange,
       current,
       length,
     } = this.props;
 
+    const {gisDisplay, mode} = this.state;
     return (
-      <div className="mapContainer">
-        <div className="sider">
+      <div className="mapContainer" id="mapContainer">
+        <div className="side" id="side">
           <div
             style={{
               padding: '0 20px',
@@ -116,7 +113,7 @@ class MapPage extends Component {
               activity={activity}
               fireDraw={this.fireDraw}
               values={values}
-              mode={this.state.mode}
+              mode={mode}
               onChange={onChange}
               updateQuestionID={this.updateQuestionID}
               changeGIS={this.changeGIS}
@@ -126,11 +123,14 @@ class MapPage extends Component {
         </div>
         <div className="map">
           <MapTool
+            tileURL={activity.tileURL}
+            tileAttribution={activity.tileAttribution}
             center={activity.center}
-            zoomLevel={activity.zoomLevel}
+            bounds={activity.bounds}
+            zoom={activity.zoom}
             onFeatureDrawn={this.onFeatureDrawn}
-            objects={Object.values(this.state.gisDisplay)}
-            mode={this.state.mode}
+            objects={Object.values(gisDisplay)}
+            mode={mode}
           />
         </div>
       </div>

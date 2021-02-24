@@ -29,7 +29,7 @@ function Label({ label, audio }) {
   );
 }
 
-export default function FormRender({ questions, onChange, onFinish }) {
+function FormRender({ questions, onChange, onFinish }) {
   FormRender.propTypes = {
     questions: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
@@ -209,3 +209,5 @@ export default function FormRender({ questions, onChange, onFinish }) {
     </Form>
   );
 }
+
+export default FormRender;

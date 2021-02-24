@@ -5,6 +5,14 @@ html, body, #root, .App, .mapContainer {
     height: 100%;
 }
 
+body, .mapContainer {
+    overflow: hidden;
+}
+
+#root, .pageContainer, .side {
+    overflow: auto;
+}
+
 .pageContainer {
     margin: auto;
     max-width: 900px;
@@ -19,7 +27,7 @@ html, body, #root, .App, .mapContainer {
     flex-wrap: wrap-reverse;
 }
 
-.sider {
+.side {
     width: 400px;
     height: 100%;
 }
@@ -31,13 +39,17 @@ html, body, #root, .App, .mapContainer {
 }
 
 @media screen and (max-width: 1000px) {
-    .sider, .map {
+    .mapContainer {
+        overflow: auto;
+    }
+    .side, .map {
         width: 100%;
     }
     .map {
         height: 55%;
     }
-    .sider {
+    .side {
         height: 45%;
+        overflow: initial;
     }
 }

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const { Title, Paragraph } = Typography;
 
-export default function TitleRender({
+function TitleRender({
   title, intro, current, length,
 }) {
   TitleRender.propTypes = {
@@ -42,6 +42,7 @@ export default function TitleRender({
               style={{
                 fontSize: '38px',
                 lineHeight: 'initial',
+                whiteSpace: 'initial',
               }}
             >
               {title}
@@ -53,3 +54,5 @@ export default function TitleRender({
     </Typography>
   );
 }
+
+export default TitleRender;
