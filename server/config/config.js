@@ -1,22 +1,20 @@
-{
+module.exports = {
   "development": {
     "username": "postgres",
     "password": "mypassword",
     "database": "flom",
     "host": "db",
     "port": "5432",
-    "logging": true,
-    "dialect": "postgres",
-    "operatorsAliases": 0
+    "logging": false,
+    "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
-    "password": "mypassword",
+    "password": process.env.DB_PASSWORD,
     "database": "flom",
     "host": "db",
     "port": "5432",
-    "logging": true,
-    "dialect": "postgres",
-    "operatorsAliases": 0
+    "logging": false,
+    "dialect": "postgres"
   }
-}
+};

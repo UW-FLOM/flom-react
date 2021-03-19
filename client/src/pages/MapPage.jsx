@@ -54,10 +54,8 @@ class MapPage extends Component {
   }
 
   changeGIS(gis) {
-    console.log(gis);
     const gisDisplay = [];
     gisDisplay[0] = gis;
-    console.log(gisDisplay);
     this.setState({
       gisDisplay,
     });
@@ -103,6 +101,7 @@ class MapPage extends Component {
             }}
           >
             <TitleRender
+              id={activity.id}
               title={activity.title}
               intro={activity.helpText}
               current={current}
@@ -128,6 +127,8 @@ class MapPage extends Component {
             center={activity.center}
             bounds={activity.bounds}
             zoom={activity.zoom}
+            minZoom={activity.minZoom}
+            maxZoom={activity.maxZoom}
             onFeatureDrawn={this.onFeatureDrawn}
             objects={Object.values(gisDisplay)}
             mode={mode}

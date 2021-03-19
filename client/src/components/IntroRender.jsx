@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button, Typography, Layout } from 'antd';
+import ParagraphRender from './ParagraphRender';
 
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 const { Header, Content, Footer } = Layout;
 
 function IntroRender({ title, intro, onFinish }) {
@@ -22,7 +23,7 @@ function IntroRender({ title, intro, onFinish }) {
         padding: '0px 50px',
       }}
       >
-        <Typography><Paragraph>{intro}</Paragraph></Typography>
+        <ParagraphRender intro={intro} />
       </Content>
       <Footer style={{
         left: '0',

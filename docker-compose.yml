@@ -6,8 +6,10 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: mypassword
+      POSTGRES_PASSWORD: ${PASSWORD}
       POSTGRES_DB: flom
+    env_file:
+      - ./.env
     restart: always
     volumes:
       - ./data:/var/lib/postgresql/data
@@ -20,6 +22,11 @@ services:
       - /app/node_modules
     ports:
       - "3001:3001"
+    environment:
+      DB_PASSWORD: ${PASSWORD}
+      NODE_ENV: production
+    env_file:
+      - ./.env
     restart: always
     depends_on:
       - db

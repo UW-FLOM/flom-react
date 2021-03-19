@@ -19,6 +19,7 @@ class SurveyListPage extends Component {
   render() {
     return (
       <PageRender
+        id={"surveylist"}
         steps={false}
         title={"Available Surveys"}
         intro={"Below are all available survey for development testing."}
