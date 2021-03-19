@@ -8,10 +8,6 @@ COPY package.json yarn.lock ./
 
 RUN yarn config set ignore-engines true
 
-RUN yarn install --production
-
-RUN cp -R node_modules node_modules_production
-
 RUN yarn config set ignore-engines true
 
 RUN yarn install --network-timeout 1000000

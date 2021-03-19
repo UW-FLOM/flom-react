@@ -1,11 +1,12 @@
 import React from 'react';
 import { Progress, Typography } from 'antd';
 import PropTypes from 'prop-types';
+import ParagraphRender from "./ParagraphRender";
 
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 
 function TitleRender({
-  title, intro, current, length,
+  title, intro, current, length, id
 }) {
   TitleRender.propTypes = {
     title: PropTypes.string.isRequired,
@@ -50,7 +51,7 @@ function TitleRender({
           </div>
         )
         : <Title>{title}</Title>}
-      { intro && <Paragraph>{intro}</Paragraph>}
+      { intro && <ParagraphRender id={id} intro={intro} />}
     </Typography>
   );
 }

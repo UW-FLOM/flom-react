@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import {Result} from 'antd';
+import React, { Component } from 'react';
+import { Result } from 'antd';
 
-import {getSurvey, submitAnswer} from '../services/api';
+import { getSurvey, submitAnswer } from '../services/api';
 import MapPage from './MapPage';
 import PageRender from '../components/PageRender';
 import FormRender from '../components/FormRender';
 import IntroRender from '../components/IntroRender';
+import EndRender from '../components/EndRender';
 
 class Survey extends Component {
   constructor(props) {
@@ -79,7 +80,6 @@ class Survey extends Component {
     const currentResponse = this.state.response;
     currentResponse[activityID][questionID] = response;
     this.setState({ response: currentResponse });
-    console.log(this.state.response);
   }
 
   getResponse(questionID) {
@@ -104,19 +104,24 @@ class Survey extends Component {
   }
 
   render() {
-    const { currentPage, isFetching, surveyLength, isStart, surveyDefinition } = this.state;
+    const {
+      currentPage, isFetching, surveyLength, isStart, surveyDefinition, isComplete
+    } = this.state;
     if (isFetching) {
       return null;
     }
     if (currentPage === this.getSurvey().activities.length) {
       localStorage.clear();
-      submitAnswer(this.getSurveyId(), this.state.response)
-        .then(() => {
-          this.setState({
-            isComplete: true,
-          });
-        })
-        .catch((err) => console.log(err));
+      if (!isComplete) {
+        submitAnswer(this.getSurveyId(), this.state.response)
+          .then(() => {
+            console.log("Submitted");
+            this.setState({
+              isComplete: true,
+            });
+          })
+          .catch((err) => console.log(err));
+      }
       return (
         <Result
           status="success"
@@ -142,6 +147,7 @@ class Survey extends Component {
     if (currentActivity.type === 'form') {
       return (
         <PageRender
+          id={currentActivity.id}
           current={currentPage + 1}
           length={surveyLength}
           title={currentActivity.title}
@@ -160,15 +166,31 @@ class Survey extends Component {
     if (currentActivity.type === 'map') {
       return (
         <MapPage
-            key="MapPage"
-            activity={currentActivity}
-            onChange={this.updateResponse}
-            onFinish={this.next}
-            values={currentResponse}
-            current={currentPage + 1}
-            length={surveyLength}
-            progress
-          />
+          key="MapPage"
+          activity={currentActivity}
+          onChange={this.updateResponse}
+          onFinish={this.next}
+          values={currentResponse}
+          current={currentPage + 1}
+          length={surveyLength}
+          progress
+        />
+      );
+    }
+    if (currentActivity.type === 'end') {
+      return (
+        <EndRender
+          id={currentActivity.id}
+          current={currentPage + 1}
+          length={surveyLength}
+          title={currentActivity.title}
+          intro={currentActivity.intro}
+          questions={currentActivity.questions}
+          onChange={this.updateResponse}
+          values={currentResponse}
+          onFinish={this.next}
+          progress
+        />
       );
     }
     return (

@@ -38,7 +38,6 @@ export const getSurvey = async (args) => {
 };
 
 export const submitAnswer = async (surveyID, args) => {
-  console.log(args);
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

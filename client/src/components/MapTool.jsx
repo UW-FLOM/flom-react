@@ -95,7 +95,6 @@ class MapTool extends Component {
         zoom={zoom}
         minZoom={minZoom}
         maxZoom={maxZoom}
-        zoom={zoom}
         bounds={bounds}
         maxBounds={bounds}
         draggable={mode === 'NONE'}
@@ -149,8 +148,8 @@ MapTool.propTypes = {
 MapTool.defaultProps = {
   tileURL: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}{r}.png',
   tileAttribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-  center: undefined,
-  zoom: undefined,
+  center: [38.678052, -96.273380],
+  zoom: 4,
   bounds: null,
 };
 

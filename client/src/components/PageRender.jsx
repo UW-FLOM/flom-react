@@ -6,7 +6,7 @@ import TitleRender from './TitleRender';
 const { Content } = Layout;
 
 function PageRender({
-  length, children, current, intro, title,
+  length, children, current, intro, title, id
 }) {
   PageRender.propTypes = {
     title: PropTypes.string.isRequired,
@@ -30,6 +30,7 @@ function PageRender({
         }}
       >
         <TitleRender
+          id={id}
           title={title}
           intro={intro}
           current={current}

@@ -139,7 +139,7 @@ class MapQuestion extends Component {
           )
           : (
             <Card
-              key={index}
+              key={questions[index].id}
               title={questions[index].title}
             >
               <QuestionPanel
