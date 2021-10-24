@@ -3,26 +3,22 @@
   "version": "0.1.0",
   "license": "UNLICENSED",
   "scripts": {
-    "start:dev": "yarn db:migrate && yarn db:seed & nodemon server.js",
-    "start:prod": "yarn db:migrate && NODE_ENV=production node ./server.js",
-    "db:migrate": "./node_modules/.bin/sequelize db:migrate",
-    "db:seed": "./node_modules/.bin/sequelize db:seed:all",
-    "db:create": "./node_modules/.bin/sequelize db:create flom",
-    "db:setup": "yarn install && yarn db:create && yarn db:migrate"
+    "start:dev": "nodemon index.js",
+    "start:prod": "NODE_ENV=production node ./index.js"
   },
   "dependencies": {
     "body-parser": "1.19.0",
     "express": "4.17.1",
-    "express-session": "1.17.1",
-    "glob": "7.1.6",
-    "lodash": "4.17.20",
+    "express-promise-router": "4.1.0",
+    "express-session": "1.17.2",
+    "glob": "7.2.0",
+    "lodash": "4.17.21",
     "morgan": "1.10.0",
-    "pg": "8.5.1",
-    "pg-hstore": "2.3.3",
-    "sequelize": "6.5.0",
-    "sequelize-cli": "6.2.0"
+    "pg": "8.7.1",
+    "pg-hstore": "2.3.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.5"
+    "nodemon": "2.0.14",
+    "yarn-audit-fix": "^7.1.3"
   }
 }
