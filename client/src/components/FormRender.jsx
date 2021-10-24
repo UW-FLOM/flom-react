@@ -202,9 +202,15 @@ function FormRender({ questions, onChange, onFinish }) {
           );
         }
       })}
+      <Container>
+        <Row>
+          <Col align="center">
             <Button variant="primary" type="submit">
               Next
             </Button>
+          </Col>
+        </Row>
+      </Container>
     </Form>
   );
 }
