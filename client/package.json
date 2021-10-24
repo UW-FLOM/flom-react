@@ -10,7 +10,7 @@
     "geojson": "0.5.0",
     "leaflet": "1.7.1",
     "leaflet-freedraw": "2.13.3",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "prop-types": "^15.7.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
