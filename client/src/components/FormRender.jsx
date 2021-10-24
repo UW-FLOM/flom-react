@@ -38,15 +38,13 @@ function FormRender({ questions, onChange, onFinish }) {
     // Need to handle the submission to avoid
     // Form submission canceled because the form is not connected
     event.preventDefault();
-    console.log(event);
-    console.log(inputs);
-    /*
-    map(values, (value, key) => {
+    // Store the response
+    // TODO: Migrate to Redux
+    map(inputs, (value, key) => {
       if (value !== undefined) {
         onChange(key, value);
       }
     });
-     */
     onFinish();
   };
 
