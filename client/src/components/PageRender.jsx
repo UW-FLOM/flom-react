@@ -1,12 +1,10 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import TitleRender from './TitleRender';
 
-const { Content } = Layout;
-
 function PageRender({
-  length, children, current, intro, title, id
+  length, children, current, intro, title, id,
 }) {
   PageRender.propTypes = {
     title: PropTypes.string.isRequired,
@@ -23,22 +21,16 @@ function PageRender({
   };
 
   return (
-    <Layout className="pageContainer">
-      <Content
-        style={{
-          padding: '0 50px',
-        }}
-      >
-        <TitleRender
-          id={id}
-          title={title}
-          intro={intro}
-          current={current}
-          length={length}
-        />
-        {children}
-      </Content>
-    </Layout>
+    <Container className="pageContainer">
+      <TitleRender
+        id={id}
+        title={title}
+        intro={intro}
+        current={current}
+        length={length}
+      />
+      {children}
+    </Container>
   );
 }
 

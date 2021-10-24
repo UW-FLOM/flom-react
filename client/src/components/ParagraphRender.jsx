@@ -1,17 +1,14 @@
-import { Typography } from 'antd';
 import React from 'react';
-
-const { Paragraph } = Typography;
 
 function ParagraphRender({ intro, id }) {
   return (
-    <Typography>
+    <>
       { intro.split('/n').map((item, idx) => (
-        <Paragraph key={id + idx}>
+        <p key={id + idx}>
           { item }
-        </Paragraph>
+        </p>
       )) }
-    </Typography>
+    </>
   );
 }
 

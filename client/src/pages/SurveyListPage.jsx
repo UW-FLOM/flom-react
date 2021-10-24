@@ -30,7 +30,7 @@ class SurveyListPage extends Component {
             map(this.state.survey, (survey) => {
               return (
                 <li key={survey.id}>
-                  <Link to={`/survey/${survey.id}`}>{survey.name}</Link>
+                  <Link to={`/survey/${survey.surveyid}`}>{survey.name}</Link>
                 </li>
               );
             })
