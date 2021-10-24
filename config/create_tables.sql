@@ -1,6 +1,8 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE IF NOT EXISTS Surveys (
-    SurveyID UUID NOT NULL,
-    Nickname CHAR,
+    SurveyID text NOT NULL,
+    Name text,
     Detail json,
     PRIMARY KEY (SurveyID)
 );
