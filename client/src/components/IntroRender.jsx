@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Typography, Layout } from 'antd';
+import { Typography, Layout } from 'antd';
+import { Button } from 'react-bootstrap';
 import ParagraphRender from './ParagraphRender';
 
 const { Title } = Typography;

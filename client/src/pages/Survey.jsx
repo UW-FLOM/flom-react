@@ -52,12 +52,13 @@ class Survey extends Component {
     const self = this;
     getSurvey(this.props.match.params.surveyId)
       .then((res) => {
+        console.log(res[0].detail);
         self.setState({
-          surveyDefinition: res.content,
+          surveyDefinition: res[0].detail,
           isFetching: false,
-          surveyLength: res.content.activities.length,
+          surveyLength: res[0].detail.activities.length,
         });
-        document.title = res.content.title;
+        document.title = res[0].detail.title;
       })
       .catch((err) => console.log(err));
   }
@@ -105,7 +106,7 @@ class Survey extends Component {
 
   render() {
     const {
-      currentPage, isFetching, surveyLength, isStart, surveyDefinition, isComplete
+      currentPage, isFetching, surveyLength, isStart, surveyDefinition, isComplete,
     } = this.state;
     if (isFetching) {
       return null;
@@ -115,7 +116,7 @@ class Survey extends Component {
       if (!isComplete) {
         submitAnswer(this.getSurveyId(), this.state.response)
           .then(() => {
-            console.log("Submitted");
+            console.log('Submitted');
             this.setState({
               isComplete: true,
             });

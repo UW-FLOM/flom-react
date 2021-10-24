@@ -1,7 +1,7 @@
 import React from 'react';
 import { Progress, Typography } from 'antd';
 import PropTypes from 'prop-types';
-import ParagraphRender from "./ParagraphRender";
+import ParagraphRender from './ParagraphRender';
 
 const { Title } = Typography;
 

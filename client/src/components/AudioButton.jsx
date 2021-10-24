@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button } from 'antd';
+import { Button } from 'react-bootstrap'
 import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
 
 class AudioButton extends Component {
@@ -75,9 +75,9 @@ class AudioButton extends Component {
         >
         </audio>
         {isPlay ? (
-          <Button type="primary" shape="circle" icon={<PauseOutlined />} onClick={this.pauseAudio} size={"large"}/>
+          <Button type="primary" icon={<PauseOutlined />} onClick={this.pauseAudio} size={"large"}/>
         ) : (
-          <Button type="primary" shape="circle" icon={<CaretRightOutlined />} onClick={this.playAudio} size={"large"}/>
+          <Button type="primary" icon={<CaretRightOutlined />} onClick={this.playAudio} size={"large"}/>
         )}
       </div>
     );
