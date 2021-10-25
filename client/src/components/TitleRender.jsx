@@ -1,9 +1,7 @@
 import React from 'react';
-import { Progress, Typography } from 'antd';
+import { ProgressBar } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import ParagraphRender from './ParagraphRender';
-
-const { Title } = Typography;
 
 function TitleRender({
   title, intro, current, length, id
@@ -22,21 +20,18 @@ function TitleRender({
   };
 
   return (
-    <Typography>
+    <>
       {(current && length)
         ? (
           <div
             className="ant-page-header-heading-left"
             style={{
               paddingTop: '10px',
+              paddingBottom: '10px',
             }}
           >
-            <Progress
-              type="circle"
-              percent={(current / length) * 100}
-              width={50}
-              format={() => `${current}/${length}`}
-              style={{ marginRight: '12px' }}
+            <ProgressBar
+              now={(current / length) * 100}
             />
             <div
               className="ant-page-header-heading-title"
@@ -50,9 +45,9 @@ function TitleRender({
             </div>
           </div>
         )
-        : <Title>{title}</Title>}
+        : <h2>{title}</h2>}
       { intro && <ParagraphRender id={id} intro={intro} />}
-    </Typography>
+    </>
   );
 }
 
