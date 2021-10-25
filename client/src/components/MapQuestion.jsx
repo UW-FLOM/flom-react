@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
-import { Button, Card, Row } from 'antd';
+import React, { Component, lazy, Suspense } from 'react';
+import {
+  Button, Card, Container, Row, Col,
+} from 'react-bootstrap';
 import { PlusOutlined } from '@ant-design/icons';
 import { map } from 'lodash';
 
-import QuestionPanel from './QuestionPanel';
+import Loading from './Loading';
+
+const QuestionPanel = lazy(() => import('./QuestionPanel')
+  .then(({ default: QuestionPanel }) => ({ default: QuestionPanel })));
 
 class MapQuestion extends Component {
   constructor(prop) {
@@ -119,7 +124,7 @@ class MapQuestion extends Component {
             <>
               <Button
                 block
-                type="dashed"
+                variant="dashed"
                 icon={<PlusOutlined />}
                 disabled={mode === 'CREATE'}
                 style={{
@@ -130,30 +135,40 @@ class MapQuestion extends Component {
               >
                 Add Another Area
               </Button>
-              <Row justify="center">
-                <Button type="primary" onClick={this.props.onFinish}>
-                  Next
-                </Button>
-              </Row>
+              <Container>
+                <Row>
+                  <Col align="center">
+                    <Button variant="primary" onClick={this.props.onFinish}>
+                      Next
+                    </Button>
+                  </Col>
+                </Row>
+              </Container>
             </>
           )
           : (
             <Card
               key={questions[index].id}
-              title={questions[index].title}
             >
-              <QuestionPanel
-                key={questions[index].id}
-                noDraw={(activity.function === 'additional')}
-                question={questions[index]}
-                values={values[activity.id]}
-                fireDraw={fireDraw}
-                onChange={onChange}
-                updateQuestionID={updateQuestionID}
-                changeGIS={changeGIS}
-                onFinish={this.nextQuestion}
-                mode={mode}
-              />
+              <Card.Body>
+                <Card.Header>{questions[index].title}</Card.Header>
+                <Card.Text>
+                  <Suspense fallback={<Loading />}>
+                    <QuestionPanel
+                      key={questions[index].id}
+                      noDraw={(activity.function === 'additional')}
+                      question={questions[index]}
+                      values={values[activity.id]}
+                      fireDraw={fireDraw}
+                      onChange={onChange}
+                      updateQuestionID={updateQuestionID}
+                      changeGIS={changeGIS}
+                      onFinish={this.nextQuestion}
+                      mode={mode}
+                    />
+                  </Suspense>
+                </Card.Text>
+              </Card.Body>
             </Card>
           )}
       </>
