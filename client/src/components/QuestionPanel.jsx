@@ -1,7 +1,12 @@
-import React, { Component } from 'react';
-import { Button, Row } from 'antd';
+import React, { Component, lazy, Suspense } from 'react';
+import {
+  Button, Container, Row, Col,
+} from 'react-bootstrap';
 import { EditOutlined } from '@ant-design/icons';
-import FormRender from './FormRender';
+import Loading from './Loading';
+
+const FormRender = lazy(() => import('../components/FormRender')
+  .then(({ default: FormRender }) => ({ default: FormRender })));
 
 class QuestionPanel extends Component {
   constructor(prop) {
@@ -41,34 +46,44 @@ class QuestionPanel extends Component {
       <>
         {(!values[question.id] && !noDraw)
         && (
-          <Row justify="center">
-            <Button
-              type="primary"
-              icon={<EditOutlined />}
-              onClick={this.fireDraw}
-              disabled={mode === 'CREATE'}
-            >
-              {(mode === 'CREATE') ? 'Drawing' : 'Draw'}
-            </Button>
-          </Row>
+          <Container>
+            <Row>
+              <Col align="center">
+                <Button
+                  type="primary"
+                  icon={<EditOutlined />}
+                  onClick={this.fireDraw}
+                  disabled={mode === 'CREATE'}
+                >
+                  {(mode === 'CREATE') ? 'Drawing' : 'Draw'}
+                </Button>
+              </Col>
+            </Row>
+          </Container>
         )}
         {((values[question.id] && question.questions)
           || noDraw)
         && (
-          <FormRender
-            questions={question.questions}
-            onChange={this.onFormItemChange}
-            values={values[question.id]}
-            onFinish={onFinish}
-          />
+          <Suspense fallback={<Loading />}>
+            <FormRender
+              questions={question.questions}
+              onChange={this.onFormItemChange}
+              values={values[question.id]}
+              onFinish={onFinish}
+            />
+          </Suspense>
         )}
         {(values[question.id] && !question.questions)
         && (
-          <Row justify="center">
-            <Button type="primary" onClick={onFinish}>
-              Next
-            </Button>
-          </Row>
+          <Container>
+            <Row>
+              <Col align="center">
+                <Button type="primary" onClick={onFinish}>
+                  Next
+                </Button>
+              </Col>
+            </Row>
+          </Container>
         )}
       </>
     );

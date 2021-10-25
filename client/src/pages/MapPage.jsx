@@ -1,8 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 
-import MapTool from '../components/MapTool';
-import MapQuestion from '../components/MapQuestion';
+// import MapTool from '../components/MapTool';
+//import MapQuestion from '../components/MapQuestion';
 import TitleRender from '../components/TitleRender';
+import Loading from '../components/Loading'
+
+const MapTool = lazy(() => import('../components/MapTool')
+  .then(({ default: MapTool }) => ({ default: MapTool })));
+const MapQuestion = lazy(() => import('../components/MapQuestion')
+  .then(({ default: MapQuestion }) => ({ default: MapQuestion })));
 
 export const featureFromGeometry = (geometry) => {
   if (geometry.type === 'polygon') {
@@ -76,6 +82,7 @@ class MapPage extends Component {
   }
 
   fireDraw() {
+    console.log("Draw Fired")
     this.setState({
       mode: 'CREATE',
     });
@@ -107,6 +114,7 @@ class MapPage extends Component {
               current={current}
               length={length}
             />
+            <Suspense fallback={<Loading/>}>
             <MapQuestion
               key={activity.id}
               activity={activity}
@@ -118,9 +126,11 @@ class MapPage extends Component {
               changeGIS={this.changeGIS}
               onFinish={this.props.onFinish}
             />
+            </Suspense>
           </div>
         </div>
         <div className="map">
+          <Suspense fallback={<Loading/>}>
           <MapTool
             tileURL={activity.tileURL}
             tileAttribution={activity.tileAttribution}
@@ -133,6 +143,7 @@ class MapPage extends Component {
             objects={Object.values(gisDisplay)}
             mode={mode}
           />
+          </Suspense>
         </div>
       </div>
     );
