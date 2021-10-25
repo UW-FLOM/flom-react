@@ -1,87 +1,37 @@
-import React, { Component } from "react";
-import { Button } from 'react-bootstrap'
-import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
+// https://stackoverflow.com/a/47686478
 
-class AudioButton extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isPlay: false,
-      allTime: 0,
-      currentTime: 0,
+import React, { useState, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
+
+const useAudio = (src) => {
+  const [audio] = useState(new Audio(src));
+  const [playing, setPlaying] = useState(false);
+
+  const toggle = () => setPlaying(!playing);
+
+  useEffect(() => {
+    playing ? audio.play() : audio.pause();
+  },
+  [playing]);
+
+  useEffect(() => {
+    audio.addEventListener('ended', () => setPlaying(false));
+    return () => {
+      audio.removeEventListener('ended', () => setPlaying(false));
     };
-  }
+  }, []);
 
-  componentDidMount() {}
+  return [playing, toggle];
+};
 
-  onCanPlay = () => {
-    const { id } = this.props;
-    const audio = document.getElementById(`audio${id}`);
-    this.setState({
-      allTime: audio.duration,
-    });
-  };
+const AudioButton = ({ src }) => {
+  const [playing, toggle] = useAudio(src);
 
-  playAudio = () => {
-    const { id } = this.props;
-    const audio = document.getElementById(`audio${id}`);
-    audio.play();
-    this.setState({
-      isPlay: true,
-    });
-  };
-
-  pauseAudio = () => {
-    const { id } = this.props;
-    const audio = document.getElementById(`audio${id}`);
-    audio.pause();
-    this.setState({
-      isPlay: false,
-    });
-  };
-
-  onTimeUpdate = () => {
-    const { id } = this.props;
-    const audio = document.getElementById(`audio${id}`);
-
-    this.setState({
-      currentTime: audio.currentTime,
-    });
-    if (audio.currentTime === audio.duration) {
-      this.setState({
-        isPlay: false,
-      });
-    }
-  };
-
-  render() {
-    const { src, id } = this.props;
-
-    const {
-      isPlay,
-    } = this.state;
-
-    return (
-      <div>
-        <audio
-          id={`audio${id}`}
-          src={src}
-          ref={(audio) => {
-            this.audioDom = audio;
-          }}
-          preload={"auto"}
-          onCanPlay={this.onCanPlay}
-          onTimeUpdate={this.onTimeUpdate}
-        >
-        </audio>
-        {isPlay ? (
-          <Button type="primary" icon={<PauseOutlined />} onClick={this.pauseAudio} size={"large"}/>
-        ) : (
-          <Button type="primary" icon={<CaretRightOutlined />} onClick={this.playAudio} size={"large"}/>
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Button onClick={toggle}>{playing ? 'Pause' : 'Play'}</Button>
+    </div>
+  );
+};
 
 export default AudioButton;
