@@ -1,12 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import { Result } from 'antd';
 
 import { getSurvey, submitAnswer } from '../services/api';
-import MapPage from './MapPage';
 import PageRender from '../components/PageRender';
-import FormRender from '../components/FormRender';
-import IntroRender from '../components/IntroRender';
-import EndRender from '../components/EndRender';
+import Loading from '../components/Loading';
+
+const IntroRender = lazy(() => import('../components/IntroRender')
+  .then(({ default: IntroRender }) => ({ default: IntroRender })));
+const FormRender = lazy(() => import('../components/FormRender')
+  .then(({ default: FormRender }) => ({ default: FormRender })));
+const EndRender = lazy(() => import('../components/EndRender')
+  .then(({ default: EndRender }) => ({ default: EndRender })));
+const MapPage = lazy(() => import('./MapPage')
+  .then(({ default: MapPage }) => ({ default: MapPage })));
 
 class Survey extends Component {
   constructor(props) {
@@ -124,21 +130,25 @@ class Survey extends Component {
           .catch((err) => console.log(err));
       }
       return (
-        <Result
-          status="success"
-          title="Survey Complete"
-          subTitle="Thank you for participating!"
-        />
+        <Suspense fallback={<Loading />}>
+          <Result
+            status="success"
+            title="Survey Complete"
+            subTitle="Thank you for participating!"
+          />
+        </Suspense>
       );
     }
 
     if (!isStart) {
       return (
-        <IntroRender
-          title={surveyDefinition.title}
-          intro={surveyDefinition.intro}
-          onFinish={this.start}
-        />
+        <Suspense fallback={<Loading />}>
+          <IntroRender
+            title={surveyDefinition.title}
+            intro={surveyDefinition.intro}
+            onFinish={this.start}
+          />
+        </Suspense>
       );
     }
 
@@ -147,59 +157,67 @@ class Survey extends Component {
 
     if (currentActivity.type === 'form') {
       return (
-        <PageRender
-          id={currentActivity.id}
-          current={currentPage + 1}
-          length={surveyLength}
-          title={currentActivity.title}
-          intro={currentActivity.intro}
-          progress
-        >
-          <FormRender
-            questions={currentActivity.questions}
-            onChange={this.updateResponse}
-            values={currentResponse}
-            onFinish={this.next}
-          />
-        </PageRender>
+        <Suspense fallback={<Loading />}>
+          <PageRender
+            id={currentActivity.id}
+            current={currentPage + 1}
+            length={surveyLength}
+            title={currentActivity.title}
+            intro={currentActivity.intro}
+            progress
+          >
+            <FormRender
+              questions={currentActivity.questions}
+              onChange={this.updateResponse}
+              values={currentResponse}
+              onFinish={this.next}
+            />
+          </PageRender>
+        </Suspense>
       );
     }
     if (currentActivity.type === 'map') {
       return (
-        <MapPage
-          key="MapPage"
-          activity={currentActivity}
-          onChange={this.updateResponse}
-          onFinish={this.next}
-          values={currentResponse}
-          current={currentPage + 1}
-          length={surveyLength}
-          progress
-        />
+        <Suspense fallback={<Loading />}>
+          <MapPage
+            key="MapPage"
+            activity={currentActivity}
+            onChange={this.updateResponse}
+            onFinish={this.next}
+            values={currentResponse}
+            current={currentPage + 1}
+            length={surveyLength}
+            progress
+          />
+        </Suspense>
       );
     }
     if (currentActivity.type === 'end') {
       return (
-        <EndRender
-          id={currentActivity.id}
-          current={currentPage + 1}
-          length={surveyLength}
-          title={currentActivity.title}
-          intro={currentActivity.intro}
-          questions={currentActivity.questions}
-          onChange={this.updateResponse}
-          values={currentResponse}
-          onFinish={this.next}
-          progress
-        />
+        <Suspense fallback={<Loading />}>
+          <EndRender
+            id={currentActivity.id}
+            current={currentPage + 1}
+            length={surveyLength}
+            title={currentActivity.title}
+            intro={currentActivity.intro}
+            questions={currentActivity.questions}
+            onChange={this.updateResponse}
+            values={currentResponse}
+            onFinish={this.next}
+            progress
+          />
+        </Suspense>
       );
     }
     return (
-      <Result
-        status="warning"
-        title="Activity type not found"
-        subTitle="The specified activity type does not exist."
-      />
+      <Suspense fallback={<Loading />}>
+        <Result
+          status="warning"
+          title="Activity type not found"
+          subTitle="The specified activity type does not exist."
+        />
+      </Suspense>
     );
   }
 }

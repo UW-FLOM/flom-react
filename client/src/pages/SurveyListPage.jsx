@@ -20,6 +20,7 @@ class SurveyListPage extends Component {
     return (
       <PageRender
         id={"surveylist"}
+        key={"surveylist"}
         steps={false}
         title={"Available Surveys"}
         intro={"Below are all available survey for development testing."}
