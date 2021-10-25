@@ -1,15 +1,11 @@
-import React from 'react';
+import React, { useReducer, useState } from 'react';
 import {
-  Form, Input, Select, Button, Rate, InputNumber, Radio, Checkbox, Typography, Row,
-} from 'antd';
+  Form, Button, Container, Row, Col,
+} from 'react-bootstrap';
 import { map } from 'lodash';
 import PropTypes from 'prop-types';
 
 import AudioButton from './AudioButton';
-
-const { Option } = Select;
-const { TextArea } = Input;
-const { Text } = Typography;
 
 function Label({ label, audio }) {
   Label.propTypes = {
@@ -22,10 +18,10 @@ function Label({ label, audio }) {
   };
 
   return (
-    <>
-      <Text>{label}</Text>
+    <Form.Label>
+      {label}
       {audio && <AudioButton src={audio} />}
-    </>
+    </Form.Label>
   );
 }
 
@@ -36,8 +32,15 @@ function FormRender({ questions, onChange, onFinish }) {
     onFinish: PropTypes.func.isRequired,
   };
 
-  const updateResponse = (values) => {
-    map(values, (value, key) => {
+  const [inputs, setInputs] = useState({});
+
+  const submitResponse = (event) => {
+    // Need to handle the submission to avoid
+    // Form submission canceled because the form is not connected
+    event.preventDefault();
+    // Store the response
+    // TODO: Migrate to Redux
+    map(inputs, (value, key) => {
       if (value !== undefined) {
         onChange(key, value);
       }
@@ -45,10 +48,21 @@ function FormRender({ questions, onChange, onFinish }) {
     onFinish();
   };
 
+  const handleChange = (event) => {
+    setInputs(
+      {
+        ...inputs,
+        [event.target.id]: event.target.value,
+      },
+    );
+    console.log(event.target.id);
+    console.log(event.target.value);
+    console.log(inputs);
+  };
+
   return (
     <Form
-      layout="vertical"
-      onFinish={updateResponse}
+      onSubmit={submitResponse}
     >
       {questions.map((question) => {
         const rules = { required: true };
@@ -61,151 +75,140 @@ function FormRender({ questions, onChange, onFinish }) {
         }
         if (question.type === 'text') {
           return (
-            <Form.Item
-              key={question.id}
-              name={question.id}
-              label={<Label label={question.title} audio={question.audio} />}
-              rules={[rules]}
-            >
-              <Input />
-            </Form.Item>
+            <Form.Group className="mb-3" key={question.id}>
+              <Label label={question.title} audio={question.audio} />
+              <Form.Control type="text" id={question.id} onChange={handleChange} />
+            </Form.Group>
           );
         }
         if (question.type === 'select') {
           return (
-            <Form.Item
-              key={question.id}
-              name={question.id}
-              label={<Label label={question.title} audio={question.audio} />}
-              rules={[rules]}
-            >
-              <Select
-                showSearch={question.searchable || false}
-              >
+            <Form.Group className="mb-3" key={question.id} >
+              <Label label={question.title} audio={question.audio} />
+              <Form.Select aria-label={question.title} id={question.id} defaultValue="" onChange={handleChange}>
+                <option disabled value=""> -- select an option -- </option>
                 {question.options.map((option) => (
-                  <Option
+                  <option
+                    id={option.id}
                     key={option.id}
                     value={option.id}
                   >
                     {option.text}
-                  </Option>
+                  </option>
                 ))}
-              </Select>
-            </Form.Item>
+              </Form.Select>
+            </Form.Group>
           );
         }
         if (question.type === 'rate') {
           return (
-            <Form.Item
+            <Form.Group
               key={question.id}
-              label={<Label label={question.title} audio={question.audio} />}
             >
-              <span className="ant-rate-text">{question.least}</span>
-              <Form.Item
-                name={question.id}
-                rules={[rules]}
-                noStyle
-              >
-                <Rate />
-              </Form.Item>
-              <span className="ant-rate-text">{question.best}</span>
-            </Form.Item>
+              <Label label={question.title} audio={question.audio} />
+              <Form.Range onChange={handleChange} />
+            </Form.Group>
           );
         }
         if (question.type === 'num') {
           return (
-            <Form.Item
+            <Form.Group
               key={question.id}
-              name={question.id}
-              label={<Label label={question.title} audio={question.audio} />}
-              rules={[rules]}
             >
-              <InputNumber />
-            </Form.Item>
+              <Label label={question.title} audio={question.audio} />
+              <Form.Control type="number" id={question.id} onChange={handleChange} />
+            </Form.Group>
           );
         }
         if (question.type === 'textarea') {
           return (
-            <Form.Item
+            <Form.Group
               key={question.id}
-              name={question.id}
-              label={<Label label={question.title} audio={question.audio} />}
-              rules={[rules]}
             >
-              <TextArea
-                rows={4}
-              />
-            </Form.Item>
+              <Label label={question.title} audio={question.audio} />
+              <Form.Control type="textarea" id={question.id} onChange={handleChange} />
+            </Form.Group>
           );
         }
         if (question.type === 'radio') {
           return (
-            <Form.Item
+            <Form.Group
               key={question.id}
-              name={question.id}
-              label={<Label label={question.title} audio={question.audio} />}
-              rules={[rules]}
             >
-              <Radio.Group>
+              <Label label={question.title} audio={question.audio} />
+              <div key={question.id} className="mb-3">
                 {question.options.map((option) => (
-                  <Radio
+                  <Form.Check
+                    inline
+                    type="radio"
                     key={option.id}
-                    value={option.id}
-                  >
-                    {option.text}
-                  </Radio>
+                    id={option.id}
+                    label={option.text}
+                    onChange={handleChange}
+                  />
                 ))}
-              </Radio.Group>
-            </Form.Item>
+              </div>
+            </Form.Group>
           );
         }
         if (question.type === 'boolean') {
           return (
-            <Form.Item
+            <Form.Group
               key={question.id}
-              name={question.id}
-              label={<Label label={question.title} audio={question.audio} />}
-              rules={[rules]}
             >
-              <Radio.Group>
-                <Radio
+              <Label label={question.title} audio={question.audio} />
+              <div key={question.id} className="mb-3">
+                <Form.Check
+                  inline
+                  type="radio"
                   key="true"
-                  value="true"
-                >
-                  Yes
-                </Radio>
-                <Radio
+                  id={`${question.id}true`}
+                  label="True"
+                  onChange={handleChange}
+                />
+                <Form.Check
+                  inline
+                  type="radio"
                   key="false"
-                  value="false"
-                >
-                  No
-                </Radio>
-              </Radio.Group>
-            </Form.Item>
+                  id={`${question.id}false`}
+                  label="False"
+                  onChange={handleChange}
+                />
+              </div>
+            </Form.Group>
           );
         }
         if (question.type === 'checkbox') {
           return (
-            <Form.Item
+            <Form.Group
               key={question.id}
-              name={question.id}
-              label={<Label label={question.title} audio={question.audio} />}
-              rules={[rules]}
             >
-              <Checkbox.Group
-                options={question.options}
-              />
-            </Form.Item>
+              <Label label={question.title} audio={question.audio} />
+              <div key={question.id} className="mb-3">
+                {question.options.map((option) => (
+                  <Form.Check
+                    inline
+                    type="checkbox"
+                    key={option.id}
+                    id={option.id}
+                    label={option.text}
+                    onChange={handleChange}
+                  />
+                ))}
+              </div>
+            </Form.Group>
           );
         }
       })}
-      <Form.Item>
-        <Row justify="center">
-          <Button type="primary" htmlType="submit">
-            Next
-          </Button>
+      <Container>
+        <Row>
+          <Col align="center">
+            <Button variant="primary" type="submit">
+              Next
+            </Button>
+          </Col>
         </Row>
-      </Form.Item>
+      </Container>
     </Form>
   );
 }
