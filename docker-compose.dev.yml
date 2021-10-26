@@ -10,8 +10,7 @@ services:
       POSTGRES_DB: flom
     restart: always
     volumes:
-      - ./config/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-      - ./config/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+      - ./db:/docker-entrypoint-initdb.d/
   server:
     container_name: flom-react_dev_server
     build:
