@@ -1074,16 +1074,16 @@ VALUES ('demo','Full Demo of Current Survey Format',
                     "type": "checkbox",
                     "options": [
                         {
-                            "value": "apple",
-                            "label": "apple"
+                            "id": "apple",
+                            "text": "apple"
                         },
                         {
-                            "value": "pear",
-                            "label": "pear"
+                            "id": "pear",
+                            "text": "pear"
                         },
                         {
-                            "value": "orange",
-                            "label": "orange"
+                            "id": "orange",
+                            "text": "orange"
                         }
                     ]
                 }
