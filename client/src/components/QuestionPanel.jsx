@@ -2,7 +2,7 @@ import React, { Component, lazy, Suspense } from 'react';
 import {
   Button, Container, Row, Col,
 } from 'react-bootstrap';
-import { EditOutlined } from '@ant-design/icons';
+import { BsFillPencilFill } from 'react-icons/bs';
 import Loading from './Loading';
 
 const FormRender = lazy(() => import('../components/FormRender')
@@ -25,11 +25,12 @@ class QuestionPanel extends Component {
   }
 
   onFormItemChange(questionID, response) {
+    console.log(questionID, response);
     let currentResponse;
     if (this.props.values[this.props.question.id]) {
       currentResponse = this.props.values[this.props.question.id];
     }
-    currentResponse[questionID] = response;
+    currentResponse.properties[questionID] = response;
     this.props.onChange(this.props.question.id, currentResponse);
   }
 
@@ -50,11 +51,10 @@ class QuestionPanel extends Component {
             <Row>
               <Col align="center">
                 <Button
-                  type="primary"
-                  icon={<EditOutlined />}
                   onClick={this.fireDraw}
                   disabled={mode === 'CREATE'}
                 >
+                  <BsFillPencilFill />
                   {(mode === 'CREATE') ? 'Drawing' : 'Draw'}
                 </Button>
               </Col>
@@ -75,15 +75,17 @@ class QuestionPanel extends Component {
         )}
         {(values[question.id] && !question.questions)
         && (
-          <Container>
-            <Row>
-              <Col align="center">
-                <Button type="primary" onClick={onFinish}>
-                  Next
-                </Button>
-              </Col>
-            </Row>
-          </Container>
+          <>
+            <Container>
+              <Row>
+                <Col align="center">
+                  <Button type="primary" onClick={onFinish}>
+                    Next
+                  </Button>
+                </Col>
+              </Row>
+            </Container>
+          </>
         )}
       </>
     );

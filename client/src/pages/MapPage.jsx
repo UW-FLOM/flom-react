@@ -10,14 +10,18 @@ const MapTool = lazy(() => import('../components/MapTool')
 const MapQuestion = lazy(() => import('../components/MapQuestion')
   .then(({ default: MapQuestion }) => ({ default: MapQuestion })));
 
+// Process Freedraw's latLngs to GeoJson Object
 export const featureFromGeometry = (geometry) => {
+  let GeoJsonTemplate = {
+    "type": "Feature",
+    "geometry": {},
+    "properties": {}
+  }
   if (geometry.type === 'polygon') {
-    return {
-      GISObject: {
-        type: 'polygon',
-        data: geometry.geometry,
-      },
-    };
+    let json = GeoJsonTemplate["geometry"]
+    json["type"] = "Polygon";
+    json["coordinates"] = geometry.geometry;
+    return GeoJsonTemplate;
   }
   return {};
 };
@@ -26,11 +30,9 @@ class MapPage extends Component {
   constructor(prop) {
     super(prop);
 
-    const storedGisDisplay = [];
-
     this.state = {
       questionID: this.props.activity.id,
-      gisDisplay: storedGisDisplay,
+      gis: [],
       mode: 'NONE',
     };
 
@@ -44,12 +46,8 @@ class MapPage extends Component {
       this.setState({
         questionID: 0,
         mode: 'NONE',
+        gis: [],
       });
-      if (this.props.activity.function !== 'additional') {
-        this.setState({
-          gisDisplay: [],
-        });
-      }
     }
   }
 
@@ -72,17 +70,16 @@ class MapPage extends Component {
 
     this.props.onChange(id, featureFromGeometry(featureGeometry));
 
-    let gis = this.state.gisDisplay;
-    gis[id] = featureFromGeometry(featureGeometry);
+    let gis = this.state.gis;
+    gis.push(featureFromGeometry(featureGeometry));
 
     this.setState({
-      gisDisplay: gis,
+      gis: gis,
       mode: "NONE",
     });
   }
 
   fireDraw() {
-    console.log("Draw Fired")
     this.setState({
       mode: 'CREATE',
     });
@@ -97,7 +94,7 @@ class MapPage extends Component {
       length,
     } = this.props;
 
-    const {gisDisplay, mode} = this.state;
+    const {gis, mode} = this.state;
     return (
       <div className="mapContainer" id="mapContainer">
         <div className="side" id="side">
@@ -140,7 +137,7 @@ class MapPage extends Component {
             minZoom={activity.minZoom}
             maxZoom={activity.maxZoom}
             onFeatureDrawn={this.onFeatureDrawn}
-            objects={Object.values(gisDisplay)}
+            objects={Object.values(gis)}
             mode={mode}
           />
           </Suspense>
