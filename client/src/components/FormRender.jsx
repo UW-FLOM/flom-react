@@ -106,7 +106,7 @@ function FormRender({ questions, onChange, onFinish }) {
               key={question.id}
             >
               <Label label={question.title} audio={question.audio} />
-              <Form.Range onChange={handleChange} />
+              <Form.Range id={question.id} onChange={handleChange} />
             </Form.Group>
           );
         }
@@ -200,7 +200,7 @@ function FormRender({ questions, onChange, onFinish }) {
           );
         }
       })}
-      <Container>
+      <Container style={{marginTop: '20px'}}>
         <Row>
           <Col align="center">
             <Button variant="primary" type="submit">
