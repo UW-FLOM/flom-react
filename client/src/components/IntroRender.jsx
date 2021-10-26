@@ -1,32 +1,28 @@
 import React from 'react';
-import { Typography, Layout } from 'antd';
 import { Button } from 'react-bootstrap';
 import ParagraphRender from './ParagraphRender';
 
-const { Title } = Typography;
-const { Header, Content, Footer } = Layout;
-
 function IntroRender({ title, intro, onFinish }) {
   return (
-    <Layout className="pageContainer" style={{ overflow: 'hidden' }}>
-      <Header style={{
+    <div className="pageContainer" style={{ overflow: 'hidden' }}>
+      <div style={{
         textAlign: 'center',
         background: 'none',
         height: 'fit-content',
         padding: '20px',
       }}
       >
-        <Title>{title}</Title>
-      </Header>
-      <Content style={{
+        <h3>{title}</h3>
+      </div>
+      <div style={{
         background: 'none',
         overflow: 'auto',
         padding: '0px 50px',
       }}
       >
         <ParagraphRender intro={intro} />
-      </Content>
-      <Footer style={{
+      </div>
+      <div style={{
         left: '0',
         right: '0',
         bottom: '0',
@@ -37,8 +33,8 @@ function IntroRender({ title, intro, onFinish }) {
         <Button onClick={onFinish} type="primary">
           Begin
         </Button>
-      </Footer>
-    </Layout>
+      </div>
+    </div>
   );
 }
 

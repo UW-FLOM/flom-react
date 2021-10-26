@@ -1,5 +1,4 @@
 import React, { Component, lazy, Suspense } from 'react';
-import { Result } from 'antd';
 
 import { getSurvey, submitAnswer } from '../services/api';
 import PageRender from '../components/PageRender';
@@ -13,6 +12,8 @@ const EndRender = lazy(() => import('../components/EndRender')
   .then(({ default: EndRender }) => ({ default: EndRender })));
 const MapPage = lazy(() => import('./MapPage')
   .then(({ default: MapPage }) => ({ default: MapPage })));
+const Result = lazy(() => import('../components/Result')
+  .then(({ default: Result }) => ({ default: Result })));
 
 class Survey extends Component {
   constructor(props) {
