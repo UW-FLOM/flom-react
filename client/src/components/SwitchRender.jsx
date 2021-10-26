@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import {
-  Button, Layout, Switch, Divider,
-} from 'antd';
+import { Form, Button } from 'react-bootstrap';
 import FormRender from './FormRender';
 import ParagraphRender from './ParagraphRender';
-
-const { Footer } = Layout;
 
 class SwitchRender extends Component {
   constructor(prop) {
@@ -18,11 +14,12 @@ class SwitchRender extends Component {
     this.props.onChange(this.props.id, false);
   }
 
-  displayFurther(status) {
+  displayFurther(event) {
     const { onChange, id } = this.props;
-    onChange(id, status);
+    const result = event.target.value === 'on';
+    onChange(id, result);
     this.setState({
-      displayForm: status,
+      displayForm: result,
     });
   }
 
@@ -34,18 +31,19 @@ class SwitchRender extends Component {
     return (
       <>
         { intro && <ParagraphRender intro={intro} style={{ marginBottom: '12px' }} />}
-        <Switch
-          key={id}
-          onChange={this.displayFurther}
-          style={{
-            marginRight: '12px',
-          }}
-        />
-        {title}
+        <Form>
+          <Form.Check
+            type="switch"
+            key={id}
+            id={id}
+            label={title}
+            onChange={this.displayFurther}
+          />
+        </Form>
         {(displayForm && questions)
           ? (
             <>
-              <Divider />
+              <hr />
               <FormRender
                 questions={questions}
                 onChange={onChange}
@@ -54,7 +52,7 @@ class SwitchRender extends Component {
             </>
           )
           : (
-            <Footer style={{
+            <div style={{
               left: '0',
               right: '0',
               bottom: '0',
@@ -65,7 +63,7 @@ class SwitchRender extends Component {
               <Button type="primary" onClick={onFinish}>
                 Next
               </Button>
-            </Footer>
+            </div>
           )}
       </>
     );

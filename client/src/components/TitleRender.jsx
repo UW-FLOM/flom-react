@@ -41,7 +41,7 @@ function TitleRender({
                 whiteSpace: 'initial',
               }}
             >
-              {title}
+              <h2>{title}</h2>
             </div>
           </div>
         )
