@@ -1176,3 +1176,97 @@ VALUES ('demo','Full Demo of Current Survey Format',
         }
     ]
 }');
+INSERT INTO Surveys (SurveyID, Name, Detail)
+VALUES ('map','Development Testcase for Map',
+        '{
+    "title": "Full Demo of Current Survey Format",
+    "intro": "This is the full demo of current survey format",
+    "startText": "Start Demo",
+    "activities": [
+        {
+            "title": "Defined Draw",
+            "helpText": "We will draw some areas on the map.",
+            "id": "defined",
+            "type": "map",
+            "function": "predefined",
+            "center": [
+                38.678052,
+                -96.273380
+            ],
+            "zoomLevel": 4,
+            "questions": [
+                {
+                    "title": "Draw New England",
+                    "type": "area",
+                    "id": "new_england",
+                    "questions": [
+                        {
+                            "title": "Rating question example",
+                            "type": "rate",
+                            "id": "rating",
+                            "required": "false",
+                            "least": "terrible",
+                            "best": "wonderful"
+                        },
+                        {
+                            "title": "One-line text question example",
+                            "type": "text",
+                            "id": "text",
+                            "required": "false"
+                        }
+                    ]
+                },
+                {
+                    "title": "Draw the South",
+                    "type": "area",
+                    "id": "south"
+                }
+            ]
+        },
+        {
+            "title": "Freehand Draw",
+            "helpText": "User can draw freely",
+            "id": "freehand",
+            "type": "map",
+            "function": "freedraw",
+            "center": [
+                38.678052,
+                -96.273380
+            ],
+            "zoomLevel": 4,
+            "questions": [
+                {
+                    "title": "Rating question example",
+                    "type": "rate",
+                    "id": "rating",
+                    "required": "false",
+                    "least": "terrible",
+                    "best": "wonderful"
+                }
+            ]
+        },
+        {
+            "title": "Additional Questions",
+            "helpText": "Ask additional questions based on user previous drawn area",
+            "id": "additional",
+            "type": "map",
+            "function": "additional",
+            "center": [
+                38.678052,
+                -96.273380
+            ],
+            "zoomLevel": 4,
+            "basedOn": "freehand",
+            "questions": [
+                {
+                    "title": "Rating question example",
+                    "type": "rate",
+                    "id": "rating",
+                    "required": "false",
+                    "least": "terrible",
+                    "best": "wonderful"
+                }
+            ]
+        }
+    ]
+}');
