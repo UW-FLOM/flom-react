@@ -1,26 +1,32 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE IF NOT EXISTS Surveys (
-    SurveyID text NOT NULL,
-    Name text,
+    SurveyID TEXT NOT NULL,
+    Name TEXT NOT NULL,
+    Description TEXT,
+    Author TEXT NOT NULL,
     Detail json,
     PRIMARY KEY (SurveyID)
 );
 
 CREATE TABLE IF NOT EXISTS Subjects (
-	SubjectID UUID NOT NULL,
-  	FK_SurveyID UUID NOT NULL,
-    start_at TIME NOT NULL,
-    end_at TIME NOT NULL,
-  	PRIMARY KEY (SubjectID),
-    FOREIGN KEY (FK_SurveyID) REFERENCES Surveys(SurveyID)
+    SubjectID TEXT NOT NULL,
+    SurveyID UUID NOT NULL,
+    PRIMARY KEY (SubjectID),
+    CONSTRAINT fk_SurveyID
+        FOREIGN KEY(SurveyID)
+            REFERENCES Surveys(SurveyID)
 );
 
 CREATE TABLE IF NOT EXISTS Response (
-	FK_SubjectID UUID NOT NULL,
+	SubjectID UUID NOT NULL,
+	StartTime TIME,
+	EndTime TIME,
   	Detail json,
-  	PRIMARY KEY (FK_SubjectID),
-    FOREIGN KEY (FK_SubjectID) REFERENCES Subjects(SubjectID)
+  	PRIMARY KEY (SubjectID),
+    CONSTRAINT fk_SubjectID
+        FOREIGN KEY(SubjectID)
+            REFERENCES Subjects(SubjectID)
 );
 
 /*
