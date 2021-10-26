@@ -4,7 +4,7 @@ import React, {
 
 import { map } from 'lodash';
 import {
-  MapContainer, TileLayer, Marker, Popup,
+  MapContainer, TileLayer, Marker, Popup, Polygon,
 } from 'react-leaflet';
 import Freedraw, { CREATE, NONE } from 'react-leaflet-freedraw';
 import PropTypes from 'prop-types';
@@ -21,7 +21,7 @@ function currentMode(mode) {
   return NONE;
 }
 
-function MapTool({ tileURL, tileAttribution, mode, onFeatureDrawn }) {
+function MapTool({ tileURL, tileAttribution, mode, onFeatureDrawn, objects }) {
   /*
   componentDidUpdate(prevProps) {
     const { mode, objects } = this.props;
@@ -88,6 +88,15 @@ function MapTool({ tileURL, tileAttribution, mode, onFeatureDrawn }) {
         eventHandlers={handlers}
         ref={freedrawRef}
       />
+      {
+        map(objects, (object, idx) => (
+          <Polygon
+            key={idx}
+            color="#b1ef8d"
+            positions={object.geometry.coordinates}
+          />
+        ))
+      }
     </MapContainer>
   );
 }
@@ -101,6 +110,7 @@ MapTool.propTypes = {
   minZoom: PropTypes.number,
   maxZoom: PropTypes.number,
   zoom: PropTypes.number,
+  mode: PropTypes.string.isRequired,
 };
 
 MapTool.defaultProps = {

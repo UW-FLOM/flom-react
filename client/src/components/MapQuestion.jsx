@@ -2,7 +2,7 @@ import React, { Component, lazy, Suspense } from 'react';
 import {
   Button, Card, Container, Row, Col,
 } from 'react-bootstrap';
-import { PlusOutlined } from '@ant-design/icons';
+import { BsPlus } from 'react-icons/bs';
 import { map } from 'lodash';
 
 import Loading from './Loading';
@@ -40,7 +40,7 @@ class MapQuestion extends Component {
       questions = [];
       map(areas, (area, id) => (
         questions = [...questions, {
-          title: `About ${area.name}`,
+          title: `About ${area.properties.name}`,
           id,
           area: area.GISObject,
           questions: this.props.activity.questions,
@@ -122,19 +122,20 @@ class MapQuestion extends Component {
         {activityComplete
           ? (
             <>
-              <Button
-                block
-                variant="dashed"
-                icon={<PlusOutlined />}
-                disabled={mode === 'CREATE'}
-                style={{
-                  marginBottom: '20px',
-                  height: '139px',
-                }}
-                onClick={this.addMapQuestion}
-              >
-                Add Another Area
-              </Button>
+              <div className="d-grid gap-2">
+                <Button
+                  variant="outline-primary"
+                  style={{
+                    marginBottom: '20px',
+                    height: '139px',
+                  }}
+                  onClick={this.addMapQuestion}
+                >
+                  <BsPlus />
+                  {' '}
+                  Add Another Area
+                </Button>
+              </div>
               <Container>
                 <Row>
                   <Col align="center">
@@ -150,8 +151,8 @@ class MapQuestion extends Component {
             <Card
               key={questions[index].id}
             >
+              <Card.Header>{questions[index].title}</Card.Header>
               <Card.Body>
-                <Card.Header>{questions[index].title}</Card.Header>
                 <Card.Text>
                   <Suspense fallback={<Loading />}>
                     <QuestionPanel
