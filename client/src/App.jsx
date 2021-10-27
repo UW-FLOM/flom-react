@@ -1,14 +1,13 @@
-import React, { Suspense, lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loading from './components/Loading';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage'
 
 const Survey = lazy(() => import('./pages/Survey')
   .then(({ default: Survey }) => ({ default: Survey })));
-
-const SurveyListPage = lazy(() => import('./pages/SurveyListPage')
-  .then(({ default: SurveyListPage }) => ({ default: SurveyListPage })));
 
 // This component handles routing. Rendering the page specified
 // for each URL listed in the Switch below.
@@ -16,13 +15,13 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Suspense fallback={(<Loading />)}
-        >
-          <Switch>
-            <Route exact path="/" component={SurveyListPage} />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Suspense fallback={(<Loading />)}>
             <Route exact path="/survey/:surveyId" component={Survey} />
-          </Switch>
-        </Suspense>
+          </Suspense>
+        </Switch>
       </Router>
     </div>
   );
