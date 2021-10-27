@@ -4,14 +4,14 @@ CREATE TABLE IF NOT EXISTS Surveys (
     SurveyID TEXT NOT NULL,
     Name TEXT NOT NULL,
     Description TEXT,
-    Author TEXT NOT NULL,
+    Author TEXT,
     Detail json,
     PRIMARY KEY (SurveyID)
 );
 
 CREATE TABLE IF NOT EXISTS Subjects (
-    SubjectID TEXT NOT NULL,
-    SurveyID UUID NOT NULL,
+    SubjectID UUID NOT NULL,
+    SurveyID TEXT NOT NULL,
     PRIMARY KEY (SubjectID),
     CONSTRAINT fk_SurveyID
         FOREIGN KEY(SurveyID)
