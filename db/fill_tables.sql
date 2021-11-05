@@ -1,4 +1,4 @@
-INSERT INTO Surveys (SurveyID, Name, Detail)
+INSERT INTO survey (survey_id, name, detail)
 VALUES ('test','A Sample Survey for Development Testing',
 '{
     "title": "Test of FLOM",
@@ -734,7 +734,7 @@ VALUES ('test','A Sample Survey for Development Testing',
         }
     ]
 }');
-INSERT INTO Surveys (SurveyID, Name, Detail)
+INSERT INTO survey (survey_id, name, detail)
 VALUES ('demo','Full Demo of Current Survey Format',
         '{
     "title": "Full Demo of Current Survey Format",
@@ -1176,7 +1176,7 @@ VALUES ('demo','Full Demo of Current Survey Format',
         }
     ]
 }');
-INSERT INTO Surveys (SurveyID, Name, Detail)
+INSERT INTO survey (survey_id, name, detail)
 VALUES ('map','Development Testcase for Map',
         '{
     "title": "Full Demo of Current Survey Format",
