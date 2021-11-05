@@ -49,7 +49,7 @@ class HomePage extends Component {
                           <Card.Text>
                             Sample Text
                           </Card.Text>
-                          <Button variant="primary" href={`/survey/${survey.surveyid}`}>Take Survey</Button>
+                          <Button variant="primary" href={`/survey/${survey.survey_id}`}>Take Survey</Button>
                         </Card.Body>
                       </Card>
                     </Col>
