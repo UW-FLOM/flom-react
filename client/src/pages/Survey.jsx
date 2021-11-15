@@ -113,13 +113,7 @@ class Survey extends Component {
 
   render() {
     return (
-      <Suspense fallback={<Loading />}>
-        <Result
-          status="warning"
-          title="Activity type not found"
-          subTitle="The specified activity type does not exist."
-        />
-      </Suspense>
+      Result("warning", "test1", "test2")
     );
   }
 }
