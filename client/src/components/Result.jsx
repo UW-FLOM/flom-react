@@ -3,22 +3,14 @@ import { BsFillCheckCircleFill } from 'react-icons/bs'; //get logos from here
 import { Result, Button } from 'antd';
 
 function Result({
-  status, title, intro
+  itemstatus, itemtitle, itemintro
 }) {
   return (
-    <div style={{
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-    >
-      <BsFillCheckCircleFill
-        style={{
-          fontSize: '72px',
-          color: '#52c41a',
-        }}
+    <div>
+      <Result
+        status= {itemstatus}
+        title= {itemtitle}
+        subTitle= {itemintro}
       />
     </div>
   );
