@@ -1,7 +1,10 @@
 import React from 'react';
-import { BsFillCheckCircleFill } from 'react-icons/bs';
+import { BsFillCheckCircleFill } from 'react-icons/bs'; //get logos from here
+import { Result, Button } from 'antd';
 
-function Result() {
+function Result({
+  status, title, intro
+}) {
   return (
     <div style={{
       width: '100%',
