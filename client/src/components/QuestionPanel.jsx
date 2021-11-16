@@ -1,4 +1,6 @@
-import React, { Component, lazy, Suspense } from 'react';
+import React, {
+  useState, useEffect, lazy, Suspense,
+} from 'react';
 import {
   Button, Container, Row, Col,
 } from 'react-bootstrap';
@@ -8,50 +10,40 @@ import Loading from './Loading';
 const FormRender = lazy(() => import('../components/FormRender')
   .then(({ default: FormRender }) => ({ default: FormRender })));
 
-class QuestionPanel extends Component {
-  constructor(prop) {
-    super(prop);
-    const displaySurvey = this.props.noDraw;
-    this.state = {
-      displaySurvey,
-    };
-    this.onFormItemChange = this.onFormItemChange.bind(this);
-    this.fireDraw = this.fireDraw.bind(this);
-    if (this.props.noDraw) {
-      this.props.onChange(this.props.question.id, {});
-      const area = { GISObject: this.props.question.area };
-      this.props.changeGIS(area);
+function QuestionPanel({
+  noDraw, question, values, fireDraw, onChange, updateQuestionID, changeGIS, onFinish, mode,
+}) {
+  useEffect(() => {
+    if (noDraw) {
+      onChange(question.id, {});
+      const area = { geometry: question.geometry };
+      changeGIS(area);
     }
-  }
+  }, [noDraw]);
 
-  onFormItemChange(questionID, response) {
-    console.log(questionID, response);
+  const onFormItemChange = (questionID, response) => {
     let currentResponse;
-    if (this.props.values[this.props.question.id]) {
-      currentResponse = this.props.values[this.props.question.id];
+    if (values[question.id]) {
+      currentResponse = values[question.id];
     }
-    currentResponse.properties[questionID] = response;
-    this.props.onChange(this.props.question.id, currentResponse);
-  }
+    currentResponse[questionID] = response;
+    onChange(question.id, currentResponse);
+  };
 
-  fireDraw() {
-    this.props.updateQuestionID(this.props.question.id);
-    this.props.fireDraw();
-  }
+  const fire = () => {
+    updateQuestionID(question.id);
+    fireDraw();
+  };
 
-  render() {
-    const {
-      noDraw, onFinish, values, question, mode,
-    } = this.props;
-    return (
-      <>
-        {(!values[question.id] && !noDraw)
+  return (
+    <>
+      {(!values[question.id] && !noDraw)
         && (
           <Container>
             <Row>
               <Col align="center">
                 <Button
-                  onClick={this.fireDraw}
+                  onClick={fire}
                   disabled={mode === 'CREATE'}
                 >
                   <BsFillPencilFill />
@@ -61,19 +53,19 @@ class QuestionPanel extends Component {
             </Row>
           </Container>
         )}
-        {((values[question.id] && question.questions)
+      {((values[question.id] && question.questions)
           || noDraw)
         && (
           <Suspense fallback={<Loading />}>
             <FormRender
               questions={question.questions}
-              onChange={this.onFormItemChange}
+              onChange={onFormItemChange}
               values={values[question.id]}
               onFinish={onFinish}
             />
           </Suspense>
         )}
-        {(values[question.id] && !question.questions)
+      {(values[question.id] && !question.questions)
         && (
           <>
             <Container>
@@ -87,9 +79,8 @@ class QuestionPanel extends Component {
             </Container>
           </>
         )}
-      </>
-    );
-  }
+    </>
+  );
 }
 
 export default QuestionPanel;
