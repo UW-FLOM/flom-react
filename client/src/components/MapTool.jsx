@@ -1,5 +1,5 @@
 import React, {
-  useState, useRef, useEffect, useCallback, useMemo, forwardRef,
+  useRef, useCallback, useMemo
 } from 'react';
 
 import { map } from 'lodash';
@@ -22,28 +22,6 @@ function currentMode(mode) {
 }
 
 function MapTool({ tileURL, tileAttribution, mode, onFeatureDrawn, objects }) {
-  /*
-  componentDidUpdate(prevProps) {
-    const { mode, objects } = this.props;
-    if (prevProps.objects !== objects) {
-      this.setState({ objects });
-    }
-    if (prevProps.mode !== mode) {
-      this.setState({ mode });
-      this.changeMode(mode);
-    }
-  }
-
-  handleFeatureDrawn(event) {
-    if (event.eventType !== 'clear') {
-      if (event.latLngs !== undefined || event.latLngs.length !== 0) {
-        const { onFeatureDrawn } = this.props;
-        onFeatureDrawn(polygonFromLatLngs(event.latLngs));
-        freeDraw.clear();
-      }
-    }
-  }
-  */
 
   const freedrawRef = useRef(null);
 
