@@ -1,7 +1,5 @@
 import React, { Component, lazy, Suspense } from 'react';
 
-// import MapTool from '../components/MapTool';
-//import MapQuestion from '../components/MapQuestion';
 import TitleRender from '../components/TitleRender';
 import Loading from '../components/Loading'
 
@@ -13,9 +11,7 @@ const MapQuestion = lazy(() => import('../components/MapQuestion')
 // Process Freedraw's latLngs to GeoJson Object
 export const featureFromGeometry = (geometry) => {
   let GeoJsonTemplate = {
-    "type": "Feature",
     "geometry": {},
-    "properties": {}
   }
   if (geometry.type === 'polygon') {
     let json = GeoJsonTemplate["geometry"]
@@ -61,7 +57,7 @@ class MapPage extends Component {
     const gisDisplay = [];
     gisDisplay[0] = gis;
     this.setState({
-      gisDisplay,
+      gis: gisDisplay,
     });
   }
 
