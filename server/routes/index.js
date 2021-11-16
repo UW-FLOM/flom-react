@@ -1,5 +1,7 @@
 // Database controllers
 const survey = require('./survey');
+const auth = require('./auth');
+const user = require('./user');
 
 // Asset controllers
 
@@ -20,4 +22,6 @@ module.exports = (app) => {
   app.post('/api/submission/:surveyID', submissionController.create);
   */
   app.use('/api/survey', survey);
+  app.use('/api/auth', auth);
+  app.use('/api/user', user);
 };

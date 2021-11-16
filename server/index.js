@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const path = require('path');
+const path = require('path');
+const helmet = require('helmet');
+const passport = require('passport');
 
 // Create the server and choose a port to bind to
 const app = express();
@@ -13,6 +15,11 @@ app.use(
     extended: true,
   }),
 );
+app.use(helmet());
+
+require('./config/passport')(passport);
+
+app.use(passport.initialize());
 
 app.use('/static', express.static('public'));
 
@@ -23,12 +30,10 @@ mountRoutes(app);
 
 // If in production, serve
 if (process.env.NODE_ENV === 'production') {
-  console.log('Starting production server');
-
   app.use(express.static(path.join(__dirname, '../client/build')));
 
   // Client-side routing
-  app.get('*', function(req, res) {
+  app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
   });
 }

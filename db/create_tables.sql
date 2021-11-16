@@ -71,13 +71,12 @@ CREATE TABLE local_user(
     user_id UUID NOT NULL,
     username varchar NOT NULL,
     password varchar NOT NULL,
-    PRIMARY KEY(user_id),
+    PRIMARY KEY(user_id, username),
     CONSTRAINT fk_user_id
         FOREIGN KEY(user_id)
             REFERENCES users(user_id)
 );
 
-/*
 WITH admin_id AS (
     INSERT INTO
         users (user_id, user_right_id, user_type_id, name)
@@ -87,8 +86,9 @@ WITH admin_id AS (
 INSERT INTO
     local_user(user_id, username, password)
 VALUES
-    (admin_id, 'admin', '$2a$10$7geW09JGm75PvvXB.LfQe.mJ0zbrd71nvBZBkt1T/7/36vUIM/0tG');
+    ((SELECT * FROM admin_id), 'admin', '$2a$10$gV8Z9cUxiJb8HFWlPB4px.Bk7v8kcWNk1mshRa7pa8q9m5LvsuQx6');
 
+/*
 CREATE TABLE IF NOT EXISTS Question_Types (
     QuestionTypeID UUID NOT NULL,
     detail VARCHAR(2048),
