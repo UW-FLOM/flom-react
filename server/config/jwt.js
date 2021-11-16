@@ -8,7 +8,7 @@ const PRIV_KEY = fs.readFileSync(pathToKey, 'utf8');
 module.exports = (user) => {
   const { id } = user;
 
-  const expiresIn = '1h';
+  const expiresIn = '30m';
 
   const payload = {
     sub: id,
@@ -19,6 +19,5 @@ module.exports = (user) => {
 
   return {
     token: `Bearer ${signedToken}`,
-    expires: expiresIn,
   };
 };
