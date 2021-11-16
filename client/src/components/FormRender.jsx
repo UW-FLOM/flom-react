@@ -25,7 +25,9 @@ function Label({ label, audio }) {
   );
 }
 
-function FormRender({ questions, onChange, onFinish }) {
+function FormRender({
+  questions, onChange, onFinish,
+}) {
   FormRender.propTypes = {
     questions: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
@@ -83,7 +85,7 @@ function FormRender({ questions, onChange, onFinish }) {
         }
         if (question.type === 'select') {
           return (
-            <Form.Group className="mb-3" key={question.id} >
+            <Form.Group className="mb-3" key={question.id}>
               <Label label={question.title} audio={question.audio} />
               <Form.Select aria-label={question.title} id={question.id} defaultValue="" onChange={handleChange}>
                 <option disabled value=""> -- select an option -- </option>
@@ -200,7 +202,7 @@ function FormRender({ questions, onChange, onFinish }) {
           );
         }
       })}
-      <Container style={{marginTop: '20px'}}>
+      <Container style={{ marginTop: '20px' }}>
         <Row>
           <Col align="center">
             <Button variant="primary" type="submit">
