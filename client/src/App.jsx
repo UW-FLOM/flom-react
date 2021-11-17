@@ -4,7 +4,10 @@ import Loading from './components/Loading';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage'
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+import SurveyListPage from './pages/SurveyListPage';
+import SurveyDetailPage from "./pages/SurveyDetailPage";
 
 const Survey = lazy(() => import('./pages/Survey')
   .then(({ default: Survey }) => ({ default: Survey })));
@@ -18,6 +21,9 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/dashboard" component={DashboardPage} />
+          <Route exact path="/dashboard/survey" component={SurveyListPage} />
+          <Route exact path="/dashboard/survey/:surveyId" component={SurveyDetailPage} />
           <Suspense fallback={(<Loading />)}>
             <Route exact path="/survey/:surveyId" component={Survey} />
           </Suspense>
