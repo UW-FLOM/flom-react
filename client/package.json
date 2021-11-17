@@ -11,7 +11,6 @@
     "leaflet": "1.7.1",
     "leaflet-freedraw": "2.13.3",
     "lodash": "4.17.21",
-    "moment": "2.29.1",
     "prop-types": "^15.7.2",
     "ramda": "^0.22.1",
     "react": "17.0.2",
