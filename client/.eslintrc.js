@@ -1,11 +1,12 @@
 module.exports = {
+  root: true,
   env: {
     browser: true,
     es6: true,
   },
   extends: [
     'plugin:react/recommended',
-    'airbnb',
+    'eslint:recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -15,8 +16,14 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
-    'react',
   ],
   rules: {
+    'no-use-before-define': 'off',
   },
+  ignorePatterns: ['**/*.stories.{js,jsx}'],
+  settings: {
+    react: {       // default to "createReactClass"
+      "version": "detect",
+    }
+  }
 };
