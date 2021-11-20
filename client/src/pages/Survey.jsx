@@ -1,4 +1,4 @@
-import React, { Component, lazy, Suspense } from 'react';
+import { Component, lazy, Suspense } from 'react';
 
 import { getSurvey, submitAnswer } from '../services/api';
 import PageRender from '../components/PageRender';

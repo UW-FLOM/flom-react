@@ -1,4 +1,3 @@
-import React from 'react';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 
 function Result() {

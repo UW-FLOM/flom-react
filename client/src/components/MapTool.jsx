@@ -1,6 +1,4 @@
-import React, {
-  useRef, useCallback, useMemo
-} from 'react';
+import { useRef, useCallback, useMemo } from 'react';
 
 import { map } from 'lodash';
 import {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import FormRender from './FormRender';
 import ParagraphRender from './ParagraphRender';

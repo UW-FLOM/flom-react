@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PageRender from './PageRender';
 import SwitchRender from './SwitchRender';
 import FormRender from './FormRender';
