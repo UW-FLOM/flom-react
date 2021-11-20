@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { map } from 'lodash';
 import {
   Button, Card, Col, Container, Nav, Navbar, Row,

@@ -1,6 +1,6 @@
 // https://stackoverflow.com/a/47686478
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 
 const useAudio = (src) => {

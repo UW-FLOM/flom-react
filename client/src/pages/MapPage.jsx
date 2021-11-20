@@ -1,4 +1,4 @@
-import React, { Component, lazy, Suspense } from 'react';
+import { Component, lazy, Suspense } from 'react';
 
 import TitleRender from '../components/TitleRender';
 import Loading from '../components/Loading'

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import TitleRender from './TitleRender';
