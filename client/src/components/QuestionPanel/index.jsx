@@ -3,7 +3,7 @@ import {
   Button, Container, Row, Col,
 } from 'react-bootstrap';
 import { BsFillPencilFill } from 'react-icons/bs';
-import Index from '../Loading';
+import Loading from '../Loading';
 
 const FormRender = lazy(() => import('../FormRender'));
 
@@ -53,7 +53,7 @@ function QuestionPanel({
       {((values[question.id] && question.questions)
           || noDraw)
         && (
-          <Suspense fallback={<Index />}>
+          <Suspense fallback={<Loading />}>
             <FormRender
               questions={question.questions}
               onChange={onFormItemChange}

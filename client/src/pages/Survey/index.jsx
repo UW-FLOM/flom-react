@@ -2,7 +2,7 @@ import { Component, lazy, Suspense } from 'react';
 
 import { getSurvey, submitAnswer } from '../../services/api';
 import PageRender from '../../components/PageRender';
-import Index from '../../components/Loading';
+import Loading from '../../components/Loading';
 
 const IntroRender = lazy(() => import('../../components/IntroRender'));
 const FormRender = lazy(() => import('../../components/FormRender'));
@@ -126,7 +126,7 @@ class Survey extends Component {
           .catch((err) => console.log(err));
       }
       return (
-        <Suspense fallback={<Index />}>
+        <Suspense fallback={<Loading />}>
           <Result
             status="success"
             title="Survey Complete"
@@ -138,7 +138,7 @@ class Survey extends Component {
 
     if (!isStart) {
       return (
-        <Suspense fallback={<Index />}>
+        <Suspense fallback={<Loading />}>
           <IntroRender
             title={surveyDefinition.title}
             intro={surveyDefinition.intro}
@@ -153,7 +153,7 @@ class Survey extends Component {
 
     if (currentActivity.type === 'form') {
       return (
-        <Suspense fallback={<Index />}>
+        <Suspense fallback={<Loading />}>
           <PageRender
             id={currentActivity.id}
             current={currentPage + 1}
@@ -174,7 +174,7 @@ class Survey extends Component {
     }
     if (currentActivity.type === 'map') {
       return (
-        <Suspense fallback={<Index />}>
+        <Suspense fallback={<Loading />}>
           <MapPage
             key="MapPage"
             activity={currentActivity}
@@ -190,7 +190,7 @@ class Survey extends Component {
     }
     if (currentActivity.type === 'end') {
       return (
-        <Suspense fallback={<Index />}>
+        <Suspense fallback={<Loading />}>
           <EndRender
             id={currentActivity.id}
             current={currentPage + 1}
@@ -207,7 +207,7 @@ class Survey extends Component {
       );
     }
     return (
-      <Suspense fallback={<Index />}>
+      <Suspense fallback={<Loading />}>
         <Result
           status="warning"
           title="Activity type not found"

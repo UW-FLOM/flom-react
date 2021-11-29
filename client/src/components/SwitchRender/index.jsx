@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import Index from '../FormRender';
+import FormRender from '../FormRender';
 import ParagraphRender from '../ParagraphRender';
 
 class SwitchRender extends Component {
@@ -44,7 +44,7 @@ class SwitchRender extends Component {
           ? (
             <>
               <hr />
-              <Index
+              <FormRender
                 questions={questions}
                 onChange={onChange}
                 onFinish={onFinish}

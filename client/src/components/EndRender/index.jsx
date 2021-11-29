@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PageRender from '../PageRender';
 import SwitchRender from '../SwitchRender';
-import Index from '../FormRender';
+import FormRender from '../FormRender';
 import ParagraphRender from '../ParagraphRender';
 
 const comment = [{
@@ -73,7 +73,7 @@ class EndRender extends Component {
             />
           )
           : (
-            <Index
+            <FormRender
               questions={questions[index]}
               onChange={onChange}
               onFinish={this.next}

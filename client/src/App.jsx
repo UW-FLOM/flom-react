@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Index from './components/Loading';
+import Loading from './components/Loading';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -21,7 +21,7 @@ function App() {
           <Route exact path="/dashboard" component={DashboardPage} />
           <Route exact path="/dashboard/survey" component={SurveyListPage} />
           <Route exact path="/dashboard/survey/:surveyId" component={SurveyDetailPage} />
-          <Suspense fallback={(<Index />)}>
+          <Suspense fallback={(<Loading />)}>
             <Route exact path="/survey/:surveyId" component={Survey} />
           </Suspense>
         </Switch>

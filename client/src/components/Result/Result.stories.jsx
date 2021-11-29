@@ -1,10 +1,10 @@
-import Index from './index';
+import Result from './';
 
 export default {
-  component: Index,
+  component: Result,
   title: 'Components/Result',
 };
 
 export const Default = function Default() {
-  return <Index />;
+  return <Result />;
 };

@@ -1,7 +1,7 @@
 import { Component, lazy, Suspense } from 'react';
 
 import TitleRender from '../TitleRender';
-import Index from '../Loading';
+import Loading from '../Loading';
 
 const MapTool = lazy(() => import('../MapTool'));
 const MapQuestion = lazy(() => import('../MapQuestion'));
@@ -105,7 +105,7 @@ class MapRender extends Component {
               current={current}
               length={length}
             />
-            <Suspense fallback={<Index />}>
+            <Suspense fallback={<Loading />}>
               <MapQuestion
                 key={activity.id}
                 activity={activity}
@@ -121,7 +121,7 @@ class MapRender extends Component {
           </div>
         </div>
         <div className="map">
-          <Suspense fallback={<Index />}>
+          <Suspense fallback={<Loading />}>
             <MapTool
               tileURL={activity.tileURL}
               tileAttribution={activity.tileAttribution}
