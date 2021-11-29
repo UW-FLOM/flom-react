@@ -21,9 +21,7 @@ function login(username, password) {
     });
 }
 
-const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem('currentUser'));
-};
+const getCurrentUser = () => JSON.parse(localStorage.getItem('currentUser'));
 
 export const auth = {
   login,
