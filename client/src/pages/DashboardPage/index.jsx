@@ -12,12 +12,13 @@ function DashboardPage() {
         setContent(JSON.stringify(response.data));
       },
       (error) => {
-        const errorContent = (error.response && error.response.data)
-          || error.message
-          || error.toString();
+        const errorContent =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
 
         setContent(errorContent);
-      },
+      }
     );
   }, []);
 

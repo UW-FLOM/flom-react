@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  Container, Nav, Navbar,
-} from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import ReactJson from 'react-json-view';
 import user from '../../services/user';
 
@@ -14,11 +12,12 @@ function SurveyDetailPage(props) {
         setContent(response.data);
       },
       (error) => {
-        const _content = (error.response && error.response.data)
-          || error.message
-          || error.toString();
+        const _content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
         setContent(_content);
-      },
+      }
     );
   }, []);
 

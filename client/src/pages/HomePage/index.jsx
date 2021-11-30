@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
 import { map } from 'lodash';
 import {
-  Button, Card, Col, Container, Nav, Navbar, Row,
+  Button,
+  Card,
+  Col,
+  Container,
+  Nav,
+  Navbar,
+  Row,
 } from 'react-bootstrap';
 import { getSurveyList } from '../../services/api';
 
@@ -44,10 +50,13 @@ function HomePage() {
                   <Card className="mb-4">
                     <Card.Body>
                       <Card.Title>{surveyItem.name}</Card.Title>
-                      <Card.Text>
-                        Sample Text
-                      </Card.Text>
-                      <Button variant="primary" href={`/survey/${surveyItem.survey_id}`}>Take Survey</Button>
+                      <Card.Text>Sample Text</Card.Text>
+                      <Button
+                        variant="primary"
+                        href={`/survey/${surveyItem.survey_id}`}
+                      >
+                        Take Survey
+                      </Button>
                     </Card.Body>
                   </Card>
                 </Col>

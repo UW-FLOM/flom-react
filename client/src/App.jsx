@@ -4,7 +4,11 @@ import Loading from './components/Loading';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-  DashboardPage, HomePage, LoginPage, SurveyListPage, SurveyDetailPage,
+  DashboardPage,
+  HomePage,
+  LoginPage,
+  SurveyListPage,
+  SurveyDetailPage,
 } from './pages';
 
 const Survey = lazy(() => import('./pages/Survey'));
@@ -20,8 +24,12 @@ function App() {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/dashboard" component={DashboardPage} />
           <Route exact path="/dashboard/survey" component={SurveyListPage} />
-          <Route exact path="/dashboard/survey/:surveyId" component={SurveyDetailPage} />
-          <Suspense fallback={(<Loading />)}>
+          <Route
+            exact
+            path="/dashboard/survey/:surveyId"
+            component={SurveyDetailPage}
+          />
+          <Suspense fallback={<Loading />}>
             <Route exact path="/survey/:surveyId" component={Survey} />
           </Suspense>
         </Switch>

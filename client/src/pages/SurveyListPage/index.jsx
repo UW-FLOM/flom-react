@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  Container, ListGroup, Nav, Navbar,
-} from 'react-bootstrap';
+import { Container, ListGroup, Nav, Navbar } from 'react-bootstrap';
 
 import { map } from 'lodash';
 import user from '../../services/user';
@@ -15,11 +13,12 @@ function SurveyListPage() {
         setContent(response.data);
       },
       (error) => {
-        const _content = (error.response && error.response.data)
-          || error.message
-          || error.toString();
+        const _content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
         setContent(_content);
-      },
+      }
     );
   }, []);
 
@@ -41,7 +40,11 @@ function SurveyListPage() {
         {
           // Render a list of links
           map(content, (surveyItem) => (
-            <ListGroup.Item key={surveyItem.survey_id} action href={`/dashboard/survey/${surveyItem.survey_id}`}>
+            <ListGroup.Item
+              key={surveyItem.survey_id}
+              action
+              href={`/dashboard/survey/${surveyItem.survey_id}`}
+            >
               {surveyItem.name}
             </ListGroup.Item>
           ))

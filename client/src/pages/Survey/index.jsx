@@ -108,7 +108,12 @@ class Survey extends Component {
 
   render() {
     const {
-      currentPage, isFetching, surveyLength, isStart, surveyDefinition, isComplete,
+      currentPage,
+      isFetching,
+      surveyLength,
+      isStart,
+      surveyDefinition,
+      isComplete,
     } = this.state;
     if (isFetching) {
       return null;

@@ -31,5 +31,11 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
         cache-dependency-path: client/yarn.lock
-    - run: yarn install
-    - run: yarn test
+    - name: Install dependencies
+      run: yarn install
+    - name: Check prettier
+      run: yarn prettier --check .
+    - name: Check eslint
+      run: eslint . --ext .js,.jsx
+    - name: Run test
+      run: yarn test

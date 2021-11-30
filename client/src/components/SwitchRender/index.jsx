@@ -24,13 +24,13 @@ class SwitchRender extends Component {
   }
 
   render() {
-    const {
-      questions, id, title, onChange, onFinish, intro,
-    } = this.props;
+    const { questions, id, title, onChange, onFinish, intro } = this.props;
     const { displayForm } = this.state;
     return (
       <>
-        { intro && <ParagraphRender intro={intro} style={{ marginBottom: '12px' }} />}
+        {intro && (
+          <ParagraphRender intro={intro} style={{ marginBottom: '12px' }} />
+        )}
         <Form>
           <Form.Check
             type="switch"
@@ -40,31 +40,30 @@ class SwitchRender extends Component {
             onChange={this.displayFurther}
           />
         </Form>
-        {(displayForm && questions)
-          ? (
-            <>
-              <hr />
-              <FormRender
-                questions={questions}
-                onChange={onChange}
-                onFinish={onFinish}
-              />
-            </>
-          )
-          : (
-            <div style={{
+        {displayForm && questions ? (
+          <>
+            <hr />
+            <FormRender
+              questions={questions}
+              onChange={onChange}
+              onFinish={onFinish}
+            />
+          </>
+        ) : (
+          <div
+            style={{
               left: '0',
               right: '0',
               bottom: '0',
               background: 'white',
               textAlign: 'center',
             }}
-            >
-              <Button type="primary" onClick={onFinish}>
-                Next
-              </Button>
-            </div>
-          )}
+          >
+            <Button type="primary" onClick={onFinish}>
+              Next
+            </Button>
+          </div>
+        )}
       </>
     );
   }

@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import {
-  Alert, Form, Button, Container, Row, Col,
-} from 'react-bootstrap';
+import { Alert, Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { map } from 'lodash';
 import PropTypes from 'prop-types';
 
@@ -25,9 +23,7 @@ const Label = function Label({ label, audio }) {
   );
 };
 
-const FormRender = function FormRender({
-  questions, onChange, onFinish,
-}) {
+const FormRender = function FormRender({ questions, onChange, onFinish }) {
   FormRender.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     questions: PropTypes.array.isRequired,
@@ -51,24 +47,24 @@ const FormRender = function FormRender({
   };
 
   const handleChange = (event) => {
-    setInputs(
-      {
-        ...inputs,
-        [event.target.id]: event.target.value,
-      },
-    );
+    setInputs({
+      ...inputs,
+      [event.target.id]: event.target.value,
+    });
   };
 
   return (
-    <Form
-      onSubmit={submitResponse}
-    >
+    <Form onSubmit={submitResponse}>
       {questions.map((question) => {
         if (question.type === 'text') {
           return (
             <Form.Group className="mb-3" key={question.id}>
               <Label label={question.title} audio={question.audio} />
-              <Form.Control type="text" id={question.id} onChange={handleChange} />
+              <Form.Control
+                type="text"
+                id={question.id}
+                onChange={handleChange}
+              />
             </Form.Group>
           );
         }
@@ -76,14 +72,18 @@ const FormRender = function FormRender({
           return (
             <Form.Group className="mb-3" key={question.id}>
               <Label label={question.title} audio={question.audio} />
-              <Form.Select aria-label={question.title} id={question.id} defaultValue="" onChange={handleChange}>
-                <option disabled value=""> -- select an option -- </option>
+              <Form.Select
+                aria-label={question.title}
+                id={question.id}
+                defaultValue=""
+                onChange={handleChange}
+              >
+                <option disabled value="">
+                  {' '}
+                  -- select an option --{' '}
+                </option>
                 {question.options.map((option) => (
-                  <option
-                    id={option.id}
-                    key={option.id}
-                    value={option.id}
-                  >
+                  <option id={option.id} key={option.id} value={option.id}>
                     {option.text}
                   </option>
                 ))}
@@ -93,9 +93,7 @@ const FormRender = function FormRender({
         }
         if (question.type === 'rate') {
           return (
-            <Form.Group
-              key={question.id}
-            >
+            <Form.Group key={question.id}>
               <Label label={question.title} audio={question.audio} />
               <Form.Range id={question.id} onChange={handleChange} />
             </Form.Group>
@@ -103,29 +101,31 @@ const FormRender = function FormRender({
         }
         if (question.type === 'num') {
           return (
-            <Form.Group
-              key={question.id}
-            >
+            <Form.Group key={question.id}>
               <Label label={question.title} audio={question.audio} />
-              <Form.Control type="number" id={question.id} onChange={handleChange} />
+              <Form.Control
+                type="number"
+                id={question.id}
+                onChange={handleChange}
+              />
             </Form.Group>
           );
         }
         if (question.type === 'textarea') {
           return (
-            <Form.Group
-              key={question.id}
-            >
+            <Form.Group key={question.id}>
               <Label label={question.title} audio={question.audio} />
-              <Form.Control type="textarea" id={question.id} onChange={handleChange} />
+              <Form.Control
+                type="textarea"
+                id={question.id}
+                onChange={handleChange}
+              />
             </Form.Group>
           );
         }
         if (question.type === 'radio') {
           return (
-            <Form.Group
-              key={question.id}
-            >
+            <Form.Group key={question.id}>
               <Label label={question.title} audio={question.audio} />
               <div key={question.id} className="mb-3">
                 {question.options.map((option) => (
@@ -144,9 +144,7 @@ const FormRender = function FormRender({
         }
         if (question.type === 'boolean') {
           return (
-            <Form.Group
-              key={question.id}
-            >
+            <Form.Group key={question.id}>
               <Label label={question.title} audio={question.audio} />
               <div key={question.id} className="mb-3">
                 <Form.Check
@@ -171,9 +169,7 @@ const FormRender = function FormRender({
         }
         if (question.type === 'checkbox') {
           return (
-            <Form.Group
-              key={question.id}
-            >
+            <Form.Group key={question.id}>
               <Label label={question.title} audio={question.audio} />
               <div key={question.id} className="mb-3">
                 {question.options.map((option) => (

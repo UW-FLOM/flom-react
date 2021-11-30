@@ -15,7 +15,10 @@ function login(username, password) {
     })
     .then((response) => {
       if (response.data.token) {
-        localStorage.setItem('currentUser', JSON.stringify(response.data.token));
+        localStorage.setItem(
+          'currentUser',
+          JSON.stringify(response.data.token)
+        );
       }
       return response.data;
     });

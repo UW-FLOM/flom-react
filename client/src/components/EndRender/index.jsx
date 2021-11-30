@@ -4,17 +4,19 @@ import SwitchRender from '../SwitchRender';
 import FormRender from '../FormRender';
 import ParagraphRender from '../ParagraphRender';
 
-const comment = [{
-  title: 'Draw New Area',
-  id: 'comment',
-  questions: [
-    {
-      title: 'Do you have any comments or feedback about this online survey?',
-      type: 'textarea',
-      id: 'comment',
-    },
-  ],
-}];
+const comment = [
+  {
+    title: 'Draw New Area',
+    id: 'comment',
+    questions: [
+      {
+        title: 'Do you have any comments or feedback about this online survey?',
+        type: 'textarea',
+        id: 'comment',
+      },
+    ],
+  },
+];
 class EndRender extends Component {
   constructor(prop) {
     super(prop);
@@ -41,9 +43,8 @@ class EndRender extends Component {
   }
 
   render() {
-    const {
-      current, length, title, intro, progress, questions, onChange, id,
-    } = this.props;
+    const { current, length, title, intro, progress, questions, onChange, id } =
+      this.props;
     const { index } = this.state;
     return (
       <PageRender
@@ -54,31 +55,28 @@ class EndRender extends Component {
         intro={intro}
         progress={progress}
       >
-        { questions[index].intro
-          && (
+        {questions[index].intro && (
           <ParagraphRender
             id={questions[index].id}
             intro={questions[index].intro}
           />
-          )}
-        {(questions[index].type === 'switch')
-          ? (
-            <SwitchRender
-              key={questions[index].id}
-              id={questions[index].id}
-              onChange={onChange}
-              title={questions[index].title}
-              questions={questions[index].questions}
-              onFinish={this.next}
-            />
-          )
-          : (
-            <FormRender
-              questions={questions[index]}
-              onChange={onChange}
-              onFinish={this.next}
-            />
-          )}
+        )}
+        {questions[index].type === 'switch' ? (
+          <SwitchRender
+            key={questions[index].id}
+            id={questions[index].id}
+            onChange={onChange}
+            title={questions[index].title}
+            questions={questions[index].questions}
+            onFinish={this.next}
+          />
+        ) : (
+          <FormRender
+            questions={questions[index]}
+            onChange={onChange}
+            onFinish={this.next}
+          />
+        )}
       </PageRender>
     );
   }

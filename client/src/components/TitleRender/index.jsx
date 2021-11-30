@@ -2,9 +2,7 @@ import { ProgressBar } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import ParagraphRender from '../ParagraphRender';
 
-function TitleRender({
-  title, intro, current, length, id
-}) {
+function TitleRender({ title, intro, current, length, id }) {
   TitleRender.propTypes = {
     title: PropTypes.string.isRequired,
     intro: PropTypes.string,
@@ -20,32 +18,30 @@ function TitleRender({
 
   return (
     <>
-      {(current && length)
-        ? (
+      {current && length ? (
+        <div
+          className="ant-page-header-heading-left"
+          style={{
+            paddingTop: '10px',
+            paddingBottom: '10px',
+          }}
+        >
+          <ProgressBar now={(current / length) * 100} />
           <div
-            className="ant-page-header-heading-left"
+            className="ant-page-header-heading-title"
             style={{
-              paddingTop: '10px',
-              paddingBottom: '10px',
+              fontSize: '38px',
+              lineHeight: 'initial',
+              whiteSpace: 'initial',
             }}
           >
-            <ProgressBar
-              now={(current / length) * 100}
-            />
-            <div
-              className="ant-page-header-heading-title"
-              style={{
-                fontSize: '38px',
-                lineHeight: 'initial',
-                whiteSpace: 'initial',
-              }}
-            >
-              <h2>{title}</h2>
-            </div>
+            <h2>{title}</h2>
           </div>
-        )
-        : <h2>{title}</h2>}
-      { intro && <ParagraphRender id={id} intro={intro} />}
+        </div>
+      ) : (
+        <h2>{title}</h2>
+      )}
+      {intro && <ParagraphRender id={id} intro={intro} />}
     </>
   );
 }

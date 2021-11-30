@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import {
-  Alert, Button, Form,
-} from 'react-bootstrap';
+import { Alert, Button, Form } from 'react-bootstrap';
 
 import auth from '../../services/auth';
 
@@ -27,15 +25,16 @@ function LoginPage() {
         window.location.replace('/dashboard');
       },
       (error) => {
-        const resMessage = (error.response
-            && error.response.data
-            && error.response.data.message)
-          || error.message
-          || error.toString();
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
 
         setLoading(false);
         setMessage(resMessage);
-      },
+      }
     );
   };
 
@@ -68,9 +67,7 @@ function LoginPage() {
         </Button>
         {message && (
           <Form.Group className="mb-3">
-            <Alert variant="danger">
-              {message}
-            </Alert>
+            <Alert variant="danger">{message}</Alert>
           </Form.Group>
         )}
       </Form>
