@@ -36,6 +36,6 @@ jobs:
     - name: Check prettier
       run: yarn prettier --check .
     - name: Check eslint
-      run: eslint . --ext .js,.jsx
+      run: yarn eslint . --ext .js,.jsx
     - name: Run test
       run: yarn test
