@@ -6,9 +6,9 @@ WORKDIR /app
 
 FROM base AS builder
 
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock .yarn ./
 
-RUN yarn config set ignore-engines true
+RUN yarn set version berry
 
 RUN yarn install --production
 
