@@ -26,6 +26,8 @@ jobs:
         node-version: 16.x
         cache: 'yarn'
         cache-dependency-path: client/yarn.lock
+    - name: Use Yarn Berry
+      run: yarn set version berry
     - name: Install dependencies
       run: yarn install
     - name: Check prettier
