@@ -1,6 +1,6 @@
 import { BsFillCheckCircleFill, BsFillExclamationCircleFill, BsFillExclamationTriangleFill } from 'react-icons/bs'; //get logos from here
 
-function Result(status, title, intro) {
+const Result = function Result(status, title, intro) {
   let comp;
 
   if ( { status } === "success" ) {
