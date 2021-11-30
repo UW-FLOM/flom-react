@@ -82,6 +82,6 @@ const Result = function Result(status, title, intro) {
       { status, title, intro }
     </div>
   );
-}
+};
 
 export default Result;
