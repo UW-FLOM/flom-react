@@ -4,12 +4,11 @@
     "prod:start": "docker-compose build --no-cache && yarn prod:resume",
     "prod:resume": "docker-compose up -d",
     "prod:stop": "docker-compose stop",
-    "prod:destroy": "docker-compose down -v",
-    "dev:setup": "yarn setup && yarn dev:start",
+    "prod:destroy": "docker-compose down -v --rmi all --remove-orphans",
     "dev:start": "docker-compose -f docker-compose.dev.yml build && yarn dev:resume",
     "dev:resume": "docker-compose -f docker-compose.dev.yml -p flom-react_dev up -d",
     "dev:stop": "docker-compose -f docker-compose.dev.yml -p flom-react_dev stop",
-    "dev:destroy": "docker-compose -f docker-compose.dev.yml -p flom-react_dev down -v"
+    "dev:destroy": "docker-compose -f docker-compose.dev.yml -p flom-react_dev down -v --rmi all --remove-orphans"
   },
   "license": "UNLICENSED"
 }
