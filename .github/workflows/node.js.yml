@@ -8,10 +8,6 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-    
-defaults:
-      run:
-        working-directory: client
 
 jobs:
   build:
@@ -30,5 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
+        cache-dependency-path: client/yarn.lock
     - run: yarn install
     - run: yarn test
