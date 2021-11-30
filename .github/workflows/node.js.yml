@@ -38,6 +38,7 @@ jobs:
       run: yarn test
   
   docker-dev-build:
+    needs: client-test
 
     runs-on: ubuntu-latest
 
