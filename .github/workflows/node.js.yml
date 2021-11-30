@@ -44,4 +44,4 @@ jobs:
     - name: Start Development Docker
       run: yarn dev:start
     - name: Stop Development Docker
-      run: yarn dev:stop
+      run: yarn dev:destroy
