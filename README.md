@@ -14,6 +14,6 @@ customizable suite of tools for collecting mental maps digitally for linguistic 
 ## Development
 Go into the project folder and type the following command to initialize, build and start docker containers
 ```
-yarn dev:setup
+yarn dev:start
 ```
 The Application now runs on http://localhost:3000

@@ -10,7 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  client-test:
 
     runs-on: ubuntu-latest
     
@@ -34,3 +34,14 @@ jobs:
       run: yarn lint
     - name: Run test
       run: yarn test
+  
+  docker-dev-build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Start Development Docker
+      run: yarn dev:start
+    - name: Stop Development Docker
+      run: yarn dev:destroy
