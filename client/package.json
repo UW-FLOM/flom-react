@@ -25,6 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "test": "react-scripts test",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
@@ -39,6 +40,7 @@
     "@testing-library/react": "12.1.2",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "3.3.1",
     "prettier": "2.5.0",
     "yarn-audit-fix": "^7.2.3"
   },
