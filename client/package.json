@@ -26,8 +26,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "prettier": "yarn prettier --write .",
-    "prettier-check": "yarn prettier --check .",
+    "prettier": "prettier --write .",
+    "prettier-check": "prettier --check .",
     "lint": "eslint . --ext .js,.jsx",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
