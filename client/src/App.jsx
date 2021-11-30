@@ -19,7 +19,6 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={LoginPage} />
-          <Route path='/timeline' element={Timeline} />
           <Suspense fallback={(<Loading />)}>
             <Route exact path="/survey/:surveyId" component={Survey} />
           </Suspense>

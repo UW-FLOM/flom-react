@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {map} from 'lodash';
 import {getSurveyList} from '../services/api';
 import {Button, Card, Col, Container, Nav, Navbar, Row} from 'react-bootstrap';
+import Timeline from '../components/Timeline';
 
 class HomePage extends Component {
   state = {
@@ -58,6 +59,9 @@ class HomePage extends Component {
               }
             </Row>
           </Container>
+            <Timeline
+              events={[["success", "first"], ["pending", "second"], ["error", "third"]]}
+            />
         </div>
       </>
     );
