@@ -71,7 +71,7 @@ class MapRender extends Component {
       gis,
       mode: 'NONE',
     });
-  }
+  };
 
   fireDraw() {
     this.setState({
@@ -80,13 +80,7 @@ class MapRender extends Component {
   }
 
   render() {
-    const {
-      activity,
-      values,
-      onChange,
-      current,
-      length,
-    } = this.props;
+    const { activity, values, onChange, current, length } = this.props;
 
     const { gis, mode } = this.state;
     return (

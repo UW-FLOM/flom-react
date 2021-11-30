@@ -2,9 +2,7 @@ import { Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import TitleRender from '../TitleRender';
 
-function PageRender({
-  length, children, current, intro, title, id,
-}) {
+function PageRender({ length, children, current, intro, title, id }) {
   PageRender.propTypes = {
     title: PropTypes.string.isRequired,
     children: PropTypes.element.isRequired,

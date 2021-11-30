@@ -26,6 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "prettier": "prettier --write .",
+    "prettier-check": "prettier --check .",
+    "lint": "eslint . --ext .js,.jsx",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
@@ -60,9 +63,11 @@
   "eslintConfig": {
     "env": {
       "browser": true,
-      "node": true
+      "node": true,
+      "jest": true
     },
     "extends": [
+      "plugin:prettier/recommended",
       "plugin:react/jsx-runtime"
     ],
     "parser": "babel-eslint",
@@ -83,5 +88,8 @@
         }
       }
     ]
+  },
+  "prettier": {
+    "singleQuote": true
   }
 }

@@ -1,15 +1,15 @@
 import { useRef, useCallback, useMemo } from 'react';
 
 import { map } from 'lodash';
-import {
-  MapContainer, TileLayer, Marker, Popup, Polygon,
-} from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Polygon } from 'react-leaflet';
 import Freedraw, { CREATE, NONE } from 'react-leaflet-freedraw';
 import PropTypes from 'prop-types';
 
 export const polygonFromLatLngs = (latLngs) => ({
   type: 'polygon',
-  geometry: map(latLngs, (shape) => map(shape, (point) => [point.lat, point.lng])),
+  geometry: map(latLngs, (shape) =>
+    map(shape, (point) => [point.lat, point.lng])
+  ),
 });
 
 function currentMode(mode) {
@@ -20,27 +20,22 @@ function currentMode(mode) {
 }
 
 function MapTool({ tileURL, tileAttribution, mode, onFeatureDrawn, objects }) {
-
   const freedrawRef = useRef(null);
 
-  const handleMarkersDraw = useCallback(
-    (event) => {
-      if (event.eventType !== 'clear') {
-        if (event.latLngs !== undefined || event.latLngs.length !== 0) {
-          onFeatureDrawn(polygonFromLatLngs(event.latLngs));
-          freedrawRef.current.clear();
-        }
+  const handleMarkersDraw = useCallback((event) => {
+    if (event.eventType !== 'clear') {
+      if (event.latLngs !== undefined || event.latLngs.length !== 0) {
+        onFeatureDrawn(polygonFromLatLngs(event.latLngs));
+        freedrawRef.current.clear();
       }
-    },
-    [],
-  );
-
+    }
+  }, []);
 
   const handlers = useMemo(
     () => ({
       markers: handleMarkersDraw,
     }),
-    [handleMarkersDraw],
+    [handleMarkersDraw]
   );
 
   return (
@@ -55,24 +50,19 @@ function MapTool({ tileURL, tileAttribution, mode, onFeatureDrawn, objects }) {
       doubleClickZoom={false}
       touchZoom={false}
     >
-      <TileLayer
-        attribution={tileAttribution}
-        url={tileURL}
-      />
+      <TileLayer attribution={tileAttribution} url={tileURL} />
       <Freedraw
         mode={currentMode(mode)}
         eventHandlers={handlers}
         ref={freedrawRef}
       />
-      {
-        map(objects, (object, idx) => (
-          <Polygon
-            key={idx}
-            color="#b1ef8d"
-            positions={object.geometry.coordinates}
-          />
-        ))
-      }
+      {map(objects, (object, idx) => (
+        <Polygon
+          key={idx}
+          color="#b1ef8d"
+          positions={object.geometry.coordinates}
+        />
+      ))}
     </MapContainer>
   );
 }
@@ -90,9 +80,11 @@ MapTool.propTypes = {
 };
 
 MapTool.defaultProps = {
-  tileURL: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}{r}.png',
-  tileAttribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-  center: [38.678052, -96.273380],
+  tileURL:
+    'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}{r}.png',
+  tileAttribution:
+    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+  center: [38.678052, -96.27338],
   zoom: 4,
   bounds: null,
 };

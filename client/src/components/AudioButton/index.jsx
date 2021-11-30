@@ -10,7 +10,13 @@ const useAudio = (src) => {
 
   const toggle = () => setPlaying(!playing);
 
-  useEffect(() => { if (playing) { audio.play(); } else { audio.pause(); } }, [playing]);
+  useEffect(() => {
+    if (playing) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  }, [playing]);
 
   useEffect(() => {
     audio.addEventListener('ended', () => setPlaying(false));
