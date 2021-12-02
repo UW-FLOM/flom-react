@@ -26,8 +26,6 @@ jobs:
         node-version: 16.x
         cache: 'yarn'
         cache-dependency-path: client/yarn.lock
-    - name: Use Yarn Berry
-      run: yarn set version berry
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
       run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
@@ -46,15 +44,3 @@ jobs:
       run: yarn lint
     - name: Run test
       run: yarn test
-  
-  docker-dev-build:
-    needs: client-test
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Start Development Docker
-      run: yarn dev:start
-    - name: Stop Development Docker
-      run: yarn dev:destroy

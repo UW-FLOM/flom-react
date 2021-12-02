@@ -6,7 +6,7 @@ customizable suite of tools for collecting mental maps digitally for linguistic 
 * [Docker Engine](https://docs.docker.com/engine/install/)
 * [Docker Compose](https://docs.docker.com/compose/install/)
 * [Node.js](https://nodejs.org/en/download/)
-* [yarn](https://yarnpkg.com/getting-started/install)
+* [Classic yarn](https://classic.yarnpkg.com/en/docs/install)
 
 
 # Getting started

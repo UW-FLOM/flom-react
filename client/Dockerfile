@@ -4,9 +4,7 @@ WORKDIR /app
 
 FROM base AS builder
 
-COPY package.json yarn.lock .yarn ./
-
-RUN yarn set version berry
+COPY package.json yarn.lock ./
 
 RUN yarn install --network-timeout 1000000
 

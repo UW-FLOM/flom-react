@@ -4,9 +4,7 @@ EXPOSE 3001
 
 WORKDIR /app
 
-COPY package.json yarn.lock .yarn ./
-
-RUN yarn set version berry
+COPY package.json yarn.lock ./
 
 RUN yarn install --immutable --network-timeout 1000000
 
