@@ -13,7 +13,7 @@ jobs:
   client-test:
 
     runs-on: ubuntu-latest
-    
+
     defaults:
       run:
         working-directory: client
@@ -44,3 +44,5 @@ jobs:
       run: yarn lint
     - name: Run test
       run: yarn test
+    - name: Check react-scripts runnable
+      run: yarn build
