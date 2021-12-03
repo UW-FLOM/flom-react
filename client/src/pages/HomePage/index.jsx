@@ -46,14 +46,14 @@ function HomePage() {
             {
               // Render a list of links
               map(survey, (surveyItem) => (
-                <Col key={surveyItem.survey_id} md={4}>
+                <Col key={surveyItem.id} md={4}>
                   <Card className="mb-4">
                     <Card.Body>
                       <Card.Title>{surveyItem.name}</Card.Title>
                       <Card.Text>Sample Text</Card.Text>
                       <Button
                         variant="primary"
-                        href={`/survey/${surveyItem.survey_id}`}
+                        href={`/survey/${surveyItem.id}`}
                       >
                         Take Survey
                       </Button>
