@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "setup": "yarn && cd client && yarn && cd ../server && yarn",
+    "init:dep": "yarn && cd client && yarn && cd ../server && yarn",
+    "init:secret": "sh init.sh",
     "prod:start": "docker-compose build --no-cache && yarn prod:resume",
     "prod:resume": "docker-compose up -d",
     "prod:stop": "docker-compose stop",

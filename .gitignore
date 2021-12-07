@@ -18,6 +18,9 @@ build/
 # Database data
 data/
 
+# Secrets
+secret/
+
 # misc
 .DS_Store
 .env.local
