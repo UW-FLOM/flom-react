@@ -21,6 +21,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - /app/node_modules
+      - ./secret:/app/secret
     ports:
       - "3001:3001"
     environment:
