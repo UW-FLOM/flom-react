@@ -19,6 +19,7 @@ services:
     volumes:
       - /app/node_modules
       - ./server:/app
+      - ./secret:/app/secret
     ports:
       - "3001:3001"
     depends_on:

@@ -12,7 +12,7 @@ services:
       - ./.env
     restart: always
     volumes:
-      - ./config/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ./db/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
       - ./data:/var/lib/postgresql/data
   server:
     container_name: flom-react_prod_server
