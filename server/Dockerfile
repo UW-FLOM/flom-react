@@ -1,4 +1,4 @@
-FROM node:lts-alpine as base
+FROM node:lts as base
 
 EXPOSE 3001
 

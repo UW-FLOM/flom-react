@@ -1,4 +1,4 @@
-FROM node:lts-alpine AS base
+FROM node:lts AS base
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY . /app
 
 RUN yarn build
 
-FROM nginx:alpine
+FROM nginx:stable
 
 COPY --from=builder /app/build /usr/share/nginx/html
 
