@@ -20,6 +20,7 @@ data/
 
 # Secrets
 secret/
+.env
 
 # misc
 .DS_Store
