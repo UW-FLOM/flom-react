@@ -1,20 +1,17 @@
-FROM node:lts AS base
+FROM nginx:stable AS Client
 
 WORKDIR /app
 
-FROM base AS builder
+COPY . ./
 
-COPY package.json yarn.lock ./
-
-RUN yarn install --network-timeout 1000000
-
-COPY . /app
+RUN apt -y update && apt -y install npm
+RUN npm install -g n yarn
+RUN n lts
+RUN npm install --force
 
 RUN yarn build
 
-FROM nginx:stable
-
-COPY --from=builder /app/build /usr/share/nginx/html
+RUN cp -r build/* /usr/share/nginx/html/
 
 RUN rm /etc/nginx/conf.d/default.conf
 
@@ -22,4 +19,4 @@ COPY nginx.conf /etc/nginx/conf.d
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT exec nginx -g "daemon off;"

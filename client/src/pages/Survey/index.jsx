@@ -1,5 +1,6 @@
-import { Component, lazy, Suspense } from 'react';
-
+import { useState, useEffect, lazy, Suspense } from 'react';
+import { useParams } from "react-router-dom";
+import { createBrowserHistory } from "history";
 import { getSurvey, submitAnswer } from '../../services/api';
 import PageRender from '../../components/PageRender';
 import Loading from '../../components/Loading';
@@ -10,217 +11,196 @@ const EndRender = lazy(() => import('../../components/EndRender'));
 const MapPage = lazy(() => import('../../components/MapRender'));
 const Result = lazy(() => import('../../components/Result'));
 
-class Survey extends Component {
-  constructor(props) {
-    super(props);
 
-    const storedSurveyDefinitions = {};
-    const storedCurrentPage = 0;
-    const storedResponse = {};
+function Survey(props) {
+    const history = createBrowserHistory();
+    const unblock = history.block();
 
-    /*
-    if(localStorage.getItem("surveyID") === storedSurveyID) {
-      storedSurveyDefinitions = JSON.parse(localStorage.getItem("surveyDefinitions"));
-      storedCurrentPage = parseInt(localStorage.getItem("currentPage"));
-      storedSurveyStart = localStorage.getItem("surveyStart") === 'true';
-      storedResponse = JSON.parse(localStorage.getItem("response"));
-    } else {
-      localStorage.clear();
-      localStorage.setItem("surveyID", storedSurveyID);
-      localStorage.setItem("surveyDefinitions", JSON.stringify(storedSurveyDefinitions));
-      localStorage.setItem("currentPage", storedCurrentPage);
-      localStorage.setItem("surveyStart", "false");
-      localStorage.setItem("response", JSON.stringify(storedResponse));
+    var { surveyId, isComplete} = useParams();
+    const initialState = {
+       surveyDefinition: {},
+        currentPage: 0,
+        response: {},
+        isFetching: true,
+        isComplete: false,
+        isStart: false,
+        startTime: 0,
+        surveyLength: 0,
+        surveyId: surveyId,
     }
-    */
+console.log(surveyId);
+    const [runSurvey, setRunSurvey] = useState(initialState);
+    useEffect(() => {
 
-    this.state = {
-      surveyDefinition: storedSurveyDefinitions,
-      currentPage: storedCurrentPage,
-      response: storedResponse,
-      isFetching: true,
-      isComplete: false,
-      isStart: false,
-      surveyLength: 0,
-    };
+        getSurvey(surveyId)
+            .then((res) => {
+                //console.log(res[0].detail);           
+                setRunSurvey(setRunSurvey => ({...runSurvey, 
+                  surveyDefinition: res[0].detail,
+                  currentPage: 0,
+                  surveyLength: res[0].detail.activities.length,
+                  isFetching: false
+                 }));
+               // document.title = res[0].detail.title;
+            })
+            .catch((err) => console.log(err));
+    }, []);
 
-    this.updateResponse = this.updateResponse.bind(this);
-    this.next = this.next.bind(this);
-    this.getResponse = this.getResponse.bind(this);
-    this.start = this.start.bind(this);
-  }
-
-  componentDidMount() {
-    const self = this;
-    getSurvey(this.props.match.params.surveyId)
-      .then((res) => {
-        console.log(res[0].detail);
-        self.setState({
-          surveyDefinition: res[0].detail,
-          isFetching: false,
-          surveyLength: res[0].detail.activities.length,
-        });
-        document.title = res[0].detail.title;
-      })
-      .catch((err) => console.log(err));
-  }
-
-  getSurvey() {
-    return this.state.surveyDefinition;
-  }
-
-  getSurveyId() {
-    return this.props.match.params.surveyId;
-  }
-
-  // Returns the current activity based on the index
-  getActivity() {
-    return this.getSurvey().activities[this.state.currentPage];
-  }
-
-  updateResponse(questionID, response) {
-    const activityID = this.getActivity().id;
-    const currentResponse = this.state.response;
-    currentResponse[activityID][questionID] = response;
-    this.setState({ response: currentResponse });
-  }
-
-  getResponse(questionID) {
-    const { response } = this.state;
-    if (!response[questionID]) {
-      const currentResponse = this.state.response;
-      currentResponse[questionID] = {};
-      this.setState({ response: currentResponse });
-    }
-    return response;
-  }
-
-  next() {
-    const { currentPage: currentPage1 } = this.state;
-    const currentPage = currentPage1 + 1;
-    this.setState({ currentPage });
-    localStorage.setItem('currentPage', currentPage);
-  }
-
-  start() {
-    this.setState({ isStart: true });
-  }
-
-  render() {
-    const {
-      currentPage,
-      isFetching,
-      surveyLength,
-      isStart,
-      surveyDefinition,
-      isComplete,
-    } = this.state;
-    if (isFetching) {
-      return null;
-    }
-    if (currentPage === this.getSurvey().activities.length) {
-      localStorage.clear();
-      if (!isComplete) {
-        submitAnswer(this.getSurveyId(), this.state.response)
-          .then(() => {
-            console.log('Submitted');
-            this.setState({
-              isComplete: true,
-            });
-          })
-          .catch((err) => console.log(err));
-      }
-      return (
-        <Suspense fallback={<Loading />}>
-          <Result
-            status="success"
-            title="Survey Complete"
-            subTitle="Thank you for participating!"
-          />
-        </Suspense>
-      );
+    const getSurveyDef = () => {
+      return runSurvey.surveyDefinition;
     }
 
-    if (!isStart) {
-      return (
-        <Suspense fallback={<Loading />}>
-          <IntroRender
-            title={surveyDefinition.title}
-            intro={surveyDefinition.intro}
-            onFinish={this.start}
-          />
-        </Suspense>
-      );
+    const getSurveyId = () => {
+        return runSurvey.surveyId;
     }
 
-    const currentActivity = this.getActivity();
-    const currentResponse = this.getResponse(currentActivity.id);
+    // Returns the current activity based on the index
+    const getActivity = () => {
+        return getSurveyDef().activities[runSurvey.currentPage];
+    }
+
+    const updateResponse = (questionID, response) => {
+        const activityID = getActivity().id;
+        const currentResponse = runSurvey.response;
+        currentResponse[activityID][questionID] = response;
+        setRunSurvey(setRunSurvey => ({...runSurvey, response: currentResponse }));
+    }
+
+    const getResponse = (questionID) => {
+        const { response } = runSurvey;
+        if (!response[questionID]) {
+            const currentResponse = runSurvey.response;
+            currentResponse[questionID] = {};
+            setRunSurvey(setRunSurvey => ({...runSurvey, response: currentResponse }));
+        }
+        return runSurvey.response;
+    }
+
+    const next = () => {
+        const { currentPage: currentPage1 } = runSurvey;
+        const currentPage = currentPage1 + 1;
+        setRunSurvey(setRunSurvey => ({...runSurvey, currentPage: currentPage }));
+        localStorage.setItem('currentPage', currentPage);
+    }
+
+    const start = () => {
+        setRunSurvey(setRunSurvey => ({ ...runSurvey, isStart: true, startTime: Date.now() }));
+    }
+
+    // Check Check
+
+    if (runSurvey.isFetching) {
+        return null;
+    }
+    if (runSurvey.currentPage === getSurveyDef().activities.length) {
+        localStorage.clear();
+        if (!isComplete) {
+            console.log('isComplete: ' + runSurvey.startTime)
+            submitAnswer(getSurveyId(), runSurvey.response, runSurvey.startTime)
+                .then(() => {
+                    console.log('Submitted');
+                    //setRunSurvey(setRunSurvey => ({ ...runSurvey, isComplete: true }));
+                    isComplete = true;
+                    unblock();
+                })
+                .catch((err) => console.log(err));
+        }
+        return (
+            <Suspense fallback={<Loading />}>
+                <Result
+                    status="success"
+                    title="Survey Complete"
+                    subTitle="Thank you for participating!"
+                />
+            </Suspense>
+        );
+    }
+
+    if (!runSurvey.isStart) {
+        return (
+            <Suspense fallback={<Loading />}>
+                <IntroRender
+                    title={runSurvey.surveyDefinition.title}
+                    intro={runSurvey.surveyDefinition.intro}
+                    onFinish={start}
+                />
+            </Suspense>
+        );
+    }
+
+    const currentActivity = getActivity();
+    const currentResponse = getResponse(currentActivity.id);
 
     if (currentActivity.type === 'form') {
-      return (
-        <Suspense fallback={<Loading />}>
-          <PageRender
-            id={currentActivity.id}
-            current={currentPage + 1}
-            length={surveyLength}
-            title={currentActivity.title}
-            intro={currentActivity.intro}
-            progress
-          >
-            <FormRender
-              questions={currentActivity.questions}
-              onChange={this.updateResponse}
-              values={currentResponse}
-              onFinish={this.next}
-            />
-          </PageRender>
-        </Suspense>
-      );
+      console.log(currentActivity.type)
+        return (
+            <Suspense fallback={<Loading />}>
+                <PageRender
+                    id={currentActivity.id}
+                    current={runSurvey.currentPage + 1}
+                    length={runSurvey.surveyLength}
+                    title={currentActivity.title}
+                    intro={currentActivity.intro}
+                    progress
+                >
+                    <FormRender
+                        questions={currentActivity.questions}
+                        onChange={updateResponse}
+                        values={currentResponse}
+                        onFinish={next}
+                    />
+                </PageRender>
+            </Suspense>
+        );
     }
     if (currentActivity.type === 'map') {
-      return (
-        <Suspense fallback={<Loading />}>
-          <MapPage
-            key="MapPage"
-            activity={currentActivity}
-            onChange={this.updateResponse}
-            onFinish={this.next}
-            values={currentResponse}
-            current={currentPage + 1}
-            length={surveyLength}
-            progress
-          />
-        </Suspense>
-      );
+      console.log(currentActivity.type)
+        return (
+            <Suspense fallback={<Loading />}>
+                <MapPage
+                    key="MapPage"
+                    activity={currentActivity}
+                    onChange={updateResponse}
+                    onFinish={next}
+                    values={currentResponse}
+                    current={runSurvey.currentPage + 1}
+                    length={runSurvey.surveyLength}
+                    isComplete={isComplete}
+                    progress
+                />
+            </Suspense>
+        );
     }
     if (currentActivity.type === 'end') {
-      return (
-        <Suspense fallback={<Loading />}>
-          <EndRender
-            id={currentActivity.id}
-            current={currentPage + 1}
-            length={surveyLength}
-            title={currentActivity.title}
-            intro={currentActivity.intro}
-            questions={currentActivity.questions}
-            onChange={this.updateResponse}
-            values={currentResponse}
-            onFinish={this.next}
-            progress
-          />
-        </Suspense>
-      );
+        console.log(currentActivity.type)
+        return (
+            <Suspense fallback={<Loading />}>
+                <EndRender
+                    id={currentActivity.id}
+                    current={runSurvey.currentPage + 1}
+                    length={runSurvey.surveyLength}
+                    title={currentActivity.title}
+                    intro={currentActivity.intro}
+                    questions={currentActivity.questions}
+                    onChange={updateResponse}
+                    values={currentResponse}
+                    isComplete={isComplete}
+                    onFinish={next}
+                    progress
+                />
+            </Suspense>
+        );
     }
+    console.log(currentActivity.type)
     return (
-      <Suspense fallback={<Loading />}>
-        <Result
-          status="warning"
-          title="Activity type not found"
-          subTitle="The specified activity type does not exist."
-        />
-      </Suspense>
+        <Suspense fallback={<Loading />}>
+            <Result
+                status="warning"
+                title="Activity type not found"
+                subTitle="The specified activity type does not exist."
+            />
+        </Suspense>
     );
-  }
 }
-
+//export default withParams(Survey);
 export default Survey;

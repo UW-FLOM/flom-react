@@ -10,30 +10,23 @@ import {
   Row,
 } from 'react-bootstrap';
 import { getSurveyList } from '../../services/api';
+import { Menu } from '../../components/Menu';
 
 function HomePage() {
-  const [survey, setSurvey] = useState([]);
+    const [survey, setSurvey] = useState('');
 
   // Get the survey definitionÒ
-  useEffect(() => {
-    getSurveyList()
-      .then((res) => setSurvey(res))
-      .catch((err) => console.log(err));
-  });
+
+    useEffect(() => {
+    console.log('Client: homepage index');
+        getSurveyList()
+            .then((res) => setSurvey(res))
+            .catch((err) => console.log(err));
+  },[]);
 
   return (
     <>
-      <Navbar bg="light">
-        <Container>
-          <Navbar.Brand>FLOM</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#about">About</Nav.Link>
-          </Nav>
-          <Nav className="justify-content-end">
-            <Nav.Link href="/login">Log In</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+        <Menu />
       <section className="jumbotron text-center">
         <Container>
           <h1 className="jumbotron-heading">Folk Linguistic Online Mapping</h1>

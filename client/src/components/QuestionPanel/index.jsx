@@ -38,7 +38,7 @@ function QuestionPanel({
     fireDraw();
   };
 
-  return (
+    return (
     <>
       {!values[question.id] && !noDraw && (
         <Container>

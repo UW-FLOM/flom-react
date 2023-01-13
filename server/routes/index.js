@@ -2,6 +2,9 @@
 const survey = require('./survey');
 const auth = require('./auth');
 const user = require('./user');
+const submission = require('./submission')
+const addSurvey = require('./addSurvey')
+const upload = require('./upload')
 
 // Asset controllers
 
@@ -21,7 +24,10 @@ module.exports = (app) => {
   // Store user response
   app.post('/api/submission/:surveyID', submissionController.create);
   */
-  app.use('/api/survey', survey);
-  app.use('/api/auth', auth);
-  app.use('/api/user', user);
+    app.use('/api/upload', upload);
+    app.use('/api/submission', submission);
+    app.use('/api/addSurvey', addSurvey);
+    app.use('/api/survey', survey);
+    app.use('/api/auth', auth);
+    app.use('/api/user', user);
 };

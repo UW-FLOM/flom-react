@@ -5,9 +5,9 @@ CREATE TABLE IF NOT EXISTS survey (
     name TEXT NOT NULL,
     description TEXT,
     author TEXT,
-    start_time TIMESTAMP,
-    end_time TIMESTAMP,
-    visibility_id INT,
+    start_time BIGINT NOT NULL,
+    end_time BIGINT NOT NULL,
+    visibility_id INT NOT NULL,
     page_group_id INT,
     detail json,
     PRIMARY KEY(id)
@@ -16,21 +16,22 @@ CREATE TABLE IF NOT EXISTS survey (
 CREATE TABLE IF NOT EXISTS subject (
     id UUID NOT NULL,
     survey_id VARCHAR NOT NULL,
-    PRIMARY KEY(id),
-    CONSTRAINT fk_survey_id
-        FOREIGN KEY(survey_id)
-            REFERENCES survey(id)
+    PRIMARY KEY(id)
+    --CONSTRAINT fk_survey_id
+    --    FOREIGN KEY(survey_id)
+    --        REFERENCES survey(id)
 );
 
 CREATE TABLE IF NOT EXISTS response (
-    subject_id UUID NOT NULL,
-	start_time TIMESTAMP,
-	end_time TIMESTAMP,
+    id BIGSERIAL NOT NULL,
+    survey text,
+    start_time BIGINT NOT NULL,
+    end_time BIGINT NOT NULL,
   	detail json,
-    PRIMARY KEY(subject_id),
-    CONSTRAINT fk_subject_iD
-        FOREIGN KEY(subject_id)
-            REFERENCES subject(id)
+    PRIMARY KEY(id)
+    --CONSTRAINT fk_subject_iD
+    --    FOREIGN KEY(subject_id)
+    --        REFERENCES subject(id)
 );
 
 CREATE TABLE IF NOT EXISTS user_right (

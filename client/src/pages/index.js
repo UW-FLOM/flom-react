@@ -5,3 +5,4 @@ export { default as MapPage } from '../components/MapRender';
 export { default as Survey } from './Survey';
 export { default as SurveyDetailPage } from './SurveyDetailPage';
 export { default as SurveyListPage } from './SurveyListPage';
+export { default as SurveyAddPage } from './SurveyAddPage';

@@ -1,15 +1,34 @@
 import { useState, useEffect } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import ReactJson from 'react-json-view';
+import { useParams } from 'react-router-dom';
+import JSONViewer from 'react-json-viewer';
 import user from '../../services/user';
+import { Menu } from '../../components/Menu';
+
+const dataExport = (filename, dataObjToWrite) => {
+    const blob = new Blob([JSON.stringify(dataObjToWrite)], { type: "text/json" });
+    const link = document.createElement("a");
+        link.download = filename;
+        link.href = window.URL.createObjectURL(blob);
+        link.dataset.downloadurl = ["text/json", link.download, link.href].join(":");
+
+    const evt = new MouseEvent("click", {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+    });
+    link.dispatchEvent(evt);
+    link.remove()
+};
 
 function SurveyDetailPage(props) {
   const [content, setContent] = useState([]);
-
+  const { surveyId } = useParams();
   useEffect(() => {
-    user.surveyDetail(props.match.params.surveyId).then(
+    user.surveyDetail(surveyId).then(
       (response) => {
-        setContent(response.data);
+            setContent(response.data);
+            console.log(response);
       },
       (error) => {
         const _content =
@@ -21,21 +40,13 @@ function SurveyDetailPage(props) {
     );
   }, []);
 
+
+  if (!content[0]) { return null; }
   return (
     <>
-      <Navbar bg="light">
-        <Container>
-          <Navbar.Brand>FLOM</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="/dashboard/survey">Survey</Nav.Link>
-            <Nav.Link href="#survey">Response</Nav.Link>
-          </Nav>
-          <Nav className="justify-content-end">
-            <Nav.Link href="/logout">Log Out</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
-      <ReactJson src={content} />
+        <Menu />
+        <button type="button" onClick={() => dataExport("Export.json", content[0])}>Export</button>
+        <JSONViewer json={content[0]} />
     </>
   );
 }

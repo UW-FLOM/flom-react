@@ -46,11 +46,17 @@ const FormRender = function FormRender({ questions, onChange, onFinish }) {
     onFinish();
   };
 
-  const handleChange = (event) => {
+const handleCheckedChange = (event) => {
+    event.target.value = event.target.checked;
+    handleChange(event);
+};
+
+const handleChange = (event) => {
     setInputs({
       ...inputs,
       [event.target.id]: event.target.value,
     });
+    console.log(JSON.stringify(inputs))
   };
 
   return (
@@ -83,7 +89,11 @@ const FormRender = function FormRender({ questions, onChange, onFinish }) {
                   -- select an option --{' '}
                 </option>
                 {question.options.map((option) => (
-                  <option id={option.id} key={option.id} value={option.id}>
+                    <option
+                        id={option.id}
+                        key={option.id}
+                        value={option.id}
+                    >
                     {option.text}
                   </option>
                 ))}
@@ -123,7 +133,8 @@ const FormRender = function FormRender({ questions, onChange, onFinish }) {
             </Form.Group>
           );
         }
-        if (question.type === 'radio') {
+          if (question.type === 'radio') {
+              console.log(JSON.stringify(inputs))
           return (
             <Form.Group key={question.id}>
               <Label label={question.title} audio={question.audio} />
@@ -133,7 +144,9 @@ const FormRender = function FormRender({ questions, onChange, onFinish }) {
                     inline
                     type="radio"
                     key={option.id}
-                    id={option.id}
+                    id={question.id}
+                    value={option.text}
+                    checked={inputs[question.id] === option.text}
                     label={option.text}
                     onChange={handleChange}
                   />
@@ -142,7 +155,7 @@ const FormRender = function FormRender({ questions, onChange, onFinish }) {
             </Form.Group>
           );
         }
-        if (question.type === 'boolean') {
+          if (question.type === 'boolean') {
           return (
             <Form.Group key={question.id}>
               <Label label={question.title} audio={question.audio} />
@@ -151,7 +164,9 @@ const FormRender = function FormRender({ questions, onChange, onFinish }) {
                   inline
                   type="radio"
                   key="true"
-                  id={`${question.id}true`}
+                  id={`${question.id}`}
+                  value={true}
+                  checked={inputs[question.id]=== "true"}
                   label="True"
                   onChange={handleChange}
                 />
@@ -159,7 +174,9 @@ const FormRender = function FormRender({ questions, onChange, onFinish }) {
                   inline
                   type="radio"
                   key="false"
-                  id={`${question.id}false`}
+                  id={`${question.id}`}
+                  value={false}
+                  checked={inputs[question.id]=== "false"}
                   label="False"
                   onChange={handleChange}
                 />
@@ -179,7 +196,8 @@ const FormRender = function FormRender({ questions, onChange, onFinish }) {
                     key={option.id}
                     id={option.id}
                     label={option.text}
-                    onChange={handleChange}
+                    
+                        onChange={handleCheckedChange}
                   />
                 ))}
               </div>

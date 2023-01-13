@@ -4,7 +4,8 @@ const API_URL = '/api/auth/';
 
 function logout() {
   // remove user from local storage to log user out
-  localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUser');
+    console.log("logging out");
 }
 
 function login(username, password) {
@@ -15,16 +16,15 @@ function login(username, password) {
     })
     .then((response) => {
       if (response.data.token) {
-        localStorage.setItem(
-          'currentUser',
-          JSON.stringify(response.data.token)
-        );
+        localStorage.setItem('currentUser', JSON.stringify(response.data.token));
       }
       return response.data;
     });
 }
 
-const getCurrentUser = () => JSON.parse(localStorage.getItem('currentUser'));
+const getCurrentUser = () => {
+    JSON.parse(localStorage.getItem('currentUser'));
+};
 
 export const auth = {
   login,

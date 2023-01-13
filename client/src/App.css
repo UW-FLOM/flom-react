@@ -1,14 +1,10 @@
-html,
-body,
-#root,
-.App,
-.mapContainer {
-  width: 100%;
-  height: 100%;
+
+html, body, #root, .App, .mapContainer {
+    width: 100%;
+    height: 100%;
 }
 
-body,
-.mapContainer {
+body, .mapContainer {
   overflow: hidden;
 }
 
@@ -53,6 +49,23 @@ body,
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
+}
+
+.rootLogin {
+    overflow-y: scroll;
+    overflow-x: auto;
+}
+
+
+.form-NewSurvey {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
 }
 
 .form-signin {

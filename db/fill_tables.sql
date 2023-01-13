@@ -1,5 +1,5 @@
-INSERT INTO survey (id, name, detail)
-VALUES ('test','A Sample Survey for Development Testing',
+INSERT INTO survey (id, name, start_time, end_time, visibility_id, detail)
+VALUES ('test','A Sample Survey for Development Testing',0,16661244179,1,
 '{
     "title": "Test of FLOM",
     "intro": "This is the first iteration of FLOM",
@@ -248,8 +248,8 @@ VALUES ('test','A Sample Survey for Development Testing',
         }
     ]
 }');
-INSERT INTO survey (id, name, detail)
-VALUES ('demo','Full Demo of Current Survey Format',
+INSERT INTO survey (id, name, start_time, end_time, visibility_id, detail)
+VALUES ('demo','Full Demo of Current Survey Format',0,16661244179,1,
         '{
     "title": "Full Demo of Current Survey Format",
     "intro": "This is the full demo of current survey format",
@@ -430,8 +430,8 @@ VALUES ('demo','Full Demo of Current Survey Format',
         }
     ]
 }');
-INSERT INTO survey (id, name, detail)
-VALUES ('map','Development Testcase for Map',
+INSERT INTO survey (id, name, start_time, end_time, visibility_id, detail)
+VALUES ('map','Development Testcase for Map',0,16661244179,1,
         '{
     "title": "Full Demo of Current Survey Format",
     "intro": "This is the full demo of current survey format",

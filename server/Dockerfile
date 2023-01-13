@@ -1,27 +1,13 @@
-FROM node:lts as base
+FROM node:lts AS Server
 
 EXPOSE 3001
 
 WORKDIR /app
 
-FROM base AS builder
-
-COPY package.json yarn.lock ./
-
-RUN yarn install --production
-
-RUN cp -R node_modules node_modules_production
-
-RUN yarn install --network-timeout 1000000
-
 COPY . ./
 
-FROM base AS release
+RUN yarn install
 
-COPY --from=builder /app/node_modules_production ./node_modules
+USER root
 
-COPY . ./
-
-USER node
-
-CMD ["yarn", "start:prod"]
+ENTRYPOINT yarn start:prod

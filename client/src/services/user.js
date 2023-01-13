@@ -3,16 +3,28 @@ import authHeader from './authHeader';
 
 const API_URL = '/api/user/';
 
-const test = () => axios.get(API_URL, { headers: authHeader() });
+axios.interceptors.response.use(
+    (response) => {
+        console.log("Approved")
+        return response;
+    },
+    (error) => {
+        if (error.response.status === 401) {
+window.location = '/login';
+        }
+        return error;
+    }
+);
 
-const surveyList = () =>
-  axios.get(`${API_URL}survey`, { headers: authHeader() });
+// const test = () => axios.get(`${API_URL}verify`, { headers: authHeader() })
 
-const surveyDetail = (id) =>
-  axios.get(`${API_URL}survey/${id}`, { headers: authHeader() });
+const surveyList = () => axios.get(`${API_URL}survey`, { headers: authHeader() })
+
+const surveyDetail = (id) => axios.get(`${API_URL}survey/${id}`, { headers: authHeader() })
+
 
 export default {
-  test,
+  // test,
   surveyList,
   surveyDetail,
 };

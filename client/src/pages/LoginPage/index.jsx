@@ -42,7 +42,7 @@ function LoginPage() {
     <div className="login" onSubmit={handleLogin}>
       <Form className="form-signin text-center">
         <h1 className="h3 mb-3 font-weight-normal">Log in</h1>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3">
           <Form.Control
             className="form-control"
             id="username"
@@ -52,7 +52,7 @@ function LoginPage() {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3">
           <Form.Control
             className="form-control"
             id="password"
