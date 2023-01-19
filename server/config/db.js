@@ -6,7 +6,7 @@ const pool = new Pool({
   host: process.env.DB_HOST || 'db',
   port: process.env.DB_PORT || '5432',
   user: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD || 'm7T1V5Nchc1jEALxK5ZO+l/WjwTJPmthnVMBEhcOYOg/DcVaIy/jahWfUfZvMewq zSUuhfovN8eBMnkYchoj9Q==',
+    password: process.env.DB_PASSWORD || 'DlZA2zvYTMlvJz2srSuYCd1IN2jBn+h1pK9bCgS9GG6x+ewQMttetmiTaZJj7AkU mKZojDLsofgV99Di4c86zQ==',
   database: process.env.DB_NAME || 'flom',
 });
 module.exports = {

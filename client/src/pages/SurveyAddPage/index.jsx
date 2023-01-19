@@ -12,7 +12,7 @@ function SurveyAddPage() {
     const childRef = useRef(null);
     const [newSurvey, setNewSurvey] = useState({
         visible: true,
-        start_time: Date.now()
+        start_time: Date.now() - (86400000)
     });
 
     //const [upload, setUpload] = useState(false);

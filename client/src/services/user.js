@@ -9,8 +9,10 @@ axios.interceptors.response.use(
         return response;
     },
     (error) => {
-        if (error.response.status === 401) {
-window.location = '/login';
+        if (error.response) {
+            if (error.response.status === 401) {
+            window.location = '/login';
+            }
         }
         return error;
     }
