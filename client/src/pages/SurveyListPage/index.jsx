@@ -36,15 +36,15 @@ function SurveyListPage() {
                 setContent(response.data);
             },
             (error) => {
-                const _content =
-                    (error.response && error.response.data) ||
-                    error.message ||
-                    error.toString();
-                setContent(_content);
+                //const _content =
+                    
+                //console.log('Content Error : ', error)
+                    
+                //setContent(_content);
             }
         );
     }, [refresh]);
-
+    console.log('Content: ',content)
     if (!content) { return null; }
     return (
         <>

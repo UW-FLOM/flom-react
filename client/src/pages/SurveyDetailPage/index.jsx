@@ -45,7 +45,7 @@ function SurveyDetailPage(props) {
   return (
     <>
         <Menu />
-        <button type="button" onClick={() => dataExport("Export.json", content[0])}>Export</button>
+        <button type="button" onClick={() => dataExport("Export.json", content[0].detail)}>Export</button>
         <JSONViewer json={content[0]} />
     </>
   );
