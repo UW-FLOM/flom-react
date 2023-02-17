@@ -1,9 +1,10 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Route, Routes } from 'react-router-dom';
 import Loading from './components/Loading';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// Verifies route authorization before passing child route
 import { AuthGate } from './components/AuthGate'
 
 import {
