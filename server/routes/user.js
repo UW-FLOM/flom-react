@@ -11,7 +11,7 @@ module.exports = router;
 
 router.get('/verify', (req, res) => {
     const verification = jwt.verify(req.headers.token);
-    console.log("Verification status: ", verification)
+    //console.log("Verification status: ", verification)
 
     if (verification.status) {
         //console.log('You are successfully authenticated to this route!', req)
@@ -30,7 +30,7 @@ router.get('/survey', passport.authenticate('jwt', { session: false }), async (r
 // Getting specific survey based on surveyID
 router.get('/survey/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
     const { id } = req.params;
-    console.log('User.js)');
+    //console.log('User.js)');
   const { rows } = await db.query('SELECT detail FROM survey WHERE id = $1', [id]);
   res.status(200).json(rows);
 });

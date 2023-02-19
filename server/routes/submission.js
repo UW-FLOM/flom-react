@@ -14,8 +14,8 @@ router.post('/:id', async (req, res) => {
         const { rows } = await db.query(`INSERT INTO response (survey,detail,start_time,end_time) VALUES ($1,$2,$3,$4);`, [id, body, startTime, Date.now() ]);
         res.status(201).json(rows);
     } catch (err) {
-        console.log(err);
-        console.log(req.params);
-        console.log(req.body);
+        console.log('Route > Submission > Post > Error: ',err);
+        console.log('Route > Submission > Post > Params: ', req.params);
+        console.log('Route > Submission > Post > Body: ', req.body);
     }
 });

@@ -1,19 +1,22 @@
 # FLOM React
-React version of the Folk Linguistic Online Mapping Application. This application is designed as an open-source, 
-customizable suite of tools for collecting mental maps digitally for linguistic research.
+Containerized React version of the Folk Linguistic Online Mapping application. This application is designed as an open-source, customizable suite of survey tools for collecting mental maps digitally for linguistic research.
 
-# Prerequisites
+Built in collaboration with the University of Washington’s [Department of Linguistics](https://linguistics.washington.edu/) and [Language Learning Center](https://depts.washington.edu/llc/).
+
+# Quick start
+
+## Prerequisites
+Install: docker-ce, docker-ce-cli, containerd.io, docker-compose-plugin, and yarn
 * [Docker Engine](https://docs.docker.com/engine/install/)
 * [Docker Compose](https://docs.docker.com/compose/install/)
-* [Node.js](https://nodejs.org/en/download/)
 * [Classic yarn](https://classic.yarnpkg.com/en/docs/install)
 
-
-# Getting started
-
-## Development
-Go into the project folder and type the following command to initialize, build and start docker containers
+## Getting started
+In the project folder run:
 ```
-yarn dev:start
+yarn init:dep
+yarn init:secret
+yarn prod:start
 ```
-The Application now runs on http://localhost:3000
+The “init” commands are only required the first time.
+An https proxy is highly recommended!

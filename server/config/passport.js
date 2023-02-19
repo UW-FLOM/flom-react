@@ -24,13 +24,13 @@ module.exports = (passport) => {
     passport.use('jwt', new JwtStrategy(options, (async (jwtPayload, done) => {
         // We will assign the `sub` property on the JWT to the database ID of user
         //let user = (await db.query('SELECT * FROM users WHERE id = $1', [jwtPayload.sub])).rows[0];
-        console.log(jwtPayload.exp + " - " + Date.now())
+        //console.log(jwtPayload.exp + " - " + Date.now())
         if (jwtPayload.exp > Date.now()) {
-            console.log("Yes")
+            //console.log("Yes")
             return done(null, jwtPayload.sub.right, { message: 'SERVER:PASPORT.js - This user IS Authenticated' }); 
         } else {
             //done.redirect('/login');
-            console.log("No")
+            //console.log("No")
             return done(null, false, { message: 'SERVER:PASPORT.js - This user is not Authenticated' });
         }
     })));

@@ -5,7 +5,7 @@ const API_URL = '/api/auth/';
 function logout() {
   // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
-    console.log("logging out");
+    //console.log("logging out");
 }
 
 function login(username, password) {

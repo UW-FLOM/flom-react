@@ -25,17 +25,17 @@ import authHeader from './authHeader';
 };*/
 
 export const verifyUser = async (token) => {
-    console.log('Client: api.js ', token);
+    //console.log('Client: api.js ', token);
     const response = await fetch('/api/user/verify', { headers: {'token':token}});
     return response.json();
 };
 
 export const getSurveyList = async () => {
-    console.log('Client: api.js');
+    //console.log('Client: api.js');
     const response = await fetch('/api/survey');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
-    console.log('getSurveyList: ', body);
+    //console.log('getSurveyList: ', body);
     return body;
 };
 
@@ -65,7 +65,7 @@ export const submitAnswer = async (surveyID, args, startTime) => {
 
 // New file upload for SurveyAddPage
 export const surveyAddPageUpload = async (data) => {
-    console.log(data)
+    //console.log(data)
     const options = {
         headers: authHeader(),
         method: 'POST',
@@ -73,7 +73,7 @@ export const surveyAddPageUpload = async (data) => {
     };
 
     await fetch('/api/upload', options)
-        .catch(error => console.log('error', error));
+        .catch(error => console.log('API > surveyAddPageUpload > error: ', error));
 
 };
 

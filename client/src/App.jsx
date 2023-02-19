@@ -4,6 +4,7 @@ import Loading from './components/Loading';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// Verifies route authorization before passing child route
 import { AuthGate } from './components/AuthGate'
 
 import {

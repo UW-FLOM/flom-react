@@ -5,7 +5,7 @@ const API_URL = '/api/user/';
 
 axios.interceptors.response.use(
     (response) => {
-        console.log("Approved")
+        //console.log("Approved")
         return response;
     },
     (error) => {

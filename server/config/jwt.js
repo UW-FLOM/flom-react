@@ -27,10 +27,10 @@ exports.verify = (token) => {
     try {
         const verify = jsonwebtoken.verify(token, PRIV_KEY, { algorithms: 'RS256' });
         if (verify.exp > Date.now()) {
-            console.log('true')
+            //console.log('true')
             return { "status": true, "right": verify.sub.right };
         } else {
-            console.log('false: ')
+            //console.log('false: ')
             return {"status": false };
         }
     } catch { return { "status": false }; }

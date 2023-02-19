@@ -121,7 +121,7 @@ class MapRender extends Component {
                             tileAttribution={activity.tileAttribution}
                             center={activity.center}
                             bounds={activity.bounds}
-                            zoom={activity.zoom}
+                            zoom={activity.zoomLevel}
                             minZoom={activity.minZoom}
                             maxZoom={activity.maxZoom}
                             onFeatureDrawn={this.onFeatureDrawn}

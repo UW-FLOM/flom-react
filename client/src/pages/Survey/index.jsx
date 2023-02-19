@@ -28,7 +28,7 @@ function Survey(props) {
         surveyLength: 0,
         surveyId: surveyId,
     }
-console.log(surveyId);
+//console.log(surveyId);
     const [runSurvey, setRunSurvey] = useState(initialState);
     useEffect(() => {
 
@@ -95,10 +95,10 @@ console.log(surveyId);
     if (runSurvey.currentPage === getSurveyDef().activities.length) {
         localStorage.clear();
         if (!isComplete) {
-            console.log('isComplete: ' + runSurvey.startTime)
+            //console.log('isComplete: ' + runSurvey.startTime)
             submitAnswer(getSurveyId(), runSurvey.response, runSurvey.startTime)
                 .then(() => {
-                    console.log('Submitted');
+                    //console.log('Submitted');
                     //setRunSurvey(setRunSurvey => ({ ...runSurvey, isComplete: true }));
                     isComplete = true;
                     unblock();
@@ -132,7 +132,7 @@ console.log(surveyId);
     const currentResponse = getResponse(currentActivity.id);
 
     if (currentActivity.type === 'form') {
-      console.log(currentActivity.type)
+      //console.log(currentActivity.type)
         return (
             <Suspense fallback={<Loading />}>
                 <PageRender
@@ -154,7 +154,7 @@ console.log(surveyId);
         );
     }
     if (currentActivity.type === 'map') {
-      console.log(currentActivity.type)
+      //console.log(currentActivity.type)
         return (
             <Suspense fallback={<Loading />}>
                 <MapPage
@@ -172,7 +172,7 @@ console.log(surveyId);
         );
     }
     if (currentActivity.type === 'end') {
-        console.log(currentActivity.type)
+        //console.log(currentActivity.type)
         return (
             <Suspense fallback={<Loading />}>
                 <EndRender
@@ -191,7 +191,7 @@ console.log(surveyId);
             </Suspense>
         );
     }
-    console.log(currentActivity.type)
+    //console.log(currentActivity.type)
     return (
         <Suspense fallback={<Loading />}>
             <Result
