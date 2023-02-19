@@ -28,7 +28,7 @@ function SurveyDetailPage(props) {
     user.surveyDetail(surveyId).then(
       (response) => {
             setContent(response.data);
-            console.log(response);
+            //console.log(response);
       },
       (error) => {
         const _content =

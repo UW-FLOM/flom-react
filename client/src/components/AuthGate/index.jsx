@@ -25,13 +25,13 @@ export const AuthGate = ({ type, toggle, children }) => {
 
         switch (type) {
             case 'route':
-                console.log('route: ', type)
+                //console.log('route: ', type)
                 return <Navigate to="/login" replace />;
             case 'menu':
-                console.log('menu: ', type, "toggle: ", toggle)
+                //console.log('menu: ', type, "toggle: ", toggle)
                 return null;
             default:
-                console.log('default: ', type)
+                //console.log('default: ', type)
                 return null;
         }
 

@@ -12,7 +12,7 @@ export const FileUpload = forwardRef((props, ref) => {
 
     const onInputChange = (e) => {
         setFiles(e.target.files)
-        console.log(`onInputChange: ${e.target.files}`)
+        //console.log(`onInputChange: ${e.target.files}`)
     };
     useImperativeHandle(ref, () => ({
         onUpload(path) {

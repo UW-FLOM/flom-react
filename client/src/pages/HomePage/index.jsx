@@ -18,7 +18,7 @@ function HomePage() {
   // Get the survey definitionÒ
 
     useEffect(() => {
-    console.log('Client: homepage index');
+    //console.log('Client: homepage index');
         getSurveyList()
             .then((res) => setSurvey(res))
             .catch((err) => console.log(err));

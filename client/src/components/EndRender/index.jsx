@@ -25,7 +25,7 @@ function EndRender(props) {
        // const { index } = this.state;
        // const { questions } = props;
         var nextQuestionIndex = index + 1;
-        console.log(`next: ${nextQuestionIndex} , question: ${JSON.stringify(questions)}, length: ${questions.length}, props: ${JSON.stringify(props)}`)
+        //console.log(`next: ${nextQuestionIndex} , question: ${JSON.stringify(questions)}, length: ${questions.length}, props: ${JSON.stringify(props)}`)
         const activityComplete = nextQuestionIndex >= questions.length;
         if (activityComplete) {
             const { onFinish } = props;

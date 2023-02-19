@@ -23,7 +23,7 @@ function SurveyAddPage() {
         switch (event.target.type) {
             case 'checkbox':
                 data = event.target.checked;
-                console.log(data)
+                //console.log(data)
                 break;
             case 'date':
                 data = dateWrite(event.target.value);
@@ -35,9 +35,7 @@ function SurveyAddPage() {
             ...newSurvey,
             [event.target.id]: data,
         });
-        console.log(`
-                    data: ${JSON.stringify(newSurvey)}
-                `)
+        //console.log(`data: ${JSON.stringify(newSurvey)}`)
     }
 
     const create = (event) => {

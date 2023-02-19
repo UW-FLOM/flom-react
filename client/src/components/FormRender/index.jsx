@@ -56,7 +56,7 @@ const handleChange = (event) => {
       ...inputs,
       [event.target.id]: event.target.value,
     });
-    console.log(JSON.stringify(inputs))
+    //console.log(JSON.stringify(inputs))
   };
 
   return (
@@ -134,7 +134,7 @@ const handleChange = (event) => {
           );
         }
           if (question.type === 'radio') {
-              console.log(JSON.stringify(inputs))
+              //console.log(JSON.stringify(inputs))
           return (
             <Form.Group key={question.id}>
               <Label label={question.title} audio={question.audio} />

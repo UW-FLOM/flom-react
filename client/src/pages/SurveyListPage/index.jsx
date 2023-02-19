@@ -24,27 +24,27 @@ function SurveyListPage() {
     const update = (data, mode) => {
         surveyModify(data, mode)
         setRefresh(refresh + 1);
-        console.log(data, mode,refresh)
+        //console.log(data, mode,refresh)
     }
 
 
     useEffect(() => {
-        console.log(user.surveyList())
+        //console.log(user.surveyList())
         user.surveyList().then(
             (response) => {
-                console.log(response)
+                //console.log(response)
                 setContent(response.data);
             },
             (error) => {
                 //const _content =
                     
-                //console.log('Content Error : ', error)
+                console.log('SurveyListPage > Content Error : ', error)
                     
                 //setContent(_content);
             }
         );
     }, [refresh]);
-    console.log('Content: ',content)
+    //console.log('Content: ',content)
     if (!content) { return null; }
     return (
         <>

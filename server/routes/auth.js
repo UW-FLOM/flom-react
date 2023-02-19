@@ -10,7 +10,7 @@ module.exports = router;
 
 // Getting all survey
 router.post('/login/local', async (req, res) => {
-    console.log(req.body);
+    //console.log(req.body);
     let localUser = (await db.query('SELECT * FROM local_user WHERE username = $1', [req.body.username])).rows[0];
     if (typeof localUser === 'undefined') {
         return res.status(401).json({ success: false, msg: 'Username is incorrect' });
@@ -42,7 +42,7 @@ router.post('/login/local', async (req, res) => {
 
 router.get('/logout', (req, res) => {
     localStorage.removeItem('currentUser');
-    console.log("loging out-Route");
+    //console.log("loging out-Route");
     req.logout();
     res.redirect('/');
 });

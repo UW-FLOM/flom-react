@@ -8,9 +8,8 @@ import PageRender from '../PageRender';
 function SwitchRender(props) {
     var [ state, setState ] = useState(false)
     var { questions, id, title, onChange, onFinish, intro, values, current, length, isComplete } = props;
-    console.log(`onFinish: ${onFinish} 
-state: ${state}
-`)
+    //console.log(`onFinish: ${onFinish} state: ${state}`)
+
     const handleDisplayFurther = (event) => {
         const result = event.target.checked;
         onChange(id, result);

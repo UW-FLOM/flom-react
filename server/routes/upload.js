@@ -10,10 +10,10 @@ module.exports = router;
 const mp3Storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const directory = `public/audio/${req.body.path}`
-        console.log(`Server_Directory: public/audio/${req.body.path}`)
+        //console.log(`Server_Directory: public/audio/${req.body.path}`)
         if (!fs.existsSync(directory)) {
             fs.mkdirSync(directory, { recursive: true })
-            console.log(`mkdir: ${req.body.path}`)
+            //console.log(`mkdir: ${req.body.path}`)
         }
         cb(null, directory)
     }, 
