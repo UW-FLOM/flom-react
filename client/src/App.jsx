@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter as Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Loading from './components/Loading';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
