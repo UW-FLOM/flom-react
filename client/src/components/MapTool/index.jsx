@@ -1,6 +1,6 @@
-import { useRef, useCallback, useMemo } from 'react';
+import { useRef, useCallback, useMemo, useEffect } from 'react';
 import { map } from 'lodash';
-import { MapContainer, TileLayer, Marker, Popup, Polygon } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Polygon, useMap } from 'react-leaflet';
 import Freedraw, { CREATE, NONE } from 'react-leaflet-freedraw';
 import PropTypes from 'prop-types';
 
@@ -18,7 +18,7 @@ function currentMode(mode) {
     return NONE;
 }
 
-function MapTool({ tileURL, tileAttribution, mode, onFeatureDrawn, objects }) {
+function MapTool({ tileURL, tileAttribution, mode, onFeatureDrawn, objects, zoom, center }) {
     const freedrawRef = useRef(null);
 
     const handleMarkersDraw = useCallback((event) => {
@@ -37,11 +37,19 @@ function MapTool({ tileURL, tileAttribution, mode, onFeatureDrawn, objects }) {
         [handleMarkersDraw]
     );
 
+    const SetView = (() => {
+        const map = useMap()
+        useEffect(() => {
+            map.setView(center, zoom)
+        }, [center, zoom])
+        return null
+    })
+
     return (
         <MapContainer
             dragging={false}
-            center={[51.505, -0.09]}
-            zoom={13}
+            center={center}
+            zoom={zoom}
             scrollWheelZoom={false}
             zoomControl={false}
             doubleClickZoom={false}
@@ -53,7 +61,7 @@ function MapTool({ tileURL, tileAttribution, mode, onFeatureDrawn, objects }) {
             }}
         >
             <TileLayer attribution={tileAttribution} url={tileURL} />
-            <Freedraw               
+            <Freedraw
                 mode={currentMode(mode)}
                 eventHandlers={handlers}
                 ref={freedrawRef}
@@ -65,6 +73,7 @@ function MapTool({ tileURL, tileAttribution, mode, onFeatureDrawn, objects }) {
                     positions={object.geometry.coordinates}
                 />
             ))}
+            <SetView />
         </MapContainer>
     );
 }
