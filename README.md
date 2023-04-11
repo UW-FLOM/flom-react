@@ -1,5 +1,4 @@
-#The Folk Linguistic Online Mapping application
-##University of Washington
+# The Folk Linguistic Online Mapping application
 [https://depts.washington.edu/flom/](https://depts.washington.edu/flom/)
 
 # FLOM React
