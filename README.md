@@ -21,5 +21,6 @@ yarn init:dep
 yarn init:secret
 yarn prod:start
 ```
+
 The “init” commands are only required the first time.
 An https proxy is highly recommended!

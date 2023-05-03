@@ -102,8 +102,15 @@ function SurveyListPage() {
                                 onClick={() => deleteHandeler({ "id": surveyItem.id}, "delete")}
                                 variant="danger"
                                 size="sm"
-                            >Delete</Button>
+                            >Delete</Button>{' '}
 
+                            {surveyItem.responseCount === 0 ? (null) : (
+                                <Button
+                                    href={`/dashboard/response/${surveyItem.id}`}
+                                    variant="info"
+                                    size="sm"
+                                >{surveyItem.responseCount} - Responses</Button>
+                            )}
                         </ListGroup.Item>
 
                     ))

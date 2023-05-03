@@ -14,6 +14,7 @@ import {
     SurveyListPage,
     SurveyDetailPage,
     SurveyAddPage,
+    SurveyResponsePage,
 } from './pages';
 
 const Survey = lazy(() => import('./pages/Survey'));
@@ -47,6 +48,11 @@ function App() {
                     <Route path={"/dashboard/survey/:surveyId"} element={
                         <AuthGate type='route' >
                             <SurveyDetailPage />
+                        </AuthGate>
+                    } />
+                    <Route path={"/dashboard/response/:surveyId"} element={
+                        <AuthGate type='route' >
+                            <SurveyResponsePage />
                         </AuthGate>
                     } />
 

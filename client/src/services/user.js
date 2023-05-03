@@ -24,9 +24,14 @@ const surveyList = () => axios.get(`${API_URL}survey`, { headers: authHeader() }
 
 const surveyDetail = (id) => axios.get(`${API_URL}survey/${id}`, { headers: authHeader() })
 
+// const surveyResponseCount = (id) => axios.get(`${API_URL}responseCount/${id}`, { headers: authHeader() })
+
+const surveyResponse = (id) => axios.get(`${API_URL}/survey/response/${id}`, { headers: authHeader() })
 
 export default {
-  // test,
-  surveyList,
-  surveyDetail,
+    //test,
+    surveyList,
+    surveyDetail,
+    //surveyResponseCount,
+    surveyResponse,
 };
