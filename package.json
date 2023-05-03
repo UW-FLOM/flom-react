@@ -5,7 +5,7 @@
     "prod:start": "docker compose build && yarn prod:resume",
     "prod:resume": "docker compose up -d",
     "prod:stop": "docker compose stop",
-    "prod:destroy": "docker compose down -v",
+    "prod:destroy": "docker compose down -v && docker system prune",
     "dev:start": "docker compose -f docker-compose.dev.yml build && yarn dev:resume",
     "dev:resume": "docker compose -f docker-compose.dev.yml -p flom-react_dev up -d",
     "dev:stop": "docker compose -f docker-compose.dev.yml -p flom-react_dev stop",
