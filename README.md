@@ -3,7 +3,6 @@
 
 # FLOM React
 Containerized React version of the Folk Linguistic Online Mapping application. This application is designed as an open-source, customizable suite of survey tools for collecting mental maps digitally for linguistic research.
-=======
 
 Built in collaboration with the University of Washington’s [Department of Linguistics](https://linguistics.washington.edu/) and [Language Learning Center](https://depts.washington.edu/llc/).
 
@@ -22,6 +21,5 @@ yarn init:dep
 yarn init:secret
 yarn prod:start
 ```
-=======
 The “init” commands are only required the first time.
 An https proxy is highly recommended!
