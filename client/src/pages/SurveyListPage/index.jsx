@@ -44,7 +44,7 @@ function SurveyListPage() {
             }
         );
     }, [refresh]);
-    console.log('Content: ',content)
+    //console.log('Content: ',content)
     if (!content) { return null; }
     return (
         <>

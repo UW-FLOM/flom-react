@@ -36,7 +36,7 @@ router.get('/survey', passport.authenticate('jwt', { session: false }), async (r
 router.get('/survey/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
     const { id } = req.params;
     //console.log('User.js)');
-    let { rows } = await db.query('SELECT detail FROM survey WHERE id = $1', [id])
+  const { rows } = await db.query('SELECT detail FROM survey WHERE id = $1', [id]);
   res.status(200).json(rows);
 });
 
